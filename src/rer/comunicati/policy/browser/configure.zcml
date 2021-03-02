@@ -1,0 +1,21 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="rer.comunicati.policy">
+
+  <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
+  <include package="z3c.jbot" file="meta.zcml" />
+  <browser:jbot
+      directory="overrides"
+      layer="rer.comunicati.policy.interfaces.IRerComunicatiPolicyLayer"
+      />
+
+  <!-- Publish static files -->
+  <plone:static
+      name="rer.comunicati.policy"
+      type="plone"
+      directory="static"
+      />
+
+</configure>
