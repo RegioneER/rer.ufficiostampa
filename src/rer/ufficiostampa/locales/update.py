@@ -8,12 +8,9 @@ import subprocess
 domain = "rer.ufficiostampa"
 os.chdir(pkg_resources.resource_filename(domain, ""))
 os.chdir("../../../")
-target_path = "src/rer/policy/"
+target_path = "src/rer/ufficiostampa/"
 locale_path = target_path + "locales/"
 i18ndude = "./bin/i18ndude"
-
-# ignore node_modules files resulting in errors
-excludes = '"*.html *json-schema*.xml"'
 
 
 def locale_folder_setup():
@@ -37,12 +34,8 @@ def locale_folder_setup():
 
 
 def _rebuild():
-    cmd = "{i18ndude} rebuild-pot --pot {locale_path}/{domain}.pot --exclude {excludes} --create {domain} {target_path}".format(  # NOQA: E501
-        i18ndude=i18ndude,
-        locale_path=locale_path,
-        domain=domain,
-        target_path=target_path,
-        exclude=excludes,
+    cmd = "{0} rebuild-pot --pot {1}/{2}.pot --create {3} {4}".format(
+        i18ndude, locale_path, domain, domain, target_path,
     )
     subprocess.call(
         cmd, shell=True,

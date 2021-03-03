@@ -9,7 +9,7 @@ from zope import schema
 
 class IComunicatoStampa(model.Schema):
     arguments = schema.Tuple(
-        title=_("arguments_label", default=u""),
+        title=_("arguments_label", default=u"Arguments"),
         description=_("arguments_help", default="Select one or more values."),
         value_type=schema.TextLine(),
         required=False,

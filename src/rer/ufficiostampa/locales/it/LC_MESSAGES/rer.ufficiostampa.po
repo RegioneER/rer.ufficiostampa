@@ -1,0 +1,87 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2021-03-03 15:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: rer.ufficiostampa\n"
+
+#: rer/ufficiostampa/profiles/default/controlpanel.xml
+msgid "Configurazione Ufficio Stampa"
+msgstr ""
+
+#: rer/ufficiostampa/configure.zcml:24
+msgid "Installs the rer.ufficiostampa add-on."
+msgstr ""
+
+#: rer/ufficiostampa/browser/controlpanel.py:17
+msgid "Ufficio Stampa settings"
+msgstr "Configurazione Ufficio Stampa"
+
+#: rer/ufficiostampa/configure.zcml:33
+msgid "Uninstalls the rer.ufficiostampa add-on."
+msgstr ""
+
+#. Default: "Select one or more values."
+#: rer/ufficiostampa/interfaces/content.py:13
+msgid "arguments_help"
+msgstr "Seleziona uno o più valori possibili."
+
+#. Default: "Arguments"
+#: rer/ufficiostampa/interfaces/content.py:12
+msgid "arguments_label"
+msgstr "Argomenti"
+
+#. Default: "Legislature"
+#: rer/ufficiostampa/interfaces/content.py:26
+msgid "label_legislature"
+msgstr "Legislatura"
+
+#. Default: "Insert a list of arguments related to this legislature. One per line."
+#: rer/ufficiostampa/interfaces/settings.py:30
+msgid "legislature_arguments_help"
+msgstr "Inserisci una lista di argomenti a cui si fa riferimento."
+
+#. Default: "Arguments"
+#: rer/ufficiostampa/interfaces/settings.py:29
+msgid "legislature_arguments_label"
+msgstr "Argomenti"
+
+#. Default: "Insert the legislature name."
+#: rer/ufficiostampa/interfaces/settings.py:23
+msgid "legislature_help"
+msgstr "Inserisci il nome della legislatura."
+
+#. Default: "Legislature"
+#: rer/ufficiostampa/interfaces/settings.py:22
+msgid "legislature_label"
+msgstr "Legislatura"
+
+#. Default: "This is a list of all legislatures. The last one is the one used to fill fields in a new Comunicato."
+#: rer/ufficiostampa/interfaces/settings.py:11
+msgid "legislatures_help"
+msgstr "Questa è una lista di legislature. L'ultima inserita è quella utilizzata per popolare i campi dei Comunicati e Inviti."
+
+#. Default: "List of legislatures."
+#: rer/ufficiostampa/interfaces/settings.py:10
+msgid "legislatures_label"
+msgstr "Elenco Legislature."
+
+#: rer/ufficiostampa/configure.zcml:24
+msgid "rer.ufficiostampa"
+msgstr ""
+
+#: rer/ufficiostampa/configure.zcml:33
+msgid "rer.ufficiostampa (uninstall)"
+msgstr ""

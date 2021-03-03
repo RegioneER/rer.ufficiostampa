@@ -1,3 +1,5 @@
+.python-version
+extras/
 .coverage
 *.egg-info
 *.log
