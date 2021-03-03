@@ -68,4 +68,3 @@ class TestUninstall(unittest.TestCase):
         from plone.browserlayer import utils
 
         self.assertNotIn(IRerUfficiostampaLayer, utils.registered_layers())
-

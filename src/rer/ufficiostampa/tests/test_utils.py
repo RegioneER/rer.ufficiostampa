@@ -23,8 +23,8 @@ class TestUtils(unittest.TestCase):
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
 
         legislatures = [
-            {"legislature": "First", "arguments": ["foo", "bar"],},
-            {"legislature": "Second", "arguments": ["foo2", "bar2"],},
+            {"legislature": "First", "arguments": ["foo", "bar"]},
+            {"legislature": "Second", "arguments": ["foo2", "bar2"]},
         ]
         set_registry_record(
             "legislatures",
