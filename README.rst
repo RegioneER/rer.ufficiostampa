@@ -2,9 +2,9 @@
    If you want to learn more about writing documentation, please check out: http://docs.plone.org/about/documentation_styleguide.html
    This text does not appear on pypi or github. It is a comment.
 
-=====================
-rer.comunicati.policy
-=====================
+=================
+rer.ufficiostampa
+=================
 
 Tell me what your product does
 
@@ -38,14 +38,14 @@ This product has been translated into
 Installation
 ------------
 
-Install rer.comunicati.policy by adding it to your buildout::
+Install rer.ufficiostampa by adding it to your buildout::
 
     [buildout]
 
     ...
 
     eggs =
-        rer.comunicati.policy
+        rer.ufficiostampa
 
 
 and then running ``bin/buildout``
@@ -54,8 +54,8 @@ and then running ``bin/buildout``
 Contribute
 ----------
 
-- Issue Tracker: https://github.com/collective/rer.comunicati.policy/issues
-- Source Code: https://github.com/collective/rer.comunicati.policy
+- Issue Tracker: https://github.com/collective/rer.ufficiostampa/issues
+- Source Code: https://github.com/collective/rer.ufficiostampa
 - Documentation: https://docs.plone.org/foo/bar
 
 

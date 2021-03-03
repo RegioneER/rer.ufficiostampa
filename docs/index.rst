@@ -1,5 +1,5 @@
 =====================
-rer.comunicati.policy
+rer.ufficiostampa
 =====================
 
 User documentation

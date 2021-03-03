@@ -1,4 +1,4 @@
-rer.comunicati.policy Copyright 2021, RedTurtle Technology
+rer.ufficiostampa Copyright 2021, RedTurtle Technology
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License version 2

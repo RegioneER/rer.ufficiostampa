@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<rolemap>
+  <permissions>
+    <permission name="rer.ufficiostampa: Manage Settings" acquire="True">
+      <role name="Manager" />
+      <role name="Site Administrator" />
+    </permission>
+    <permission name="rer.ufficiostampa: Add Comunicato Stampa" acquire="True">
+      <role name="Manager" />
+      <role name="Site Administrator" />
+      <role name="Owner"/>
+      <role name="Contributor"/>
+    </permission>
+    <permission name="rer.ufficiostampa: Add Invito Stampa" acquire="True">
+      <role name="Manager" />
+      <role name="Site Administrator" />
+      <role name="Owner"/>
+      <role name="Contributor"/>
+    </permission>
+
+  </permissions>
+</rolemap>

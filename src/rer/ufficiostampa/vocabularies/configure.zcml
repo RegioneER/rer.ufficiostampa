@@ -1,0 +1,13 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="rer.ufficiostampa">
+
+  <utility
+    name="rer.ufficiostampa.vocabularies.arguments"
+    component=".vocabularies.ArgumentsVocabulary"
+    />
+</configure>
