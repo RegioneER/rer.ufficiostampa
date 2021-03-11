@@ -25,4 +25,24 @@
       permission="cmf.ManagePortal"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
+    <browser:page
+      name="view"
+      for="rer.ufficiostampa.interfaces.IComunicatoStampa"
+      template="templates/comunicato.pt"
+      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
+      class=".comunicato_view.View"
+      permission="zope2.View"
+      menu="plone_displayviews"
+      title="View Comunicato"
+      />
+    <browser:page
+      name="view"
+      for="rer.ufficiostampa.interfaces.IInvitoStampa"
+      template="templates/comunicato.pt"
+      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
+      class=".comunicato_view.View"
+      permission="zope2.View"
+      menu="plone_displayviews"
+      title="View Invito"
+      />
 </configure>

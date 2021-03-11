@@ -37,6 +37,8 @@
       name="rer.ufficiostampa-hiddenprofiles"
       />
 
-  <!-- -*- extra stuff goes here -*- -->
+  <!-- indexer per i destinatari -->
+  <adapter name="arguments" factory=".indexer.arguments" />
+  <adapter name="legislature" factory=".indexer.legislature" />
 
 </configure>
