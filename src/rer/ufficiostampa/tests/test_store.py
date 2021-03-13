@@ -54,7 +54,7 @@ class TestTool(unittest.TestCase):
 
     def test_update_record(self):
         tool = getUtility(ISubscriptionsStore)
-        id = tool.add({"channels": ["foo"], "email": "foo@foo.it",})
+        id = tool.add({"channels": ["foo"], "email": "foo@foo.it"})
 
         item = tool.get_record(id)
         self.assertEqual(item.attrs.get("email", None), "foo@foo.it")
