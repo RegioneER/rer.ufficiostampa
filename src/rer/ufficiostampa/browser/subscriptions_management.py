@@ -20,8 +20,8 @@ class View(BrowserView):
     def get_env_mode(self):
         return (
             api.portal.get_registry_record("plone.resources.development")
-            and "dev"
-            or "prod"
+            and "dev"  # noqa
+            or "prod"  # noqa
         )
 
     def get_resource_js(self, name="main"):
