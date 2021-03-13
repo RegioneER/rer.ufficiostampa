@@ -5,6 +5,7 @@ from rer.ufficiostampa.interfaces import ISubscriptionsStore
 from souper.soup import get_soup
 from souper.soup import Record
 from zope.interface import implementer
+from repoze.catalog.query import Eq
 
 import logging
 import six
@@ -41,11 +42,35 @@ class SubscriptionsStore(object):
     def length(self):
         return len([x for x in self.soup.data.values()])
 
-    def search(self, query=None):
-        if not query:
-            records = self.soup.data.values()
+    def search(self, query=None, sort_index="date", reverse=False):
+        if query:
+            queries = [
+                self.parse_query_params(index, value)
+                for index, value in query.items()
+                if index in ["text", "channels"]
+            ]
+            if queries:
+                return [
+                    x
+                    for x in self.soup.query(
+                        " and ".join(queries),
+                        sort_index=sort_index,
+                        reverse=reverse,
+                    )
+                ]
+        records = self.soup.data.values()
+        return sorted(
+            records, key=lambda k: k.attrs[sort_index], reverse=reverse
+        )
 
-        return records
+    def parse_query_params(self, index, value):
+        if index == "text":
+            return "'{}' in text".format(value)
+        elif index == "channels":
+            if isinstance(value, list):
+                return "channels in any({})".format(value)
+            elif isinstance(value, six.text_type):
+                return "channels in any('{}')".format(value)
 
     def get_record(self, id):
         if isinstance(id, six.text_type):
@@ -84,6 +109,5 @@ class SubscriptionsStore(object):
             return {"error": "NotFound"}
         del self.soup[record]
 
-
-#     def clear(self):
-#         self.soup.clear()
+    def clear(self):
+        self.soup.clear()

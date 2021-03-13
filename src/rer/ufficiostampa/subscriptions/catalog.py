@@ -17,12 +17,10 @@ logger = logging.getLogger(__name__)
 class SubscriptionsSoupCatalogFactory(object):
     def __call__(self, context):
         catalog = Catalog()
-        fullname_indexer = NodeTextIndexer(["name", "surname"])
-        catalog[u"fullname"] = CatalogTextIndex(fullname_indexer)
-        mail_indexer = NodeAttributeIndexer("email")
-        catalog[u"email"] = CatalogFieldIndex(mail_indexer)
-        mail_indexer = NodeAttributeIndexer("email")
-        catalog[u"email"] = CatalogFieldIndex(mail_indexer)
+        text_indexer = NodeTextIndexer(["name", "surname", "email"])
+        catalog[u"text"] = CatalogTextIndex(text_indexer)
         channels_indexer = NodeAttributeIndexer("channels")
         catalog[u"channels"] = CatalogKeywordIndex(channels_indexer)
+        date_indexer = NodeAttributeIndexer("date")
+        catalog[u"date"] = CatalogFieldIndex(date_indexer)
         return catalog

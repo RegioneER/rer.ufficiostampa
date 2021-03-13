@@ -128,3 +128,11 @@ class SubscriptionDelete(TraversableService):
                 message="Unable to delete subscription. Contact site manager.",
             )
         )
+
+
+class SubscriptionsClear(Service):
+    def reply(self):
+        # soup = get_soup("subscriptions_soup", self.context)
+        tool = getUtility(ISubscriptionsStore)
+        tool.clear()
+        return self.reply_no_content()

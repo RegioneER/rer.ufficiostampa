@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 from rer.ufficiostampa.testing import (
     RER_UFFICIOSTAMPA_API_FUNCTIONAL_TESTING,  # noqa: E501,
 )
@@ -7,10 +8,11 @@ from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
+from plone.restapi.serializer.converters import json_compatible
 from plone.restapi.testing import RelativeSession
 from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
-from souper.soup import Record
 from souper.soup import get_soup
+from souper.soup import Record
 
 import transaction
 import unittest
@@ -94,11 +96,13 @@ class TestSubscriptionsGet(unittest.TestCase):
         res = response.json()
         self.assertEqual(res["items_total"], 0)
 
+        now = datetime.now()
         soup = get_soup("subscriptions_soup", self.portal)
         transaction.commit()
         record = Record()
         record.attrs["name"] = "John"
         record.attrs["email"] = "jdoe@foo.com"
+        record.attrs["date"] = now
         intid = soup.add(record)
         transaction.commit()
 
@@ -109,5 +113,12 @@ class TestSubscriptionsGet(unittest.TestCase):
         self.assertEqual(res["items_total"], 1)
         self.assertEqual(
             res["items"],
-            [{"id": intid, "email": "jdoe@foo.com", "name": "John"}],
+            [
+                {
+                    "id": intid,
+                    "email": "jdoe@foo.com",
+                    "name": "John",
+                    "date": json_compatible(now),
+                }
+            ],
         )
