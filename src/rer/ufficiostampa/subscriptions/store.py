@@ -5,7 +5,6 @@ from rer.ufficiostampa.interfaces import ISubscriptionsStore
 from souper.soup import get_soup
 from souper.soup import Record
 from zope.interface import implementer
-from repoze.catalog.query import Eq
 
 import logging
 import six
@@ -33,7 +32,6 @@ class SubscriptionsStore(object):
                 logger.warning(
                     "[ADD SUBSCRIPTION] SKIP unkwnown field: {}".format(k)
                 )
-
             else:
                 record.attrs[k] = v
         record.attrs["date"] = datetime.now()
