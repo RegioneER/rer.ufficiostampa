@@ -8,3 +8,4 @@ from rer.ufficiostampa.interfaces.settings import (  # noqa
 from rer.ufficiostampa.interfaces.settings import (  # noqa
     IRerUfficiostampaSettings,
 )
+from rer.ufficiostampa.interfaces.store import ISubscriptionsStore  # noqa

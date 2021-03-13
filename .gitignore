@@ -40,3 +40,4 @@ reports/
 !.gitkeep
 !.travis.yml
 !src/rer
+rer/ufficiostampa/browser/static/dist/dev

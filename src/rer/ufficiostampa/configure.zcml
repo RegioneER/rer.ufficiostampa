@@ -8,11 +8,13 @@
   <i18n:registerTranslations directory="locales" />
 
   <!--<includeDependencies package="." />-->
+  <include file="permissions.zcml" />
 
   <include package=".browser" />
+  <include package=".restapi" />
+  <include package=".subscriptions" />
   <include package=".vocabularies" />
 
-  <include file="permissions.zcml" />
 
   <genericsetup:registerProfile
       name="default"

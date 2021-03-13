@@ -16,6 +16,23 @@ class IRerUfficiostampaSettings(model.Schema):
         required=True,
     )
 
+    subscription_channels = schema.List(
+        title=_(
+            u"subscription_channels_label", default=u"Subscription Channels"
+        ),
+        description=_(
+            u"subscription_channels_description",
+            default=u"List of available subscription channels."
+            u"One per line."
+            u"These channels will be used for users subscriptions "
+            u"and for select to which channel send a Comunicato.",
+        ),
+        required=True,
+        default=[],
+        missing_value=[],
+        value_type=schema.TextLine(),
+    )
+
 
 class ILegislaturesRowSchema(model.Schema):
     legislature = schema.SourceText(

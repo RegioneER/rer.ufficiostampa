@@ -45,4 +45,14 @@
       menu="plone_displayviews"
       title="View Invito"
       />
+
+    <!-- subscriptions-management -->
+    <browser:page
+      for="*"
+      name="subscriptions-management"
+      template="subscriptions_management.pt"
+      class=".subscriptions_management.View"
+      permission="rer.ufficiostampa.ManageChannels"
+      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
+    />
 </configure>

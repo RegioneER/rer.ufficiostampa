@@ -4,12 +4,7 @@
   i18n_domain="plone">
 
   <configure zcml:condition="installed AccessControl.security">
-  
-    <permission
-     id="rer.ufficiostampa.ManageSettings"
-     title="rer.ufficiostampa: Manage Settings"
-     />
-
+      
     <permission
         id="rer.ufficiostampa.AddComunicatoStampa"
         title="rer.ufficiostampa: Add Comunicato Stampa"
@@ -19,6 +14,15 @@
         title="rer.ufficiostampa: Add Invito Stampa"
         />
 
+    <permission
+      id="rer.ufficiostampa.ManageSettings"
+      title="rer.ufficiostampa: Manage Settings"
+     />
+    
+    <permission
+      id="rer.ufficiostampa.ManageChannels"
+      title="rer.ufficiostampa: Manage Channels"
+     />
 
   </configure>
 
