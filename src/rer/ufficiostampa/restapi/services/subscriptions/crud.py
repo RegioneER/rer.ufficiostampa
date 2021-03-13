@@ -63,11 +63,11 @@ class SubscriptionAdd(Service):
 
 
 @implementer(IPublishTraverse)
-class SubscriptionUpdate(Service):
+class TraversableService(Service):
     """ Update an entry """
 
     def __init__(self, context, request):
-        super(SubscriptionUpdate, self).__init__(context, request)
+        super(TraversableService, self).__init__(context, request)
         self.id = ""
         self.errors = {}
 
@@ -78,6 +78,13 @@ class SubscriptionUpdate(Service):
         except ValueError:
             raise BadRequest("Subscriber id should be a number.")
         return self
+
+    def reply(self):
+        raise NotImplementedError
+
+
+class SubscriptionUpdate(TraversableService):
+    """ Update an entry """
 
     def reply(self):
         if not self.id:
@@ -97,6 +104,27 @@ class SubscriptionUpdate(Service):
         return dict(
             error=dict(
                 type="InternalServerError",
-                message="Unable to add subscription. Contact site manager.",
+                message="Unable to update subscription. Contact site manager.",
+            )
+        )
+
+
+class SubscriptionDelete(TraversableService):
+    def reply(self):
+        if not self.id:
+            raise BadRequest("Missing subscriber id")
+        tool = getUtility(ISubscriptionsStore)
+        res = tool.delete(id=self.id)
+        if not res:
+            return self.reply_no_content()
+        if res.get("error", "") == "NotFound":
+            raise BadRequest(
+                'Unable to find subscription with id "{}"'.format(self.id)
+            )
+        self.request.response.setStatus(500)
+        return dict(
+            error=dict(
+                type="InternalServerError",
+                message="Unable to delete subscription. Contact site manager.",
             )
         )

@@ -105,8 +105,6 @@ class TestSubscriptionsUpdate(unittest.TestCase):
 
         self.api_session.patch(url, json={"name": "Jack"})
 
-        record = getUtility(ISubscriptionsStore).get_record(self.id)
-
         res = self.api_session.get(self.url).json()
         self.assertEqual(res["items"][0]["name"], "Jack")
         self.assertEqual(res["items"][0]["id"], self.id)

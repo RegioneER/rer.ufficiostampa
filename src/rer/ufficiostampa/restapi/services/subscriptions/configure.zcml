@@ -27,4 +27,13 @@
     permission="rer.ufficiostampa.ManageChannels"
     layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
     />
+  
+  <plone:service
+    method="DELETE"
+    name="@subscriptions"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    factory=".crud.SubscriptionDelete"
+    permission="rer.ufficiostampa.ManageChannels"
+    layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
+    />
 </configure>

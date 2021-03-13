@@ -72,10 +72,18 @@ class SubscriptionsStore(object):
                 record.attrs[k] = v
         self.soup.reindex(record)
 
+    def delete(self, id):
+        try:
+            record = self.soup.get(id)
+        except KeyError:
+            logger.error(
+                '[DELETE SUBSCRIPTION] Subscription with id "{}" not found.'.format(  # noqa
+                    id
+                )
+            )
+            return {"error": "NotFound"}
+        del self.soup[record]
 
-#     def delete(self, id):
-#         record = self.soup.get(id)
-#         del self.soup[record]
 
 #     def clear(self):
 #         self.soup.clear()
