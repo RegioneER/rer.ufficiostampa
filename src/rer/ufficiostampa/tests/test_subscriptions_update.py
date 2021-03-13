@@ -110,25 +110,3 @@ class TestSubscriptionsUpdate(unittest.TestCase):
         res = self.api_session.get(self.url).json()
         self.assertEqual(res["items"][0]["name"], "Jack")
         self.assertEqual(res["items"][0]["id"], self.id)
-
-    # def test_store_only_known_fields(self):
-
-    #     self.api_session.post(
-    #         self.url,
-    #         json={
-    #             "channels": ["foo"],
-    #             "email": "foo@foo.it",
-    #             "unknown": "mistery",
-    #             "name": "John",
-    #             "surname": "Doe",
-    #             "phone": "123456",
-    #         },
-    #     )
-    #     res = self.api_session.get(self.url).json()
-    #     self.assertEqual(res["items_total"], 1)
-    #     self.assertEqual(res["items"][0].get("unknown", None), None)
-    #     self.assertEqual(res["items"][0].get("email", None), "foo@foo.it")
-    #     self.assertEqual(res["items"][0].get("channels", None), ["foo"])
-    #     self.assertEqual(res["items"][0].get("name", None), "John")
-    #     self.assertEqual(res["items"][0].get("surname", None), "Doe")
-    #     self.assertEqual(res["items"][0].get("phone", None), "123456")

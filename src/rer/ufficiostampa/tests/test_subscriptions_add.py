@@ -8,8 +8,6 @@ from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
-from rer.ufficiostampa.interfaces import ISubscriptionsStore
-from zope.component import getUtility
 import transaction
 import unittest
 

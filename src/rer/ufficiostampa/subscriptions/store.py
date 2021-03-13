@@ -1,23 +1,10 @@
 # -*- coding: utf-8 -*-
-# from collective.volto.formsupport.interfaces import IFormDataStore
 from datetime import datetime
-from plone.dexterity.interfaces import IDexterityContent
-from plone.restapi.deserializer import json_body
-from repoze.catalog.catalog import Catalog
-from repoze.catalog.indexes.field import CatalogFieldIndex
-from souper.interfaces import ICatalogFactory
-from souper.soup import get_soup
-from souper.soup import NodeAttributeIndexer
-from souper.soup import Record
-from zope.component import adapter
-from zope.interface import implementer
-from zope.interface import Interface
-from repoze.catalog.indexes.text import CatalogTextIndex
-from souper.soup import NodeTextIndexer
-from repoze.catalog.indexes.keyword import CatalogKeywordIndex
-from rer.ufficiostampa.interfaces import ISubscriptionsStore
-from zope.interface import implementer
 from plone import api
+from rer.ufficiostampa.interfaces import ISubscriptionsStore
+from souper.soup import get_soup
+from souper.soup import Record
+from zope.interface import implementer
 
 import logging
 import six
