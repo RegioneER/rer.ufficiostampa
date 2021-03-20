@@ -104,7 +104,7 @@ Lista iscritti
 
 Endpoint da chiamare in **GET** sulla radice del sito.
 
-Ritorna la lista degli iscritti e i possibili canali. Solo per gli utenti che hanno il permesso "rer.ufficiostampa.ManageChannels".
+Ritorna la lista degli iscritti e i possibili canali. Solo per gli utenti che hanno il permesso "rer.ufficiostampa.ManageChannels"::
 
 > curl -i -X GET http://localhost:8080/Plone/@subscriptions -H 'Accept: application/json' -H 'Content-Type: application/json' --user admin:admin
 
@@ -127,7 +127,7 @@ Creazione nuovo iscritto
 
 Endpoint da chiamare in **POST** sulla radice del sito.
 
-Solo per gli utenti che hanno il permesso "rer.ufficiostampa.ManageChannels".
+Solo per gli utenti che hanno il permesso "rer.ufficiostampa.ManageChannels"::
 
 > curl -i -X POST http://localhost:8080/Plone/@subscriptions -H 'Accept: application/json' -H 'Content-Type: application/json' --data-raw '{"email": "foo@plone.org", "channels": ["first", "second"]}' --user admin:admin
 
@@ -142,7 +142,7 @@ Aggiornamento dati iscritto
 
 Endpoint da chiamare in **PATCH** sulla radice del sito.
 
-Solo per gli utenti che hanno il permesso "rer.ufficiostampa.ManageChannels".
+Solo per gli utenti che hanno il permesso "rer.ufficiostampa.ManageChannels"::
 
 > curl -i -X PATCH http://localhost:8080/Plone/@subscriptions/subscription_id -H 'Accept: application/json' -H 'Content-Type: application/json' --data-raw '{"email": "foo@plone.org", "name": "John"}' --user admin:admin
 
@@ -159,7 +159,7 @@ Cancellazione iscritto
 
 Endpoint da chiamare in **DELETE** sulla radice del sito.
 
-Solo per gli utenti che hanno il permesso "rer.ufficiostampa.ManageChannels".
+Solo per gli utenti che hanno il permesso "rer.ufficiostampa.ManageChannels"::
 
 > curl -i -X DELETE http://localhost:8080/Plone/@subscriptions/subscription_id -H 'Accept: application/json' --user admin:admin
 
@@ -175,7 +175,7 @@ Cancellazione iscritto
 
 Endpoint da chiamare in **GET** sulla radice del sito.
 
-Solo per gli utenti che hanno il permesso "rer.ufficiostampa.ManageChannels".
+Solo per gli utenti che hanno il permesso "rer.ufficiostampa.ManageChannels"::
 
 > curl -i -X DELETE http://localhost:8080/Plone/@subscriptions-clear -H 'Accept: application/json' --user admin:admin
 
