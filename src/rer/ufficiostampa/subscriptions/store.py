@@ -11,7 +11,14 @@ import six
 
 logger = logging.getLogger(__name__)
 
-SUBSCRIPTION_FIELDS = ["name", "surname", "email", "phone", "channels"]
+SUBSCRIPTION_FIELDS = [
+    "name",
+    "surname",
+    "email",
+    "phone",
+    "channels",
+    "newspaper",
+]
 
 
 @implementer(ISubscriptionsStore)

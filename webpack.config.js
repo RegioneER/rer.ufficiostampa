@@ -16,7 +16,10 @@ module.exports = (webpackEnv, argv) => {
   }
 
   const isProduction = argv.mode === 'production';
-  const pkgDir = path.resolve(__dirname, './rer/ufficiostampa/browser/static/');
+  const pkgDir = path.resolve(
+    __dirname,
+    './src/rer/ufficiostampa/browser/static/',
+  );
   const buildPath = isProduction
     ? path.resolve(pkgDir, './dist/prod')
     : path.resolve(pkgDir, './dist/dev');

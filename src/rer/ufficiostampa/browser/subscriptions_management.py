@@ -6,8 +6,8 @@ from time import time
 
 import pkg_resources
 
-JS_TEMPLATE = "{portal_url}/++plone++rer.ufficiostampa.static/dist/{env_mode}/{name}.js?v={version}"  # noqa
-CSS_TEMPLATE = "{portal_url}/++plone++rer.ufficiostampa.static/dist/{env_mode}/{name}.css?v={version}"  # noqa
+JS_TEMPLATE = "{portal_url}/++plone++rer.ufficiostampa/dist/{env_mode}/{name}.js?v={version}"  # noqa
+CSS_TEMPLATE = "{portal_url}/++plone++rer.ufficiostampa/dist/{env_mode}/{name}.css?v={version}"  # noqa
 
 
 class View(BrowserView):
