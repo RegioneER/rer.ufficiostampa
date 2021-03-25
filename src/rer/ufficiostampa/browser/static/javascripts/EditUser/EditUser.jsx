@@ -90,8 +90,8 @@ const EditUser = ({ user }) => {
         <div className="edit-user">
           <h1>
             {editUser['@id']
-              ? getTranslationFor('edit_user', 'Edit User')
-              : getTranslationFor('add_user', 'Add User')}
+              ? getTranslationFor('Edit Subscriber', 'Edit Subscriber')
+              : getTranslationFor('Add Subscriber', 'Add Subscriber')}
           </h1>
 
           {serverError && (

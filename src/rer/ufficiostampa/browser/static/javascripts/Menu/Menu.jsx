@@ -11,7 +11,7 @@ const Menu = ({ portalUrl, editUser }) => {
           onClick={() => editUser()}
           className="plone-btn plone-btn-primary"
         >
-          {getTranslationFor('add_user', 'Add user')}
+          {getTranslationFor('Add Subscriber', 'Add subscriber')}
         </button>
       </div>
     </>
