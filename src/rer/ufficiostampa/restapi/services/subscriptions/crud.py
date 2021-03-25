@@ -3,12 +3,14 @@ from plone import api
 from plone.restapi.deserializer import json_body
 from plone.restapi.serializer.converters import json_compatible
 from plone.restapi.services import Service
+from plone.protect.interfaces import IDisableCSRFProtection
 from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
 from rer.ufficiostampa.interfaces import ISubscriptionsStore
 from zExceptions import BadRequest
 from zope.component import getUtility
 from zope.publisher.interfaces import IPublishTraverse
 from zope.interface import implementer
+from zope.interface import alsoProvides
 
 
 class SubscriptionsGet(Service):
@@ -34,6 +36,7 @@ class SubscriptionsGet(Service):
 
 class SubscriptionAdd(Service):
     def reply(self):
+        alsoProvides(self.request, IDisableCSRFProtection)
         form_data = json_body(self.request)
         self.validate_form(form_data=form_data)
 
@@ -87,6 +90,7 @@ class SubscriptionUpdate(TraversableService):
     """ Update an entry """
 
     def reply(self):
+        alsoProvides(self.request, IDisableCSRFProtection)
         if not self.id:
             raise BadRequest("Missing subscriber id")
 
@@ -111,6 +115,7 @@ class SubscriptionUpdate(TraversableService):
 
 class SubscriptionDelete(TraversableService):
     def reply(self):
+        alsoProvides(self.request, IDisableCSRFProtection)
         if not self.id:
             raise BadRequest("Missing subscriber id")
         tool = getUtility(ISubscriptionsStore)

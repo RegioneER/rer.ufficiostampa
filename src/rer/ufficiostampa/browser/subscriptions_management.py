@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from plone import api
 from plone.memoize import ram
+from plone.protect.authenticator import createToken
 from Products.Five import BrowserView
 from time import time
+
 
 import pkg_resources
 
@@ -39,3 +41,6 @@ class View(BrowserView):
             name=name,
             version=self.get_version(),
         )
+
+    def get_token(self):
+        return createToken()
