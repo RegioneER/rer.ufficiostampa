@@ -18,6 +18,7 @@ const Field = ({
   errors,
   type = 'text',
   options = [], //for type 'multiselect'
+  confirmRemove = false, //for type 'multiselect. If true ask user if he really want to uncheck option
 }) => {
   const getTranslationFor = useContext(TranslationsContext);
 
@@ -65,7 +66,21 @@ const Field = ({
                 onChange={() => {
                   let v = JSON.parse(JSON.stringify(value ?? []));
                   if (v.indexOf(opt) >= 0) {
-                    v.splice(v.indexOf(opt), 1);
+                    if (confirmRemove) {
+                      if (
+                        window.confirm(
+                          `${getTranslationFor(
+                            'Are you sure you want to uncheck this item',
+                            'Are you sure you want to uncheck this item',
+                          )}: ${opt}?`,
+                        )
+                      ) {
+                        //remove item
+                        v.splice(v.indexOf(opt), 1);
+                      } else {
+                        //do nothing
+                      }
+                    }
                   } else {
                     v.push(opt);
                   }

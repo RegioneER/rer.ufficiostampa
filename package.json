@@ -73,6 +73,8 @@
         "axios": "^0.21.0",
         "plone-less-base": "git+https://git@github.com/RedTurtle/plone-less-base#master",
         "react": "^16.8.5",
-        "react-dom": "^16.8.5"
+        "react-data-table-component": "^6.11.7",
+        "react-dom": "^16.8.5",
+        "styled-components": "^5.2.1"
     }
 }

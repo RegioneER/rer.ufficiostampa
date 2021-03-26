@@ -28,7 +28,6 @@ const apiFetch = ({ url, params, method }) => {
   }
   var headers = { Accept: 'application/json' };
 
-  console.log(url, params, method);
   return axios({
     method,
     url,

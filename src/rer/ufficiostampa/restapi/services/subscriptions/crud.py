@@ -137,6 +137,7 @@ class SubscriptionDelete(TraversableService):
 
 class SubscriptionsClear(Service):
     def reply(self):
+        alsoProvides(self.request, IDisableCSRFProtection)
         # soup = get_soup("subscriptions_soup", self.context)
         tool = getUtility(ISubscriptionsStore)
         tool.clear()

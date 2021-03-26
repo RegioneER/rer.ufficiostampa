@@ -14,6 +14,20 @@ function SubscriptionsWrapper({ children }) {
   const [subscriptions, setSubscriptions] = useState({});
   const [portalUrl, setPortalUrl] = useState(null);
 
+  const [apiErrors, setApiErrors] = useState(null);
+
+  const handleApiResponse = res => {
+    if (res?.status == 204 || res?.status == 200) {
+      //ok
+    } else {
+      setApiErrors(
+        res
+          ? { status: res.status, statusText: res.statusText }
+          : { status: '404', statusText: '' },
+      );
+    }
+  };
+
   const fetchSubscriptions = (b_size = DEFAULT_B_SIZE, b_start = 0) => {
     const fetches = [
       apiFetch({
@@ -27,6 +41,7 @@ function SubscriptionsWrapper({ children }) {
     ];
 
     Promise.all(fetches).then(data => {
+      handleApiResponse(data[0]);
       setSubscriptions(data[0].data);
     });
   };
@@ -50,7 +65,13 @@ function SubscriptionsWrapper({ children }) {
 
   return (
     <SubscriptionsProvider
-      value={{ fetchSubscriptions, subscriptions, portalUrl }}
+      value={{
+        fetchSubscriptions,
+        subscriptions,
+        portalUrl,
+        handleApiResponse,
+        apiErrors,
+      }}
     >
       {children}
     </SubscriptionsProvider>

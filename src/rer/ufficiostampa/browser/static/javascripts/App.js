@@ -15,7 +15,7 @@ const App = () => {
     <TranslationsWrapper>
       <SubscriptionsWrapper>
         <Menu editUser={() => setUser({})} />
-        <UsersList />
+        <UsersList editUser={u => setUser(u)} />
         <EditUser user={user} />
       </SubscriptionsWrapper>
     </TranslationsWrapper>

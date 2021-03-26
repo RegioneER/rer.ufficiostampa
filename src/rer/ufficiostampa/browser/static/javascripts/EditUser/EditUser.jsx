@@ -4,7 +4,7 @@ import { SubscriptionsContext } from '../SubscriptionsContext';
 import apiFetch from '../utils/apiFetch';
 import Modal from '../Modal/Modal';
 import TextField from '../common/Field';
-
+import { getUserFieldsLables } from '../utils/utils';
 import './EditUser.less';
 
 const isValidEmail = email => {
@@ -20,6 +20,8 @@ const EditUser = ({ user }) => {
 
   const [showModal, setShowModal] = useState(user != null);
   const [serverError, setServerError] = useState(null);
+
+  const labels = getUserFieldsLables(getTranslationFor);
 
   useEffect(() => {
     if (user != null) {
@@ -42,15 +44,15 @@ const EditUser = ({ user }) => {
     const validation = {};
 
     if (!u.email) {
-      validation.email = `${getTranslationFor(
-        'E-mail',
-        'E-mail',
-      )} ${getTranslationFor('is required', 'is required')}`;
+      validation.email = `${labels.email} ${getTranslationFor(
+        'is required',
+        'is required',
+      )}`;
     } else if (!isValidEmail(u.email)) {
-      validation.email = `${getTranslationFor(
-        'E-mail',
-        'E-mail',
-      )} ${getTranslationFor('is not valid', 'is not valid')}`;
+      validation.email = `${labels.email} ${getTranslationFor(
+        'is not valid',
+        'is not valid',
+      )}`;
     }
 
     if (!u.channels || u.channels.length == 0) {
@@ -63,11 +65,19 @@ const EditUser = ({ user }) => {
   };
 
   const submit = () => {
+    let url = portalUrl + '/@subscriptions';
+    let method = 'POST';
+
+    if (editUser.id) {
+      url += '/' + editUser.id;
+      method = 'PATCH';
+    }
+
     const fetches = [
       apiFetch({
-        url: portalUrl + '/@subscriptions',
+        url: url,
         params: editUser,
-        method: 'POST',
+        method: method,
       }),
     ];
 
@@ -104,21 +114,21 @@ const EditUser = ({ user }) => {
           <form>
             <TextField
               name="name"
-              label={getTranslationFor('Name', 'Name')}
+              label={labels.name}
               value={editUser.name}
               onChange={changeUserField}
               errors={validationErrors}
             />
             <TextField
               name="surname"
-              label={getTranslationFor('Surname', 'Surname')}
+              label={labels.surname}
               value={editUser.surname}
               onChange={changeUserField}
               errors={validationErrors}
             />
             <TextField
               name="email"
-              label={getTranslationFor('email', 'E-mail')}
+              label={labels.email}
               value={editUser.email}
               onChange={changeUserField}
               required={true}
@@ -126,27 +136,28 @@ const EditUser = ({ user }) => {
             />
             <TextField
               name="phone"
-              label={getTranslationFor('phone', 'Phone')}
+              label={labels.phone}
               value={editUser.phone}
               onChange={changeUserField}
               errors={validationErrors}
             />
             <TextField
               name="newspaper"
-              label={getTranslationFor('newspaper', 'Newspaper name')}
+              label={labels.newspaper}
               value={editUser.newspaper}
               onChange={changeUserField}
               errors={validationErrors}
             />
             <TextField
               name="channels"
-              label={getTranslationFor('channels', 'Channels')}
+              label={labels.channels}
               value={editUser.channels ?? []}
               onChange={changeUserField}
               required={true}
               errors={validationErrors}
               type="multiselect"
               options={subscriptions.channels}
+              confirmRemove={true}
             />
           </form>
         </div>
