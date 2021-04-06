@@ -11,21 +11,25 @@ from zope.component import getUtility
 from zope.publisher.interfaces import IPublishTraverse
 from zope.interface import implementer
 from zope.interface import alsoProvides
+from plone.restapi.batching import HypermediaBatch
 
 
 class SubscriptionsGet(Service):
     def reply(self):
-        # soup = get_soup("subscriptions_soup", self.context)
         tool = getUtility(ISubscriptionsStore)
-        records = [self.expand_data(x) for x in tool.search()]
+
+        batch = HypermediaBatch(self.request, tool.search())
         data = {
-            "@id": "{}/@subscriptions".format(self.context.absolute_url()),
-            "items": records,
-            "items_total": len(records),
+            "@id": batch.canonical_url,
+            "items": [self.expand_data(x) for x in batch],
+            "items_total": batch.items_total,
             "channels": api.portal.get_registry_record(
                 "subscription_channels", interface=IRerUfficiostampaSettings
             ),
         }
+        links = batch.links
+        if links:
+            data["batching"] = links
         return data
 
     def expand_data(self, record):
@@ -41,6 +45,15 @@ class SubscriptionAdd(Service):
         self.validate_form(form_data=form_data)
 
         tool = getUtility(ISubscriptionsStore)
+        for x in range(100):
+            tool.add(
+                {
+                    "name": "{} {}".format(form_data["name"], x),
+                    "surname": "{} {}".format(form_data["surname"], x),
+                    "email": "{}-{}".format(x, form_data["email"]),
+                    "channels": form_data["channels"],
+                }
+            )
         res = tool.add(form_data)
 
         if res:

@@ -47,7 +47,7 @@ class SubscriptionsStore(object):
     def length(self):
         return len([x for x in self.soup.data.values()])
 
-    def search(self, query=None, sort_index="date", reverse=False):
+    def search(self, query=None, sort_index="date", reverse=True):
         if query:
             queries = [
                 self.parse_query_params(index, value)
