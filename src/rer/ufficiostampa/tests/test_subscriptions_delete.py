@@ -113,8 +113,8 @@ class TestSubscriptionsDelete(unittest.TestCase):
         records = self.api_session.get(self.url).json()
 
         self.assertEqual(records["items_total"], 2)
-        self.assertEqual(records["items"][0]["email"], "foo@foo.it")
-        self.assertEqual(records["items"][1]["email"], "bar@bar.it")
+        self.assertEqual(records["items"][0]["email"], "bar@bar.it")
+        self.assertEqual(records["items"][1]["email"], "foo@foo.it")
 
         self.api_session.delete(url)
 

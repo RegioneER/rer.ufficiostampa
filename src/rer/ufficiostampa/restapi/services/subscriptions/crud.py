@@ -45,15 +45,15 @@ class SubscriptionAdd(Service):
         self.validate_form(form_data=form_data)
 
         tool = getUtility(ISubscriptionsStore)
-        for x in range(100):
-            tool.add(
-                {
-                    "name": "{} {}".format(form_data["name"], x),
-                    "surname": "{} {}".format(form_data["surname"], x),
-                    "email": "{}-{}".format(x, form_data["email"]),
-                    "channels": form_data["channels"],
-                }
-            )
+        # for x in range(100):
+        #     tool.add(
+        #         {
+        #             "name": "{} {}".format(form_data["name"], x),
+        #             "surname": "{} {}".format(form_data["surname"], x),
+        #             "email": "{}-{}".format(x, form_data["email"]),
+        #             "channels": form_data["channels"],
+        #         }
+        #     )
         res = tool.add(form_data)
 
         if res:

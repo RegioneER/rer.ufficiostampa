@@ -85,7 +85,6 @@ class TestSubscriptionsGet(unittest.TestCase):
         self.api_session.post(
             self.url, json={"channels": ["foo"], "email": "foo@foo.it"}
         )
-
         self.assertEqual(
             self.api_session.get(self.url).json()["items_total"], 1
         )
