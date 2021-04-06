@@ -19,6 +19,8 @@ class SubscriptionsSoupCatalogFactory(object):
         catalog = Catalog()
         text_indexer = NodeTextIndexer(["name", "surname", "email"])
         catalog[u"text"] = CatalogTextIndex(text_indexer)
+        email_indexer = NodeAttributeIndexer("email")
+        catalog[u"email"] = CatalogFieldIndex(email_indexer)
         channels_indexer = NodeAttributeIndexer("channels")
         catalog[u"channels"] = CatalogKeywordIndex(channels_indexer)
         date_indexer = NodeAttributeIndexer("date")

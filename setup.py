@@ -58,6 +58,7 @@ setup(
         "plone.app.dexterity",
         "collective.z3cform.jsonwidget",
         "souper.plone",
+        "itsdangerous",
     ],
     extras_require={
         "test": [

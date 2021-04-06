@@ -184,10 +184,6 @@ Svuota completamente il db degli iscritti.
 Se l'operazione va a buon fine, il server ritorna un ``204``.
 
 
-Sviluppo
-========
-
-
 Installazione
 =============
 

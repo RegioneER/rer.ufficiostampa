@@ -10,4 +10,8 @@
     name="rer.ufficiostampa.vocabularies.arguments"
     component=".vocabularies.ArgumentsVocabulary"
     />
+  <utility
+    name="rer.ufficiostampa.vocabularies.channels"
+    component=".vocabularies.ChannelsVocabulary"
+    />
 </configure>

@@ -52,7 +52,7 @@ class SubscriptionsStore(object):
             queries = [
                 self.parse_query_params(index, value)
                 for index, value in query.items()
-                if index in ["text", "channels"]
+                if index in ["text", "channels", "email"]
             ]
             if queries:
                 return [
@@ -63,6 +63,8 @@ class SubscriptionsStore(object):
                         reverse=reverse,
                     )
                 ]
+            else:
+                return []
         records = self.soup.data.values()
         return sorted(
             records, key=lambda k: k.attrs[sort_index], reverse=reverse
@@ -71,11 +73,13 @@ class SubscriptionsStore(object):
     def parse_query_params(self, index, value):
         if index == "text":
             return "'{}' in text".format(value)
-        elif index == "channels":
+        elif index in ["channels"]:
             if isinstance(value, list):
-                return "channels in any({})".format(value)
+                return "{} in any({})".format(index, value)
             elif isinstance(value, six.text_type):
-                return "channels in any('{}')".format(value)
+                return "{} in any('{}')".format(index, value)
+        else:
+            return "{} == '{}'".format(index, value)
 
     def get_record(self, id):
         if isinstance(id, six.text_type):

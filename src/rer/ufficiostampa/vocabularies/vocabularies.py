@@ -5,7 +5,7 @@ from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
 from plone import api
 from plone.api.exc import InvalidParameterError
-
+from plone.app.vocabularies.terms import safe_simplevocabulary_from_values
 import json
 
 
@@ -36,3 +36,19 @@ class ArgumentsVocabularyFactory(object):
 
 
 ArgumentsVocabulary = ArgumentsVocabularyFactory()
+
+
+@implementer(IVocabularyFactory)
+class ChannelsVocabularyFactory(object):
+    def __call__(self, context):
+        try:
+            subscription_channels = api.portal.get_registry_record(
+                "subscription_channels", interface=IRerUfficiostampaSettings,
+            )
+        except (KeyError, InvalidParameterError):
+            subscription_channels = []
+        return safe_simplevocabulary_from_values(subscription_channels)
+
+
+ArgumentsVocabulary = ArgumentsVocabularyFactory()
+ChannelsVocabulary = ChannelsVocabularyFactory()

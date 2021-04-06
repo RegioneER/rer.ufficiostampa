@@ -12,12 +12,12 @@
 
 <body>
 <metal:title fill-slot="content-title">
-    <h1 class="documentFirstHeading" i18n:translate="subscriptions_management_label">Subscriptions management</h1>
+    <h1 class="documentFirstHeading" i18n:translate="channels_management_label">Channels management</h1>
 </metal:title>
 <metal:description fill-slot="content-description">
 </metal:description>
 <metal:core fill-slot="content-core">
-  <div id="subscriptions-management" data-authenticator="${view/get_token}"/>
+  <div id="channels-management" data-authenticator="${view/get_token}"/>
   <script src="${view/get_resource_js}"></script>
 </metal:core>
 </body>

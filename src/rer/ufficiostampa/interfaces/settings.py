@@ -33,6 +33,25 @@ class IRerUfficiostampaSettings(model.Schema):
         value_type=schema.TextLine(),
     )
 
+    token_secret = schema.Password(
+        title=_("token_secret_label", default=u"Token secret"),
+        description=_(
+            "token_secret_help",
+            default=u"Insert the secret key for token generation.",
+        ),
+        required=True,
+    )
+    token_salt = schema.Password(
+        title=_("token_salt_label", default=u"Token salt"),
+        description=_(
+            "token_salt_help",
+            default=u"Insert the salt for token generation. This, in "
+            u"conjunction with the secret, will generate unique tokens for "
+            u"subscriptions management links.",
+        ),
+        required=True,
+    )
+
 
 class ILegislaturesRowSchema(model.Schema):
     legislature = schema.SourceText(

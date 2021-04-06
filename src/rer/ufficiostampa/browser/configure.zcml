@@ -46,13 +46,34 @@
       title="View Invito"
       />
 
-    <!-- subscriptions-management -->
+    <!-- channels-management -->
     <browser:page
-      for="*"
-      name="subscriptions-management"
-      template="subscriptions_management.pt"
-      class=".subscriptions_management.View"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      name="channels-management"
+      template="channels_management.pt"
+      class=".channels_management.View"
       permission="rer.ufficiostampa.ManageChannels"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
     />
+
+    <browser:page
+      name="manage-subscriptions-request"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".manage_subscriptions.ManageSubscriptionsRequestForm"
+      permission="zope2.View"
+      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
+      />
+    <browser:page
+      name="manage-subscriptions"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".manage_subscriptions.ManageSubscriptionsForm"
+      permission="zope2.View"
+      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
+      />
+    <browser:page
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      name="manage_subscriptions_mail_template"
+      template="templates/manage_subscriptions_mail_template.pt"
+      permission="zope2.View"
+      />
 </configure>

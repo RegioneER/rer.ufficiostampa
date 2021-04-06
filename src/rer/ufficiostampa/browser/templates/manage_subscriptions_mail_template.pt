@@ -1,0 +1,13 @@
+<tal:root define="site_title python:options['site_title'];
+                  url python:options['url'];"
+          i18n:translate="rer.ufficiostampa">
+  <br />
+    <p>
+    You received this email because someone asked to manage your subscriptions on ${site_title}.
+    </p>
+  <br />
+  <a href="" tal:attributes="href url">Click here</a> to confirm. or ignore this email.
+  <b>
+    This link will expire in 24 hours.
+  </b>
+</tal:root>

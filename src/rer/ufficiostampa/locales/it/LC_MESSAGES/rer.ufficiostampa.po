@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-03-03 15:31+0000\n"
+"POT-Creation-Date: 2021-04-06 09:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Configurazione Ufficio Stampa"
 msgstr ""
 
-#: rer/ufficiostampa/configure.zcml:24
+#: rer/ufficiostampa/configure.zcml:26
 msgid "Installs the rer.ufficiostampa add-on."
 msgstr ""
 
@@ -29,8 +29,16 @@ msgstr ""
 msgid "Ufficio Stampa settings"
 msgstr "Configurazione Ufficio Stampa"
 
-#: rer/ufficiostampa/configure.zcml:33
+#: rer/ufficiostampa/configure.zcml:35
 msgid "Uninstalls the rer.ufficiostampa add-on."
+msgstr ""
+
+#: rer/ufficiostampa/browser/configure.zcml:37
+msgid "View Comunicato"
+msgstr ""
+
+#: rer/ufficiostampa/browser/configure.zcml:47
+msgid "View Invito"
 msgstr ""
 
 #. Default: "Select one or more values."
@@ -43,28 +51,38 @@ msgstr "Seleziona uno o più valori possibili."
 msgid "arguments_label"
 msgstr "Argomenti"
 
+#. Default: "Cancel"
+#: rer/ufficiostampa/browser/manage_subscriptions.py:277
+msgid "cancel_button"
+msgstr "Annulla"
+
+#. Default: "Channels management"
+#: rer/ufficiostampa/browser/channels_management.pt:15
+msgid "channels_management_label"
+msgstr "Gestione canali di iscrizione"
+
 #. Default: "Legislature"
 #: rer/ufficiostampa/interfaces/content.py:26
 msgid "label_legislature"
 msgstr "Legislatura"
 
 #. Default: "Insert a list of arguments related to this legislature. One per line."
-#: rer/ufficiostampa/interfaces/settings.py:30
+#: rer/ufficiostampa/interfaces/settings.py:66
 msgid "legislature_arguments_help"
 msgstr "Inserisci una lista di argomenti a cui si fa riferimento."
 
 #. Default: "Arguments"
-#: rer/ufficiostampa/interfaces/settings.py:29
+#: rer/ufficiostampa/interfaces/settings.py:65
 msgid "legislature_arguments_label"
 msgstr "Argomenti"
 
 #. Default: "Insert the legislature name."
-#: rer/ufficiostampa/interfaces/settings.py:23
+#: rer/ufficiostampa/interfaces/settings.py:59
 msgid "legislature_help"
 msgstr "Inserisci il nome della legislatura."
 
 #. Default: "Legislature"
-#: rer/ufficiostampa/interfaces/settings.py:22
+#: rer/ufficiostampa/interfaces/settings.py:58
 msgid "legislature_label"
 msgstr "Legislatura"
 
@@ -78,10 +96,160 @@ msgstr "Questa è una lista di legislature. L'ultima inserita è quella utilizza
 msgid "legislatures_label"
 msgstr "Elenco Legislature."
 
-#: rer/ufficiostampa/configure.zcml:24
+#. Default: "Manage your subscriptions for ${site}"
+#: rer/ufficiostampa/browser/manage_subscriptions.py:201
+msgid "manage_subscription_subject_label"
+msgstr "Gestisci le tue iscrizioni su ${site}"
+
+#. Default: "Select which channels you want to be subscribed or not. Disable all if you don't want to be notified."
+#: rer/ufficiostampa/browser/manage_subscriptions.py:67
+msgid "manage_subscriptions_channels_description"
+msgstr "Seleziona per quali canali vuoi ricevere le comunicazioni. Disattivali tutti se non vuoi mai essere aggiornato."
+
+#. Default: "Channels"
+#: rer/ufficiostampa/browser/manage_subscriptions.py:66
+msgid "manage_subscriptions_channels_title"
+msgstr "Canali"
+
+#. Default: "Insert the email for wich you want to manage subscriptions."
+#: rer/ufficiostampa/browser/manage_subscriptions.py:53
+msgid "manage_subscriptions_description"
+msgstr "Inserisci l'email per la quale vuoi gestire le iscrizioni."
+
+#. Default: "Email"
+#: rer/ufficiostampa/browser/manage_subscriptions.py:52
+msgid "manage_subscriptions_email_title"
+msgstr "Email"
+
+#. Default: "This is the list of available channels and your subscriptions."
+#: rer/ufficiostampa/browser/manage_subscriptions.py:226
+msgid "manage_subscriptions_help"
+msgstr "Questa è la lista dei possibili canali e di quelli a cui sei già iscritto."
+
+#. Default: "Mail not found. Unable to change settings."
+#: rer/ufficiostampa/browser/manage_subscriptions.py:263
+msgid "manage_subscriptions_inexistent_mail"
+msgstr "Email non trovata. Impossibile aggiornare i dati."
+
+#. Default: "Unable to send manage subscriptions link. Please contact site administrator."
+#: rer/ufficiostampa/browser/manage_subscriptions.py:155
+msgid "manage_subscriptions_not_send"
+msgstr "Impossibile spedire il link per la gestione delle iscrizioni. Per favore contatta l'amministratore del sito."
+
+#. Default: "If you want to manage your subscriptions, please insert your email address. You will receive an email with the link to manage them. That link will expire in 24 hours."
+#: rer/ufficiostampa/browser/manage_subscriptions.py:84
+msgid "manage_subscriptions_request_help"
+msgstr "Se vuoi gestire le tue iscrizioni, per favore inserisci il tuo indirizzo email nell'apposito campo. Riceverai un'email con il link apposito. Il link scadrà in 24 ore."
+
+#. Default: "Mail not found. Unable to send the link."
+#: rer/ufficiostampa/browser/manage_subscriptions.py:109
+msgid "manage_subscriptions_request_inexistent_mail"
+msgstr "Email non trovata. Impossibile spedire la mail con il link."
+
+#. Default: "Serializer secret and salt not set in control panel. Unable to send the link."
+#: rer/ufficiostampa/browser/manage_subscriptions.py:125
+msgid "manage_subscriptions_request_serializer_error"
+msgstr "Secret e salt non impostati nel pannello di controllo. Impossibile inviare il link."
+
+#. Default: "Channels subscriptions"
+#: rer/ufficiostampa/browser/manage_subscriptions.py:83
+msgid "manage_subscriptions_request_title"
+msgstr "Gestione iscrizioni"
+
+#. Default: "You will receive an email with a link to manage your subscriptions."
+#: rer/ufficiostampa/browser/manage_subscriptions.py:162
+msgid "manage_subscriptions_send_success"
+msgstr "Riceverai un'email con il link per gestire le tue iscrizioni."
+
+#. Default: "Subscriptions updated"
+#: rer/ufficiostampa/browser/manage_subscriptions.py:269
+msgid "manage_subscriptions_success"
+msgstr "Iscrizioni aggiornate"
+
+#. Default: "Channels subscriptions"
+#: rer/ufficiostampa/browser/manage_subscriptions.py:225
+msgid "manage_subscriptions_title"
+msgstr "Gestione iscrizioni"
+
+#: rer/ufficiostampa/configure.zcml:26
 msgid "rer.ufficiostampa"
 msgstr ""
 
-#: rer/ufficiostampa/configure.zcml:33
+#: rer/ufficiostampa/configure.zcml:35
 msgid "rer.ufficiostampa (uninstall)"
 msgstr ""
+
+#. Default: "Save"
+#: rer/ufficiostampa/browser/manage_subscriptions.py:252
+msgid "save_button"
+msgstr "Salva"
+
+#. Default: "Send"
+#: rer/ufficiostampa/browser/manage_subscriptions.py:98
+msgid "send_button"
+msgstr "Invia"
+
+#. Default: "List of available subscription channels.One per line.These channels will be used for users subscriptions and for select to which channel send a Comunicato."
+#: rer/ufficiostampa/interfaces/settings.py:23
+msgid "subscription_channels_description"
+msgstr "Elenco dei vari canali a cui ci si può iscrivere. Uno per riga. Questi canali verranno usati per le iscrizioni e per selezionare a chi inviare i comunicati."
+
+#. Default: "Subscription Channels"
+#: rer/ufficiostampa/interfaces/settings.py:20
+msgid "subscription_channels_label"
+msgstr "Canali"
+
+#. Default: "Insert the salt for token generation. This, in conjunction with the secret, will generate unique tokens for subscriptions management links."
+#: rer/ufficiostampa/interfaces/settings.py:46
+msgid "token_salt_help"
+msgstr "Inserisci il salt per la generazione del token. E' una stringa che in unione con il secret, serve a generare token univoci per i link di gestione delle iscrizioni."
+
+#. Default: "Token salt"
+#: rer/ufficiostampa/interfaces/settings.py:45
+msgid "token_salt_label"
+msgstr "Token salt"
+
+#. Default: "Insert the secret key for token generation."
+#: rer/ufficiostampa/interfaces/settings.py:38
+msgid "token_secret_help"
+msgstr "Inserisci la chiave segreta per la generazione dei token."
+
+#. Default: "Token secret"
+#: rer/ufficiostampa/interfaces/settings.py:37
+msgid "token_secret_label"
+msgstr "Token secret"
+
+#. Default: "Unable to manage subscriptions. Invalid email."
+#: rer/ufficiostampa/utils.py:135
+msgid "unsubscribe_confirm_invalid_email"
+msgstr "Impossibile gestire le iscrizioni. Email non valida."
+
+#. Default: "Unable to manage subscriptions. Invalid id."
+#: rer/ufficiostampa/utils.py:128
+msgid "unsubscribe_confirm_invalid_id"
+msgstr "Impossibile gestire le iscrizioni. Id non valido."
+
+#. Default: "Unable to manage subscriptions. Invalid parameters."
+#: rer/ufficiostampa/utils.py:119
+msgid "unsubscribe_confirm_invalid_parameters"
+msgstr "Impossibile gestire le iscrizioni. Parametri non validi."
+
+#. Default: "Unable to manage subscriptions. Token expired."
+#: rer/ufficiostampa/utils.py:103
+msgid "unsubscribe_confirm_secret_expired"
+msgstr "Impossibile gestire le iscrizioni. Token scaduto."
+
+#. Default: "Unable to manage subscriptions. Invalid token."
+#: rer/ufficiostampa/utils.py:110
+msgid "unsubscribe_confirm_secret_invalid"
+msgstr "Impossibile gestire le iscrizioni. Token non valido."
+
+#. Default: "Unable to manage subscriptions. Token not present."
+#: rer/ufficiostampa/utils.py:72
+msgid "unsubscribe_confirm_secret_null"
+msgstr "Impossibile gestire le iscrizioni. Token non presente."
+
+#. Default: "Unable to manage subscriptions. Token keys not set in control panel."
+#: rer/ufficiostampa/utils.py:86
+msgid "unsubscribe_confirm_secret_token_settings_error"
+msgstr "Impossibile gestire le iscrizioni. Chiavi per il token non impostate nel pannello di controllo."
