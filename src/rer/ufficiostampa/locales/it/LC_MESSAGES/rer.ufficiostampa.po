@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-04-06 13:05+0000\n"
+"POT-Creation-Date: 2021-04-06 15:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -123,6 +123,12 @@ msgstr "non valido"
 
 msgid "is required"
 msgstr "obbligatorio"
+
+msgid "item_selected"
+msgstr "elemento selezionato"
+
+msgid "items_selected"
+msgstr "elementi selezionati"
 
 #. Default: "Legislature"
 #: ../interfaces/content.py:26

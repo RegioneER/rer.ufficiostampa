@@ -212,6 +212,11 @@ const UsersList = ({ editUser }) => {
         onSelectedRowsChange={handleRowSelected}
         contextActions={contextActions}
         clearSelectedRows={toggleCleared}
+        contextMessage={{
+          singular: getTranslationFor('item_selected', 'item selected'),
+          plural: getTranslationFor('items_selected', 'items selected'),
+          message: '',
+        }}
       />
     </div>
   );

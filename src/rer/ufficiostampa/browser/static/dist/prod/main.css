@@ -1,0 +1,8 @@
+.ufficiostampa-menu-wrapper{margin-bottom:3em;padding:1em;background-color:#e6e6e6}.ufficiostampa-menu-wrapper button{margin-right:1em}
+.ufficio-stampa-users-list [role=heading]{background-color:transparent}.ufficio-stampa-users-list .rdt_TableCol{background-color:#e8e8e8}.ufficio-stampa-users-list .channels{width:100%;overflow:scroll;max-height:4rem}.ufficio-stampa-users-list .action.editItem:active,.ufficio-stampa-users-list .action.editItem:hover{box-shadow:none}.ufficio-stampa-users-list .search-wrapper{display:flex}.ufficio-stampa-users-list .search-wrapper input{border-bottom-right-radius:0;border-top-right-radius:0;height:unset}.ufficio-stampa-users-list .search-wrapper button{border-left:none;border-bottom-left-radius:0;border-top-left-radius:0}
+.plone-modal .plone-modal-dialog .plone-modal-content{background-color:#fff}body.plone-toolbar-left-default .plone-modal-wrapper .plone-modal .plone-modal-content{max-width:80%!important}
+.field .fieldErrorBox{font-style:italic;color:#c4173c;font-weight:400}.field input[type=checkbox]+label{margin-left:.5rem}.field.multiselect .fieldErrorBox{margin-bottom:.5rem}
+.edit-user form .formControls{padding:1em 0;border-top:1px solid #ccc}
+
+
+/*# sourceMappingURL=main.css.map*/
