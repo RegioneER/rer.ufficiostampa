@@ -1,0 +1,41 @@
+<tal:root define="notes python:options.get('notes', '');
+                  css python:options.get('css', '');
+                  site_title python:options.get('site_title', '');
+                  description context/description|nothing;
+                  text context/text|nothing;
+                  date python:options.get('date', '');
+                  toLocalizedTime nocall:context/@@plone/toLocalizedTime;"
+          i18n:domain="rer.ufficiostampa">
+    <style tal:condition="css">${css}</style>
+    <div class="comunicato-note" tal:condition="notes" tal:content="notes">
+    </div>
+    <div id="logo">
+      <img src="${context/portal_url}/++plone++rer.ufficiostampa/logo_rer.gif" alt="Regione Emilia-Romagna" />
+      <div>Giunta Regionale - Agenzia di informazione e comunicazione</div>
+    </div>
+    <div class="infos">
+      <span i18n:translate="send_date_label">
+        Date <b i18n:name="date" tal:content="python:toLocalizedTime(date, long_format=False)" />
+      </span>
+    </div>
+    <p class="comunicato-description" tal:condition="description">${description}</p>
+    
+    <div class="comunicato-text" tal:condition="text" tal:content="structure text/output"></div>
+
+    <div id="footer">
+      <div class="other-news">
+        <p>
+          Tutte le notizie su <a title="Regione Emilia-Romagna" href="https://www.regione.emilia-romagna.it">www.regione.emilia-romagna.it</a>,
+          i comunicati nella sezione <em>Agenzia di informazione e comunicazione<em>.
+        </p>
+        <p>Seguici su Twitter (<a href="https://twitter.com/@RegioneER">@RegioneER</a>), Facebook (<a href="https://www.facebook.com/RegioneEmiliaRomagna">@RegioneEmiliaRomagna</a>)</p>
+        <p>Segreteria di redazione tel. 051 5275490</p>
+      </div>
+      <div class="manage-subscriptions">
+        <p i18n:translate="manage_subscriptions_intro">
+        You are receiving this email because you are subscribed to <b i18n:name="site_title">${site_title}</b>.
+        </p>
+        <a i18n:translate="manage_subscriptions_link" href="${context/portal_url}/manage-subscriptions-request">Manage your subscriptions</a>.
+      </div>
+    </div>
+</tal:root>

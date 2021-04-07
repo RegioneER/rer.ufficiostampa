@@ -46,6 +46,21 @@
       title="View Invito"
       />
 
+    <browser:page
+      for="rer.ufficiostampa.interfaces.IComunicatoStampa"
+      name="send_preview"
+      class=".send_preview.View"
+      template="templates/send_preview.pt"
+      permission="zope2.View"
+      />
+    <browser:page
+      for="rer.ufficiostampa.interfaces.IInvitoStampa"
+      name="send_preview"
+      class=".send_preview.View"
+      template="templates/send_preview.pt"
+      permission="zope2.View"
+      />
+
     <!-- channels-management -->
     <browser:page
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
@@ -74,6 +89,19 @@
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       name="manage_subscriptions_mail_template"
       template="templates/manage_subscriptions_mail_template.pt"
+      permission="zope2.View"
+      />
+    <browser:page
+      name="send"
+      for="rer.ufficiostampa.interfaces.IComunicatoStampa"
+      class=".send.SendForm"
+      permission="zope2.View"
+      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
+      />
+    <browser:page
+      for="rer.ufficiostampa.interfaces.IComunicatoStampa"
+      name="send_mail_template"
+      template="templates/send_mail_template.pt"
       permission="zope2.View"
       />
 </configure>

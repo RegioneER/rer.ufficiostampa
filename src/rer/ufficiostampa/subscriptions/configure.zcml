@@ -11,6 +11,16 @@
     />
 
     <utility
+        provides="souper.interfaces.ICatalogFactory"
+        factory=".catalog.SendHistorySoupCatalogFactory"
+        name="send_history_soup"
+    />
+
+    <utility
         factory=".store.SubscriptionsStore"
+    />
+
+    <utility
+        factory=".store.SendHistoryStore"
     />
 </configure>

@@ -2,6 +2,7 @@
 from datetime import datetime
 from plone import api
 from rer.ufficiostampa.interfaces import ISubscriptionsStore
+from rer.ufficiostampa.interfaces import ISendHistoryStore
 from souper.soup import get_soup
 from souper.soup import Record
 from zope.interface import implementer
@@ -20,24 +21,34 @@ SUBSCRIPTION_FIELDS = [
     "newspaper",
 ]
 
+SEND_HISTORY_FIELDS = [
+    "subject",
+    "recipients",
+    "channels",
+    "status",
+    "completed_date",
+]
 
-@implementer(ISubscriptionsStore)
-class SubscriptionsStore(object):
+KEYWORD_INDEXES = ["channels"]
+
+
+class BaseStore(object):
     """
     """
 
     @property
     def soup(self):
 
-        return get_soup("subscriptions_soup", api.portal.get())
+        return get_soup(self.soup_name, api.portal.get())
 
     def add(self, data):
-
         record = Record()
         for k, v in data.items():
-            if k not in SUBSCRIPTION_FIELDS:
+            if k not in self.fields:
                 logger.warning(
-                    "[ADD SUBSCRIPTION] SKIP unkwnown field: {}".format(k)
+                    "[ADD {}] SKIP unkwnown field: {}".format(
+                        self.soup_type, k
+                    )
                 )
             else:
                 record.attrs[k] = v
@@ -52,7 +63,7 @@ class SubscriptionsStore(object):
             queries = [
                 self.parse_query_params(index, value)
                 for index, value in query.items()
-                if index in ["text", "channels", "email"]
+                if index in self.indexes
             ]
             if queries:
                 return [
@@ -73,7 +84,7 @@ class SubscriptionsStore(object):
     def parse_query_params(self, index, value):
         if index == "text":
             return "'{}' in text".format(value)
-        elif index in ["channels"]:
+        elif index in KEYWORD_INDEXES:
             if isinstance(value, list):
                 return "{} in any({})".format(index, value)
             elif isinstance(value, six.text_type):
@@ -91,15 +102,17 @@ class SubscriptionsStore(object):
             record = self.soup.get(id)
         except KeyError:
             logger.error(
-                '[UPDATE SUBSCRIPTION] Subscription with id "{}" not found.'.format(  # noqa
-                    id
+                '[UPDATE {}] item with id "{}" not found.'.format(
+                    self.soup_type, id
                 )
             )
             return {"error": "NotFound"}
         for k, v in data.items():
-            if k not in SUBSCRIPTION_FIELDS:
+            if k not in self.fields:
                 logger.warning(
-                    "[UPDATE SUBSCRIPTION] SKIP unkwnown field: {}".format(k)
+                    "[UPDATE {}] SKIP unkwnown field: {}".format(
+                        self.soup_type, k
+                    )
                 )
 
             else:
@@ -111,8 +124,8 @@ class SubscriptionsStore(object):
             record = self.soup.get(id)
         except KeyError:
             logger.error(
-                '[DELETE SUBSCRIPTION] Subscription with id "{}" not found.'.format(  # noqa
-                    id
+                '[DELETE {}] Subscription with id "{}" not found.'.format(
+                    self.soup_type, id
                 )
             )
             return {"error": "NotFound"}
@@ -120,3 +133,19 @@ class SubscriptionsStore(object):
 
     def clear(self):
         self.soup.clear()
+
+
+@implementer(ISubscriptionsStore)
+class SubscriptionsStore(BaseStore):
+    soup_name = "subscriptions_soup"
+    soup_type = "SUBSCRIPTION"
+    fields = SUBSCRIPTION_FIELDS
+    indexes = ["text", "channels", "email"]
+
+
+@implementer(ISendHistoryStore)
+class SendHistoryStore(BaseStore):
+    soup_name = "send_history_soup"
+    soup_type = "HISTORY"
+    fields = SEND_HISTORY_FIELDS
+    indexes = ["subject", "channels", "date"]

@@ -53,4 +53,11 @@
     url_expr="string:${object_url}/edit" visible="True">
   <permission value="Modify portal content"/>
  </action>
+ <action
+    title="Send" action_id="send" category="object" condition_expr=""
+    i18n:attributes="title"
+    description="" icon_expr="" link_target=""
+    url_expr="string:${object_url}/send" visible="True">
+  <permission value="rer.ufficiostampa: Send"/>
+ </action>
 </object>

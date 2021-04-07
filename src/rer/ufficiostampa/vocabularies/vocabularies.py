@@ -23,7 +23,7 @@ class ArgumentsVocabularyFactory(object):
             else:
                 arguments = []
 
-        except (KeyError, InvalidParameterError):
+        except (KeyError, InvalidParameterError, TypeError):
             arguments = []
         for arg in getattr(context, "arguments", []):
             if arg and arg not in arguments:
@@ -33,9 +33,6 @@ class ArgumentsVocabularyFactory(object):
             for x in arguments
         ]
         return SimpleVocabulary(terms)
-
-
-ArgumentsVocabulary = ArgumentsVocabularyFactory()
 
 
 @implementer(IVocabularyFactory)
@@ -50,5 +47,23 @@ class ChannelsVocabularyFactory(object):
         return safe_simplevocabulary_from_values(subscription_channels)
 
 
+@implementer(IVocabularyFactory)
+class AttachmentsVocabularyFactory(object):
+    def __call__(self, context):
+        terms = []
+        for child in context.listFolderContents(
+            contentFilter={"portal_type": ["File", "Image"]}
+        ):
+            terms.append(
+                SimpleTerm(
+                    value=child.getId(),
+                    token=child.getId(),
+                    title=child.Title(),
+                )
+            )
+        return SimpleVocabulary(terms)
+
+
 ArgumentsVocabulary = ArgumentsVocabularyFactory()
 ChannelsVocabulary = ChannelsVocabularyFactory()
+AttachmentsVocabulary = AttachmentsVocabularyFactory()

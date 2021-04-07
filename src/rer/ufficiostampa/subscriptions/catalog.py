@@ -28,3 +28,16 @@ class SubscriptionsSoupCatalogFactory(object):
         newspaper_indexer = NodeAttributeIndexer("newspaper")
         catalog[u"newspaper"] = CatalogFieldIndex(newspaper_indexer)
         return catalog
+
+
+@implementer(ICatalogFactory)
+class SendHistorySoupCatalogFactory(object):
+    def __call__(self, context):
+        catalog = Catalog()
+        channels_indexer = NodeAttributeIndexer("channels")
+        catalog[u"channels"] = CatalogKeywordIndex(channels_indexer)
+        date_indexer = NodeAttributeIndexer("date")
+        catalog[u"date"] = CatalogFieldIndex(date_indexer)
+        subject_indexer = NodeAttributeIndexer("subject")
+        catalog[u"subject"] = CatalogFieldIndex(subject_indexer)
+        return catalog

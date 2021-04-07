@@ -23,6 +23,7 @@ except ImportError:
 
 import json
 import six
+import premailer
 
 
 def defaultLegislature():
@@ -32,7 +33,7 @@ def defaultLegislature():
                 "legislatures", interface=IRerUfficiostampaSettings
             )
         )
-    except (KeyError, InvalidParameterError):
+    except (KeyError, InvalidParameterError, TypeError):
         return ""
 
     if not legislatures:
@@ -138,3 +139,30 @@ def decode_token():
             )
         }
     return {"data": record}
+
+
+def prepare_email_message(context, template, parameters):
+    mail_template = context.restrictedTraverse(template)
+    try:
+        css = api.portal.get_registry_record(
+            "css_styles", interface=IRerUfficiostampaSettings
+        )
+    except (KeyError, InvalidParameterError):
+        css = ""
+    if css:
+        parameters["css"] = css
+    html = mail_template(**parameters)
+    # convert it
+    html = premailer.transform(html)
+
+    try:
+        frontend_url = api.portal.get_registry_record(
+            "frontend_url", interface=IRerUfficiostampaSettings
+        )
+    except (KeyError, InvalidParameterError):
+        frontend_url = ""
+
+    if frontend_url:
+        source_link = api.portal.get().absolute_url()
+        html = html.replace(source_link, frontend_url)
+    return html

@@ -14,4 +14,8 @@
     name="rer.ufficiostampa.vocabularies.channels"
     component=".vocabularies.ChannelsVocabulary"
     />
+  <utility
+    name="rer.ufficiostampa.vocabularies.attachments"
+    component=".vocabularies.AttachmentsVocabulary"
+    />
 </configure>

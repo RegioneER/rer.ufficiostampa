@@ -7,7 +7,7 @@ from zope import schema
 
 class IRerUfficiostampaSettings(model.Schema):
     legislatures = schema.SourceText(
-        title=_("legislatures_label", default=u"List of legislatures.",),
+        title=_("legislatures_label", default=u"List of legislatures",),
         description=_(
             "legislatures_help",
             default=u"This is a list of all legislatures. The last one is the"
@@ -33,7 +33,7 @@ class IRerUfficiostampaSettings(model.Schema):
         value_type=schema.TextLine(),
     )
 
-    token_secret = schema.Password(
+    token_secret = schema.TextLine(
         title=_("token_secret_label", default=u"Token secret"),
         description=_(
             "token_secret_help",
@@ -41,13 +41,43 @@ class IRerUfficiostampaSettings(model.Schema):
         ),
         required=True,
     )
-    token_salt = schema.Password(
+    token_salt = schema.TextLine(
         title=_("token_salt_label", default=u"Token salt"),
         description=_(
             "token_salt_help",
             default=u"Insert the salt for token generation. This, in "
             u"conjunction with the secret, will generate unique tokens for "
             u"subscriptions management links.",
+        ),
+        required=True,
+    )
+
+    frontend_url = schema.TextLine(
+        title=_("frontend_url_label", default=u"Frontend URL"),
+        description=_(
+            "frontend_url_help",
+            default=u"If the frontend site is published with a different URL "
+            u"than the backend, insert it here. All links in emails will be "
+            u"converted with that URL.",
+        ),
+        required=False,
+    )
+    external_sender_url = schema.TextLine(
+        title=_("external_sender_url_label", default=u"External sender URL"),
+        description=_(
+            "external_sender_url_help",
+            default=u"If you want to send emails with an external tool "
+            u"(rer.newsletterdispatcher.flask), insert the url of the service "
+            u"here. If empty, all emails will be sent from Plone.",
+        ),
+        required=False,
+    )
+
+    css_styles = schema.SourceText(
+        title=_("css_styles_label", default=u"Styles",),
+        description=_(
+            "css_styles_help",
+            default=u"Insert a list of CSS styles for received emails.",
         ),
         required=True,
     )

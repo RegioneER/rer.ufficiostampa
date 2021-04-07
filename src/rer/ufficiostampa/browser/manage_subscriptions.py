@@ -21,6 +21,7 @@ from zope.interface import Interface
 from z3c.form.interfaces import HIDDEN_MODE
 from plone.api.exc import InvalidParameterError
 from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
+from rer.ufficiostampa.utils import prepare_email_message
 
 import logging
 
@@ -142,14 +143,13 @@ class ManageSubscriptionsRequestForm(form.Form):
         url = "{url}/manage-subscriptions?secret={secret}&_authenticator={token}".format(  # noqa
             url=self.context.absolute_url(), secret=secret, token=token
         )
-
-        mail_template = self.context.restrictedTraverse(
-            "@@manage_subscriptions_mail_template"
-        )
         site_title = get_site_title()
-        parameters = {"url": url, "site_title": site_title}
+        mail_text = prepare_email_message(
+            context=api.portal.get(),
+            template="@@manage_subscriptions_mail_template",
+            parameters={"url": url, "site_title": site_title},
+        )
 
-        mail_text = mail_template(**parameters)
         res = self.send(message=mail_text, mto=email, site_title=site_title)
         if not res:
             msg = _(
@@ -277,4 +277,7 @@ class ManageSubscriptionsForm(form.Form):
         _(u"cancel_button", default="Cancel"), name="cancel"
     )
     def handleCancel(self, action):
-        super(ManageSubscriptionsForm, self).handleCancel(self, action)
+        return self.return_with_message(
+            message=_("cancel_action", default=u"Action cancelled",),
+            type=u"info",
+        )

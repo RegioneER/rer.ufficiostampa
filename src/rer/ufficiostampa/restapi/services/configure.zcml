@@ -3,5 +3,7 @@
     xmlns:zcml="http://namespaces.zope.org/zcml">
 
   <include package=".subscriptions" />
+  <include package=".send_history" />
+  <include package=".send_complete" />
 
 </configure>
