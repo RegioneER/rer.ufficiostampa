@@ -8,3 +8,13 @@ export const getUserFieldsLables = getTranslationFor => {
     channels: getTranslationFor('channels', 'Channels'),
   };
 };
+
+export const getHistoryFieldsLables = getTranslationFor => {
+  return {
+    subject: getTranslationFor('Subject', 'Subject'),
+    recipients: getTranslationFor('Recipients', 'Recipients'),
+    date: getTranslationFor('Date', 'Date'),
+    completed_date: getTranslationFor('Completed Date', 'Completed Date'),
+    status: getTranslationFor('Status', 'Status'),
+  };
+};

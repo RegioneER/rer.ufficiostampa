@@ -94,3 +94,18 @@ msgstr ""
 
 msgid "items_selected"
 msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "Recipients"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Completed Date"
+msgstr ""
+
+msgid "Status"
+msgstr ""

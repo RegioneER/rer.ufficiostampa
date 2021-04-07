@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { TranslationsContext } from '../TranslationsContext';
-import { SubscriptionsContext } from '../SubscriptionsContext';
+import { ApiContext } from '../ApiContext';
 import apiFetch from '../utils/apiFetch';
 import Modal from '../Modal/Modal';
 import TextField from '../common/Field';
@@ -14,9 +14,7 @@ const isValidEmail = email => {
 
 const EditUser = ({ user }) => {
   const getTranslationFor = useContext(TranslationsContext);
-  const { subscriptions, portalUrl, fetchSubscriptions } = useContext(
-    SubscriptionsContext,
-  );
+  const { data, portalUrl, fetchApi } = useContext(ApiContext);
 
   const [showModal, setShowModal] = useState(user != null);
   const [serverError, setServerError] = useState(null);
@@ -87,7 +85,7 @@ const EditUser = ({ user }) => {
       if (res.status == 204) {
         //OK
         setShowModal(false);
-        fetchSubscriptions();
+        fetchApi();
       } else {
         setServerError(res);
       }
@@ -156,7 +154,7 @@ const EditUser = ({ user }) => {
               required={true}
               errors={validationErrors}
               type="multiselect"
-              options={subscriptions.channels}
+              options={data.channels}
               confirmRemove={true}
             />
           </form>

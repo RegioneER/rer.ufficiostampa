@@ -65,12 +65,23 @@
     <browser:page
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       name="channels-management"
-      template="channels_management.pt"
-      class=".channels_management.View"
+      template="templates/channels_management.pt"
+      class=".react_views.View"
       permission="rer.ufficiostampa.ManageChannels"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
     />
 
+    <!-- send history -->
+    <browser:page
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      name="history-management"
+      template="templates/history_management.pt"
+      class=".react_views.View"
+      permission="rer.ufficiostampa.ManageChannels"
+      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
+    />
+
+    <!-- manage subscriptions -->
     <browser:page
       name="manage-subscriptions-request"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"

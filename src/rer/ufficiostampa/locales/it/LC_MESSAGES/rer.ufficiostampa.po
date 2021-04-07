@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-04-06 15:42+0000\n"
+"POT-Creation-Date: 2021-04-07 15:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,9 +32,15 @@ msgstr "Sei sicuro di volere eliminare questi utenti iscritti?"
 msgid "Are you sure you want to uncheck this item"
 msgstr "Sei sicuro di voler eliminare"
 
-#: ../profiles/default/controlpanel.xml
+msgid "Completed Date"
+msgstr "Concluso"
+
+#: rer/ufficiostampa/profiles/default/controlpanel.xml
 msgid "Configurazione Ufficio Stampa"
 msgstr "Configurazione Ufficio Stampa"
+
+msgid "Date"
+msgstr "Data di invio"
 
 msgid "Delete"
 msgstr "Elimina"
@@ -51,7 +57,7 @@ msgstr "Modifica iscritto"
 msgid "Filter subscribers"
 msgstr "Filtra gli iscritti"
 
-#: ../configure.zcml:26
+#: rer/ufficiostampa/configure.zcml:26
 msgid "Installs the rer.ufficiostampa add-on."
 msgstr "Installa the rer.ufficiostampa."
 
@@ -60,6 +66,9 @@ msgstr "Nome"
 
 msgid "No subscribers found"
 msgstr "Nessun iscritto trovato"
+
+msgid "Recipients"
+msgstr "Destinatari"
 
 msgid "Required"
 msgstr "Obbligatorio"
@@ -70,25 +79,31 @@ msgstr "Cerca..."
 msgid "Select at least one channel"
 msgstr "Seleziona almeno un canale"
 
+msgid "Status"
+msgstr "Stato"
+
+msgid "Subject"
+msgstr "Oggetto"
+
 msgid "Subscribers"
 msgstr "Iscritti"
 
 msgid "Surname"
 msgstr "Cognome"
 
-#: ../browser/controlpanel.py:17
+#: rer/ufficiostampa/browser/controlpanel.py:17
 msgid "Ufficio Stampa settings"
 msgstr "Configurazione Ufficio Stampa"
 
-#: ../configure.zcml:35
+#: rer/ufficiostampa/configure.zcml:35
 msgid "Uninstalls the rer.ufficiostampa add-on."
 msgstr "Disinstalla rer.ufficiostampa."
 
-#: ../browser/configure.zcml:37
+#: rer/ufficiostampa/browser/configure.zcml:37
 msgid "View Comunicato"
 msgstr "Vista Comunicato"
 
-#: ../browser/configure.zcml:47
+#: rer/ufficiostampa/browser/configure.zcml:47
 msgid "View Invito"
 msgstr "Vista Invito"
 
@@ -103,12 +118,12 @@ msgid "additional_addresses_title"
 msgstr "Indirizzi aggiuntivi"
 
 #. Default: "Select one or more values."
-#: ../interfaces/content.py:13
+#: rer/ufficiostampa/interfaces/content.py:13
 msgid "arguments_help"
 msgstr "Seleziona uno o più valori possibili."
 
 #. Default: "Arguments"
-#: ../interfaces/content.py:12
+#: rer/ufficiostampa/interfaces/content.py:12
 msgid "arguments_label"
 msgstr "Argomenti"
 
@@ -128,7 +143,8 @@ msgid "channels"
 msgstr "Canali"
 
 #. Default: "Channels management"
-#: ../browser/channels_management.pt:15
+#: rer/ufficiostampa/browser/history_management.pt:15
+#: rer/ufficiostampa/browser/templates/channels_management.pt:15
 msgid "channels_management_label"
 msgstr "Gestione canali di iscrizione"
 
@@ -162,6 +178,9 @@ msgstr "Inserisci una serie di stili CSS per le mail invitate."
 msgid "css_styles_label"
 msgstr "Stili"
 
+msgid "email"
+msgstr "E-mail"
+
 #. Default: "Error sending mail. Contact site administrator."
 #: rer/ufficiostampa/browser/send.py:242
 msgid "error_send_mail"
@@ -187,8 +206,10 @@ msgstr "Se il sito pubblico è accessibile da un URL diversa da quella redaziona
 msgid "frontend_url_label"
 msgstr "URL di frontend"
 
-msgid "email"
-msgstr "E-mail"
+#. Default: "History management"
+#: rer/ufficiostampa/browser/templates/history_management.pt:15
+msgid "history_management_label"
+msgstr "Storico invii"
 
 msgid "is not valid"
 msgstr "non valido"
@@ -203,7 +224,7 @@ msgid "items_selected"
 msgstr "elementi selezionati"
 
 #. Default: "Legislature"
-#: ../interfaces/content.py:26
+#: rer/ufficiostampa/interfaces/content.py:26
 msgid "label_legislature"
 msgstr "Legislatura"
 
@@ -228,7 +249,7 @@ msgid "legislature_label"
 msgstr "Legislatura"
 
 #. Default: "This is a list of all legislatures. The last one is the one used to fill fields in a new Comunicato."
-#: ../interfaces/settings.py:11
+#: rer/ufficiostampa/interfaces/settings.py:11
 msgid "legislatures_help"
 msgstr "Questa è una lista di legislature. L'ultima inserita è quella utilizzata per popolare i campi dei Comunicati e Inviti."
 
@@ -238,7 +259,7 @@ msgid "legislatures_label"
 msgstr "Elenco Legislature"
 
 #. Default: "Manage your subscriptions for ${site}"
-#: ../browser/manage_subscriptions.py:201
+#: rer/ufficiostampa/browser/manage_subscriptions.py:201
 msgid "manage_subscription_subject_label"
 msgstr "Gestisci le tue iscrizioni su ${site}"
 
@@ -263,12 +284,12 @@ msgid "manage_subscriptions_email_title"
 msgstr "Email"
 
 #. Default: "This is the list of available channels and your subscriptions."
-#: ../browser/manage_subscriptions.py:226
+#: rer/ufficiostampa/browser/manage_subscriptions.py:226
 msgid "manage_subscriptions_help"
 msgstr "Questa è la lista dei possibili canali e di quelli a cui sei già iscritto."
 
 #. Default: "Mail not found. Unable to change settings."
-#: ../browser/manage_subscriptions.py:263
+#: rer/ufficiostampa/browser/manage_subscriptions.py:263
 msgid "manage_subscriptions_inexistent_mail"
 msgstr "Email non trovata. Impossibile aggiornare i dati."
 
@@ -285,7 +306,7 @@ msgid "manage_subscriptions_link"
 msgstr "Gestisci le tue iscrizioni"
 
 #. Default: "Unable to send manage subscriptions link. Please contact site administrator."
-#: ../browser/manage_subscriptions.py:155
+#: rer/ufficiostampa/browser/manage_subscriptions.py:155
 msgid "manage_subscriptions_not_send"
 msgstr "Impossibile spedire il link per la gestione delle iscrizioni. Per favore contatta l'amministratore del sito."
 
@@ -310,19 +331,22 @@ msgid "manage_subscriptions_request_title"
 msgstr "Gestione iscrizioni"
 
 #. Default: "You will receive an email with a link to manage your subscriptions."
-#: ../browser/manage_subscriptions.py:162
+#: rer/ufficiostampa/browser/manage_subscriptions.py:162
 msgid "manage_subscriptions_send_success"
 msgstr "Riceverai un'email con il link per gestire le tue iscrizioni."
 
 #. Default: "Subscriptions updated"
-#: ../browser/manage_subscriptions.py:269
+#: rer/ufficiostampa/browser/manage_subscriptions.py:269
 msgid "manage_subscriptions_success"
 msgstr "Iscrizioni aggiornate"
 
 #. Default: "Channels subscriptions"
-#: ../browser/manage_subscriptions.py:225
+#: rer/ufficiostampa/browser/manage_subscriptions.py:225
 msgid "manage_subscriptions_title"
 msgstr "Gestione iscrizioni"
+
+msgid "newspaper"
+msgstr "Testata giornalistica"
 
 #. Default: "Additional notes."
 #: rer/ufficiostampa/browser/send.py:65
@@ -334,23 +358,19 @@ msgstr "Note aggiuntive."
 msgid "notes_title"
 msgstr "Note"
 
-#: rer/ufficiostampa/configure.zcml:26
-msgid "newspaper"
-msgstr "Testata giornalistica"
-
 msgid "phone"
 msgstr "Telefono"
 
 #. Default: "Materiale per la stampa"
-#: ../browser/templates/comunicato.pt:23
+#: rer/ufficiostampa/browser/templates/comunicato.pt:23
 msgid "press_attachments"
 msgstr "Materiale per la stampa"
 
-#: ../configure.zcml:26
+#: rer/ufficiostampa/configure.zcml:26
 msgid "rer.ufficiostampa"
 msgstr ""
 
-#: ../configure.zcml:35
+#: rer/ufficiostampa/configure.zcml:35
 msgid "rer.ufficiostampa (uninstall)"
 msgstr ""
 
@@ -358,7 +378,7 @@ msgid "save"
 msgstr "Salva"
 
 #. Default: "Save"
-#: ../browser/manage_subscriptions.py:252
+#: rer/ufficiostampa/browser/manage_subscriptions.py:252
 msgid "save_button"
 msgstr "Salva"
 
@@ -404,12 +424,12 @@ msgid "send_form_title"
 msgstr "Invia ${type}"
 
 #. Default: "List of available subscription channels.One per line.These channels will be used for users subscriptions and for select to which channel send a Comunicato."
-#: ../interfaces/settings.py:23
+#: rer/ufficiostampa/interfaces/settings.py:23
 msgid "subscription_channels_description"
 msgstr "Elenco dei vari canali a cui ci si può iscrivere. Uno per riga. Questi canali verranno usati per le iscrizioni e per selezionare a chi inviare i comunicati."
 
 #. Default: "Subscription Channels"
-#: ../interfaces/settings.py:20
+#: rer/ufficiostampa/interfaces/settings.py:20
 msgid "subscription_channels_label"
 msgstr "Canali"
 
@@ -424,22 +444,22 @@ msgid "success_send_mail_async"
 msgstr "Invio correttamente accodato. Puoi controllare il suo stato nello storico degli invii."
 
 #. Default: "Insert the salt for token generation. This, in conjunction with the secret, will generate unique tokens for subscriptions management links."
-#: ../interfaces/settings.py:46
+#: rer/ufficiostampa/interfaces/settings.py:46
 msgid "token_salt_help"
 msgstr "Inserisci il salt per la generazione del token. E' una stringa che in unione con il secret, serve a generare token univoci per i link di gestione delle iscrizioni."
 
 #. Default: "Token salt"
-#: ../interfaces/settings.py:45
+#: rer/ufficiostampa/interfaces/settings.py:45
 msgid "token_salt_label"
 msgstr "Token salt"
 
 #. Default: "Insert the secret key for token generation."
-#: ../interfaces/settings.py:38
+#: rer/ufficiostampa/interfaces/settings.py:38
 msgid "token_secret_help"
 msgstr "Inserisci la chiave segreta per la generazione dei token."
 
 #. Default: "Token secret"
-#: ../interfaces/settings.py:37
+#: rer/ufficiostampa/interfaces/settings.py:37
 msgid "token_secret_label"
 msgstr "Token secret"
 

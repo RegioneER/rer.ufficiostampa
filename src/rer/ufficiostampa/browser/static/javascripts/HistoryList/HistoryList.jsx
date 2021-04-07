@@ -9,10 +9,10 @@ import {
   DEFAULT_SORT_ORDER,
 } from '../ApiContext';
 import apiFetch from '../utils/apiFetch';
-import { getUserFieldsLables } from '../utils/utils';
-import './Users.less';
+import { getHistoryFieldsLables } from '../utils/utils';
+import './History.less';
 
-const UsersList = ({ editUser }) => {
+const HistoryList = ({ editUser }) => {
   const getTranslationFor = useContext(TranslationsContext);
   const {
     data,
@@ -26,10 +26,9 @@ const UsersList = ({ editUser }) => {
     setSorting,
   } = useContext(ApiContext);
 
-  const labels = getUserFieldsLables(getTranslationFor);
+  const labels = getHistoryFieldsLables(getTranslationFor);
   const [filterText, setFilterText] = useState('');
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
-  const [toggleCleared, setToggleCleared] = useState(false);
   const [selectedRows, setSelectedRows] = React.useState([]);
 
   //------------------COLUMNS----------------------
@@ -49,85 +48,18 @@ const UsersList = ({ editUser }) => {
   };
 
   const columns = [
-    { name: labels.name, selector: 'name', sortable: true },
-    { name: labels.surname, selector: 'surname', sortable: true },
-    { name: labels.email, selector: 'email', sortable: true },
-    { name: labels.phone, selector: 'phone', sortable: true },
-    { name: labels.newspaper, selector: 'newspaper', sortable: true },
-    {
-      name: labels.channels,
-      selector: 'channels',
-      sortable: true,
-      cell: ChannelsCellView,
-    },
-    {
-      name: getTranslationFor('Actions', 'Actions'),
-      button: true,
-      cell: row => (
-        <button
-          className="action editItem plone-btn plone-btn-primary plone-btn-link"
-          onClick={() => {
-            editUser(row);
-          }}
-          title={getTranslationFor('Edit', 'Edit')}
-        >
-          <span className="glyphicon glyphicon-pencil"></span>
-        </button>
-      ),
-    },
+    { name: labels.subject, selector: 'subject', sortable: true },
+    { name: labels.recipients, selector: 'recipients', sortable: false },
+    { name: labels.date, selector: 'date', sortable: true },
+    { name: labels.completed_date, selector: 'completed_date', sortable: true },
+    { name: labels.status, selector: 'status', sortable: true },
+    // {
+    //   name: labels.channels,
+    //   selector: 'channels',
+    //   sortable: true,
+    //   cell: ChannelsCellView,
+    // },
   ];
-
-  //------------ROW SELECTION------------
-  const handleRowSelected = React.useCallback(state => {
-    setSelectedRows(state.selectedRows);
-  }, []);
-
-  const contextActions = React.useMemo(() => {
-    const handleDelete = () => {
-      // eslint-disable-next-line no-alert
-      if (
-        window.confirm(
-          `${getTranslationFor(
-            'Are you sure you want to delete this subscribed users?',
-            'Are you sure you want to delete this subscribed users?',
-          )} \n${selectedRows
-            .map(r => r.name + ' ' + r.surname + ' (' + r.email + ')')
-            .join('\n')}`,
-        )
-      ) {
-        setToggleCleared(!toggleCleared);
-
-        //call delete foreach item selected
-        let url = portalUrl + '/@subscriptions';
-        let method = 'DELETE';
-        let fetches = [];
-
-        selectedRows.forEach(r => {
-          fetches.push(
-            apiFetch({
-              url: url + '/' + r.id,
-              method: method,
-            }),
-          );
-        });
-
-        Promise.all(fetches).then(data => {
-          handleApiResponse(data[0]);
-          fetchApi();
-        });
-      }
-    };
-
-    return (
-      <button
-        key="delete"
-        onClick={handleDelete}
-        className="plone-btn plone-btn-danger"
-      >
-        {getTranslationFor('Delete', 'Delete')}
-      </button>
-    );
-  }, [data.items, selectedRows, toggleCleared]);
 
   //------------FILTERING-----------
 
@@ -145,10 +77,7 @@ const UsersList = ({ editUser }) => {
           <input
             id="search"
             type="text"
-            placeholder={getTranslationFor(
-              'Filter subscribers',
-              'Filter subscribers',
-            )}
+            placeholder={getTranslationFor('Filter history', 'Filter history')}
             aria-label={getTranslationFor('Search...', 'Search...')}
             value={filterText}
             onChange={e => setFilterText(e.target.value)}
@@ -176,17 +105,16 @@ const UsersList = ({ editUser }) => {
   }, [filterText]);
 
   return (
-    <div className="ufficio-stampa-users-list">
+    <div className="ufficio-stampa-history-list">
       <DataTable
-        title={getTranslationFor('Subscribers', 'Subscribers')}
         columns={columns}
         data={data.items}
         striped={true}
         highlightOnHover={true}
         pointerOnHover={false}
         noDataComponent={getTranslationFor(
-          'No subscribers found',
-          'No subscribers found',
+          'No send history found',
+          'No send history found',
         )}
         responsive={true}
         defaultSortField={DEFAULT_SORT_ON}
@@ -208,17 +136,8 @@ const UsersList = ({ editUser }) => {
         paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
         subHeader
         subHeaderComponent={SubHeaderComponent}
-        selectableRows
-        onSelectedRowsChange={handleRowSelected}
-        contextActions={contextActions}
-        clearSelectedRows={toggleCleared}
-        contextMessage={{
-          singular: getTranslationFor('item_selected', 'item selected'),
-          plural: getTranslationFor('items_selected', 'items selected'),
-          message: '',
-        }}
       />
     </div>
   );
 };
-export default UsersList;
+export default HistoryList;
