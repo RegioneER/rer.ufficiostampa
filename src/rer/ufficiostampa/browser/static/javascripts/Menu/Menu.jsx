@@ -23,7 +23,7 @@ const Menu = ({ editUser }) => {
     ) {
       let fetches = [
         apiFetch({
-          url: portalUrl + '/@subscriptions-clearress',
+          url: portalUrl + '/@subscriptions-clear',
           method: 'GET',
         }),
       ];

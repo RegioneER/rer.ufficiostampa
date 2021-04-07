@@ -20,9 +20,9 @@
   <div class="attachments"
        tal:define="attachments view/get_children"
        tal:condition="attachments">
-    <h3>Materiale per la stampa</h3>
+    <h2 i18n:translate="press_attachments">Materiale per la stampa</h2>
     <ul>
-      <li tal:repeat="attachment attachments">
+      <li tal:repeat="attachment attachments" class="attachment">
         <a href="${attachment/url}" title="${attachment/description}">${attachment/title}</a>
       </li>
     </ul>

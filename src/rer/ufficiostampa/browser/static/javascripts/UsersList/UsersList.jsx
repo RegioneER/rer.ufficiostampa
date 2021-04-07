@@ -2,7 +2,12 @@ import React, { useState, useEffect, useContext } from 'react';
 import DataTable from 'react-data-table-component';
 
 import { TranslationsContext } from '../TranslationsContext';
-import { SubscriptionsContext } from '../SubscriptionsContext';
+import {
+  SubscriptionsContext,
+  DEFAULT_B_SIZE,
+  DEFAULT_SORT_ON,
+  DEFAULT_SORT_ORDER,
+} from '../SubscriptionsContext';
 import apiFetch from '../utils/apiFetch';
 import { getUserFieldsLables } from '../utils/utils';
 import './Users.less';
@@ -13,7 +18,12 @@ const UsersList = ({ editUser }) => {
     subscriptions,
     portalUrl,
     fetchSubscriptions,
+    loading,
     handleApiResponse,
+    setB_size,
+    handlePageChange,
+    b_size,
+    setSorting,
   } = useContext(SubscriptionsContext);
 
   const labels = getUserFieldsLables(getTranslationFor);
@@ -30,7 +40,7 @@ const UsersList = ({ editUser }) => {
           return (
             <span key={index}>
               {channel}
-              <br />
+              {index < row.channels.length - 1 ? ',' : ''}{' '}
             </span>
           );
         })}
@@ -117,22 +127,9 @@ const UsersList = ({ editUser }) => {
         {getTranslationFor('Delete', 'Delete')}
       </button>
     );
-  }, [filteredItems, selectedRows, toggleCleared]);
+  }, [subscriptions.items, selectedRows, toggleCleared]);
 
   //------------FILTERING-----------
-  const strContains = (str, c) => {
-    return str && str.toLowerCase().includes(c.toLowerCase());
-  };
-
-  const filteredItems = subscriptions.items?.filter(
-    item =>
-      strContains(item.name, filterText) ||
-      strContains(item.surname, filterText) ||
-      strContains(item.email, filterText) ||
-      strContains(item.phone, filterText) ||
-      strContains(item.newspaper, filterText) ||
-      strContains(item.channels?.toString() ?? '', filterText),
-  );
 
   const SubHeaderComponent = React.useMemo(() => {
     const handleClear = () => {
@@ -164,12 +161,26 @@ const UsersList = ({ editUser }) => {
     ) : null;
   }, [filterText, resetPaginationToggle, subscriptions.items]);
 
+  React.useEffect(() => {
+    if (filterText?.length > 0) {
+      fetchSubscriptions(null, [
+        {
+          i: 'SearchableText',
+          o: 'plone.app.querystring.operation.string.contains',
+          v: filterText + '*',
+        },
+      ]);
+    } else {
+      fetchSubscriptions();
+    }
+  }, [filterText]);
+
   return (
     <div className="ufficio-stampa-users-list">
       <DataTable
         title={getTranslationFor('Subscribers', 'Subscribers')}
         columns={columns}
-        data={filteredItems}
+        data={subscriptions.items}
         striped={true}
         highlightOnHover={true}
         pointerOnHover={false}
@@ -178,8 +189,22 @@ const UsersList = ({ editUser }) => {
           'No subscribers found',
         )}
         responsive={true}
-        defaultSortField="surname"
+        defaultSortField={DEFAULT_SORT_ON}
+        defaultSortAsc={DEFAULT_SORT_ORDER == 'ascending'}
         pagination={true}
+        paginationRowsPerPageOptions={[5, 25, 50, 100]}
+        paginationPerPage={b_size}
+        paginationServer={true}
+        paginationServerOptions={{
+          persistSelectedOnPageChange: true,
+          persistSelectedOnSort: false,
+        }}
+        paginationTotalRows={subscriptions.items_total}
+        onChangeRowsPerPage={size => setB_size(size)}
+        onChangePage={handlePageChange}
+        progressPending={loading}
+        sortServer={true}
+        onSort={(column, direction) => setSorting(column.selector, direction)}
         paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
         subHeader
         subHeaderComponent={SubHeaderComponent}
@@ -187,6 +212,11 @@ const UsersList = ({ editUser }) => {
         onSelectedRowsChange={handleRowSelected}
         contextActions={contextActions}
         clearSelectedRows={toggleCleared}
+        contextMessage={{
+          singular: getTranslationFor('item_selected', 'item selected'),
+          plural: getTranslationFor('items_selected', 'items selected'),
+          message: '',
+        }}
       />
     </div>
   );
