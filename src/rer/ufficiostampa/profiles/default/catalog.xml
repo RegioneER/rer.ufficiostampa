@@ -4,7 +4,7 @@
  <index name="arguments" meta_type="KeywordIndex">
   <indexed_attr value="arguments"/>
  </index>
- <index name="legislature" meta_type="FieldIndex">
+ <index name="legislature" meta_type="KeywordIndex">
   <indexed_attr value="legislature"/>
  </index>
  

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-04-07 15:04+0000\n"
+"POT-Creation-Date: 2021-04-08 08:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -91,6 +91,10 @@ msgstr "Iscritti"
 msgid "Surname"
 msgstr "Cognome"
 
+#: rer/ufficiostampa/profiles/default/registry.xml
+msgid "Text"
+msgstr "Testo"
+
 #: rer/ufficiostampa/browser/controlpanel.py:17
 msgid "Ufficio Stampa settings"
 msgstr "Configurazione Ufficio Stampa"
@@ -108,12 +112,12 @@ msgid "View Invito"
 msgstr "Vista Invito"
 
 #. Default: "Insert a list of additional addressed that will receive the mail. One per line. You can use this field also for testing without sending emails to all subscribed addresses."
-#: rer/ufficiostampa/browser/send.py:53
+#: rer/ufficiostampa/browser/send.py:59
 msgid "additional_addresses_description"
 msgstr "Inserisci una lista di indirizzi email aggiuntivi che riceveranno questa mail. Uno per riga. Puoi utilizzare questo campo (senza selezionare dei canali) anche per fare degli invii di prova prima di inviarla a tutti i destinatari."
 
 #. Default: "Additional addresses"
-#: rer/ufficiostampa/browser/send.py:50
+#: rer/ufficiostampa/browser/send.py:56
 msgid "additional_addresses_title"
 msgstr "Indirizzi aggiuntivi"
 
@@ -124,18 +128,19 @@ msgstr "Seleziona uno o più valori possibili."
 
 #. Default: "Arguments"
 #: rer/ufficiostampa/interfaces/content.py:12
+#: rer/ufficiostampa/profiles/default/registry.xml
 msgid "arguments_label"
 msgstr "Argomenti"
 
 #. Default: "Action cancelled"
 #: rer/ufficiostampa/browser/manage_subscriptions.py:281
-#: rer/ufficiostampa/browser/send.py:117
+#: rer/ufficiostampa/browser/send.py:123
 msgid "cancel_action"
 msgstr "Azione annullata"
 
 #. Default: "Cancel"
 #: rer/ufficiostampa/browser/manage_subscriptions.py:277
-#: rer/ufficiostampa/browser/send.py:113
+#: rer/ufficiostampa/browser/send.py:119
 msgid "cancel_button"
 msgstr "Annulla"
 
@@ -182,7 +187,7 @@ msgid "email"
 msgstr "E-mail"
 
 #. Default: "Error sending mail. Contact site administrator."
-#: rer/ufficiostampa/browser/send.py:242
+#: rer/ufficiostampa/browser/send.py:248
 msgid "error_send_mail"
 msgstr "Si è verificato un errore invitando le mail. Contatta l'amministratore del sito."
 
@@ -237,6 +242,11 @@ msgstr "Inserisci una lista di argomenti a cui si fa riferimento."
 #: rer/ufficiostampa/interfaces/settings.py:95
 msgid "legislature_arguments_label"
 msgstr "Argomenti"
+
+#. Default: "Legislature"
+#: rer/ufficiostampa/profiles/default/registry.xml
+msgid "legislature_criteria_label"
+msgstr "Legislatura"
 
 #. Default: "Insert the legislature name."
 #: rer/ufficiostampa/interfaces/settings.py:89
@@ -349,12 +359,12 @@ msgid "newspaper"
 msgstr "Testata giornalistica"
 
 #. Default: "Additional notes."
-#: rer/ufficiostampa/browser/send.py:65
+#: rer/ufficiostampa/browser/send.py:71
 msgid "notes_description"
 msgstr "Note aggiuntive."
 
 #. Default: "Notes"
-#: rer/ufficiostampa/browser/send.py:64
+#: rer/ufficiostampa/browser/send.py:70
 msgid "notes_title"
 msgstr "Note"
 
@@ -383,28 +393,28 @@ msgid "save_button"
 msgstr "Salva"
 
 #. Default: "Select which attachment you want to send via email. You can only select first level Files and Images."
-#: rer/ufficiostampa/browser/send.py:70
+#: rer/ufficiostampa/browser/send.py:76
 msgid "send_attachments_description"
 msgstr "Seleziona quali allegati vuoi inviare via email. Puoi selezionare solamente le Immagini e i File di primo livello."
 
 #. Default: "Attachments"
-#: rer/ufficiostampa/browser/send.py:69
+#: rer/ufficiostampa/browser/send.py:75
 msgid "send_attachments_title"
 msgstr "Allegati"
 
 #. Default: "Send"
 #: rer/ufficiostampa/browser/manage_subscriptions.py:99
-#: rer/ufficiostampa/browser/send.py:104
+#: rer/ufficiostampa/browser/send.py:110
 msgid "send_button"
 msgstr "Invia"
 
 #. Default: "Select which channels should receive this Comunicato. All email address subscribed to this channel will receive it. "
-#: rer/ufficiostampa/browser/send.py:38
+#: rer/ufficiostampa/browser/send.py:44
 msgid "send_channels_description"
 msgstr "Seleziona quali canali devono ricevere questa comunicazione. Tutti gli indirizzi email assegnati ai canali selezionati riceveranno il messaggio."
 
 #. Default: "Channels"
-#: rer/ufficiostampa/browser/send.py:37
+#: rer/ufficiostampa/browser/send.py:43
 msgid "send_channels_title"
 msgstr "Canali"
 
@@ -414,12 +424,12 @@ msgid "send_date_label"
 msgstr "Data ${date}"
 
 #. Default: "Send this Comunicato or Invito to a list of recipients."
-#: rer/ufficiostampa/browser/send.py:84
+#: rer/ufficiostampa/browser/send.py:90
 msgid "send_form_help"
 msgstr "Invia questa comunicazione ad una lista di indirizzi."
 
 #. Default: "Send ${type}"
-#: rer/ufficiostampa/browser/send.py:96
+#: rer/ufficiostampa/browser/send.py:102
 msgid "send_form_title"
 msgstr "Invia ${type}"
 
@@ -434,12 +444,12 @@ msgid "subscription_channels_label"
 msgstr "Canali"
 
 #. Default: "Send complete."
-#: rer/ufficiostampa/browser/send.py:287
+#: rer/ufficiostampa/browser/send.py:293
 msgid "success_send_mail"
 msgstr "Invio completato."
 
 #. Default: "Send queued with success. See the status in send history."
-#: rer/ufficiostampa/browser/send.py:346
+#: rer/ufficiostampa/browser/send.py:352
 msgid "success_send_mail_async"
 msgstr "Invio correttamente accodato. Puoi controllare il suo stato nello storico degli invii."
 

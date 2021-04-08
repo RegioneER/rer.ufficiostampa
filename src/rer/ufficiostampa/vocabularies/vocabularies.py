@@ -6,6 +6,8 @@ from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
 from plone import api
 from plone.api.exc import InvalidParameterError
 from plone.app.vocabularies.terms import safe_simplevocabulary_from_values
+from plone.app.vocabularies.catalog import KeywordsVocabulary
+
 import json
 
 
@@ -64,6 +66,12 @@ class AttachmentsVocabularyFactory(object):
         return SimpleVocabulary(terms)
 
 
+@implementer(IVocabularyFactory)
+class LegislaturesVocabularyFactory(KeywordsVocabulary):
+    keyword_index = "legislature"
+
+
 ArgumentsVocabulary = ArgumentsVocabularyFactory()
 ChannelsVocabulary = ChannelsVocabularyFactory()
 AttachmentsVocabulary = AttachmentsVocabularyFactory()
+LegislaturesVocabulary = LegislaturesVocabularyFactory()

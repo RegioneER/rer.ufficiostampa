@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
-from email.message import EmailMessage
 from plone import api
 from plone import schema
 from plone.api.exc import InvalidParameterError
@@ -28,6 +27,13 @@ from rer.ufficiostampa.utils import prepare_email_message
 import logging
 import requests
 import json
+import six
+
+if six.PY2:
+    from email.message import Message as EmailMessage
+else:
+    from email.message import EmailMessage
+
 
 logger = logging.getLogger(__name__)
 

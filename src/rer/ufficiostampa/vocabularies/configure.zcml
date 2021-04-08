@@ -18,4 +18,8 @@
     name="rer.ufficiostampa.vocabularies.attachments"
     component=".vocabularies.AttachmentsVocabulary"
     />
+  <utility
+    name="rer.ufficiostampa.vocabularies.legislatures"
+    component=".vocabularies.LegislaturesVocabulary"
+    />
 </configure>
