@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
 import DataTable from 'react-data-table-component';
 
-import { TranslationsContext } from '../TranslationsContext';
+import { TranslationsContext } from '../../TranslationsContext';
 import {
   ApiContext,
   DEFAULT_B_SIZE,
   DEFAULT_SORT_ON,
   DEFAULT_SORT_ORDER,
-} from '../ApiContext';
-import apiFetch from '../utils/apiFetch';
-import { getHistoryFieldsLables } from '../utils/utils';
+} from '../../ApiContext';
+import apiFetch from '../../utils/apiFetch';
+import { getHistoryFieldsLables } from '../utils';
 import './History.less';
 
 const HistoryList = ({ editUser }) => {

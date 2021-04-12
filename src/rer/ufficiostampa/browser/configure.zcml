@@ -81,6 +81,15 @@
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
     />
 
+    <!-- search -->
+    <browser:page
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      name="comunicati-search"
+      template="templates/comunicati_search.pt"
+      class=".react_views.View"
+      permission="rer.ufficiostampa.ManageChannels"
+      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
+    />
     <!-- manage subscriptions -->
     <browser:page
       name="manage-subscriptions-request"

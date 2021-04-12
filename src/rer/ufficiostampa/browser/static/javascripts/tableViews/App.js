@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import TranslationsWrapper from './TranslationsContext';
-import ApiWrapper from './ApiContext';
-
+import TranslationsWrapper from '../TranslationsContext';
+import ApiWrapper from '../ApiContext';
 import Menu from './Menu/Menu';
 import UsersList from './UsersList/UsersList';
 import HistoryList from './HistoryList/HistoryList';

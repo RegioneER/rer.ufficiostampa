@@ -7,6 +7,10 @@
     i18n_domain="rer.ufficiostampa">
 
   <utility
+    name="rer.ufficiostampa.vocabularies.all_arguments"
+    component=".vocabularies.AllArgumentsVocabulary"
+    />
+  <utility
     name="rer.ufficiostampa.vocabularies.arguments"
     component=".vocabularies.ArgumentsVocabulary"
     />

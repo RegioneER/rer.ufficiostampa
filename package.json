@@ -71,10 +71,15 @@
     },
     "dependencies": {
         "axios": "^0.21.0",
+        "date-fns": "^2.20.1",
         "plone-less-base": "git+https://git@github.com/RedTurtle/plone-less-base#master",
+        "query-string": "^7.0.0",
         "react": "^16.8.5",
         "react-data-table-component": "^6.11.7",
         "react-dom": "^16.8.5",
+        "react-paginate": "^7.1.2",
+        "react-select": "^4.3.0",
+        "react-spinkit": "^3.0.0",
         "styled-components": "^5.2.1"
     }
 }

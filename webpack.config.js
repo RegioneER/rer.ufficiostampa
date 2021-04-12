@@ -25,7 +25,8 @@ module.exports = (webpackEnv, argv) => {
     : path.resolve(pkgDir, './dist/dev');
   return {
     entry: {
-      main: path.resolve(pkgDir, './javascripts/index.js'),
+      tableViews: path.resolve(pkgDir, './javascripts/tableViews/index.js'),
+      search: path.resolve(pkgDir, './javascripts/search/index.js'),
     },
     output: {
       path: buildPath,

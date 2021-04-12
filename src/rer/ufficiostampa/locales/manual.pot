@@ -109,3 +109,30 @@ msgstr ""
 
 msgid "Status"
 msgstr ""
+
+msgid "comunicato_published_on"
+msgstr ""
+
+msgid "select_label"
+msgstr ""
+
+msgid "select_placeholder_multi"
+msgstr ""
+
+msgid "refine_search_label"
+msgstr ""
+
+msgid "go_to_search_results"
+msgstr ""
+
+msgid "toggle_filters_label"
+msgstr ""
+
+msgid "reset_filters_label"
+msgstr ""
+
+msgid "results_tot_label"
+msgstr ""
+
+msgid "go_to_search_filters"
+msgstr ""

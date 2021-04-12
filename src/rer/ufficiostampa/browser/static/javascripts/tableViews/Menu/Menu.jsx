@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { TranslationsContext } from '../TranslationsContext';
-import { ApiContext } from '../ApiContext';
-import apiFetch from '../utils/apiFetch';
+import React, { useContext } from 'react';
+import { TranslationsContext } from '../../TranslationsContext';
+import { ApiContext } from '../../ApiContext';
+import apiFetch from '../../utils/apiFetch';
 import './Menu.less';
+
 const Menu = ({ editUser }) => {
   const getTranslationFor = useContext(TranslationsContext);
   const { portalUrl, fetchApi, handleApiResponse, apiErrors } = useContext(

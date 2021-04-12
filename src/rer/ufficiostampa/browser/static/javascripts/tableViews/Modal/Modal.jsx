@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { TranslationsContext } from '../TranslationsContext';
+import React, { useContext } from 'react';
+import { TranslationsContext } from '../../TranslationsContext';
 
 import './Modal.less';
 const ModalContext = React.createContext();

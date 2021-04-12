@@ -71,6 +71,12 @@ class LegislaturesVocabularyFactory(KeywordsVocabulary):
     keyword_index = "legislature"
 
 
+@implementer(IVocabularyFactory)
+class AllArgumentsVocabularyFactory(KeywordsVocabulary):
+    keyword_index = "arguments"
+
+
+AllArgumentsVocabulary = AllArgumentsVocabularyFactory()
 ArgumentsVocabulary = ArgumentsVocabularyFactory()
 ChannelsVocabulary = ChannelsVocabularyFactory()
 AttachmentsVocabulary = AttachmentsVocabularyFactory()

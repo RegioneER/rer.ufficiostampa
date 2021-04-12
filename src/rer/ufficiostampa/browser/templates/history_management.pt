@@ -6,7 +6,8 @@
       i18n:domain="rer.ufficiostampa">
 <head>
 <metal:style fill-slot="style_slot">
-  <link href="${view/get_resource_css}" rel="stylesheet" />
+  <link tal:define="css python:view.get_resource_css(name='tableViews')"
+        href="${css}" rel="stylesheet" />
 </metal:style>
 </head>
 
@@ -18,7 +19,7 @@
 </metal:description>
 <metal:core fill-slot="content-core">
   <div id="management-wrapper" data-authenticator="${view/get_token}" data-app-type="history"/>
-  <script src="${view/get_resource_js}"></script>
+  <script tal:define="js python:view.get_resource_js(name='tableViews')" src="${js}"></script>
 </metal:core>
 </body>
 </html>

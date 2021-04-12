@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { TranslationsContext } from '../TranslationsContext';
+import { TranslationsContext } from '../../TranslationsContext';
 import Modal from '../Modal/Modal';
 
 import './Field.less';

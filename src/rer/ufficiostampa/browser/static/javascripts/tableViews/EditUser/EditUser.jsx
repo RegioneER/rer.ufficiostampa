@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { TranslationsContext } from '../TranslationsContext';
-import { ApiContext } from '../ApiContext';
-import apiFetch from '../utils/apiFetch';
+import { TranslationsContext } from '../../TranslationsContext';
+import { ApiContext } from '../../ApiContext';
+import apiFetch from '../../utils/apiFetch';
 import Modal from '../Modal/Modal';
 import TextField from '../common/Field';
-import { getUserFieldsLables } from '../utils/utils';
+import { getUserFieldsLables } from '../utils';
 import './EditUser.less';
 
 const isValidEmail = email => {

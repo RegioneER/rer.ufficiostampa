@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-04-08 08:10+0000\n"
+"POT-Creation-Date: 2021-04-12 09:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -149,9 +149,17 @@ msgstr "Canali"
 
 #. Default: "Channels management"
 #: rer/ufficiostampa/browser/history_management.pt:15
-#: rer/ufficiostampa/browser/templates/channels_management.pt:15
+#: rer/ufficiostampa/browser/templates/channels_management.pt:16
 msgid "channels_management_label"
 msgstr "Gestione canali di iscrizione"
+
+#. Default: "Search text"
+#: rer/ufficiostampa/restapi/services/search_parameters/get.py:37
+msgid "comunicati_search_text_label"
+msgstr "Ricerca testuale"
+
+msgid "comunicato_published_on"
+msgstr "Pubblicato il"
 
 #. Default: "Click here"
 #: rer/ufficiostampa/browser/templates/manage_subscriptions_mail_template.pt:14
@@ -211,8 +219,14 @@ msgstr "Se il sito pubblico è accessibile da un URL diversa da quella redaziona
 msgid "frontend_url_label"
 msgstr "URL di frontend"
 
+msgid "go_to_search_filters"
+msgstr "Vai ai filtri"
+
+msgid "go_to_search_results"
+msgstr "Vai ai risultati"
+
 #. Default: "History management"
-#: rer/ufficiostampa/browser/templates/history_management.pt:15
+#: rer/ufficiostampa/browser/templates/history_management.pt:16
 msgid "history_management_label"
 msgstr "Storico invii"
 
@@ -230,6 +244,7 @@ msgstr "elementi selezionati"
 
 #. Default: "Legislature"
 #: rer/ufficiostampa/interfaces/content.py:26
+#: rer/ufficiostampa/restapi/services/search_parameters/get.py:46
 msgid "label_legislature"
 msgstr "Legislatura"
 
@@ -240,6 +255,7 @@ msgstr "Inserisci una lista di argomenti a cui si fa riferimento."
 
 #. Default: "Arguments"
 #: rer/ufficiostampa/interfaces/settings.py:95
+#: rer/ufficiostampa/restapi/services/search_parameters/get.py:59
 msgid "legislature_arguments_label"
 msgstr "Argomenti"
 
@@ -376,6 +392,9 @@ msgstr "Telefono"
 msgid "press_attachments"
 msgstr "Materiale per la stampa"
 
+msgid "refine_search_label"
+msgstr "Raffina la tua ricerca"
+
 #: rer/ufficiostampa/configure.zcml:26
 msgid "rer.ufficiostampa"
 msgstr ""
@@ -384,6 +403,12 @@ msgstr ""
 msgid "rer.ufficiostampa (uninstall)"
 msgstr ""
 
+msgid "reset_filters_label"
+msgstr "Rimuovi tutti i filtri"
+
+msgid "results_tot_label"
+msgstr "Trovati ${variable} bandi"
+
 msgid "save"
 msgstr "Salva"
 
@@ -391,6 +416,17 @@ msgstr "Salva"
 #: rer/ufficiostampa/browser/manage_subscriptions.py:252
 msgid "save_button"
 msgstr "Salva"
+
+#. Default: "Search Comunicati"
+#: rer/ufficiostampa/browser/templates/search_comunicati.pt:16
+msgid "search_comunicati_label"
+msgstr "Ricerca Comunicati"
+
+msgid "select_placeholder"
+msgstr "Seleziona un valore"
+
+msgid "select_placeholder_multi"
+msgstr "Seleziona uno o più valori"
 
 #. Default: "Select which attachment you want to send via email. You can only select first level Files and Images."
 #: rer/ufficiostampa/browser/send.py:76
@@ -433,6 +469,11 @@ msgstr "Invia questa comunicazione ad una lista di indirizzi."
 msgid "send_form_title"
 msgstr "Invia ${type}"
 
+#. Default: "Subjects"
+#: rer/ufficiostampa/restapi/services/search_parameters/get.py:73
+msgid "subject_label"
+msgstr "Categorie"
+
 #. Default: "List of available subscription channels.One per line.These channels will be used for users subscriptions and for select to which channel send a Comunicato."
 #: rer/ufficiostampa/interfaces/settings.py:23
 msgid "subscription_channels_description"
@@ -452,6 +493,9 @@ msgstr "Invio completato."
 #: rer/ufficiostampa/browser/send.py:352
 msgid "success_send_mail_async"
 msgstr "Invio correttamente accodato. Puoi controllare il suo stato nello storico degli invii."
+
+msgid "toggle_filters_label"
+msgstr "Apri/chiudi i filtri"
 
 #. Default: "Insert the salt for token generation. This, in conjunction with the secret, will generate unique tokens for subscriptions management links."
 #: rer/ufficiostampa/interfaces/settings.py:46

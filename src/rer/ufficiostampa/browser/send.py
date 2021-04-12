@@ -344,7 +344,7 @@ class SendForm(form.Form):
                     message=self.subject, reason=response.text,
                 )
             )
-            self.self.add_send_error_message()
+            self.add_send_error_message()
             self.update_history(send_id=send_uid, status="error")
             return
         # finish status will be managed via async calls
