@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
 from copy import deepcopy
 from datetime import datetime
-from plone import api
 from plone.protect.interfaces import IDisableCSRFProtection
 from plone.restapi.batching import HypermediaBatch
 from plone.restapi.deserializer import json_body
 from plone.restapi.search.utils import unflatten_dotted_dict
 from plone.restapi.serializer.converters import json_compatible
 from plone.restapi.services import Service
-from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
-from rer.ufficiostampa.interfaces import ISubscriptionsStore
 from six import StringIO
 from zExceptions import BadRequest
 from zope.component import getUtility
