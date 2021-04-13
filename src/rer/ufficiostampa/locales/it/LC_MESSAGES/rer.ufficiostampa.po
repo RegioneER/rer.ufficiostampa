@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-04-12 09:00+0000\n"
+"POT-Creation-Date: 2021-04-13 13:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,8 +23,8 @@ msgstr "Azioni"
 msgid "Add Subscriber"
 msgstr "Aggiungi iscritto"
 
-msgid "Are you sure you want to delete all subscribed users?"
-msgstr "Sei sicuro di volere eleminare tutti gli utenti iscritti?"
+msgid "Are you sure you want to delete all data?"
+msgstr "Sei sicuro di voler cancellare tutti i dati?"
 
 msgid "Are you sure you want to delete this subscribed users?"
 msgstr "Sei sicuro di volere eliminare questi utenti iscritti?"
@@ -45,14 +45,20 @@ msgstr "Data di invio"
 msgid "Delete"
 msgstr "Elimina"
 
-msgid "Delete all subscribers"
-msgstr "Elimina tutti gli iscritti"
+msgid "Delete all data"
+msgstr "Cancella i dati"
 
 msgid "Edit"
 msgstr "Modifica"
 
 msgid "Edit Subscriber"
 msgstr "Modifica iscritto"
+
+msgid "Export in CSV"
+msgstr "Esporta in CSV"
+
+msgid "Filter history"
+msgstr "Filtra gli oggetti"
 
 msgid "Filter subscribers"
 msgstr "Filtra gli iscritti"
@@ -63,6 +69,9 @@ msgstr "Installa the rer.ufficiostampa."
 
 msgid "Name"
 msgstr "Nome"
+
+msgid "No send history found"
+msgstr "Nessuno dato presente"
 
 msgid "No subscribers found"
 msgstr "Nessun iscritto trovato"
@@ -75,6 +84,12 @@ msgstr "Obbligatorio"
 
 msgid "Search..."
 msgstr "Cerca..."
+
+msgid "Select a channel"
+msgstr "Seleziona un canale"
+
+msgid "Select a type"
+msgstr "Seleziona una tipologia"
 
 msgid "Select at least one channel"
 msgstr "Seleziona almeno un canale"
@@ -94,6 +109,9 @@ msgstr "Cognome"
 #: rer/ufficiostampa/profiles/default/registry.xml
 msgid "Text"
 msgstr "Testo"
+
+msgid "Type"
+msgstr "Tipologia"
 
 #: rer/ufficiostampa/browser/controlpanel.py:17
 msgid "Ufficio Stampa settings"
@@ -195,7 +213,7 @@ msgid "email"
 msgstr "E-mail"
 
 #. Default: "Error sending mail. Contact site administrator."
-#: rer/ufficiostampa/browser/send.py:248
+#: rer/ufficiostampa/browser/send.py:253
 msgid "error_send_mail"
 msgstr "Si è verificato un errore invitando le mail. Contatta l'amministratore del sito."
 
@@ -407,7 +425,10 @@ msgid "reset_filters_label"
 msgstr "Rimuovi tutti i filtri"
 
 msgid "results_tot_label"
-msgstr "Trovati ${variable} bandi"
+msgstr "Trovato ${variable} Comunicato Stampa"
+
+msgid "results_tot_label_multi"
+msgstr "Trovati ${variable} Comunicati Stampa"
 
 msgid "save"
 msgstr "Salva"
@@ -418,12 +439,9 @@ msgid "save_button"
 msgstr "Salva"
 
 #. Default: "Search Comunicati"
-#: rer/ufficiostampa/browser/templates/search_comunicati.pt:16
+#: rer/ufficiostampa/browser/templates/comunicati_search.pt:16
 msgid "search_comunicati_label"
 msgstr "Ricerca Comunicati"
-
-msgid "select_placeholder"
-msgstr "Seleziona un valore"
 
 msgid "select_placeholder_multi"
 msgstr "Seleziona uno o più valori"
@@ -485,12 +503,12 @@ msgid "subscription_channels_label"
 msgstr "Canali"
 
 #. Default: "Send complete."
-#: rer/ufficiostampa/browser/send.py:293
+#: rer/ufficiostampa/browser/send.py:298
 msgid "success_send_mail"
 msgstr "Invio completato."
 
 #. Default: "Send queued with success. See the status in send history."
-#: rer/ufficiostampa/browser/send.py:352
+#: rer/ufficiostampa/browser/send.py:357
 msgid "success_send_mail_async"
 msgstr "Invio correttamente accodato. Puoi controllare il suo stato nello storico degli invii."
 

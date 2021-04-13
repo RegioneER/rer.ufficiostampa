@@ -10,7 +10,7 @@ export const ApiConsumer = ApiContext.Consumer;
 
 export const DEFAULT_B_SIZE = 25;
 export const DEFAULT_SORT_ON = 'date';
-export const DEFAULT_SORT_ORDER = 'ascending';
+export const DEFAULT_SORT_ORDER = 'descending';
 
 function ApiWrapper({ endpoint, children }) {
   const [data, setData] = useState({});
@@ -37,26 +37,37 @@ function ApiWrapper({ endpoint, children }) {
 
   const fetchApi = (b_start = 0, query) => {
     if (portalUrl) {
-      const fetches = [
-        apiFetch({
-          url: portalUrl + '/@' + endpoint,
-          params: {
-            b_size,
-            b_start,
-            sort_on,
-            sort_order,
-            query,
-          },
-          method: 'GET',
-        }),
-      ];
       setLoading(true);
-
-      Promise.all(fetches).then(data => {
-        handleApiResponse(data[0]);
-        setData(data[0].data);
-        setLoading(false);
-      });
+      apiFetch({
+        url: portalUrl + '/@' + endpoint,
+        params: {
+          b_size,
+          b_start,
+          sort_on,
+          sort_order,
+          ...query,
+        },
+        method: 'GET',
+      })
+        .then(data => {
+          if (data === undefined) {
+            setApiErrors({ status: 500, statusText: 'Error' });
+            setLoading(false);
+            return;
+          }
+          handleApiResponse(data);
+          setData(data.data);
+          setLoading(false);
+        })
+        .catch(error => {
+          debugger;
+          setLoading(false);
+          setApiErrors(
+            res
+              ? { status: res.status, statusText: res.statusText }
+              : { status: '404', statusText: '' },
+          );
+        });
     }
   };
 
@@ -100,7 +111,9 @@ function ApiWrapper({ endpoint, children }) {
         sort_order,
         handlePageChange,
         apiErrors,
+        setApiErrors,
         loading,
+        endpoint,
       }}
     >
       {children}

@@ -103,7 +103,7 @@ const EditUser = ({ user }) => {
           </h1>
 
           {serverError && (
-            <dl class="portalMessage error" role="alert">
+            <dl className="portalMessage error" role="alert">
               <dt>Error. Status code: {serverError.status}</dt>
               <dd>{res.statusText}</dd>
             </dl>

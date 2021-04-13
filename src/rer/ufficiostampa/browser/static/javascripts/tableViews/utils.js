@@ -11,6 +11,7 @@ export const getUserFieldsLables = getTranslationFor => {
 
 export const getHistoryFieldsLables = getTranslationFor => {
   return {
+    type: getTranslationFor('Type', 'Type'),
     subject: getTranslationFor('Subject', 'Subject'),
     recipients: getTranslationFor('Recipients', 'Recipients'),
     date: getTranslationFor('Date', 'Date'),

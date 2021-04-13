@@ -41,10 +41,10 @@ msgstr ""
 msgid "save"
 msgstr ""
 
-msgid "Are you sure you want to delete all subscribed users?"
+msgid "Are you sure you want to delete all data?"
 msgstr ""
 
-msgid "Delete all subscribers"
+msgid "Delete all data"
 msgstr ""
 
 msgid "Actions"
@@ -113,9 +113,6 @@ msgstr ""
 msgid "comunicato_published_on"
 msgstr ""
 
-msgid "select_label"
-msgstr ""
-
 msgid "select_placeholder_multi"
 msgstr ""
 
@@ -131,8 +128,33 @@ msgstr ""
 msgid "reset_filters_label"
 msgstr ""
 
+msgid "results_tot_label_multi"
+msgstr ""
+
 msgid "results_tot_label"
 msgstr ""
 
+
 msgid "go_to_search_filters"
+msgstr ""
+
+msgid "Select a channel"
+msgstr ""
+
+msgid "Select a type"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Filter history"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "No send history found"
+msgstr ""
+
+msgid "Export in CSV"
 msgstr ""

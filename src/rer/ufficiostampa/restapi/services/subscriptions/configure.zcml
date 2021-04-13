@@ -12,6 +12,14 @@
     layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
     />
   <plone:service
+    method="GET"
+    name="@subscriptions-csv"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    factory=".crud.SubscriptionsCSVGet"
+    permission="rer.ufficiostampa.ManageChannels"
+    layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
+    />
+  <plone:service
     method="POST"
     name="@subscriptions"
     for="plone.app.layout.navigation.interfaces.INavigationRoot"

@@ -161,7 +161,8 @@ class SendForm(form.Form):
         tool = getUtility(ISendHistoryStore)
         intid = tool.add(
             {
-                "subject": self.subject,
+                "type": self.type_name,
+                "subject": self.context.Title(),
                 "recipients": subscribers,
                 "channels": data.get("channels", []),
                 "status": "sending",
@@ -184,11 +185,15 @@ class SendForm(form.Form):
 
     @property
     @memoize
-    def subject(self):
+    def type_name(self):
         types_tool = api.portal.get_tool(name="portal_types")
+        return types_tool.getTypeInfo(self.context.portal_type).title
+
+    @property
+    @memoize
+    def subject(self):
         return "{type}: {title}".format(
-            type=types_tool.getTypeInfo(self.context.portal_type).title,
-            title=self.context.Title(),
+            type=self.type_name, title=self.context.Title(),
         )
 
     def get_subscribers(self, data):

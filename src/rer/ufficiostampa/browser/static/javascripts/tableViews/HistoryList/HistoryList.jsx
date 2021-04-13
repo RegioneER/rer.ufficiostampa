@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import DataTable from 'react-data-table-component';
-
+import format from 'date-fns/format';
 import { TranslationsContext } from '../../TranslationsContext';
+import Select from 'react-select';
 import {
   ApiContext,
   DEFAULT_B_SIZE,
@@ -27,82 +28,126 @@ const HistoryList = ({ editUser }) => {
   } = useContext(ApiContext);
 
   const labels = getHistoryFieldsLables(getTranslationFor);
-  const [filterText, setFilterText] = useState('');
+  const [filters, setFilters] = useState({});
+  const [textTimeout, setTextTimeout] = useState(0);
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
   const [selectedRows, setSelectedRows] = React.useState([]);
 
   //------------------COLUMNS----------------------
-  const ChannelsCellView = (row, index, column, id) => {
-    return (
-      <div className="channels">
-        {row.channels?.map((channel, index) => {
-          return (
-            <span key={index}>
-              {channel}
-              {index < row.channels.length - 1 ? ',' : ''}{' '}
-            </span>
-          );
-        })}
-      </div>
-    );
+  const StatusCell = (row, index, column, id) => {
+    let statusIcon = '';
+    switch (row.status) {
+      case 'success':
+        statusIcon = (
+          <span className="glyphicon glyphicon-ok-sign success"></span>
+        );
+        break;
+      case 'error':
+        statusIcon = <span className="glyphicon glyphicon-alert error"></span>;
+        break;
+      case 'sending':
+        statusIcon = <span className="glyphicon glyphicon-hourglass"></span>;
+        break;
+      default:
+        statusIcon = <span>{row.status}</span>;
+        break;
+    }
+    return <div className="status">{statusIcon}</div>;
   };
 
   const columns = [
+    {
+      name: labels.status,
+      selector: 'status',
+      sortable: true,
+      cell: StatusCell,
+    },
+    { name: labels.type, selector: 'type', sortable: true },
     { name: labels.subject, selector: 'subject', sortable: true },
     { name: labels.recipients, selector: 'recipients', sortable: false },
-    { name: labels.date, selector: 'date', sortable: true },
-    { name: labels.completed_date, selector: 'completed_date', sortable: true },
-    { name: labels.status, selector: 'status', sortable: true },
-    // {
-    //   name: labels.channels,
-    //   selector: 'channels',
-    //   sortable: true,
-    //   cell: ChannelsCellView,
-    // },
+    {
+      name: labels.date,
+      selector: 'date',
+      sortable: true,
+      cell: row => (
+        <div>{format(new Date(row.date), 'dd/MM/yyyy HH:mm:ss')}</div>
+      ),
+    },
+    {
+      name: labels.completed_date,
+      selector: 'completed_date',
+      sortable: true,
+      cell: row => (
+        <div>{format(new Date(row.completed_date), 'dd/MM/yyyy HH:mm:ss')}</div>
+      ),
+    },
   ];
 
   //------------FILTERING-----------
 
   const SubHeaderComponent = React.useMemo(() => {
-    const handleClear = () => {
-      if (filterText) {
-        setResetPaginationToggle(!resetPaginationToggle);
-        setFilterText('');
-      }
+    const handleClearText = () => {
+      setResetPaginationToggle(!resetPaginationToggle);
+      setFilters({ ...filters, subject: '' });
     };
 
-    return data?.items?.length > 0 ? (
+    const delayTextSubmit = value => {
+      const newFilters = { ...filters, subject: value };
+      if (textTimeout) {
+        clearInterval(textTimeout);
+      }
+      const timeout = setTimeout(() => {
+        doQuery(newFilters);
+      }, 1000);
+      setFilters(newFilters);
+      setTextTimeout(timeout);
+    };
+
+    const doQuery = queryFilters => {
+      const params = { ...queryFilters };
+      if (params.subject?.length) {
+        params.subject = params.subject + '*';
+      }
+      fetchApi(null, params);
+    };
+    return (
       <>
         <div className="search-wrapper">
+          <Select
+            isMulti={false}
+            isClearable={true}
+            inputId="type"
+            name={'type'}
+            options={[
+              { value: 'Comunicato Stampa', label: 'Comunicato Stampa' },
+              { value: 'Invito Stampa', label: 'Invito Stampa' },
+            ]}
+            onChange={options => {
+              const newFilters = {
+                ...filters,
+                type: options ? options.value : null,
+              };
+              setFilters(newFilters);
+              doQuery(newFilters);
+            }}
+            className="type-select"
+            placeholder={getTranslationFor('Select a type', 'Select a type')}
+          />
           <input
             id="search"
             type="text"
             placeholder={getTranslationFor('Filter history', 'Filter history')}
             aria-label={getTranslationFor('Search...', 'Search...')}
-            value={filterText}
-            onChange={e => setFilterText(e.target.value)}
+            value={filters.subject || ''}
+            onChange={e => delayTextSubmit(e.target.value)}
           />
-          <button type="button" onClick={handleClear}>
+          <button type="button" onClick={handleClearText}>
             X
           </button>
         </div>
       </>
-    ) : null;
-  }, [filterText, resetPaginationToggle, data.items]);
-
-  React.useEffect(() => {
-    if (filterText?.length > 0) {
-      fetchApi(null, [
-        {
-          i: 'SearchableText',
-          o: 'plone.app.querystring.operation.string.contains',
-          v: filterText + '*',
-        },
-      ]);
-    } else {
-      fetchApi();
-    }
-  }, [filterText]);
+    );
+  }, [filters, resetPaginationToggle, data.items]);
 
   return (
     <div className="ufficio-stampa-history-list">

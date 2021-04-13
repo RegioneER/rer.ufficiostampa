@@ -23,6 +23,7 @@ const App = ({ appType }) => {
   } else {
     children = (
       <React.Fragment>
+        <Menu />
         <HistoryList />
       </React.Fragment>
     );

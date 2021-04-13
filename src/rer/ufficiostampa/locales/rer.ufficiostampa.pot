@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-04-12 09:00+0000\n"
+"POT-Creation-Date: 2021-04-13 13:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Add Subscriber"
 msgstr ""
 
-msgid "Are you sure you want to delete all subscribed users?"
+msgid "Are you sure you want to delete all data?"
 msgstr ""
 
 msgid "Are you sure you want to delete this subscribed users?"
@@ -45,13 +45,19 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-msgid "Delete all subscribers"
+msgid "Delete all data"
 msgstr ""
 
 msgid "Edit"
 msgstr ""
 
 msgid "Edit Subscriber"
+msgstr ""
+
+msgid "Export in CSV"
+msgstr ""
+
+msgid "Filter history"
 msgstr ""
 
 msgid "Filter subscribers"
@@ -64,6 +70,9 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
+msgid "No send history found"
+msgstr ""
+
 msgid "No subscribers found"
 msgstr ""
 
@@ -74,6 +83,12 @@ msgid "Required"
 msgstr ""
 
 msgid "Search..."
+msgstr ""
+
+msgid "Select a channel"
+msgstr ""
+
+msgid "Select a type"
 msgstr ""
 
 msgid "Select at least one channel"
@@ -93,6 +108,9 @@ msgstr ""
 
 #: rer/ufficiostampa/profiles/default/registry.xml
 msgid "Text"
+msgstr ""
+
+msgid "Type"
 msgstr ""
 
 #: rer/ufficiostampa/browser/controlpanel.py:17
@@ -195,7 +213,7 @@ msgid "email"
 msgstr ""
 
 #. Default: "Error sending mail. Contact site administrator."
-#: rer/ufficiostampa/browser/send.py:248
+#: rer/ufficiostampa/browser/send.py:253
 msgid "error_send_mail"
 msgstr ""
 
@@ -409,6 +427,9 @@ msgstr ""
 msgid "results_tot_label"
 msgstr ""
 
+msgid "results_tot_label_multi"
+msgstr ""
+
 msgid "save"
 msgstr ""
 
@@ -418,11 +439,8 @@ msgid "save_button"
 msgstr ""
 
 #. Default: "Search Comunicati"
-#: rer/ufficiostampa/browser/templates/search_comunicati.pt:16
+#: rer/ufficiostampa/browser/templates/comunicati_search.pt:16
 msgid "search_comunicati_label"
-msgstr ""
-
-msgid "select_label"
 msgstr ""
 
 msgid "select_placeholder_multi"
@@ -485,12 +503,12 @@ msgid "subscription_channels_label"
 msgstr ""
 
 #. Default: "Send complete."
-#: rer/ufficiostampa/browser/send.py:293
+#: rer/ufficiostampa/browser/send.py:298
 msgid "success_send_mail"
 msgstr ""
 
 #. Default: "Send queued with success. See the status in send history."
-#: rer/ufficiostampa/browser/send.py:352
+#: rer/ufficiostampa/browser/send.py:357
 msgid "success_send_mail_async"
 msgstr ""
 

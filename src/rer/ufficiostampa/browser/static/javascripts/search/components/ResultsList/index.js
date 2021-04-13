@@ -10,11 +10,13 @@ const ResultsList = ({ queryParameters, results, updatedPagination }) => {
   if (error) {
     return <p className="discreet">{message}</p>;
   }
+  const resultLabel =
+    items_total === 1 ? 'results_tot_label' : 'results_tot_label_multi';
   return (
     <React.Fragment>
       <div className="results-total">
         <h2 id="search-results">
-          {getTranslationFor('results_tot_label', '', items_total || 0)}
+          {getTranslationFor(resultLabel, '', items_total || 0)}
         </h2>
       </div>
       {items ? (

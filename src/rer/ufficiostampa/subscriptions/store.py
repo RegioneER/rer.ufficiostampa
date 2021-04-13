@@ -12,25 +12,6 @@ import six
 
 logger = logging.getLogger(__name__)
 
-SUBSCRIPTION_FIELDS = [
-    "name",
-    "surname",
-    "email",
-    "phone",
-    "channels",
-    "newspaper",
-]
-
-SEND_HISTORY_FIELDS = [
-    "subject",
-    "recipients",
-    "channels",
-    "status",
-    "completed_date",
-]
-
-KEYWORD_INDEXES = ["channels"]
-
 
 class BaseStore(object):
     """
@@ -59,32 +40,32 @@ class BaseStore(object):
         return len([x for x in self.soup.data.values()])
 
     def search(self, query=None, sort_index="date", reverse=True):
+        queries = []
         if query:
             queries = [
                 self.parse_query_params(index, value)
                 for index, value in query.items()
-                if index in self.indexes
+                if index in self.indexes and value
             ]
-            if queries:
-                return [
-                    x
-                    for x in self.soup.query(
-                        " and ".join(queries),
-                        sort_index=sort_index,
-                        reverse=reverse,
-                    )
-                ]
-            else:
-                return []
+        if queries:
+            return [
+                x
+                for x in self.soup.query(
+                    " and ".join(queries),
+                    sort_index=sort_index,
+                    reverse=reverse,
+                )
+            ]
+        # return all data
         records = self.soup.data.values()
         return sorted(
             records, key=lambda k: k.attrs[sort_index], reverse=reverse
         )
 
     def parse_query_params(self, index, value):
-        if index == "text":
-            return "'{}' in text".format(value)
-        elif index in KEYWORD_INDEXES:
+        if index == self.text_index:
+            return "'{}' in {}".format(value, self.text_index)
+        elif index in self.keyword_indexes:
             if isinstance(value, list):
                 return "{} in any({})".format(index, value)
             elif isinstance(value, six.text_type):
@@ -139,13 +120,31 @@ class BaseStore(object):
 class SubscriptionsStore(BaseStore):
     soup_name = "subscriptions_soup"
     soup_type = "SUBSCRIPTION"
-    fields = SUBSCRIPTION_FIELDS
+    fields = [
+        "name",
+        "surname",
+        "email",
+        "phone",
+        "channels",
+        "newspaper",
+    ]
     indexes = ["text", "channels", "email"]
+    keyword_indexes = ["channels"]
+    text_index = "text"
 
 
 @implementer(ISendHistoryStore)
 class SendHistoryStore(BaseStore):
     soup_name = "send_history_soup"
     soup_type = "HISTORY"
-    fields = SEND_HISTORY_FIELDS
-    indexes = ["subject", "channels", "date"]
+    fields = [
+        "subject",
+        "type",
+        "recipients",
+        "channels",
+        "status",
+        "completed_date",
+    ]
+    indexes = ["subject", "channels", "date", "type"]
+    keyword_indexes = []
+    text_index = "subject"
