@@ -71,22 +71,6 @@
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
     />
 
-    <!-- subscriptions crud -->
-    <browser:page
-      name="add-subscription"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".subscriptions_crud.AddSubscriptionForm"
-      permission="rer.ufficiostampa.ManageChannels"
-      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
-      />
-    <browser:page
-      name="edit-subscription"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".subscriptions_crud.EditSubscriptionForm"
-      permission="rer.ufficiostampa.ManageChannels"
-      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
-      />
-
     <!-- send history -->
     <browser:page
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"

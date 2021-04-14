@@ -29,7 +29,7 @@ class View(BrowserView):
         review_state = api.content.get_state(obj=self.context)
         if (
             self.context.portal_type == "ComunicatoStampa"
-            and review_state == "published"
+            and review_state == "published"  # noqa
         ):
             return True
         if self.context.portal_type == "InvitoStampa":
