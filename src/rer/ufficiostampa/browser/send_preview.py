@@ -17,6 +17,7 @@ class View(BrowserView):
                 "notes": "test notes",
                 "site_title": get_site_title(),
                 "date": DateTime(),
+                "folders": self.get_folders_attachments(),
             },
         )
 
@@ -27,3 +28,10 @@ class View(BrowserView):
             )
         except (KeyError, InvalidParameterError):
             return ""
+
+    def get_folders_attachments(self):
+        if self.context.portal_type == "InvitoStampa":
+            return []
+        return self.context.listFolderContents(
+            contentFilter={"portal_type": ["Folder"]}
+        )

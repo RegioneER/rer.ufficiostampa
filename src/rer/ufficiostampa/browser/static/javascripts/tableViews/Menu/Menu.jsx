@@ -135,6 +135,9 @@ const Menu = ({ editUser }) => {
         >
           {getTranslationFor('Export in CSV', 'Export in CSV')}
         </button>
+        <button className="plone-btn plone-btn-primary">
+          {getTranslationFor('Import from CSV', 'Import from CSV')}
+        </button>
       </div>
 
       {apiErrors && (

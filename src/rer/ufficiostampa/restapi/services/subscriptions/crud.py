@@ -4,7 +4,6 @@ from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
 from rer.ufficiostampa.interfaces import ISubscriptionsStore
 from zExceptions import BadRequest
 from rer.ufficiostampa.restapi.services.common import DataGet
-from rer.ufficiostampa.restapi.services.common import DataCSVGet
 from rer.ufficiostampa.restapi.services.common import DataAdd
 from rer.ufficiostampa.restapi.services.common import DataUpdate
 from rer.ufficiostampa.restapi.services.common import DataDelete
@@ -21,11 +20,6 @@ class SubscriptionsGet(DataGet):
             "subscription_channels", interface=IRerUfficiostampaSettings
         )
         return data
-
-
-class SubscriptionsCSVGet(DataCSVGet):
-    type = "subscriptions"
-    store = ISubscriptionsStore
 
 
 class SubscriptionAdd(DataAdd):

@@ -12,14 +12,13 @@
 </head>
 
 <body>
-<metal:title fill-slot="content-title">
+<metal:main fill-slot="content">
+  <article id="content">
     <h1 class="documentFirstHeading" i18n:translate="channels_management_label">Channels management</h1>
-</metal:title>
-<metal:description fill-slot="content-description">
-</metal:description>
-<metal:core fill-slot="content-core">
-  <div id="management-wrapper" data-authenticator="${view/get_token}" data-app-type="channels"/>
-  <script tal:define="js python:view.get_resource_js(name='tableViews')" src="${js}"></script>
-</metal:core>
+    <div id="content-core">
+      <div id="management-wrapper" data-authenticator="${view/get_token}" data-app-type="channels"/>
+    </div>
+    <script tal:define="js python:view.get_resource_js(name='tableViews')" src="${js}"></script>
+</metal:main>
 </body>
 </html>

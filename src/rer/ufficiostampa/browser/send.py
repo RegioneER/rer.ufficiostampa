@@ -1,17 +1,21 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
+from DateTime import DateTime
+from email.utils import formataddr
 from plone import api
 from plone import schema
 from plone.api.exc import InvalidParameterError
+from plone.memoize.view import memoize
 from plone.registry.interfaces import IRegistry
 from Products.CMFPlone.interfaces.controlpanel import IMailSchema
 from requests.exceptions import ConnectionError
 from requests.exceptions import Timeout
 from rer.ufficiostampa import _
-from rer.ufficiostampa.interfaces import ISubscriptionsStore
 from rer.ufficiostampa.interfaces import ISendHistoryStore
+from rer.ufficiostampa.interfaces import ISubscriptionsStore
 from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
 from rer.ufficiostampa.utils import get_site_title
+from rer.ufficiostampa.utils import prepare_email_message
 from smtplib import SMTPException
 from z3c.form import button
 from z3c.form import field
@@ -20,9 +24,8 @@ from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.interface import Interface
-from plone.memoize.view import memoize
-from DateTime import DateTime
-from rer.ufficiostampa.utils import prepare_email_message
+from z3c.form.interfaces import ActionExecutionError
+from zope.interface import Invalid
 
 import logging
 import requests
@@ -36,6 +39,22 @@ else:
 
 
 logger = logging.getLogger(__name__)
+
+
+def check_emails(value):
+    """Check that all values are valid email addresses
+    """
+    reg_tool = api.portal.get_tool(name="portal_registration")
+    for address in value:
+        if not reg_tool.isValidEmail(address):
+            raise Invalid(
+                _(
+                    "validation_invalid_email",
+                    default="Invalid email address: ${address}",
+                    mapping={"address": address},
+                )
+            )
+    return True
 
 
 class ISendForm(Interface):
@@ -65,6 +84,7 @@ class ISendForm(Interface):
         required=False,
         missing_value=(),
         value_type=schema.TextLine(),
+        constraint=check_emails,
     )
     notes = schema.Text(
         title=_(u"notes_title", default=u"Notes"),
@@ -110,6 +130,15 @@ class SendForm(form.Form):
     @button.buttonAndHandler(_(u"send_button", default="Send"))
     def handleSave(self, action):
         data, errors = self.extractData()
+        if not self.get_subscribers(data=data):
+            raise ActionExecutionError(
+                Invalid(
+                    _(
+                        "empty_subscribers",
+                        default=u"You need to provide at least one email address or channel.",  # noqa
+                    )
+                )
+            )
         if errors:
             self.status = self.formErrorsMessage
             return
@@ -138,6 +167,7 @@ class SendForm(form.Form):
                 "notes": data.get("notes", ""),
                 "site_title": get_site_title(),
                 "date": DateTime(),
+                "folders": self.get_folders_attachments(),
             },
         )
 
@@ -158,6 +188,9 @@ class SendForm(form.Form):
         return None
 
     def set_history_start(self, data, subscribers):
+        # if it's a preview, do not store infos
+        if not data.get("channels", []):
+            return None
         tool = getUtility(ISendHistoryStore)
         intid = tool.add(
             {
@@ -196,6 +229,15 @@ class SendForm(form.Form):
             type=self.type_name, title=self.context.Title(),
         )
 
+    @property
+    @memoize
+    def mail_from(self):
+        registry = getUtility(IRegistry)
+        mail_settings = registry.forInterface(IMailSchema, prefix="plone")
+        return formataddr(
+            (mail_settings.email_from_name, mail_settings.email_from_address)
+        )
+
     def get_subscribers(self, data):
         channels = data.get("channels", [])
         subscribers = set()
@@ -206,6 +248,13 @@ class SendForm(form.Form):
 
         subscribers.update(data.get("additional_addresses", []))
         return sorted(list(subscribers))
+
+    def get_folders_attachments(self):
+        if self.context.portal_type == "InvitoStampa":
+            return []
+        return self.context.listFolderContents(
+            contentFilter={"portal_type": ["Folder"]}
+        )
 
     def get_attachments(self, data):
         attachments = []
@@ -269,15 +318,13 @@ class SendForm(form.Form):
             return {"error": "MailHost is not configured."}
         subscribers = self.get_subscribers(data)
         registry = getUtility(IRegistry)
-        mail_settings = registry.forInterface(IMailSchema, prefix="plone")
-        mfrom = mail_settings.email_from_address
         encoding = registry.get("plone.email_charset", "utf-8")
 
         msg = EmailMessage()
         msg.set_content(body)
         msg["Subject"] = self.subject
-        msg["From"] = mfrom
-        msg["Reply-To"] = mfrom
+        msg["From"] = self.mail_from
+        msg["Reply-To"] = self.mail_from
         msg.replace_header("Content-Type", 'text/html; charset="utf-8"')
 
         self.manage_attachments(data=data, msg=msg)
@@ -299,7 +346,9 @@ class SendForm(form.Form):
             request=self.request,
             type="info",
         )
-        self.update_history(send_id=send_id, status="success")
+
+        if send_id:
+            self.update_history(send_id=send_id, status="success")
 
     def send_external(self, data, body):
         frontend_url = self.get_value_from_settings(field="frontend_url")
@@ -310,9 +359,6 @@ class SendForm(form.Form):
         channel_url = api.portal.get().absolute_url()
         if frontend_url:
             channel_url = frontend_url
-        registry = getUtility(IRegistry)
-        mail_settings = registry.forInterface(IMailSchema, prefix="plone")
-        mfrom = mail_settings.email_from_address
         subscribers = self.get_subscribers(data)
         send_uid = self.set_history_start(
             data=data, subscribers=len(subscribers)
@@ -322,7 +368,7 @@ class SendForm(form.Form):
             "channel_url": channel_url,
             "subscribers": subscribers,
             "subject": self.subject,
-            "mfrom": mfrom,
+            "mfrom": self.mail_from,
             "text": body,
             "send_uid": send_uid,
         }
@@ -341,7 +387,8 @@ class SendForm(form.Form):
         except (ConnectionError, Timeout) as e:
             logger.exception(e)
             self.add_send_error_message()
-            self.update_history(send_id=send_uid, status="error")
+            if send_uid:
+                self.update_history(send_id=send_uid, status="error")
             return
         if response.status_code != 200:
             logger.error(
@@ -350,7 +397,8 @@ class SendForm(form.Form):
                 )
             )
             self.add_send_error_message()
-            self.update_history(send_id=send_uid, status="error")
+            if send_uid:
+                self.update_history(send_id=send_uid, status="error")
             return
         # finish status will be managed via async calls
         api.portal.show_message(

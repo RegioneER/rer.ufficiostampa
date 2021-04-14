@@ -75,8 +75,16 @@ class BaseStore(object):
 
     def get_record(self, id):
         if isinstance(id, six.text_type):
-            id = int(id)
-        return self.soup.get(id)
+            try:
+                id = int(id)
+            except ValueError as e:
+                logger.exception(e)
+                return None
+        try:
+            return self.soup.get(id)
+        except KeyError as e:
+            logger.exception(e)
+            return None
 
     def update(self, id, data):
         try:

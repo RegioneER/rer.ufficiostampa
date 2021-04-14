@@ -28,6 +28,7 @@ class IComunicatoStampa(model.Schema):
         required=True,
         defaultFactory=defaultLegislature,
     )
+    directives.mode(legislature="display")
 
 
 class IInvitoStampa(IComunicatoStampa):

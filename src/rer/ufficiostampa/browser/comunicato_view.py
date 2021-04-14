@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from plone import api
 from Products.Five import BrowserView
 
 
@@ -17,3 +18,20 @@ class View(BrowserView):
             "title": item.Title(),
             "description": item.Description() or item.Title(),
         }
+
+    def can_see_links(self):
+        current = api.user.get_current()
+        return api.user.has_permission(
+            "rer.ufficiostampa: Send", user=current, obj=self.context
+        )
+
+    def can_send(self):
+        review_state = api.content.get_state(obj=self.context)
+        if (
+            self.context.portal_type == "ComunicatoStampa"
+            and review_state == "published"
+        ):
+            return True
+        if self.context.portal_type == "InvitoStampa":
+            return True
+        return False

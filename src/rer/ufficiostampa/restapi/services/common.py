@@ -177,7 +177,7 @@ class DataDelete(TraversableService):
     def reply(self):
         alsoProvides(self.request, IDisableCSRFProtection)
         if not self.id:
-            raise BadRequest("Missing subscriber id")
+            raise BadRequest("Missing id")
         tool = getUtility(self.store)
         res = tool.delete(id=self.id)
         if not res:

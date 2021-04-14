@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from email.utils import formataddr
 from itsdangerous.url_safe import URLSafeTimedSerializer
 from plone import api
 from plone import schema
@@ -22,6 +23,10 @@ from z3c.form.interfaces import HIDDEN_MODE
 from plone.api.exc import InvalidParameterError
 from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
 from rer.ufficiostampa.utils import prepare_email_message
+from zope.interface import provider
+from zope.schema.interfaces import IContextSourceBinder
+from zope.schema.vocabulary import SimpleTerm
+from zope.schema.vocabulary import SimpleVocabulary
 
 import logging
 
@@ -35,6 +40,21 @@ def getSubscriptions():
     if data.get("error", ""):
         return ()
     return data["data"].attrs.get("channels", [])
+
+
+@provider(IContextSourceBinder)
+def subscriptionsVocabulary(context):
+    channels = getSubscriptions()
+    if not channels:
+        channels = context.REQUEST.form.get("form.widgets.channels", [])
+    if not channels:
+        return SimpleVocabulary([])
+    terms = [
+        SimpleTerm(value=channel, token=channel, title=channel)
+        for channel in channels
+    ]
+
+    return SimpleVocabulary(terms)
 
 
 def getUid():
@@ -67,15 +87,13 @@ class IManageSubscriptionsForm(Interface):
         title=_(u"manage_subscriptions_channels_title", default=u"Channels"),
         description=_(
             u"manage_subscriptions_channels_description",
-            default=u"Select which channels you want to be subscribed or not. "
+            default=u"Select which channels you want to be subscribed. "
             u"Disable all if you don't want to be notified.",
         ),
         required=False,
         defaultFactory=getSubscriptions,
         missing_value=(),
-        value_type=schema.Choice(
-            source="rer.ufficiostampa.vocabularies.channels"
-        ),
+        value_type=schema.Choice(source=subscriptionsVocabulary),
     )
     uid = schema.Int(readonly=True, defaultFactory=getUid)
 
@@ -225,7 +243,7 @@ class ManageSubscriptionsForm(form.Form):
     label = _("manage_subscriptions_title", u"Channels subscriptions")
     description = _(
         "manage_subscriptions_help",
-        u"This is the list of available channels and your subscriptions.",
+        u"This is the list of your subscriptions.",
     )
     ignoreContext = True
     fields = field.Fields(IManageSubscriptionsForm)
@@ -256,15 +274,32 @@ class ManageSubscriptionsForm(form.Form):
             self.status = self.formErrorsMessage
             return
         tool = getUtility(ISubscriptionsStore)
-        res = tool.update(
-            id=data.get("uid", None), data={"channels": data.get("channels")},
-        )
-        if res and res.get("error", "NotFound"):
+        subscription_id = data.get("uid", None)
+        record = tool.get_record(subscription_id)
+        if not record:
             msg = _(
                 u"manage_subscriptions_inexistent_mail",
                 default=u"Mail not found. Unable to change settings.",
             )
             return self.return_with_message(message=msg, type="error")
+        record_channels = record.attrs.get("channels", [])
+        data_channels = data.get("channels", [])
+        removed_channels = [
+            x for x in record_channels if x not in data_channels
+        ]
+        if not data_channels:
+            # completely unsubscribed, so remove it from the db
+            tool.delete(id=subscription_id)
+            self.send_notify_unsubscription(
+                channels=removed_channels, record=record, deleted=True
+            )
+        else:
+            tool.update(
+                id=subscription_id, data={"channels": data.get("channels")},
+            )
+            self.send_notify_unsubscription(
+                channels=removed_channels, record=record, deleted=False
+            )
         return self.return_with_message(
             message=_(
                 "manage_subscriptions_success",
@@ -280,4 +315,61 @@ class ManageSubscriptionsForm(form.Form):
         return self.return_with_message(
             message=_("cancel_action", default=u"Action cancelled",),
             type=u"info",
+        )
+
+    def send_notify_unsubscription(self, channels, record, deleted=False):
+        portal = api.portal.get()
+        site_title = get_site_title()
+        overview_controlpanel = getMultiAdapter(
+            (portal, self.request), name="overview-controlpanel"
+        )
+        if overview_controlpanel.mailhost_warning():
+            logger.error("MailHost is not configured.")
+            return False
+        registry = getUtility(IRegistry)
+        encoding = registry.get("plone.email_charset", "utf-8")
+        mailHost = api.portal.get_tool(name="MailHost")
+        subject = translate(
+            _(
+                "subscriptions_updated_label",
+                default=u"Subscriptions updated for ${site}",
+                mapping={"site": site_title},
+            ),
+            context=self.request,
+        )
+        message = prepare_email_message(
+            context=api.portal.get(),
+            template="@@manage_subscriptions_notify_template",
+            parameters={
+                "site_title": site_title,
+                "name": "{} {}".format(
+                    record.attrs.get("surname", ""),
+                    record.attrs.get("name", ""),
+                ),
+                "email": record.attrs.get("email", ""),
+                "deleted": deleted,
+                "channels": channels,
+            },
+        )
+        mto = self.mail_to()
+        try:
+            mailHost.send(
+                message,
+                mto=mto,
+                mfrom=mto,
+                subject=subject,
+                charset=encoding,
+                msg_type="text/html",
+                immediate=True,
+            )
+        except (SMTPException, RuntimeError) as e:
+            logger.exception(e)
+            return False
+        return True
+
+    def mail_to(self):
+        registry = getUtility(IRegistry)
+        mail_settings = registry.forInterface(IMailSchema, prefix="plone")
+        return formataddr(
+            (mail_settings.email_from_name, mail_settings.email_from_address)
         )

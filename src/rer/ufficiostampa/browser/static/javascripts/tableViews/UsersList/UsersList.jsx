@@ -206,7 +206,7 @@ const UsersList = ({ editUser }) => {
   return (
     <div className="ufficio-stampa-users-list">
       <DataTable
-        title={getTranslationFor('Subscribers', 'Subscribers')}
+        // noHeader
         columns={columns}
         data={data.items}
         striped={true}

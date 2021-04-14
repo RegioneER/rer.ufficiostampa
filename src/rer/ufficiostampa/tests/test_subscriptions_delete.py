@@ -69,7 +69,7 @@ class TestSubscriptionsDelete(unittest.TestCase):
         self.assertEqual(
             self.api_session.delete(self.url, json={}).status_code, 400
         )
-        self.assertEqual("Missing subscriber id", res.json()["message"])
+        self.assertEqual("Missing id", res.json()["message"])
 
     def test_anon_cant_delete_data(self):
         url = "{}/123".format(self.url)
@@ -98,14 +98,12 @@ class TestSubscriptionsDelete(unittest.TestCase):
 
         res = self.api_session.delete("{}/foo".format(self.url), json={})
         self.assertEqual(res.status_code, 400)
-        self.assertEqual(
-            res.json()["message"], "Subscriber id should be a number."
-        )
+        self.assertEqual(res.json()["message"], "Id should be a number.")
 
         res = self.api_session.delete("{}/123".format(self.url), json={})
         self.assertEqual(res.status_code, 400)
         self.assertEqual(
-            res.json()["message"], 'Unable to find subscription with id "123"'
+            res.json()["message"], 'Unable to find item with id "123"'
         )
 
     def test_correctly_delete_data(self):

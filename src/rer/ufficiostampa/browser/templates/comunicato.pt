@@ -7,10 +7,24 @@
     i18n:domain="rer.ufficiostampa">
 <body>
 
+<metal:content-description fill-slot="content-description">
+  <div class="send-links" tal:condition="view/can_see_links">
+    <a class="plone-btn plone-btn-primary"
+        href="${context/absolute_url}/@@send"
+        i18n:translate="send_link"
+        tal:condition="view/can_send">Send</a>
+    <a class="plone-btn plone-btn-primary"
+        href="${context/absolute_url}/@@send-preview"
+        i18n:translate="send_preview_link">See preview</a>
+  </div>
+  <div tal:condition="context/Description"
+       tal:content="context/Description"
+       class="documentDescription description"></div>
+</metal:content-description>
+
 <metal:content-core fill-slot="content-core">
 <metal:content-core define-macro="content-core"
                     tal:define="toc python:  getattr(context, 'table_of_contents', False);">
-
   <section id="section-text">
     <div id="parent-fieldname-text" tal:condition="context/text" tal:content="structure python:context.text.output_relative_to(view.context)" tal:attributes="class python: toc and 'pat-autotoc' or ''">
       Text
@@ -20,7 +34,7 @@
   <div class="attachments"
        tal:define="attachments view/get_children"
        tal:condition="attachments">
-    <h2 i18n:translate="press_attachments">Materiale per la stampa</h2>
+    <h2 i18n:translate="press_attachments">Allegati</h2>
     <ul>
       <li tal:repeat="attachment attachments" class="attachment">
         <a href="${attachment/url}" title="${attachment/description}">${attachment/title}</a>

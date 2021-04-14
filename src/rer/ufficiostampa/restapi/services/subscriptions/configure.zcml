@@ -15,7 +15,15 @@
     method="GET"
     name="@subscriptions-csv"
     for="plone.app.layout.navigation.interfaces.INavigationRoot"
-    factory=".crud.SubscriptionsCSVGet"
+    factory=".csv.SubscriptionsCSVGet"
+    permission="rer.ufficiostampa.ManageChannels"
+    layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
+    />
+  <plone:service
+    method="POST"
+    name="@subscriptions-csv"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    factory=".csv.SubscriptionsCSVPost"
     permission="rer.ufficiostampa.ManageChannels"
     layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
     />
