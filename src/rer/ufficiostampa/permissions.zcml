@@ -23,6 +23,10 @@
       id="rer.ufficiostampa.ManageChannels"
       title="rer.ufficiostampa: Manage Channels"
      />
+     <permission
+      id="rer.ufficiostampa.AccessHistory"
+      title="rer.ufficiostampa: Access History"
+     />
     <permission
       id="rer.ufficiostampa.Send"
       title="rer.ufficiostampa: Send"

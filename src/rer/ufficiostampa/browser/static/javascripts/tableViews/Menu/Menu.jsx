@@ -134,12 +134,16 @@ const Menu = ({ editUser }) => {
         >
           {getTranslationFor('Export in CSV', 'Export in CSV')}
         </button>
-        <a
-          href={`${portalUrl}/ufficiostampa-settings`}
-          className="plone-btn plone-btn-primary"
-        >
-          <span>{getTranslationFor('Settings', 'Settings')}</span>
-        </a>
+        {endpoint === 'subscriptions' ? (
+          <a
+            href={`${portalUrl}/ufficiostampa-settings`}
+            className="plone-btn plone-btn-primary"
+          >
+            <span>{getTranslationFor('Settings', 'Settings')}</span>
+          </a>
+        ) : (
+          ''
+        )}
         <button
           onClick={() => deleteAllUsers()}
           className="plone-btn plone-btn-danger"

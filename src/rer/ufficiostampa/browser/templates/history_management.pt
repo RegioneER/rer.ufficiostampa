@@ -4,6 +4,7 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="rer.ufficiostampa">
+
 <head>
 <metal:style fill-slot="style_slot">
   <link tal:define="css python:view.get_resource_css(name='tableViews')"
@@ -12,14 +13,13 @@
 </head>
 
 <body>
-<metal:title fill-slot="content-title">
+<metal:main fill-slot="content">
+  <article id="content">
     <h1 class="documentFirstHeading" i18n:translate="history_management_label">History management</h1>
-</metal:title>
-<metal:description fill-slot="content-description">
-</metal:description>
-<metal:core fill-slot="content-core">
-  <div id="management-wrapper" data-authenticator="${view/get_token}" data-app-type="history"/>
-  <script tal:define="js python:view.get_resource_js(name='tableViews')" src="${js}"></script>
-</metal:core>
+    <div id="content-core">
+      <div id="management-wrapper" data-authenticator="${view/get_token}" data-app-type="history"/>
+    </div>
+    <script tal:define="js python:view.get_resource_js(name='tableViews')" src="${js}"></script>
+</metal:main>
 </body>
 </html>

@@ -22,7 +22,7 @@
    <property name="link_target"></property>
    <property name="icon_expr"></property>
    <property name="permissions">
-    <element value="rer.ufficiostampa: Manage Channels"/>
+    <element value="rer.ufficiostampa: Access History"/>
    </property>
    <property name="visible">True</property>
   </object>

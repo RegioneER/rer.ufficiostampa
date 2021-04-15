@@ -77,7 +77,7 @@
       name="history-management"
       template="templates/history_management.pt"
       class=".react_views.View"
-      permission="rer.ufficiostampa.ManageChannels"
+      permission="rer.ufficiostampa.AccessHistory"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
     />
 
@@ -87,7 +87,7 @@
       name="comunicati-search"
       template="templates/comunicati_search.pt"
       class=".react_views.View"
-      permission="rer.ufficiostampa.ManageChannels"
+      permission="zope2.View"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
     />
     <!-- manage subscriptions -->
@@ -115,19 +115,19 @@
       name="send"
       for="rer.ufficiostampa.interfaces.IComunicatoStampa"
       class=".send.SendForm"
-      permission="zope2.View"
+      permission="rer.ufficiostampa.Send"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
     <browser:page
       for="rer.ufficiostampa.interfaces.IComunicatoStampa"
       name="send_mail_template"
       template="templates/send_mail_template.pt"
-      permission="zope2.View"
+      permission="rer.ufficiostampa.Send"
       />
     <browser:page
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       name="manage_subscriptions_notify_template"
       template="templates/manage_subscriptions_notify_template.pt"
-      permission="zope2.View"
+      permission="rer.ufficiostampa.Send"
       />
 </configure>
