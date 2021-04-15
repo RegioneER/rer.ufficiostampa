@@ -67,8 +67,33 @@ class AttachmentsVocabularyFactory(object):
 
 
 @implementer(IVocabularyFactory)
-class LegislaturesVocabularyFactory(KeywordsVocabulary):
-    keyword_index = "legislature"
+class LegislaturesVocabularyFactory(object):
+    def __call__(self, context):
+        """
+        return a list of legislature names.
+        There are all possible index values sorted on reverse order from
+        the registry one (last legislature is the first one).
+        """
+        try:
+            registry_val = json.loads(
+                api.portal.get_registry_record(
+                    "legislatures", interface=IRerUfficiostampaSettings
+                )
+            )
+            registry_legislatures = [
+                x.get("legislature", "") for x in registry_val
+            ]
+            registry_legislatures.reverse()
+        except (KeyError, InvalidParameterError, TypeError):
+            registry_legislatures = []
+
+        pc = api.portal.get_tool(name="portal_catalog")
+        catalog_legislatures = pc.uniqueValuesFor("legislature")
+
+        legislatures = [
+            x for x in registry_legislatures if x in catalog_legislatures
+        ]
+        return safe_simplevocabulary_from_values(legislatures)
 
 
 @implementer(IVocabularyFactory)
