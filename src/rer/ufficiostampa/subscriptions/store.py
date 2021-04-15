@@ -68,13 +68,13 @@ class BaseStore(object):
         elif index in self.keyword_indexes:
             if isinstance(value, list):
                 return "{} in any({})".format(index, value)
-            elif isinstance(value, six.text_type):
+            elif isinstance(value, six.text_type) or isinstance(value, str):
                 return "{} in any('{}')".format(index, value)
         else:
             return "{} == '{}'".format(index, value)
 
     def get_record(self, id):
-        if isinstance(id, six.text_type):
+        if isinstance(id, six.text_type) or isinstance(id, str):
             try:
                 id = int(id)
             except ValueError as e:
@@ -106,7 +106,7 @@ class BaseStore(object):
 
             else:
                 record.attrs[k] = v
-        self.soup.reindex(record)
+        self.soup.reindex(records=[record])
 
     def delete(self, id):
         try:
