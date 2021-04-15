@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
+from email.utils import formataddr
 from itsdangerous.exc import SignatureExpired, BadSignature
 from itsdangerous.url_safe import URLSafeTimedSerializer
 from plone import api
 from plone.api.exc import InvalidParameterError
 from plone.registry.interfaces import IRegistry
+from Products.CMFPlone.interfaces.controlpanel import IMailSchema
 from rer.ufficiostampa import _
-from rer.ufficiostampa.interfaces.store import ISubscriptionsStore
 from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
+from rer.ufficiostampa.interfaces.store import ISubscriptionsStore
 from zope.component import getUtility
 from zope.globalrequest import getRequest
 
@@ -166,3 +168,11 @@ def prepare_email_message(context, template, parameters):
         source_link = api.portal.get().absolute_url()
         html = html.replace(source_link, frontend_url)
     return html
+
+
+def mail_from():
+    registry = getUtility(IRegistry)
+    mail_settings = registry.forInterface(IMailSchema, prefix="plone")
+    return formataddr(
+        (mail_settings.email_from_name, mail_settings.email_from_address)
+    )

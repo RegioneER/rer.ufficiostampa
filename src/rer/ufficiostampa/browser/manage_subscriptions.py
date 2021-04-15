@@ -27,6 +27,7 @@ from zope.interface import provider
 from zope.schema.interfaces import IContextSourceBinder
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
+from rer.ufficiostampa.utils import mail_from
 
 import logging
 
@@ -211,8 +212,6 @@ class ManageSubscriptionsRequestForm(form.Form):
             return False
 
         registry = getUtility(IRegistry)
-        mail_settings = registry.forInterface(IMailSchema, prefix="plone")
-        mfrom = mail_settings.email_from_address
         encoding = registry.get("plone.email_charset", "utf-8")
         mailHost = api.portal.get_tool(name="MailHost")
         subject = translate(
@@ -227,7 +226,7 @@ class ManageSubscriptionsRequestForm(form.Form):
             mailHost.send(
                 message,
                 mto=mto,
-                mfrom=mfrom,
+                mfrom=mail_from(),
                 subject=subject,
                 charset=encoding,
                 msg_type="text/html",
@@ -351,7 +350,7 @@ class ManageSubscriptionsForm(form.Form):
                 "channels": channels,
             },
         )
-        mto = self.mail_to()
+        mto = mail_from()
         try:
             mailHost.send(
                 message,
@@ -367,9 +366,3 @@ class ManageSubscriptionsForm(form.Form):
             return False
         return True
 
-    def mail_to(self):
-        registry = getUtility(IRegistry)
-        mail_settings = registry.forInterface(IMailSchema, prefix="plone")
-        return formataddr(
-            (mail_settings.email_from_name, mail_settings.email_from_address)
-        )

@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 from DateTime import DateTime
-from email.utils import formataddr
 from plone import api
 from plone import schema
 from plone.api.exc import InvalidParameterError
 from plone.memoize.view import memoize
 from plone.registry.interfaces import IRegistry
-from Products.CMFPlone.interfaces.controlpanel import IMailSchema
 from requests.exceptions import ConnectionError
 from requests.exceptions import Timeout
 from rer.ufficiostampa import _
@@ -16,6 +14,7 @@ from rer.ufficiostampa.interfaces import ISubscriptionsStore
 from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
 from rer.ufficiostampa.utils import get_site_title
 from rer.ufficiostampa.utils import prepare_email_message
+from rer.ufficiostampa.utils import mail_from
 from smtplib import SMTPException
 from z3c.form import button
 from z3c.form import field
@@ -190,7 +189,7 @@ class SendForm(form.Form):
     def set_history_start(self, data, subscribers):
         # if it's a preview, do not store infos
         if not data.get("channels", []):
-            return None
+            return ""
         tool = getUtility(ISendHistoryStore)
         intid = tool.add(
             {
@@ -227,15 +226,6 @@ class SendForm(form.Form):
     def subject(self):
         return "{type}: {title}".format(
             type=self.type_name, title=self.context.Title(),
-        )
-
-    @property
-    @memoize
-    def mail_from(self):
-        registry = getUtility(IRegistry)
-        mail_settings = registry.forInterface(IMailSchema, prefix="plone")
-        return formataddr(
-            (mail_settings.email_from_name, mail_settings.email_from_address)
         )
 
     def get_subscribers(self, data):
@@ -323,8 +313,8 @@ class SendForm(form.Form):
         msg = EmailMessage()
         msg.set_content(body)
         msg["Subject"] = self.subject
-        msg["From"] = self.mail_from
-        msg["Reply-To"] = self.mail_from
+        msg["From"] = mail_from()
+        msg["Reply-To"] = mail_from()
         msg.replace_header("Content-Type", 'text/html; charset="utf-8"')
 
         self.manage_attachments(data=data, msg=msg)
@@ -368,7 +358,7 @@ class SendForm(form.Form):
             "channel_url": channel_url,
             "subscribers": subscribers,
             "subject": self.subject,
-            "mfrom": self.mail_from,
+            "mfrom": mail_from(),
             "text": body,
             "send_uid": send_uid,
         }

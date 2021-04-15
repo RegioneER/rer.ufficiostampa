@@ -19,6 +19,7 @@
       <div id="management-wrapper" data-authenticator="${view/get_token}" data-app-type="channels"/>
     </div>
     <script tal:define="js python:view.get_resource_js(name='tableViews')" src="${js}"></script>
+  </article>
 </metal:main>
 </body>
 </html>
