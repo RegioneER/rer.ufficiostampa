@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-from email.utils import formataddr
 from itsdangerous.url_safe import URLSafeTimedSerializer
 from plone import api
 from plone import schema
 from plone.protect.authenticator import createToken
 from plone.registry.interfaces import IRegistry
-from Products.CMFPlone.interfaces.controlpanel import IMailSchema
 from rer.ufficiostampa import _
 from rer.ufficiostampa.interfaces import ISubscriptionsStore
 from rer.ufficiostampa.utils import decode_token
