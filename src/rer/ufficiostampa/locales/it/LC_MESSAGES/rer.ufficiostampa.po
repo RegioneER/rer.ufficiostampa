@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-04-14 11:46+0000\n"
+"POT-Creation-Date: 2021-04-15 07:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,6 +71,9 @@ msgstr "Filtra gli iscritti"
 msgid "History management"
 msgstr "Storico invio comunicati"
 
+msgid "Import from CSV"
+msgstr "Importa da CSV"
+
 #: rer/ufficiostampa/configure.zcml:26
 msgid "Installs the rer.ufficiostampa add-on."
 msgstr "Installa the rer.ufficiostampa."
@@ -102,6 +105,9 @@ msgstr "Seleziona una tipologia"
 msgid "Select at least one channel"
 msgstr "Seleziona almeno un canale"
 
+msgid "Settings"
+msgstr "Impostazioni"
+
 msgid "Status"
 msgstr "Stato"
 
@@ -121,7 +127,7 @@ msgstr "Testo"
 msgid "Type"
 msgstr "Tipologia"
 
-#: rer/ufficiostampa/browser/controlpanel.py:17
+#: rer/ufficiostampa/browser/controlpanel.py:20
 msgid "Ufficio Stampa settings"
 msgstr "Configurazione Ufficio Stampa"
 
@@ -159,13 +165,13 @@ msgid "arguments_label"
 msgstr "Argomenti"
 
 #. Default: "Action cancelled"
-#: rer/ufficiostampa/browser/manage_subscriptions.py:315
+#: rer/ufficiostampa/browser/manage_subscriptions.py:316
 #: rer/ufficiostampa/browser/send.py:152
 msgid "cancel_action"
 msgstr "Azione annullata"
 
 #. Default: "Cancel"
-#: rer/ufficiostampa/browser/manage_subscriptions.py:311
+#: rer/ufficiostampa/browser/manage_subscriptions.py:312
 #: rer/ufficiostampa/browser/send.py:148
 msgid "cancel_button"
 msgstr "Annulla"
@@ -174,7 +180,7 @@ msgid "channels"
 msgstr "Canali"
 
 #. Default: "Channels management"
-#: rer/ufficiostampa/browser/templates/channels_management.pt:16
+#: rer/ufficiostampa/browser/templates/channels_management.pt:17
 msgid "channels_management_label"
 msgstr "Gestione degli iscritti"
 
@@ -223,6 +229,11 @@ msgstr "E-mail"
 #: rer/ufficiostampa/browser/send.py:136
 msgid "empty_subscribers"
 msgstr "Devi selezionare almeno un canale o indirizzo email."
+
+#. Default: "Error reading csv file."
+#: rer/ufficiostampa/restapi/services/subscriptions/csv.py:109
+msgid "error_reading_csv"
+msgstr "Errore in lettura del file csv."
 
 #. Default: "Error sending mail. Contact site administrator."
 #: rer/ufficiostampa/browser/send.py:302
@@ -392,7 +403,7 @@ msgid "manage_subscriptions_send_success"
 msgstr "Riceverai un'email con il link per gestire le tue iscrizioni."
 
 #. Default: "Subscriptions updated"
-#: rer/ufficiostampa/browser/manage_subscriptions.py:303
+#: rer/ufficiostampa/browser/manage_subscriptions.py:304
 msgid "manage_subscriptions_success"
 msgstr "Iscrizioni aggiornate"
 
@@ -400,6 +411,11 @@ msgstr "Iscrizioni aggiornate"
 #: rer/ufficiostampa/browser/manage_subscriptions.py:243
 msgid "manage_subscriptions_title"
 msgstr "Gestione iscrizioni"
+
+#. Default: "You need to pass a file at least."
+#: rer/ufficiostampa/restapi/services/subscriptions/csv.py:118
+msgid "missing_file"
+msgstr "Devi caricare almeno un file."
 
 msgid "newspaper"
 msgstr "Testata giornalistica"
@@ -540,7 +556,7 @@ msgid "subscription_deleted_label"
 msgstr "La sua iscrizione è stata anche rimossa dal database perché non era più iscritto a nessun canale."
 
 #. Default: "Subscriptions updated for ${site}"
-#: rer/ufficiostampa/browser/manage_subscriptions.py:332
+#: rer/ufficiostampa/browser/manage_subscriptions.py:333
 msgid "subscriptions_updated_label"
 msgstr "Iscrizioni aggiornate per ${site}"
 
@@ -616,3 +632,8 @@ msgstr "Impossibile gestire le iscrizioni. Chiavi per il token non impostate nel
 #: rer/ufficiostampa/browser/send.py:51
 msgid "validation_invalid_email"
 msgstr "Indirizzo email non valido: ${address}"
+
+#. Default: "You need to pass a csv file."
+#: rer/ufficiostampa/restapi/services/subscriptions/csv.py:93
+msgid "wrong_content_type"
+msgstr "Devi caricare un file csv."

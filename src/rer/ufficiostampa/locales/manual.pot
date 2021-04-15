@@ -158,3 +158,9 @@ msgstr ""
 
 msgid "Export in CSV"
 msgstr ""
+
+msgid "Import from CSV"
+msgstr ""
+
+msgid "Settings"
+msgstr ""

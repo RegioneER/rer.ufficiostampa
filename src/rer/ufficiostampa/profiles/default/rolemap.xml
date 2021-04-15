@@ -7,7 +7,6 @@
     <permission name="rer.ufficiostampa: Manage Settings" acquire="True">
       <role name="Manager" />
       <role name="Site Administrator" />
-      <role name="Gestore Comunicati" />
     </permission>
     <permission name="rer.ufficiostampa: Manage Channels" acquire="True">
       <role name="Manager" />

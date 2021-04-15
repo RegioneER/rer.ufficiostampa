@@ -184,6 +184,46 @@ Svuota completamente il db degli iscritti.
 Se l'operazione va a buon fine, il server ritorna un ``204``.
 
 
+Export in CSV
+-------------
+
+*@subscriptions-csv*
+
+Endpoint da chiamare in **GET** sulla radice del sito.
+
+Solo per gli utenti che hanno il permesso "rer.ufficiostampa.ManageChannels"::
+
+> curl -i -X GET http://localhost:8080/Plone/@subscriptions-csv -H 'Accept: application/json' --user admin:admin
+
+Ritorna un file csv con la lista degli iscritti.
+
+Import da CSV
+-------------
+
+*@subscriptions-csv*
+
+Endpoint da chiamare in **POST** sulla radice del sito.
+
+Solo per gli utenti che hanno il permesso "rer.ufficiostampa.ManageChannels"::
+
+> curl -i -X POST http://localhost:8080/Plone/@subscriptions-csv -H 'Accept: application/json' -H 'Content-Type: application/json' --data-raw '{"overwrite":true,"file":{"data": "...","encoding":"base64","content-type":"text/comma-separated-values","filename":"iscritti.csv"}}' --user admin:admin
+
+Accetta i seguenti parametri:
+
+- **overwrite**: se ``true``, se esiste già un record nel db con l'email presente nel file, questo verrà sovrascritto con i nuovi dati. Se il parametro è mancante o ``false``, viene mantenuto il valore già presente nel db senza aggiornarlo.
+- **clear**: se ``true``, prima di eseguire l'import, viene completamente cancellato il db.
+- **file**: il file csv da caricare. Encodato in base64
+
+La chiamata ritorna una risposta del genere::
+
+    {
+        "imported": 0,
+        "skipped": []
+    }
+
+Dove **imported** è il numero di elementi inseriti effettivamente nel db, e **skipped** è la lista di righe del file che sono state ignorate per qualche motivo (entry già presenti e overwrite non impostato).
+
+
 Installazione
 =============
 

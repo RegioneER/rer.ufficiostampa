@@ -22,7 +22,7 @@
       name="ufficiostampa-settings"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".controlpanel.UfficiostampaSettingsControlPanel"
-      permission="cmf.ManagePortal"
+      permission="rer.ufficiostampa.ManageChannels"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
     <browser:page

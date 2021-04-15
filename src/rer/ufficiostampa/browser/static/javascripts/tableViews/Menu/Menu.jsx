@@ -114,29 +114,37 @@ const Menu = ({ editUser }) => {
     <>
       <div className="ufficiostampa-menu-wrapper">
         {endpoint === 'subscriptions' ? (
-          <button
-            onClick={() => editUser()}
-            className="plone-btn plone-btn-primary"
-          >
-            {getTranslationFor('Add Subscriber', 'Add subscriber')}
-          </button>
+          <>
+            <button
+              onClick={() => editUser()}
+              className="plone-btn plone-btn-primary"
+            >
+              {getTranslationFor('Add Subscriber', 'Add subscriber')}
+            </button>
+            <button className="plone-btn plone-btn-primary">
+              {getTranslationFor('Import from CSV', 'Import from CSV')}
+            </button>
+          </>
         ) : (
           ''
         )}
-        <button
-          onClick={() => deleteAllUsers()}
-          className="plone-btn plone-btn-danger"
-        >
-          {getTranslationFor('Delete all data', 'Delete all data')}
-        </button>
         <button
           onClick={() => downloadCSV()}
           className="plone-btn plone-btn-primary"
         >
           {getTranslationFor('Export in CSV', 'Export in CSV')}
         </button>
-        <button className="plone-btn plone-btn-primary">
-          {getTranslationFor('Import from CSV', 'Import from CSV')}
+        <a
+          href={`${portalUrl}/ufficiostampa-settings`}
+          className="plone-btn plone-btn-primary"
+        >
+          <span>{getTranslationFor('Settings', 'Settings')}</span>
+        </a>
+        <button
+          onClick={() => deleteAllUsers()}
+          className="plone-btn plone-btn-danger"
+        >
+          {getTranslationFor('Delete all data', 'Delete all data')}
         </button>
       </div>
 
