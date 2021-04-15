@@ -128,6 +128,6 @@
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       name="manage_subscriptions_notify_template"
       template="templates/manage_subscriptions_notify_template.pt"
-      permission="rer.ufficiostampa.Send"
+      permission="zope2.View"
       />
 </configure>
