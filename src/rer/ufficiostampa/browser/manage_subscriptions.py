@@ -363,4 +363,3 @@ class ManageSubscriptionsForm(form.Form):
             logger.exception(e)
             return False
         return True
-
