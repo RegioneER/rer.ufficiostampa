@@ -8,7 +8,7 @@
     <div>Giunta Regionale - Agenzia di informazione e comunicazione</div>
   </div>
   <p i18n:translate="confirm_help">
-    You received this email because someone asked to manage your subscriptions on ${site_title}.
+    You received this email because someone asked to manage your subscriptions on <b i18n:name="site_title">${site_title}</b>.
   </p>
   <p>
     <a href="${url}" i18n:translate="confirm_click_here">Click here</a> <tal:text i18n:translate="confirm_text">to confirm or ignore this email.</tal:text>
