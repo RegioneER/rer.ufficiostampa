@@ -55,12 +55,12 @@ const UsersList = ({ editUser }) => {
     { name: labels.email, selector: 'email', sortable: true },
     { name: labels.phone, selector: 'phone', sortable: true },
     { name: labels.newspaper, selector: 'newspaper', sortable: true },
-    {
-      name: labels.channels,
-      selector: 'channels',
-      sortable: true,
-      cell: ChannelsCellView,
-    },
+    // {
+    //   name: labels.channels,
+    //   selector: 'channels',
+    //   sortable: true,
+    //   cell: ChannelsCellView,
+    // },
     {
       name: getTranslationFor('Actions', 'Actions'),
       button: true,

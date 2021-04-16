@@ -2,6 +2,23 @@
     .plone-modal-dialog {
         .plone-modal-content {
             background-color: #fff;
+
+            .plone-modal-header {
+                .plone-modal-close {
+                    padding: 0;
+                    background-color: transparent;
+                    border: none;
+
+                    &:hover {
+                        border: none;
+
+                        box-shadow: none;
+                    }
+                }
+            }
+        }
+        .plone-modal-footer {
+            text-align: center !important;
         }
     }
 }

@@ -19,11 +19,55 @@ const Field = ({
   type = 'text',
   options = [], //for type 'multiselect'
   confirmRemove = false, //for type 'multiselect. If true ask user if he really want to uncheck option
+  tabIndex,
 }) => {
   const getTranslationFor = useContext(TranslationsContext);
+  const otherProps = { tabIndex };
+
+  const readBase64File = (name, file) => {
+    if (file) {
+      // Make new FileReader
+      let reader = new FileReader();
+
+      // Convert the file to base64 text
+      reader.readAsDataURL(file);
+
+      // on reader load somthing...
+      reader.onload = () => {
+        // Make a fileInfo Object
+        const base64String = reader.result
+          .replace('data:', '')
+          .replace(/^.+,/, '');
+        let fileInfo = {
+          name: file.name,
+          type: file.type,
+          size: file.size,
+          base64: base64String,
+          file: file,
+        };
+        onChange(name, fileInfo);
+      };
+    } else {
+      onChange(name, null);
+    }
+  };
 
   return (
     <div className={`field ${type}`}>
+      {/* ------- checkbox -------- */}
+      {type == 'checkbox' && (
+        <input
+          id={`formfield-${name}`}
+          name={name}
+          checked={value || false}
+          onChange={event => {
+            onChange(name, event.target.checked);
+          }}
+          type="checkbox"
+          {...otherProps}
+        />
+      )}
+
       <label htmlFor={`formfield-${name}`} className="horizontal">
         {label}
         {required && (
@@ -48,6 +92,7 @@ const Field = ({
             onChange(name, event.target.value);
           }}
           type="text"
+          {...otherProps}
         />
       )}
 
@@ -86,12 +131,41 @@ const Field = ({
                   }
                   onChange(name, v);
                 }}
+                {...otherProps}
               />
               <label htmlFor={`formfield-${name}-opt-${index}`}>
                 <span className="label">{opt}</span>
               </label>
             </span>
           ))}
+        </div>
+      )}
+
+      {/* ------- file -------- */}
+      {type == 'file' && (
+        <div className="file-input">
+          <input
+            id={`formfield-${name}`}
+            name={name}
+            onChange={event => {
+              readBase64File(name, event.target.files?.[0]);
+            }}
+            type="file"
+            {...otherProps}
+          />
+          {value && (
+            <div className="file-value">
+              {value.name} ({Math.ceil(value.size / 1000)} kb){' '}
+              <button
+                onClick={() => onChange(name, null)}
+                className="plone-btn plone-btn-xs"
+                title={getTranslationFor('Remove file', 'Remove file')}
+              >
+                {' '}
+                x
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>

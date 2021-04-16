@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, createRef } from 'react';
 import { TranslationsContext } from '../../TranslationsContext';
 
 import './Modal.less';
@@ -19,24 +19,83 @@ const ModalFooter = ({ children }) => {
   );
 };
 const Modal = props => {
-  const { show, close, children } = props;
+  const { show, close, children, className, id } = props;
   const getTranslationFor = useContext(TranslationsContext);
+  const modalRef = createRef();
+
+  const handleTabKey = e => {
+    const focusableModalElements = modalRef.current.querySelectorAll(
+      'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select',
+    );
+    const firstElement = focusableModalElements[0];
+    const lastElement =
+      focusableModalElements[focusableModalElements.length - 1];
+    const activeElement = document.activeElement;
+    let activeElementIsInModal = false;
+    focusableModalElements.forEach(e => {
+      if (e === activeElement) {
+        activeElementIsInModal = true;
+      }
+    });
+    if (
+      !e.shiftKey &&
+      (activeElement == lastElement || !activeElementIsInModal)
+    ) {
+      firstElement.focus();
+      return e.preventDefault();
+    }
+
+    console.log(activeElement, lastElement);
+
+    if (
+      e.shiftKey &&
+      (activeElement == firstElement || !ctiveElementIsInModal)
+    ) {
+      lastElement.focus();
+      e.preventDefault();
+    }
+  };
+
+  useEffect(() => {
+    if (show) {
+      const keyListenersMap = new Map([
+        [27, close],
+        [9, handleTabKey],
+      ]);
+      function keyListener(e) {
+        // get the listener corresponding to the pressed key
+        const listener = keyListenersMap.get(e.keyCode);
+        // call the listener if it exists
+        return listener && listener(e);
+      }
+
+      document.addEventListener('keydown', keyListener);
+
+      return () => document.removeEventListener('keydown', keyListener);
+    }
+  }, [show]);
 
   return show ? (
-    <div className="plone-modal-wrapper">
+    <div className={`plone-modal-wrapper ${className ?? ''}`}>
       <div className={`plone-modal ${show ? 'fade in' : ''}`}>
-        <div className="plone-modal-dialog">
-          <div className="plone-modal-content">
+        <div
+          className="plone-modal-dialog"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={`${id}_label`}
+        >
+          <div className="plone-modal-content" ref={modalRef}>
             <ModalContext.Provider {...props}>
               <div className="plone-modal-header">
-                <a
+                <button
                   className="plone-modal-close"
                   onClick={() => {
                     close();
                   }}
+                  title={getTranslationFor('Close modal', 'Chiudi')}
                 >
                   ×
-                </a>
+                </button>
               </div>
               {children}
             </ModalContext.Provider>

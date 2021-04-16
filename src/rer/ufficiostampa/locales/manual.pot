@@ -164,3 +164,23 @@ msgstr ""
 
 msgid "Settings"
 msgstr ""
+
+
+msgid "Overwrite duplicates"
+msgstr ""
+
+msgid "Clean all data before import"
+msgstr ""
+
+
+msgid "Remove file"
+msgstr ""
+
+msgid "Imported rows"
+msgstr ""
+
+msgid "Skipped rows"
+msgstr ""
+
+msgid "Row"
+msgstr ""

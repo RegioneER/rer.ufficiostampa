@@ -1,7 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { TranslationsContext } from '../../TranslationsContext';
 import { ApiContext } from '../../ApiContext';
 import apiFetch from '../../utils/apiFetch';
+import { downloadCSV } from '../CSV/ExportCSV';
+import ImportCSV from '../CSV/ImportCSV';
 import { saveAs } from 'file-saver';
 import PropTypes from 'prop-types';
 
@@ -17,6 +19,8 @@ const Menu = ({ editUser }) => {
     setApiErrors,
     endpoint,
   } = useContext(ApiContext);
+
+  const [showImportCSV, setShowImportCSV] = useState(false);
 
   const deleteAllUsers = () => {
     if (
@@ -41,115 +45,50 @@ const Menu = ({ editUser }) => {
     }
   };
 
-  const downloadCSV = () => {
-    apiFetch({
-      url: portalUrl + '/@' + endpoint + '-csv',
-      method: 'GET',
-    })
-      .then(res => {
-        if (!res) {
-          setApiErrors({
-            status: 404,
-            statusText: getTranslationFor(
-              'Url not found. Unable to download this file.',
-              'Url not found. Unable to download this file.',
-            ),
-          });
-          return;
-        }
-        if (res.status !== 200) {
-          switch (res.status) {
-            case 401:
-            case 403:
-              setApiErrors({
-                status: res.status,
-                statusText: getTranslationFor(
-                  'You do not have permission to download this file.',
-                  'You do not have permission to download this file.',
-                ),
-              });
-              return;
-            default:
-              setApiErrors({
-                status: res.status,
-                statusText: getTranslationFor(
-                  'An error occurred downloading file.',
-                  'An error occurred downloading file.',
-                ),
-              });
-              return;
-          }
-        }
-        if (!res.data || res.data.length === 0) {
-          setApiErrors({
-            status: res.status,
-            statusText: getTranslationFor(
-              'An error occurred downloading file.',
-              'An error occurred downloading file.',
-            ),
-          });
-          return;
-        }
-        const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
-        const disposition = res.headers['content-disposition'];
-        if (disposition && disposition.indexOf('attachment') !== -1) {
-          const matches = filenameRegex.exec(disposition);
-          const filename = matches[1].replace(/['"]/g, '');
-          const blob = new Blob([res.data], {
-            type: res.headers['content-type'],
-          });
-          saveAs(blob, filename);
-        }
-      })
-      .catch(err => {
-        console.error(err);
-        setApiErrors({
-          status: 500,
-          statusText: err.message,
-        });
-      });
-  };
-
   return (
     <>
       <div className="ufficiostampa-menu-wrapper">
-        {endpoint === 'subscriptions' ? (
-          <>
-            <button
-              onClick={() => editUser()}
-              className="plone-btn plone-btn-primary"
-            >
-              {getTranslationFor('Add Subscriber', 'Add subscriber')}
-            </button>
-            <button className="plone-btn plone-btn-primary">
-              {getTranslationFor('Import from CSV', 'Import from CSV')}
-            </button>
-          </>
-        ) : (
-          ''
-        )}
-        <button
-          onClick={() => downloadCSV()}
-          className="plone-btn plone-btn-primary"
-        >
-          {getTranslationFor('Export in CSV', 'Export in CSV')}
-        </button>
-        {endpoint === 'subscriptions' ? (
-          <a
-            href={`${portalUrl}/ufficiostampa-settings`}
+        <div className="left-zone">
+          {endpoint === 'subscriptions' && (
+            <>
+              <button
+                onClick={() => editUser()}
+                className="plone-btn plone-btn-primary"
+              >
+                {getTranslationFor('Add Subscriber', 'Add subscriber')}
+              </button>
+              <button
+                className="plone-btn plone-btn-primary"
+                onClick={() => setShowImportCSV(true)}
+              >
+                {getTranslationFor('Import from CSV', 'Import from CSV')}
+              </button>
+            </>
+          )}
+          <button
+            onClick={() => downloadCSV(portalUrl, endpoint)}
             className="plone-btn plone-btn-primary"
           >
-            <span>{getTranslationFor('Settings', 'Settings')}</span>
-          </a>
-        ) : (
-          ''
-        )}
-        <button
-          onClick={() => deleteAllUsers()}
-          className="plone-btn plone-btn-danger"
-        >
-          {getTranslationFor('Delete all data', 'Delete all data')}
-        </button>
+            {getTranslationFor('Export in CSV', 'Export in CSV')}
+          </button>
+
+          {endpoint === 'subscriptions' && (
+            <a
+              href={`${portalUrl}/ufficiostampa-settings`}
+              className="plone-btn plone-btn-primary"
+            >
+              <span>{getTranslationFor('Settings', 'Settings')}</span>
+            </a>
+          )}
+        </div>
+        <div className="right-zone">
+          <button
+            onClick={() => deleteAllUsers()}
+            className="plone-btn plone-btn-warning"
+          >
+            {getTranslationFor('Delete all data', 'Delete all data')}
+          </button>
+        </div>
       </div>
 
       {apiErrors && (
@@ -160,6 +99,8 @@ const Menu = ({ editUser }) => {
           </dl>
         </div>
       )}
+
+      <ImportCSV showModal={showImportCSV} setShowModal={setShowImportCSV} />
     </>
   );
 };

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-04-15 11:54+0000\n"
+"POT-Creation-Date: 2021-04-16 11:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,14 +32,17 @@ msgstr ""
 msgid "Are you sure you want to uncheck this item"
 msgstr ""
 
-#: rer/ufficiostampa/profiles/default/actions.xml
+#: ../profiles/default/actions.xml
 msgid "Channels management"
+msgstr ""
+
+msgid "Clean all data before import"
 msgstr ""
 
 msgid "Completed Date"
 msgstr ""
 
-#: rer/ufficiostampa/profiles/default/controlpanel.xml
+#: ../profiles/default/controlpanel.xml
 msgid "Configurazione Ufficio Stampa"
 msgstr ""
 
@@ -67,14 +70,17 @@ msgstr ""
 msgid "Filter subscribers"
 msgstr ""
 
-#: rer/ufficiostampa/profiles/default/actions.xml
+#: ../profiles/default/actions.xml
 msgid "History management"
 msgstr ""
 
 msgid "Import from CSV"
 msgstr ""
 
-#: rer/ufficiostampa/configure.zcml:26
+msgid "Imported rows"
+msgstr ""
+
+#: ../configure.zcml:26
 msgid "Installs the rer.ufficiostampa add-on."
 msgstr ""
 
@@ -87,10 +93,19 @@ msgstr ""
 msgid "No subscribers found"
 msgstr ""
 
+msgid "Overwrite duplicates"
+msgstr ""
+
 msgid "Recipients"
 msgstr ""
 
+msgid "Remove file"
+msgstr ""
+
 msgid "Required"
+msgstr ""
+
+msgid "Row"
 msgstr ""
 
 msgid "Search..."
@@ -108,6 +123,9 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
+msgid "Skipped rows"
+msgstr ""
+
 msgid "Status"
 msgstr ""
 
@@ -120,59 +138,59 @@ msgstr ""
 msgid "Surname"
 msgstr ""
 
-#: rer/ufficiostampa/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "Text"
 msgstr ""
 
 msgid "Type"
 msgstr ""
 
-#: rer/ufficiostampa/browser/controlpanel.py:20
+#: ../browser/controlpanel.py:20
 msgid "Ufficio Stampa settings"
 msgstr ""
 
-#: rer/ufficiostampa/configure.zcml:35
+#: ../configure.zcml:35
 msgid "Uninstalls the rer.ufficiostampa add-on."
 msgstr ""
 
-#: rer/ufficiostampa/browser/configure.zcml:37
+#: ../browser/configure.zcml:37
 msgid "View Comunicato"
 msgstr ""
 
-#: rer/ufficiostampa/browser/configure.zcml:47
+#: ../browser/configure.zcml:47
 msgid "View Invito"
 msgstr ""
 
 #. Default: "Insert a list of additional addressed that will receive the mail. One per line. You can use this field also for testing without sending emails to all subscribed addresses."
-#: rer/ufficiostampa/browser/send.py:77
+#: ../browser/send.py:77
 msgid "additional_addresses_description"
 msgstr ""
 
 #. Default: "Additional addresses"
-#: rer/ufficiostampa/browser/send.py:74
+#: ../browser/send.py:74
 msgid "additional_addresses_title"
 msgstr ""
 
 #. Default: "Select one or more values."
-#: rer/ufficiostampa/interfaces/content.py:13
+#: ../interfaces/content.py:13
 msgid "arguments_help"
 msgstr ""
 
 #. Default: "Arguments"
-#: rer/ufficiostampa/interfaces/content.py:12
-#: rer/ufficiostampa/profiles/default/registry.xml
+#: ../interfaces/content.py:12
+#: ../profiles/default/registry.xml
 msgid "arguments_label"
 msgstr ""
 
 #. Default: "Action cancelled"
-#: rer/ufficiostampa/browser/manage_subscriptions.py:313
-#: rer/ufficiostampa/browser/send.py:151
+#: ../browser/manage_subscriptions.py:313
+#: ../browser/send.py:151
 msgid "cancel_action"
 msgstr ""
 
 #. Default: "Cancel"
-#: rer/ufficiostampa/browser/manage_subscriptions.py:309
-#: rer/ufficiostampa/browser/send.py:147
+#: ../browser/manage_subscriptions.py:309
+#: ../browser/send.py:147
 msgid "cancel_button"
 msgstr ""
 
@@ -180,12 +198,12 @@ msgid "channels"
 msgstr ""
 
 #. Default: "Channels management"
-#: rer/ufficiostampa/browser/templates/channels_management.pt:17
+#: ../browser/templates/channels_management.pt:17
 msgid "channels_management_label"
 msgstr ""
 
 #. Default: "Search text"
-#: rer/ufficiostampa/restapi/services/search_parameters/get.py:37
+#: ../restapi/services/search_parameters/get.py:37
 msgid "comunicati_search_text_label"
 msgstr ""
 
@@ -193,32 +211,32 @@ msgid "comunicato_published_on"
 msgstr ""
 
 #. Default: "Click here"
-#: rer/ufficiostampa/browser/templates/manage_subscriptions_mail_template.pt:14
+#: ../browser/templates/manage_subscriptions_mail_template.pt:14
 msgid "confirm_click_here"
 msgstr ""
 
 #. Default: "This link will expire in 24 hours."
-#: rer/ufficiostampa/browser/templates/manage_subscriptions_mail_template.pt:16
+#: ../browser/templates/manage_subscriptions_mail_template.pt:16
 msgid "confirm_expire"
 msgstr ""
 
 #. Default: "You received this email because someone asked to manage your subscriptions on ${site_title}."
-#: rer/ufficiostampa/browser/templates/manage_subscriptions_mail_template.pt:11
+#: ../browser/templates/manage_subscriptions_mail_template.pt:11
 msgid "confirm_help"
 msgstr ""
 
 #. Default: "to confirm or ignore this email."
-#: rer/ufficiostampa/browser/templates/manage_subscriptions_mail_template.pt:14
+#: ../browser/templates/manage_subscriptions_mail_template.pt:14
 msgid "confirm_text"
 msgstr ""
 
 #. Default: "Insert a list of CSS styles for received emails."
-#: rer/ufficiostampa/interfaces/settings.py:78
+#: ../interfaces/settings.py:78
 msgid "css_styles_help"
 msgstr ""
 
 #. Default: "Styles"
-#: rer/ufficiostampa/interfaces/settings.py:77
+#: ../interfaces/settings.py:77
 msgid "css_styles_label"
 msgstr ""
 
@@ -226,37 +244,37 @@ msgid "email"
 msgstr ""
 
 #. Default: "You need to provide at least one email address or channel."
-#: rer/ufficiostampa/browser/send.py:135
+#: ../browser/send.py:135
 msgid "empty_subscribers"
 msgstr ""
 
 #. Default: "Error reading csv file."
-#: rer/ufficiostampa/restapi/services/subscriptions/csv.py:109
+#: ../restapi/services/subscriptions/csv.py:109
 msgid "error_reading_csv"
 msgstr ""
 
 #. Default: "Error sending mail. Contact site administrator."
-#: rer/ufficiostampa/browser/send.py:292
+#: ../browser/send.py:292
 msgid "error_send_mail"
 msgstr ""
 
 #. Default: "If you want to send emails with an external tool (rer.newsletterdispatcher.flask), insert the url of the service here. If empty, all emails will be sent from Plone."
-#: rer/ufficiostampa/interfaces/settings.py:67
+#: ../interfaces/settings.py:67
 msgid "external_sender_url_help"
 msgstr ""
 
 #. Default: "External sender URL"
-#: rer/ufficiostampa/interfaces/settings.py:66
+#: ../interfaces/settings.py:66
 msgid "external_sender_url_label"
 msgstr ""
 
 #. Default: "If the frontend site is published with a different URL than the backend, insert it here. All links in emails will be converted with that URL."
-#: rer/ufficiostampa/interfaces/settings.py:57
+#: ../interfaces/settings.py:57
 msgid "frontend_url_help"
 msgstr ""
 
 #. Default: "Frontend URL"
-#: rer/ufficiostampa/interfaces/settings.py:56
+#: ../interfaces/settings.py:56
 msgid "frontend_url_label"
 msgstr ""
 
@@ -267,7 +285,7 @@ msgid "go_to_search_results"
 msgstr ""
 
 #. Default: "History management"
-#: rer/ufficiostampa/browser/templates/history_management.pt:18
+#: ../browser/templates/history_management.pt:18
 msgid "history_management_label"
 msgstr ""
 
@@ -284,136 +302,136 @@ msgid "items_selected"
 msgstr ""
 
 #. Default: "Legislature"
-#: rer/ufficiostampa/interfaces/content.py:26
-#: rer/ufficiostampa/restapi/services/search_parameters/get.py:46
+#: ../interfaces/content.py:26
+#: ../restapi/services/search_parameters/get.py:46
 msgid "label_legislature"
 msgstr ""
 
 #. Default: "Insert a list of arguments related to this legislature. One per line."
-#: rer/ufficiostampa/interfaces/settings.py:96
+#: ../interfaces/settings.py:96
 msgid "legislature_arguments_help"
 msgstr ""
 
 #. Default: "Arguments"
-#: rer/ufficiostampa/interfaces/settings.py:95
-#: rer/ufficiostampa/restapi/services/search_parameters/get.py:59
+#: ../interfaces/settings.py:95
+#: ../restapi/services/search_parameters/get.py:59
 msgid "legislature_arguments_label"
 msgstr ""
 
 #. Default: "Legislature"
-#: rer/ufficiostampa/profiles/default/registry.xml
+#: ../profiles/default/registry.xml
 msgid "legislature_criteria_label"
 msgstr ""
 
 #. Default: "Insert the legislature name."
-#: rer/ufficiostampa/interfaces/settings.py:89
+#: ../interfaces/settings.py:89
 msgid "legislature_help"
 msgstr ""
 
 #. Default: "Legislature"
-#: rer/ufficiostampa/interfaces/settings.py:88
+#: ../interfaces/settings.py:88
 msgid "legislature_label"
 msgstr ""
 
 #. Default: "This is a list of all legislatures. The last one is the one used to fill fields in a new Comunicato."
-#: rer/ufficiostampa/interfaces/settings.py:11
+#: ../interfaces/settings.py:11
 msgid "legislatures_help"
 msgstr ""
 
 #. Default: "List of legislatures"
-#: rer/ufficiostampa/interfaces/settings.py:10
+#: ../interfaces/settings.py:10
 msgid "legislatures_label"
 msgstr ""
 
 #. Default: "Manage your subscriptions for ${site}"
-#: rer/ufficiostampa/browser/manage_subscriptions.py:216
+#: ../browser/manage_subscriptions.py:216
 msgid "manage_subscription_subject_label"
 msgstr ""
 
 #. Default: "Select which channels you want to be subscribed. Disable all if you don't want to be notified."
-#: rer/ufficiostampa/browser/manage_subscriptions.py:87
+#: ../browser/manage_subscriptions.py:87
 msgid "manage_subscriptions_channels_description"
 msgstr ""
 
 #. Default: "Channels"
-#: rer/ufficiostampa/browser/manage_subscriptions.py:86
+#: ../browser/manage_subscriptions.py:86
 msgid "manage_subscriptions_channels_title"
 msgstr ""
 
 #. Default: "Insert the email for wich you want to manage subscriptions."
-#: rer/ufficiostampa/browser/manage_subscriptions.py:73
+#: ../browser/manage_subscriptions.py:73
 msgid "manage_subscriptions_description"
 msgstr ""
 
 #. Default: "Email"
-#: rer/ufficiostampa/browser/manage_subscriptions.py:72
+#: ../browser/manage_subscriptions.py:72
 msgid "manage_subscriptions_email_title"
 msgstr ""
 
 #. Default: "This is the list of your subscriptions."
-#: rer/ufficiostampa/browser/manage_subscriptions.py:241
+#: ../browser/manage_subscriptions.py:241
 msgid "manage_subscriptions_help"
 msgstr ""
 
 #. Default: "Mail not found. Unable to change settings."
-#: rer/ufficiostampa/browser/manage_subscriptions.py:277
+#: ../browser/manage_subscriptions.py:277
 msgid "manage_subscriptions_inexistent_mail"
 msgstr ""
 
 #. Default: "You are receiving this email because you are subscribed to ${site_title}."
-#: rer/ufficiostampa/browser/templates/manage_subscriptions_mail_template.pt:30
-#: rer/ufficiostampa/browser/templates/send_mail_template.pt:51
+#: ../browser/templates/manage_subscriptions_mail_template.pt:30
+#: ../browser/templates/send_mail_template.pt:51
 msgid "manage_subscriptions_intro"
 msgstr ""
 
 #. Default: "Manage your subscriptions"
-#: rer/ufficiostampa/browser/templates/manage_subscriptions_mail_template.pt:32
-#: rer/ufficiostampa/browser/templates/send_mail_template.pt:53
+#: ../browser/templates/manage_subscriptions_mail_template.pt:32
+#: ../browser/templates/send_mail_template.pt:53
 msgid "manage_subscriptions_link"
 msgstr ""
 
 #. Default: "Unable to send manage subscriptions link. Please contact site administrator."
-#: rer/ufficiostampa/browser/manage_subscriptions.py:172
+#: ../browser/manage_subscriptions.py:172
 msgid "manage_subscriptions_not_send"
 msgstr ""
 
 #. Default: "If you want to manage your subscriptions, please insert your email address. You will receive an email with the link to manage them. That link will expire in 24 hours."
-#: rer/ufficiostampa/browser/manage_subscriptions.py:102
+#: ../browser/manage_subscriptions.py:102
 msgid "manage_subscriptions_request_help"
 msgstr ""
 
 #. Default: "Mail not found. Unable to send the link."
-#: rer/ufficiostampa/browser/manage_subscriptions.py:127
+#: ../browser/manage_subscriptions.py:127
 msgid "manage_subscriptions_request_inexistent_mail"
 msgstr ""
 
 #. Default: "Serializer secret and salt not set in control panel. Unable to send the link."
-#: rer/ufficiostampa/browser/manage_subscriptions.py:143
+#: ../browser/manage_subscriptions.py:143
 msgid "manage_subscriptions_request_serializer_error"
 msgstr ""
 
 #. Default: "Channels subscriptions"
-#: rer/ufficiostampa/browser/manage_subscriptions.py:101
+#: ../browser/manage_subscriptions.py:101
 msgid "manage_subscriptions_request_title"
 msgstr ""
 
 #. Default: "You will receive an email with a link to manage your subscriptions."
-#: rer/ufficiostampa/browser/manage_subscriptions.py:179
+#: ../browser/manage_subscriptions.py:179
 msgid "manage_subscriptions_send_success"
 msgstr ""
 
 #. Default: "Subscriptions updated"
-#: rer/ufficiostampa/browser/manage_subscriptions.py:301
+#: ../browser/manage_subscriptions.py:301
 msgid "manage_subscriptions_success"
 msgstr ""
 
 #. Default: "Channels subscriptions"
-#: rer/ufficiostampa/browser/manage_subscriptions.py:240
+#: ../browser/manage_subscriptions.py:240
 msgid "manage_subscriptions_title"
 msgstr ""
 
 #. Default: "You need to pass a file at least."
-#: rer/ufficiostampa/restapi/services/subscriptions/csv.py:118
+#: ../restapi/services/subscriptions/csv.py:118
 msgid "missing_file"
 msgstr ""
 
@@ -421,17 +439,17 @@ msgid "newspaper"
 msgstr ""
 
 #. Default: "Additional notes."
-#: rer/ufficiostampa/browser/send.py:90
+#: ../browser/send.py:90
 msgid "notes_description"
 msgstr ""
 
 #. Default: "Notes"
-#: rer/ufficiostampa/browser/send.py:89
+#: ../browser/send.py:89
 msgid "notes_title"
 msgstr ""
 
 #. Default: "Other attachments"
-#: rer/ufficiostampa/browser/templates/send_mail_template.pt:32
+#: ../browser/templates/send_mail_template.pt:32
 msgid "other_attachments_folders"
 msgstr ""
 
@@ -439,18 +457,18 @@ msgid "phone"
 msgstr ""
 
 #. Default: "Allegati"
-#: rer/ufficiostampa/browser/templates/comunicato.pt:37
+#: ../browser/templates/comunicato.pt:37
 msgid "press_attachments"
 msgstr ""
 
 msgid "refine_search_label"
 msgstr ""
 
-#: rer/ufficiostampa/configure.zcml:26
+#: ../configure.zcml:26
 msgid "rer.ufficiostampa"
 msgstr ""
 
-#: rer/ufficiostampa/configure.zcml:35
+#: ../configure.zcml:35
 msgid "rer.ufficiostampa (uninstall)"
 msgstr ""
 
@@ -464,7 +482,7 @@ msgid "results_tot_label_multi"
 msgstr ""
 
 #. Default: "revoked his subscription from these channels:"
-#: rer/ufficiostampa/browser/templates/manage_subscriptions_notify_template.pt:8
+#: ../browser/templates/manage_subscriptions_notify_template.pt:8
 msgid "revoke_subscription_label"
 msgstr ""
 
@@ -472,12 +490,12 @@ msgid "save"
 msgstr ""
 
 #. Default: "Save"
-#: rer/ufficiostampa/browser/manage_subscriptions.py:267
+#: ../browser/manage_subscriptions.py:267
 msgid "save_button"
 msgstr ""
 
 #. Default: "Search Comunicati"
-#: rer/ufficiostampa/browser/templates/comunicati_search.pt:16
+#: ../browser/templates/comunicati_search.pt:16
 msgid "search_comunicati_label"
 msgstr ""
 
@@ -485,88 +503,88 @@ msgid "select_placeholder_multi"
 msgstr ""
 
 #. Default: "Select which attachment you want to send via email. You can only select first level Files and Images."
-#: rer/ufficiostampa/browser/send.py:95
+#: ../browser/send.py:95
 msgid "send_attachments_description"
 msgstr ""
 
 #. Default: "Attachments"
-#: rer/ufficiostampa/browser/send.py:94
+#: ../browser/send.py:94
 msgid "send_attachments_title"
 msgstr ""
 
 #. Default: "Send"
-#: rer/ufficiostampa/browser/manage_subscriptions.py:116
-#: rer/ufficiostampa/browser/send.py:129
+#: ../browser/manage_subscriptions.py:116
+#: ../browser/send.py:129
 msgid "send_button"
 msgstr ""
 
 #. Default: "Select which channels should receive this Comunicato. All email address subscribed to this channel will receive it. "
-#: rer/ufficiostampa/browser/send.py:62
+#: ../browser/send.py:62
 msgid "send_channels_description"
 msgstr ""
 
 #. Default: "Channels"
-#: rer/ufficiostampa/browser/send.py:61
+#: ../browser/send.py:61
 msgid "send_channels_title"
 msgstr ""
 
 #. Default: "Date ${date}"
-#: rer/ufficiostampa/browser/templates/send_mail_template.pt:20
+#: ../browser/templates/send_mail_template.pt:20
 msgid "send_date_label"
 msgstr ""
 
 #. Default: "Send this Comunicato or Invito to a list of recipients."
-#: rer/ufficiostampa/browser/send.py:109
+#: ../browser/send.py:109
 msgid "send_form_help"
 msgstr ""
 
 #. Default: "Send ${type}"
-#: rer/ufficiostampa/browser/send.py:121
+#: ../browser/send.py:121
 msgid "send_form_title"
 msgstr ""
 
 #. Default: "Send"
-#: rer/ufficiostampa/browser/templates/comunicato.pt:12
+#: ../browser/templates/comunicato.pt:12
 msgid "send_link"
 msgstr ""
 
 #. Default: "See preview"
-#: rer/ufficiostampa/browser/templates/comunicato.pt:16
+#: ../browser/templates/comunicato.pt:16
 msgid "send_preview_link"
 msgstr ""
 
 #. Default: "Subjects"
-#: rer/ufficiostampa/restapi/services/search_parameters/get.py:73
+#: ../restapi/services/search_parameters/get.py:73
 msgid "subject_label"
 msgstr ""
 
 #. Default: "List of available subscription channels.One per line.These channels will be used for users subscriptions and for select to which channel send a Comunicato."
-#: rer/ufficiostampa/interfaces/settings.py:23
+#: ../interfaces/settings.py:23
 msgid "subscription_channels_description"
 msgstr ""
 
 #. Default: "Subscription Channels"
-#: rer/ufficiostampa/interfaces/settings.py:20
+#: ../interfaces/settings.py:20
 msgid "subscription_channels_label"
 msgstr ""
 
 #. Default: "His subscription has been deleted from the database bacause he is not subscribed to any channel at all."
-#: rer/ufficiostampa/browser/templates/manage_subscriptions_notify_template.pt:16
+#: ../browser/templates/manage_subscriptions_notify_template.pt:16
 msgid "subscription_deleted_label"
 msgstr ""
 
 #. Default: "Subscriptions updated for ${site}"
-#: rer/ufficiostampa/browser/manage_subscriptions.py:330
+#: ../browser/manage_subscriptions.py:330
 msgid "subscriptions_updated_label"
 msgstr ""
 
 #. Default: "Send complete."
-#: rer/ufficiostampa/browser/send.py:335
+#: ../browser/send.py:335
 msgid "success_send_mail"
 msgstr ""
 
 #. Default: "Send queued with success. See the status in send history."
-#: rer/ufficiostampa/browser/send.py:395
+#: ../browser/send.py:395
 msgid "success_send_mail_async"
 msgstr ""
 
@@ -574,66 +592,66 @@ msgid "toggle_filters_label"
 msgstr ""
 
 #. Default: "Insert the salt for token generation. This, in conjunction with the secret, will generate unique tokens for subscriptions management links."
-#: rer/ufficiostampa/interfaces/settings.py:46
+#: ../interfaces/settings.py:46
 msgid "token_salt_help"
 msgstr ""
 
 #. Default: "Token salt"
-#: rer/ufficiostampa/interfaces/settings.py:45
+#: ../interfaces/settings.py:45
 msgid "token_salt_label"
 msgstr ""
 
 #. Default: "Insert the secret key for token generation."
-#: rer/ufficiostampa/interfaces/settings.py:38
+#: ../interfaces/settings.py:38
 msgid "token_secret_help"
 msgstr ""
 
 #. Default: "Token secret"
-#: rer/ufficiostampa/interfaces/settings.py:37
+#: ../interfaces/settings.py:37
 msgid "token_secret_label"
 msgstr ""
 
 #. Default: "Unable to manage subscriptions. Invalid email."
-#: rer/ufficiostampa/utils.py:138
+#: ../utils.py:138
 msgid "unsubscribe_confirm_invalid_email"
 msgstr ""
 
 #. Default: "Unable to manage subscriptions. Invalid id."
-#: rer/ufficiostampa/utils.py:131
+#: ../utils.py:131
 msgid "unsubscribe_confirm_invalid_id"
 msgstr ""
 
 #. Default: "Unable to manage subscriptions. Invalid parameters."
-#: rer/ufficiostampa/utils.py:122
+#: ../utils.py:122
 msgid "unsubscribe_confirm_invalid_parameters"
 msgstr ""
 
 #. Default: "Unable to manage subscriptions. Token expired."
-#: rer/ufficiostampa/utils.py:106
+#: ../utils.py:106
 msgid "unsubscribe_confirm_secret_expired"
 msgstr ""
 
 #. Default: "Unable to manage subscriptions. Invalid token."
-#: rer/ufficiostampa/utils.py:113
+#: ../utils.py:113
 msgid "unsubscribe_confirm_secret_invalid"
 msgstr ""
 
 #. Default: "Unable to manage subscriptions. Token not present."
-#: rer/ufficiostampa/utils.py:75
+#: ../utils.py:75
 msgid "unsubscribe_confirm_secret_null"
 msgstr ""
 
 #. Default: "Unable to manage subscriptions. Token keys not set in control panel."
-#: rer/ufficiostampa/utils.py:89
+#: ../utils.py:89
 msgid "unsubscribe_confirm_secret_token_settings_error"
 msgstr ""
 
 #. Default: "Invalid email address: ${address}"
-#: rer/ufficiostampa/browser/send.py:50
+#: ../browser/send.py:50
 msgid "validation_invalid_email"
 msgstr ""
 
 #. Default: "You need to pass a csv file."
-#: rer/ufficiostampa/restapi/services/subscriptions/csv.py:93
+#: ../restapi/services/subscriptions/csv.py:93
 msgid "wrong_content_type"
 msgstr ""
