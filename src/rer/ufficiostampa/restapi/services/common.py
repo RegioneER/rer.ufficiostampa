@@ -15,7 +15,10 @@ from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
 
 import csv
+import logging
 import six
+
+logger = logging.getLogger(__name__)
 
 
 class DataGet(Service):
@@ -58,6 +61,23 @@ class DataGet(Service):
 
 class DataCSVGet(DataGet):
     def render(self):
+
+        data = self.get_data()
+        if isinstance(data, six.text_type):
+            data = data.encode("utf-8")
+        else:
+            if data.get("error", False):
+                self.request.response.setStatus(500)
+                return dict(
+                    error=dict(
+                        type="InternalServerError",
+                        message="Unable export. Contact site manager.",
+                    )
+                )
+
+        self.request.response.setHeader(
+            "Content-Type", "text/comma-separated-values"
+        )
         now = datetime.now()
         self.request.response.setHeader(
             "Content-Disposition",
@@ -65,13 +85,6 @@ class DataCSVGet(DataGet):
                 type=self.type, date=now.strftime("%d%m%Y-%H%M%S")
             ),
         )
-        self.request.response.setHeader(
-            "Content-Type", "text/comma-separated-values"
-        )
-
-        data = self.get_data()
-        if isinstance(data, six.text_type):
-            data = data.encode("utf-8")
         self.request.response.write(data)
 
     def get_data(self):
@@ -96,10 +109,9 @@ class DataCSVGet(DataGet):
         for row in rows:
             try:
                 writer.writerow(row)
-            except:
-                import pdb
-
-                pdb.set_trace()
+            except Exception as e:
+                logger.exception(e)
+                return {"error": True}
         res = sbuf.getvalue()
         sbuf.close()
         return res
