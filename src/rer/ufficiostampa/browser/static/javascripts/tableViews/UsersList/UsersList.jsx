@@ -53,7 +53,7 @@ const UsersList = ({ editUser }) => {
     { name: labels.name, selector: 'name', sortable: true },
     { name: labels.surname, selector: 'surname', sortable: true },
     { name: labels.email, selector: 'email', sortable: true },
-    { name: labels.phone, selector: 'phone', sortable: true },
+    { name: labels.phone, selector: 'phone', sortable: true, width: '180px' },
     { name: labels.newspaper, selector: 'newspaper', sortable: true },
     // {
     //   name: labels.channels,
@@ -75,6 +75,7 @@ const UsersList = ({ editUser }) => {
           <span className="glyphicon glyphicon-pencil"></span>
         </button>
       ),
+      width: '100px',
     },
   ];
 

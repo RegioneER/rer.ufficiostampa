@@ -82,6 +82,11 @@ const ImportCSV = ({ showModal = false, setShowModal }) => {
     });
   };
 
+  const descriptionModalRowsLabel =
+    'CSV file should have following columns: name, surname, email, phone, channels, newspaper, date.';
+  const descriptionModalLabel =
+    'First row should be filled with column names. Actual values should start from the second one.';
+
   return (
     <Modal
       show={showModal}
@@ -94,7 +99,15 @@ const ImportCSV = ({ showModal = false, setShowModal }) => {
           <h1 id="modal-import-csv_label">
             {getTranslationFor('Import from CSV', 'Import from CSV')}
           </h1>
-
+          <p className="documentDescription">
+            {getTranslationFor(
+              descriptionModalRowsLabel,
+              descriptionModalRowsLabel,
+            )}
+          </p>
+          <p className="documentDescription">
+            {getTranslationFor(descriptionModalLabel, descriptionModalLabel)}
+          </p>
           {serverError && (
             <dl className="portalMessage error" role="alert">
               <dt>Error. Status code: {serverError.status}</dt>
@@ -146,12 +159,12 @@ const ImportCSV = ({ showModal = false, setShowModal }) => {
                 type="checkbox"
               />
               <Field
-                name="clean"
+                name="clear"
                 label={getTranslationFor(
                   'Clean all data before import',
                   'Clean all data before import',
                 )}
-                value={formData.clean}
+                value={formData.clear}
                 onChange={changeField}
                 errors={validationErrors}
                 type="checkbox"

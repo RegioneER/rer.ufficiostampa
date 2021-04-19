@@ -61,10 +61,16 @@ const HistoryList = ({ editUser }) => {
       selector: 'status',
       sortable: true,
       cell: StatusCell,
+      width: '70px',
     },
-    { name: labels.type, selector: 'type', sortable: true },
+    { name: labels.type, selector: 'type', sortable: true, width: '200px' },
     { name: labels.subject, selector: 'subject', sortable: true },
-    { name: labels.recipients, selector: 'recipients', sortable: false },
+    {
+      name: labels.recipients,
+      selector: 'recipients',
+      sortable: false,
+      width: '100px',
+    },
     {
       name: labels.date,
       selector: 'date',
@@ -72,6 +78,7 @@ const HistoryList = ({ editUser }) => {
       cell: row => (
         <div>{format(new Date(row.date), 'dd/MM/yyyy HH:mm:ss')}</div>
       ),
+      width: '180px',
     },
     {
       name: labels.completed_date,
@@ -80,6 +87,7 @@ const HistoryList = ({ editUser }) => {
       cell: row => (
         <div>{format(new Date(row.completed_date), 'dd/MM/yyyy HH:mm:ss')}</div>
       ),
+      width: '180px',
     },
   ];
 

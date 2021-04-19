@@ -16,20 +16,23 @@ const Menu = ({ editUser }) => {
     fetchApi,
     handleApiResponse,
     apiErrors,
-    setApiErrors,
     endpoint,
   } = useContext(ApiContext);
 
   const [showImportCSV, setShowImportCSV] = useState(false);
 
+  const isSubscriptionPanel = endpoint === 'subscriptions';
+  const deleteLabel = isSubscriptionPanel
+    ? 'Delete all subscriptions'
+    : 'Delete all data';
+
+  const confirmDeleteLabel = isSubscriptionPanel
+    ? 'Are you sure you want to delete all subscriptions?'
+    : 'Are you sure you want to delete all data?';
+
   const deleteAllUsers = () => {
     if (
-      window.confirm(
-        getTranslationFor(
-          'Are you sure you want to delete all data?',
-          'Are you sure you want to delete all data?',
-        ),
-      )
+      window.confirm(getTranslationFor(confirmDeleteLabel, confirmDeleteLabel))
     ) {
       let fetches = [
         apiFetch({
@@ -49,16 +52,16 @@ const Menu = ({ editUser }) => {
     <>
       <div className="ufficiostampa-menu-wrapper">
         <div className="left-zone">
-          {endpoint === 'subscriptions' && (
+          {isSubscriptionPanel && (
             <>
               <button
                 onClick={() => editUser()}
-                className="plone-btn plone-btn-primary"
+                className="plone-btn plone-btn-primary context"
               >
                 {getTranslationFor('Add Subscriber', 'Add subscriber')}
               </button>
               <button
-                className="plone-btn plone-btn-primary"
+                className="plone-btn plone-btn-primary context"
                 onClick={() => setShowImportCSV(true)}
               >
                 {getTranslationFor('Import from CSV', 'Import from CSV')}
@@ -67,15 +70,15 @@ const Menu = ({ editUser }) => {
           )}
           <button
             onClick={() => downloadCSV(portalUrl, endpoint)}
-            className="plone-btn plone-btn-primary"
+            className="plone-btn plone-btn-primary context"
           >
             {getTranslationFor('Export in CSV', 'Export in CSV')}
           </button>
 
-          {endpoint === 'subscriptions' && (
+          {isSubscriptionPanel && (
             <a
               href={`${portalUrl}/ufficiostampa-settings`}
-              className="plone-btn plone-btn-primary"
+              className="plone-btn plone-btn-primary context"
             >
               <span>{getTranslationFor('Settings', 'Settings')}</span>
             </a>
@@ -84,9 +87,9 @@ const Menu = ({ editUser }) => {
         <div className="right-zone">
           <button
             onClick={() => deleteAllUsers()}
-            className="plone-btn plone-btn-warning"
+            className="plone-btn plone-btn-danger"
           >
-            {getTranslationFor('Delete all data', 'Delete all data')}
+            {getTranslationFor(deleteLabel, deleteLabel)}
           </button>
         </div>
       </div>

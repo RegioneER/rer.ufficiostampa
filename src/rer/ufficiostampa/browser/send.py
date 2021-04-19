@@ -224,8 +224,12 @@ class SendForm(form.Form):
     @property
     @memoize
     def subject(self):
+
         return "{type}: {title}".format(
-            type=self.type_name, title=self.context.Title(),
+            type=self.context.portal_type == "ComunicatoStampa"
+            and "Comunicato Regione"  # noqa
+            or "Invito Regione",  # noqa
+            title=self.context.Title(),
         )
 
     def get_subscribers(self, data):

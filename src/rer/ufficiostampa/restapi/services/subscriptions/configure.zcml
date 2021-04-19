@@ -15,7 +15,7 @@
     method="GET"
     name="@subscriptions-csv"
     for="plone.app.layout.navigation.interfaces.INavigationRoot"
-    factory=".csv.SubscriptionsCSVGet"
+    factory=".csv_endpoint.SubscriptionsCSVGet"
     permission="rer.ufficiostampa.ManageChannels"
     layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
     />
@@ -23,7 +23,7 @@
     method="POST"
     name="@subscriptions-csv"
     for="plone.app.layout.navigation.interfaces.INavigationRoot"
-    factory=".csv.SubscriptionsCSVPost"
+    factory=".csv_endpoint.SubscriptionsCSVPost"
     permission="rer.ufficiostampa.ManageChannels"
     layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
     />

@@ -18,7 +18,7 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="rer.ufficiostampa"
+      title="RER: Ufficio Stampa"
       directory="profiles/default"
       description="Installs the rer.ufficiostampa add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"
@@ -27,7 +27,7 @@
 
   <genericsetup:registerProfile
       name="uninstall"
-      title="rer.ufficiostampa (uninstall)"
+      title="RER: Ufficio Stampa (uninstall)"
       directory="profiles/uninstall"
       description="Uninstalls the rer.ufficiostampa add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"

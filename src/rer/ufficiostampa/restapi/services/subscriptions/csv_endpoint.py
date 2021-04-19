@@ -16,10 +16,21 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+COLUMNS = [
+    "name",
+    "surname",
+    "email",
+    "phone",
+    "channels",
+    "newspaper",
+    "date",
+]
+
 
 class SubscriptionsCSVGet(DataCSVGet):
     type = "subscriptions"
     store = ISubscriptionsStore
+    columns = COLUMNS
 
 
 class SubscriptionsCSVPost(Service):
@@ -84,6 +95,7 @@ class SubscriptionsCSVPost(Service):
                     continue
                 else:
                     tool.update(id=record.intid, data=row)
+                    res["imported"] += 1
 
         return res
 

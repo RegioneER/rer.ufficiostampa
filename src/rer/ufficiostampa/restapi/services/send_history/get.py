@@ -12,6 +12,15 @@ class SendHistoryGet(DataGet):
 class SendHistoryCSVGet(DataCSVGet):
     store = ISendHistoryStore
     type = "history"
+    columns = [
+        "subject",
+        "type",
+        "recipients",
+        "channels",
+        "status",
+        "date",
+        "completed_date",
+    ]
 
 
 class SendHistoryClearGet(DataClear):

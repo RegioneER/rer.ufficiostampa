@@ -55,20 +55,19 @@ const Field = ({
   return (
     <div className={`field ${type}`}>
       {/* ------- checkbox -------- */}
-      {type == 'checkbox' && (
-        <input
-          id={`formfield-${name}`}
-          name={name}
-          checked={value || false}
-          onChange={event => {
-            onChange(name, event.target.checked);
-          }}
-          type="checkbox"
-          {...otherProps}
-        />
-      )}
-
       <label htmlFor={`formfield-${name}`} className="horizontal">
+        {type == 'checkbox' && (
+          <input
+            id={`formfield-${name}`}
+            name={name}
+            checked={value || false}
+            onChange={event => {
+              onChange(name, event.target.checked);
+            }}
+            type="checkbox"
+            {...otherProps}
+          />
+        )}
         {label}
         {required && (
           <span

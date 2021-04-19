@@ -78,21 +78,18 @@ class DataCSVGet(DataGet):
         tool = getUtility(self.store)
         query = self.parse_query()
         sbuf = StringIO()
-        fixed_columns = ["date"]
-        columns = []
         rows = []
 
         for item in tool.search(**query):
             data = {}
             for k, v in item.attrs.items():
-                if k not in columns and k not in fixed_columns:
-                    columns.append(k)
+                if k not in self.columns:
+                    continue
                 if isinstance(v, list):
                     v = ", ".join(v)
                 data[k] = json_compatible(v)
             rows.append(data)
-        columns.extend(fixed_columns)
-        writer = csv.DictWriter(sbuf, fieldnames=columns, delimiter=",")
+        writer = csv.DictWriter(sbuf, fieldnames=self.columns, delimiter=",")
         writer.writeheader()
         for row in rows:
             writer.writerow(row)

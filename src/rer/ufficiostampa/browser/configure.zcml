@@ -2,6 +2,7 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="rer.ufficiostampa">
 
   <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
@@ -52,6 +53,7 @@
       class=".send_preview.View"
       template="templates/send_preview.pt"
       permission="rer.ufficiostampa.Send"
+      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
     <browser:page
       for="rer.ufficiostampa.interfaces.IInvitoStampa"
@@ -59,6 +61,7 @@
       class=".send_preview.View"
       template="templates/send_preview.pt"
       permission="rer.ufficiostampa.Send"
+      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
 
     <!-- channels-management -->
@@ -110,6 +113,7 @@
       name="manage_subscriptions_mail_template"
       template="templates/manage_subscriptions_mail_template.pt"
       permission="zope2.View"
+      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
     <browser:page
       name="send"
@@ -123,11 +127,35 @@
       name="send_mail_template"
       template="templates/send_mail_template.pt"
       permission="rer.ufficiostampa.Send"
+      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
     <browser:page
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       name="manage_subscriptions_notify_template"
       template="templates/manage_subscriptions_notify_template.pt"
       permission="zope2.View"
+      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
+
+  <!-- collection views -->
+  <browser:page
+    for="plone.app.contenttypes.interfaces.ICollection"
+    name="comunicati_collection_view"
+    class="plone.app.contenttypes.browser.collection.CollectionView"
+    template="templates/comunicati_collection_view.pt"
+    permission="zope2.View"
+    layer="rer.agidtheme.base.interfaces.IRerAgidthemeBaseLayer"
+    menu="plone_displayviews"
+    title="Vista Comunicati Stampa"
+    />
+  <configure zcml:condition="installed collective.tiles.collection">
+    <browser:page
+      name="comunicati_stampa_renderer"
+      permission="zope2.View"
+      for="*"
+      class=".collection_renderers.ComunicatiStampaRendererView"
+      layer="rer.agidtheme.base.interfaces.IRerAgidthemeBaseLayer"
+      template="templates/comunicati_stampa_tile_render.pt"
+      />
+  </configure>
 </configure>

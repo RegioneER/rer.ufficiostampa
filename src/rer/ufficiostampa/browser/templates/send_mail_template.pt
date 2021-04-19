@@ -29,7 +29,6 @@
     <div class="comunicato-text" tal:condition="text" tal:content="structure text/output"></div>
 
     <div class="comunicato-folders" tal:condition="folders">
-      <h4 i18n:translate="other_attachments_folders">Other attachments</h4>
       <ul>
         <li tal:repeat="folder folders">
           <a href="${folder/absolute_url}" title="${folder/title}">${folder/title}</a>

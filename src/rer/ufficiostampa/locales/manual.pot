@@ -44,7 +44,13 @@ msgstr ""
 msgid "Are you sure you want to delete all data?"
 msgstr ""
 
+msgid "Are you sure you want to delete all subscriptions?"
+msgstr ""
+
 msgid "Delete all data"
+msgstr ""
+
+msgid "Delete all subscriptions"
 msgstr ""
 
 msgid "Actions"
@@ -183,4 +189,10 @@ msgid "Skipped rows"
 msgstr ""
 
 msgid "Row"
+msgstr ""
+
+msgid "CSV file should have following columns: name, surname, email, phone, channels, newspaper, date."
+msgstr ""
+
+msgid "First row should be filled with column names. Actual values should start from the second one."
 msgstr ""
