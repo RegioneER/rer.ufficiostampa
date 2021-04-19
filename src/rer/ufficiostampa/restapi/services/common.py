@@ -63,9 +63,7 @@ class DataCSVGet(DataGet):
     def render(self):
 
         data = self.get_data()
-        if isinstance(data, six.text_type):
-            data = data.encode("utf-8")
-        else:
+        if isinstance(data, dict):
             if data.get("error", False):
                 self.request.response.setStatus(500)
                 return dict(
@@ -74,7 +72,6 @@ class DataCSVGet(DataGet):
                         message="Unable export. Contact site manager.",
                     )
                 )
-
         self.request.response.setHeader(
             "Content-Type", "text/comma-separated-values"
         )
