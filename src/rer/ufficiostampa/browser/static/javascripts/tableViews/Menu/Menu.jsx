@@ -4,7 +4,6 @@ import { ApiContext } from '../../ApiContext';
 import apiFetch from '../../utils/apiFetch';
 import { downloadCSV } from '../CSV/ExportCSV';
 import ImportCSV from '../CSV/ImportCSV';
-import { saveAs } from 'file-saver';
 import PropTypes from 'prop-types';
 
 import './Menu.less';
@@ -17,6 +16,7 @@ const Menu = ({ editUser }) => {
     handleApiResponse,
     apiErrors,
     endpoint,
+    setApiErrors,
   } = useContext(ApiContext);
 
   const [showImportCSV, setShowImportCSV] = useState(false);
@@ -69,7 +69,7 @@ const Menu = ({ editUser }) => {
             </>
           )}
           <button
-            onClick={() => downloadCSV(portalUrl, endpoint)}
+            onClick={() => downloadCSV(portalUrl, endpoint, setApiErrors)}
             className="plone-btn plone-btn-primary context"
           >
             {getTranslationFor('Export in CSV', 'Export in CSV')}
