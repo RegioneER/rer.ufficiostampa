@@ -61,16 +61,9 @@ const HistoryList = ({ editUser }) => {
       selector: 'status',
       sortable: true,
       cell: StatusCell,
-      width: '70px',
+      width: '50px',
     },
-    { name: labels.type, selector: 'type', sortable: true, width: '200px' },
-    { name: labels.subject, selector: 'subject', sortable: true },
-    {
-      name: labels.recipients,
-      selector: 'recipients',
-      sortable: false,
-      width: '100px',
-    },
+    { name: labels.type, selector: 'type', sortable: true, width: '150px' },
     {
       name: labels.date,
       selector: 'date',
@@ -89,6 +82,13 @@ const HistoryList = ({ editUser }) => {
       ),
       width: '180px',
     },
+    {
+      name: labels.recipients,
+      selector: 'recipients',
+      sortable: false,
+      width: '80px',
+    },
+    { name: labels.subject, selector: 'subject', sortable: true },
   ];
 
   //------------FILTERING-----------
