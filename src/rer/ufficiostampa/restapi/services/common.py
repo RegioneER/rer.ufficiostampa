@@ -87,12 +87,19 @@ class DataCSVGet(DataGet):
                     continue
                 if isinstance(v, list):
                     v = ", ".join(v)
-                data[k] = json_compatible(v)
+                if isinstance(v, int):
+                    v = str(v)
+                data[k] = json_compatible(v).encode("utf-8")
             rows.append(data)
         writer = csv.DictWriter(sbuf, fieldnames=self.columns, delimiter=",")
         writer.writeheader()
         for row in rows:
-            writer.writerow(row)
+            try:
+                writer.writerow(row)
+            except:
+                import pdb
+
+                pdb.set_trace()
         res = sbuf.getvalue()
         sbuf.close()
         return res

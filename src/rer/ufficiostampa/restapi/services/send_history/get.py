@@ -13,13 +13,13 @@ class SendHistoryCSVGet(DataCSVGet):
     store = ISendHistoryStore
     type = "history"
     columns = [
-        "subject",
-        "type",
-        "recipients",
-        "channels",
         "status",
+        "type",
         "date",
         "completed_date",
+        "recipients",
+        "channels",
+        "subject",
     ]
 
 

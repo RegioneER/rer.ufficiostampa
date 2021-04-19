@@ -1,4 +1,5 @@
 import apiFetch from '../../utils/apiFetch';
+import { saveAs } from 'file-saver';
 
 export const downloadCSV = (
   portalUrl,
