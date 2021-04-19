@@ -69,7 +69,9 @@ const Menu = ({ editUser }) => {
             </>
           )}
           <button
-            onClick={() => downloadCSV(portalUrl, endpoint, setApiErrors)}
+            onClick={() =>
+              downloadCSV(portalUrl, endpoint, setApiErrors, getTranslationFor)
+            }
             className="plone-btn plone-btn-primary context"
           >
             {getTranslationFor('Export in CSV', 'Export in CSV')}

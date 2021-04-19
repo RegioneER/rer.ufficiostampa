@@ -1,6 +1,11 @@
 import apiFetch from '../../utils/apiFetch';
 
-export const downloadCSV = (portalUrl, endpoint, setApiErrors) => {
+export const downloadCSV = (
+  portalUrl,
+  endpoint,
+  setApiErrors,
+  getTranslationFor,
+) => {
   apiFetch({
     url: portalUrl + '/@' + endpoint + '-csv',
     method: 'GET',
