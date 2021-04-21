@@ -41,13 +41,13 @@ msgstr ""
 msgid "save"
 msgstr ""
 
-msgid "Are you sure you want to delete all data?"
+msgid "Are you sure you want to delete all history?"
 msgstr ""
 
 msgid "Are you sure you want to delete all subscriptions?"
 msgstr ""
 
-msgid "Delete all data"
+msgid "Delete all history"
 msgstr ""
 
 msgid "Delete all subscriptions"

@@ -24,11 +24,11 @@ const Menu = ({ editUser }) => {
   const isSubscriptionPanel = endpoint === 'subscriptions';
   const deleteLabel = isSubscriptionPanel
     ? 'Delete all subscriptions'
-    : 'Delete all data';
+    : 'Delete all history';
 
   const confirmDeleteLabel = isSubscriptionPanel
     ? 'Are you sure you want to delete all subscriptions?'
-    : 'Are you sure you want to delete all data?';
+    : 'Are you sure you want to delete all history?';
 
   const deleteAllUsers = () => {
     if (
