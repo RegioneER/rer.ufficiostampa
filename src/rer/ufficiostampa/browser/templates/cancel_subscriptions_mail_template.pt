@@ -8,10 +8,12 @@
     <div>Giunta Regionale - Agenzia di informazione e comunicazione</div>
   </div>
   <p i18n:translate="confirm_help">
-    You received this email because someone asked to manage your subscriptions on <b i18n:name="site_title">${site_title}</b>.
+    You received this email because someone asked to cancel your subscriptions on <b i18n:name="site_title">${site_title}</b>.
   </p>
   <p>
-    <a href="${url}" i18n:translate="confirm_click_here">Click here</a> <tal:text i18n:translate="confirm_text">to confirm or ignore this email.</tal:text>
+    <tal:click i18n:translate="confirm_click_on_label">Click on</tal:click>
+    <a href="${url}" i18n:translate="confirm_link_label">confirmation link</a>
+    <tal:text i18n:translate="confirm_ignore_label">or ignore this email.</tal:text>
   </p>
   <b i18n:translate="confirm_expire">
     This link will expire in 24 hours.
@@ -29,7 +31,7 @@
       <p i18n:translate="manage_subscriptions_intro">
       You are receiving this email because you are subscribed to <b i18n:name="site_title">${site_title}</b>.
       </p>
-      <a i18n:translate="manage_subscriptions_link" href="${context/portal_url}/manage-subscriptions-request">Manage your subscriptions</a>.
+      <a i18n:translate="manage_subscriptions_link" href="${context/portal_url}/cancel-subscriptions-request">Manage your subscriptions</a>.
     </div>
   </div>
 </tal:root>

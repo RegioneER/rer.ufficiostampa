@@ -95,23 +95,23 @@
     />
     <!-- manage subscriptions -->
     <browser:page
-      name="manage-subscriptions-request"
+      name="cancel-subscriptions-request"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".manage_subscriptions.ManageSubscriptionsRequestForm"
+      class=".cancel_subscriptions.CancelSubscriptionsRequestForm"
       permission="zope2.View"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
     <browser:page
-      name="manage-subscriptions"
+      name="cancel-subscriptions"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".manage_subscriptions.ManageSubscriptionsForm"
+      class=".cancel_subscriptions.CancelSubscriptionsForm"
       permission="zope2.View"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
     <browser:page
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      name="manage_subscriptions_mail_template"
-      template="templates/manage_subscriptions_mail_template.pt"
+      name="cancel_subscriptions_mail_template"
+      template="templates/cancel_subscriptions_mail_template.pt"
       permission="zope2.View"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
@@ -131,8 +131,8 @@
       />
     <browser:page
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      name="manage_subscriptions_notify_template"
-      template="templates/manage_subscriptions_notify_template.pt"
+      name="cancel_subscriptions_notify_template"
+      template="templates/cancel_subscriptions_notify_template.pt"
       permission="zope2.View"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
@@ -144,7 +144,7 @@
     class="plone.app.contenttypes.browser.collection.CollectionView"
     template="templates/comunicati_collection_view.pt"
     permission="zope2.View"
-    layer="rer.agidtheme.base.interfaces.IRerAgidthemeBaseLayer"
+    layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
     menu="plone_displayviews"
     title="Vista Comunicati Stampa"
     />
@@ -154,7 +154,7 @@
       permission="zope2.View"
       for="*"
       class=".collection_renderers.ComunicatiStampaRendererView"
-      layer="rer.agidtheme.base.interfaces.IRerAgidthemeBaseLayer"
+      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       template="templates/comunicati_stampa_tile_render.pt"
       />
   </configure>

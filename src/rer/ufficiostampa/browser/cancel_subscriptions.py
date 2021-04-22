@@ -65,7 +65,7 @@ def getUid():
     return data["data"].intid
 
 
-class IManageSubscriptionsRequestForm(Interface):
+class ICancelSubscriptionsRequestForm(Interface):
     """ define field to manage subscriptions """
 
     email = schema.Email(
@@ -79,16 +79,16 @@ class IManageSubscriptionsRequestForm(Interface):
     )
 
 
-class IManageSubscriptionsForm(Interface):
+class ICancelSubscriptionsForm(Interface):
     """  """
 
     channels = schema.List(
-        title=_(u"manage_subscriptions_channels_title", default=u"Channels"),
-        description=_(
-            u"manage_subscriptions_channels_description",
-            default=u"Select which channels you want to be subscribed. "
-            u"Disable all if you don't want to be notified.",
+        title=_(
+            u"manage_subscriptions_channels_title",
+            default=u"Deselect the channels that you do not want to be "
+            u"subscribed anymore.",
         ),
+        description="",
         required=False,
         defaultFactory=getSubscriptions,
         missing_value=(),
@@ -97,19 +97,19 @@ class IManageSubscriptionsForm(Interface):
     uid = schema.Int(readonly=True, defaultFactory=getUid)
 
 
-class ManageSubscriptionsRequestForm(form.Form):
-    label = _("manage_subscriptions_request_title", u"Channels subscriptions")
+class CancelSubscriptionsRequestForm(form.Form):
+    label = _("cancel_subscriptions_request_title", u"Delete me")
     description = _(
-        "manage_subscriptions_request_help",
-        u"If you want to manage your subscriptions, please insert your email "
-        u"address. You will receive an email with the link to manage them. "
+        "cancel_subscriptions_request_help",
+        u"If you want to cancel your subscriptions, please insert your email "
+        u"address. You will receive an email with the link. "
         u"That link will expire in 24 hours.",
     )
     ignoreContext = True
-    fields = field.Fields(IManageSubscriptionsRequestForm)
+    fields = field.Fields(ICancelSubscriptionsRequestForm)
 
     def updateWidgets(self):
-        super(ManageSubscriptionsRequestForm, self).updateWidgets()
+        super(CancelSubscriptionsRequestForm, self).updateWidgets()
         if self.request.get("email", None):
             self.widgets["email"].value = self.request.get("email")
 
@@ -157,13 +157,13 @@ class ManageSubscriptionsRequestForm(form.Form):
         )
 
         # send confirm email
-        url = "{url}/manage-subscriptions?secret={secret}&_authenticator={token}".format(  # noqa
+        url = "{url}/cancel-subscriptions?secret={secret}&_authenticator={token}".format(  # noqa
             url=self.context.absolute_url(), secret=secret, token=token
         )
         site_title = get_site_title()
         mail_text = prepare_email_message(
             context=api.portal.get(),
-            template="@@manage_subscriptions_mail_template",
+            template="@@cancel_subscriptions_mail_template",
             parameters={"url": url, "site_title": site_title},
         )
 
@@ -177,9 +177,9 @@ class ManageSubscriptionsRequestForm(form.Form):
             msg_type = "error"
         else:
             msg = _(
-                u"manage_subscriptions_send_success",
+                u"cancel_subscriptions_send_success",
                 default=u"You will receive an email with a link to manage "
-                u"your subscriptions.",
+                u"your cancellation.",
             )
             msg_type = "info"
         api.portal.show_message(
@@ -214,8 +214,8 @@ class ManageSubscriptionsRequestForm(form.Form):
         mailHost = api.portal.get_tool(name="MailHost")
         subject = translate(
             _(
-                "manage_subscription_subject_label",
-                default=u"Manage your subscriptions for ${site}",
+                "cancel_subscription_subject_label",
+                default=u"Manage channels subscriptions cancel for ${site}",
                 mapping={"site": site_title},
             ),
             context=self.request,
@@ -236,18 +236,18 @@ class ManageSubscriptionsRequestForm(form.Form):
         return True
 
 
-class ManageSubscriptionsForm(form.Form):
-    label = _("manage_subscriptions_title", u"Channels subscriptions")
+class CancelSubscriptionsForm(form.Form):
+    label = _("cancel_subscriptions_request_title", u"Delete me")
     description = _(
         "manage_subscriptions_help",
         u"This is the list of your subscriptions.",
     )
     ignoreContext = True
-    fields = field.Fields(IManageSubscriptionsForm)
+    fields = field.Fields(ICancelSubscriptionsForm)
     fields["channels"].widgetFactory = CheckBoxFieldWidget
 
     def updateWidgets(self):
-        super(ManageSubscriptionsForm, self).updateWidgets()
+        super(CancelSubscriptionsForm, self).updateWidgets()
         self.widgets["uid"].mode = HIDDEN_MODE
 
     def render(self):
@@ -256,7 +256,7 @@ class ManageSubscriptionsForm(form.Form):
             return self.return_with_message(
                 message=data["error"], type=u"error"
             )
-        return super(ManageSubscriptionsForm, self).render()
+        return super(CancelSubscriptionsForm, self).render()
 
     def return_with_message(self, message, type):
         api.portal.show_message(
@@ -299,8 +299,7 @@ class ManageSubscriptionsForm(form.Form):
             )
         return self.return_with_message(
             message=_(
-                "manage_subscriptions_success",
-                default=u"Subscriptions updated",
+                "cancel_subscriptions_success", default=u"Cancel registered.",
             ),
             type=u"info",
         )
@@ -336,7 +335,7 @@ class ManageSubscriptionsForm(form.Form):
         )
         message = prepare_email_message(
             context=api.portal.get(),
-            template="@@manage_subscriptions_notify_template",
+            template="@@cancel_subscriptions_notify_template",
             parameters={
                 "site_title": site_title,
                 "name": "{} {}".format(
