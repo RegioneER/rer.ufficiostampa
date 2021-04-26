@@ -42,13 +42,9 @@ class SendCompletePost(Service):
             )
         except Exception as e:
             logger.exception(e)
-            plone_utils = api.content.get_view(
-                name="plone_utils", context=self.context, request=self.request
-            )
-            exception = plone_utils.exceptionString()
             self.request.response.setStatus(500)
             return dict(
-                error=dict(type="InternalServerError", message=exception)
+                error=dict(type="InternalServerError", message=e.message)
             )
         if res and "error" in res:
             if res["error"] == "NotFound":
