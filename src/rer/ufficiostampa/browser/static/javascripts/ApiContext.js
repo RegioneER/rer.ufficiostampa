@@ -60,7 +60,6 @@ function ApiWrapper({ endpoint, children }) {
           setLoading(false);
         })
         .catch(error => {
-          debugger;
           setLoading(false);
           setApiErrors(
             res

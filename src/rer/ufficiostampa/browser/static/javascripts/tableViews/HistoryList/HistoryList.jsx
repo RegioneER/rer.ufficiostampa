@@ -78,7 +78,11 @@ const HistoryList = ({ editUser }) => {
       selector: 'completed_date',
       sortable: true,
       cell: row => (
-        <div>{format(new Date(row.completed_date), 'dd/MM/yyyy HH:mm:ss')}</div>
+        <div>
+          {row.completed_date
+            ? format(new Date(row.completed_date), 'dd/MM/yyyy HH:mm:ss')
+            : ''}
+        </div>
       ),
       width: '180px',
     },
