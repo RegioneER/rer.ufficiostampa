@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-04-22 12:29+0000\n"
+"POT-Creation-Date: 2021-04-26 12:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -207,41 +207,41 @@ msgid "arguments_label"
 msgstr "Argomenti"
 
 #. Default: "Action cancelled"
-#: rer/ufficiostampa/browser/cancel_subscriptions.py:312
+#: rer/ufficiostampa/browser/cancel_subscriptions.py:308
 #: rer/ufficiostampa/browser/send.py:151
 msgid "cancel_action"
 msgstr "Azione annullata"
 
 #. Default: "Cancel"
-#: rer/ufficiostampa/browser/cancel_subscriptions.py:308
+#: rer/ufficiostampa/browser/cancel_subscriptions.py:304
 #: rer/ufficiostampa/browser/send.py:147
 msgid "cancel_button"
 msgstr "Annulla"
 
 #. Default: "Manage channels subscriptions cancel for ${site}"
-#: rer/ufficiostampa/browser/cancel_subscriptions.py:216
+#: rer/ufficiostampa/browser/cancel_subscriptions.py:212
 msgid "cancel_subscription_subject_label"
 msgstr "Gestisci la cancellazione dai canali di ${site}"
 
 #. Default: "If you want to cancel your subscriptions, please insert your email address. You will receive an email with the link. That link will expire in 24 hours."
-#: rer/ufficiostampa/browser/cancel_subscriptions.py:102
+#: rer/ufficiostampa/browser/cancel_subscriptions.py:98
 msgid "cancel_subscriptions_request_help"
 msgstr "Se vuoi cancellarti da uno o più canali, inserisci il tuo indirizzo e-mail nell’apposito campo. Riceverai una e-mail con un link per confermare. Il link scadrà entro 24 ore."
 
 #. Default: "Delete me"
-#: rer/ufficiostampa/browser/cancel_subscriptions.py:101
+#: rer/ufficiostampa/browser/cancel_subscriptions.py:97
 msgid "cancel_subscriptions_request_title"
 msgstr "Cancellami"
 
 #. Default: "You will receive an email with a link to manage your cancellation."
-#: rer/ufficiostampa/browser/cancel_subscriptions.py:179
+#: rer/ufficiostampa/browser/cancel_subscriptions.py:175
 msgid "cancel_subscriptions_send_success"
 msgstr "Riceverai un'e-mail con il link per gestire la cancellazione."
 
 #. Default: "Cancel registered."
-#: rer/ufficiostampa/browser/cancel_subscriptions.py:301
+#: rer/ufficiostampa/browser/cancel_subscriptions.py:297
 msgid "cancel_subscriptions_success"
-msgstr "Cancellazione registata."
+msgstr "Cancellazione registrata."
 
 msgid "channels"
 msgstr "Canali"
@@ -252,7 +252,7 @@ msgid "channels_management_label"
 msgstr "Gestione degli iscritti"
 
 #. Default: "Search text"
-#: rer/ufficiostampa/restapi/services/search_parameters/get.py:37
+#: rer/ufficiostampa/restapi/services/search_parameters/get.py:51
 msgid "comunicati_search_text_label"
 msgstr "Ricerca testuale"
 
@@ -313,7 +313,7 @@ msgid "error_reading_csv"
 msgstr "Errore in lettura del file csv."
 
 #. Default: "Error sending mail. Contact site administrator."
-#: rer/ufficiostampa/browser/send.py:296
+#: rer/ufficiostampa/browser/send.py:299
 msgid "error_send_mail"
 msgstr "Si è verificato un errore invitando le mail. Contatta l'amministratore del sito."
 
@@ -362,9 +362,19 @@ msgstr "elementi selezionati"
 
 #. Default: "Legislature"
 #: rer/ufficiostampa/interfaces/content.py:26
-#: rer/ufficiostampa/restapi/services/search_parameters/get.py:46
+#: rer/ufficiostampa/restapi/services/search_parameters/get.py:70
 msgid "label_legislature"
 msgstr "Legislatura"
+
+#. Default: "Type"
+#: rer/ufficiostampa/restapi/services/search_parameters/get.py:60
+msgid "label_portal_type"
+msgstr "Tipo"
+
+#. Default: "Sent"
+#: rer/ufficiostampa/interfaces/content.py:34
+msgid "label_sent"
+msgstr "Inviato"
 
 #. Default: "Insert a list of arguments related to this legislature. One per line."
 #: rer/ufficiostampa/interfaces/settings.py:96
@@ -373,7 +383,7 @@ msgstr "Inserisci una lista di argomenti a cui si fa riferimento."
 
 #. Default: "Arguments"
 #: rer/ufficiostampa/interfaces/settings.py:95
-#: rer/ufficiostampa/restapi/services/search_parameters/get.py:59
+#: rer/ufficiostampa/restapi/services/search_parameters/get.py:83
 msgid "legislature_arguments_label"
 msgstr "Argomenti"
 
@@ -403,14 +413,9 @@ msgid "legislatures_label"
 msgstr "Elenco Legislature"
 
 #. Default: "Deselect the channels that you do not want to be subscribed anymore."
-#: rer/ufficiostampa/browser/cancel_subscriptions.py:86
+#: rer/ufficiostampa/browser/cancel_subscriptions.py:82
 msgid "manage_subscriptions_channels_title"
 msgstr "Disattiva la selezione dal canale da cui vuoi cancellarti."
-
-#. Default: "Insert the email for wich you want to manage subscriptions."
-#: rer/ufficiostampa/browser/cancel_subscriptions.py:73
-msgid "manage_subscriptions_description"
-msgstr "Inserisci l'email per la quale vuoi gestire le iscrizioni."
 
 #. Default: "Email"
 #: rer/ufficiostampa/browser/cancel_subscriptions.py:72
@@ -418,12 +423,12 @@ msgid "manage_subscriptions_email_title"
 msgstr "Email"
 
 #. Default: "This is the list of your subscriptions."
-#: rer/ufficiostampa/browser/cancel_subscriptions.py:241
+#: rer/ufficiostampa/browser/cancel_subscriptions.py:237
 msgid "manage_subscriptions_help"
 msgstr "Questa è la lista dei canali a cui sei iscritto."
 
 #. Default: "Mail not found. Unable to change settings."
-#: rer/ufficiostampa/browser/cancel_subscriptions.py:277
+#: rer/ufficiostampa/browser/cancel_subscriptions.py:273
 msgid "manage_subscriptions_inexistent_mail"
 msgstr "Email non trovata. Impossibile aggiornare i dati."
 
@@ -440,17 +445,17 @@ msgid "manage_subscriptions_link"
 msgstr "Gestisci le tue iscrizioni"
 
 #. Default: "Unable to send manage subscriptions link. Please contact site administrator."
-#: rer/ufficiostampa/browser/cancel_subscriptions.py:172
+#: rer/ufficiostampa/browser/cancel_subscriptions.py:168
 msgid "manage_subscriptions_not_send"
 msgstr "Impossibile spedire il link per la gestione delle iscrizioni. Per favore contatta l'amministratore del sito."
 
 #. Default: "Mail not found. Unable to send the link."
-#: rer/ufficiostampa/browser/cancel_subscriptions.py:127
+#: rer/ufficiostampa/browser/cancel_subscriptions.py:123
 msgid "manage_subscriptions_request_inexistent_mail"
 msgstr "Email non trovata. Impossibile spedire la mail con il link."
 
 #. Default: "Serializer secret and salt not set in control panel. Unable to send the link."
-#: rer/ufficiostampa/browser/cancel_subscriptions.py:143
+#: rer/ufficiostampa/browser/cancel_subscriptions.py:139
 msgid "manage_subscriptions_request_serializer_error"
 msgstr "Secret e salt non impostati nel pannello di controllo. Impossibile inviare il link."
 
@@ -476,12 +481,17 @@ msgid "phone"
 msgstr "Telefono"
 
 #. Default: "Allegati"
-#: rer/ufficiostampa/browser/templates/comunicato.pt:37
+#: rer/ufficiostampa/browser/templates/comunicato.pt:40
 msgid "press_attachments"
 msgstr "Allegati"
 
 msgid "refine_search_label"
 msgstr "Raffina la tua ricerca"
+
+#. Default: "Resend"
+#: rer/ufficiostampa/browser/templates/comunicato.pt:17
+msgid "resend_link"
+msgstr "Invia di nuovo"
 
 msgid "reset_filters_label"
 msgstr "Rimuovi tutti i filtri"
@@ -501,7 +511,7 @@ msgid "save"
 msgstr "Salva"
 
 #. Default: "Save"
-#: rer/ufficiostampa/browser/cancel_subscriptions.py:267
+#: rer/ufficiostampa/browser/cancel_subscriptions.py:263
 msgid "save_button"
 msgstr "Salva"
 
@@ -524,7 +534,7 @@ msgid "send_attachments_title"
 msgstr "Allegati"
 
 #. Default: "Send"
-#: rer/ufficiostampa/browser/cancel_subscriptions.py:116
+#: rer/ufficiostampa/browser/cancel_subscriptions.py:112
 #: rer/ufficiostampa/browser/send.py:129
 msgid "send_button"
 msgstr "Invia"
@@ -555,17 +565,17 @@ msgid "send_form_title"
 msgstr "Invia ${type}"
 
 #. Default: "Send"
-#: rer/ufficiostampa/browser/templates/comunicato.pt:12
+#: rer/ufficiostampa/browser/templates/comunicato.pt:16
 msgid "send_link"
 msgstr "Invia"
 
 #. Default: "See preview"
-#: rer/ufficiostampa/browser/templates/comunicato.pt:16
+#: rer/ufficiostampa/browser/templates/comunicato.pt:19
 msgid "send_preview_link"
 msgstr "Anteprima"
 
 #. Default: "Subjects"
-#: rer/ufficiostampa/restapi/services/search_parameters/get.py:73
+#: rer/ufficiostampa/restapi/services/search_parameters/get.py:97
 msgid "subject_label"
 msgstr "Categorie"
 
@@ -585,17 +595,17 @@ msgid "subscription_deleted_label"
 msgstr "La sua iscrizione è stata anche rimossa dal database perché non era più iscritto a nessun canale."
 
 #. Default: "Subscriptions updated for ${site}"
-#: rer/ufficiostampa/browser/cancel_subscriptions.py:329
+#: rer/ufficiostampa/browser/cancel_subscriptions.py:325
 msgid "subscriptions_updated_label"
 msgstr "Iscrizioni aggiornate per ${site}"
 
 #. Default: "Send complete."
-#: rer/ufficiostampa/browser/send.py:339
+#: rer/ufficiostampa/browser/send.py:342
 msgid "success_send_mail"
 msgstr "Invio completato."
 
 #. Default: "Send queued with success. See the status in send history."
-#: rer/ufficiostampa/browser/send.py:399
+#: rer/ufficiostampa/browser/send.py:402
 msgid "success_send_mail_async"
 msgstr "Invio correttamente accodato. Puoi controllare il suo stato nello storico degli invii."
 

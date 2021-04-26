@@ -23,7 +23,6 @@ const FormFieldWrapper = ({ parameter, value, updateQueryParameters }) => {
       FieldComponent = TextField;
       className = 'text';
   }
-
   return (
     <div className={`field ${className}-field`}>
       <FieldComponent

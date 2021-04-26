@@ -11,8 +11,11 @@
   <div class="send-links" tal:condition="view/can_see_links">
     <a class="plone-btn plone-btn-primary"
         href="${context/absolute_url}/@@send"
-        i18n:translate="send_link"
-        tal:condition="view/can_send">Send</a>
+        tal:condition="view/can_send"
+        tal:define="message_sent context/message_sent|nothing">
+      <tal:send condition="not:message_sent" i18n:translate="send_link">Send</tal:send>
+      <tal:send condition="message_sent" i18n:translate="resend_link">Resend</tal:send>
+    </a>
     <a class="plone-btn plone-btn-primary"
         href="${context/absolute_url}/@@send-preview"
         i18n:translate="send_preview_link">See preview</a>

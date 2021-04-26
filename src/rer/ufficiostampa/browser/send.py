@@ -174,7 +174,6 @@ class SendForm(form.Form):
             self.send_external(data=data, body=body)
         else:
             self.send_internal(data=data, body=body)
-
         return self.request.response.redirect(self.context.absolute_url())
 
     def get_value_from_settings(self, field):
@@ -190,6 +189,10 @@ class SendForm(form.Form):
         # if it's a preview, do not store infos
         if not data.get("channels", []):
             return ""
+
+        # mark as sent
+        self.context.message_sent = True
+
         tool = getUtility(ISendHistoryStore)
         intid = tool.add(
             {

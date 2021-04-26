@@ -20,6 +20,7 @@ const ResultItem = ({ data }) => {
           <span className="labelTB">
             {getTranslationFor('comunicato_published_on', '')}
           </span>
+          &nbsp;
           <span>{format(new Date(effective), 'dd/MM/yyyy')}</span>
         </p>
       );

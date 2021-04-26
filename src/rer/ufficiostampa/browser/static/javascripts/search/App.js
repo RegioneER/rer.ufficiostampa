@@ -47,8 +47,12 @@ const App = () => {
           break;
         default:
           if (!queryString.get(parameter.id)) {
-            //  empty
-            accumulator[parameter.id] = [];
+            //  empty querystring
+            if (parameter.default) {
+              accumulator[parameter.id] = parameter.default;
+            } else {
+              accumulator[parameter.id] = [];
+            }
           } else {
             accumulator[parameter.id] = queryString.getAll(parameter.id);
           }

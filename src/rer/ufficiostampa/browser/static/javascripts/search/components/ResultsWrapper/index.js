@@ -50,13 +50,14 @@ const ResultsWrapper = ({ queryParameters, updateQueryParameters }) => {
         return acc;
       },
       {
-        portal_type: ['ComunicatoStampa', 'InvitoStampa'],
         sort_on: 'effective',
         sort_order: 'reverse',
         metadata_fields: ['arguments', 'legislature', 'UID', 'effective'],
       },
     );
-
+    if (!params.portal_type || params.portal_type.length === 0) {
+      params.portal_type = ['ComunicatoStampa', 'InvitoStampa'];
+    }
     setFetching(true);
     axios({
       method: 'GET',

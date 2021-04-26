@@ -30,6 +30,13 @@ class IComunicatoStampa(model.Schema):
     )
     directives.mode(legislature="display")
 
+    message_sent = schema.Bool(
+        title=_(u"label_sent", default=u"Sent"),
+        description=u"",
+        required=False,
+    )
+    # directives.mode(sent="hidden")
+
 
 class IInvitoStampa(IComunicatoStampa):
     """ """

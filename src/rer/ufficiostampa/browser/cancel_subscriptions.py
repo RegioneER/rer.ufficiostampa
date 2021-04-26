@@ -70,11 +70,7 @@ class ICancelSubscriptionsRequestForm(Interface):
 
     email = schema.Email(
         title=_(u"manage_subscriptions_email_title", default=u"Email"),
-        description=_(
-            u"manage_subscriptions_description",
-            default=u"Insert the email for wich you want to manage "
-            u"subscriptions.",
-        ),
+        description=u"",
         required=True,
     )
 
@@ -88,7 +84,7 @@ class ICancelSubscriptionsForm(Interface):
             default=u"Deselect the channels that you do not want to be "
             u"subscribed anymore.",
         ),
-        description="",
+        description=u"",
         required=False,
         defaultFactory=getSubscriptions,
         missing_value=(),

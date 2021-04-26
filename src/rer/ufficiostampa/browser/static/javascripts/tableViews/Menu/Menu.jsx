@@ -86,14 +86,16 @@ const Menu = ({ editUser }) => {
             </a>
           )}
         </div>
-        <div className="right-zone">
-          <button
-            onClick={() => deleteAllUsers()}
-            className="plone-btn plone-btn-danger"
-          >
-            {getTranslationFor(deleteLabel, deleteLabel)}
-          </button>
-        </div>
+        {!isSubscriptionPanel && (
+          <div className="right-zone">
+            <button
+              onClick={() => deleteAllUsers()}
+              className="plone-btn plone-btn-danger"
+            >
+              {getTranslationFor(deleteLabel, deleteLabel)}
+            </button>
+          </div>
+        )}
       </div>
 
       {apiErrors && (

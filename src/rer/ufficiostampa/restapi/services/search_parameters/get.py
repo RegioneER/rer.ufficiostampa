@@ -26,6 +26,20 @@ def getVocabularyTermsForForm(vocab_name, context):
     return values
 
 
+def getTypesValues():
+    res = [{"value": "ComunicatoStampa", "label": "Comunicato Stampa"}]
+    if not api.user.is_anonymous():
+        res.append({"value": "InvitoStampa", "label": "Invito Stampa"})
+    return res
+
+
+def getTypesDefault():
+    res = ["ComunicatoStampa"]
+    if not api.user.is_anonymous():
+        res.append("InvitoStampa")
+    return res
+
+
 def getSearchFields():
     request = getRequest()
     portal = api.portal.get()
@@ -39,6 +53,16 @@ def getSearchFields():
             ),
             "help": "",
             "type": "text",
+        },
+        {
+            "id": "portal_type",
+            "label": translate(
+                _("label_portal_type", default="Type"), context=request,
+            ),
+            "help": "",
+            "type": "checkbox",
+            "options": getTypesValues(),
+            "default": getTypesDefault(),
         },
         {
             "id": "legislature",
