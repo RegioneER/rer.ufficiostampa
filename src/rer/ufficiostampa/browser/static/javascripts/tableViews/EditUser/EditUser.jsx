@@ -98,15 +98,14 @@ const EditUser = ({ user }) => {
       close={() => setShowModal(false)}
       className="modal-edit-user"
       id="modal-edit-user"
+      title={
+        editUser['@id']
+          ? getTranslationFor('Edit Subscriber', 'Edit Subscriber')
+          : getTranslationFor('Add Subscriber', 'Add Subscriber')
+      }
     >
       <Modal.Body>
         <div className="edit-user">
-          <h1 id="modal-edit-user_label">
-            {editUser['@id']
-              ? getTranslationFor('Edit Subscriber', 'Edit Subscriber')
-              : getTranslationFor('Add Subscriber', 'Add Subscriber')}
-          </h1>
-
           {serverError && (
             <dl className="portalMessage error" role="alert">
               <dt>Error. Status code: {serverError.status}</dt>

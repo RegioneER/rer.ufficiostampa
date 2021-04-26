@@ -19,7 +19,7 @@ const ModalFooter = ({ children }) => {
   );
 };
 const Modal = props => {
-  const { show, close, children, className, id } = props;
+  const { show, close, children, className, id, title } = props;
   const getTranslationFor = useContext(TranslationsContext);
   const modalRef = createRef();
 
@@ -76,7 +76,10 @@ const Modal = props => {
   }, [show]);
 
   return show ? (
-    <div className={`plone-modal-wrapper ${className ?? ''}`}>
+    <div
+      className={`plone-modal-ufficio-stampa plone-modal-wrapper ${className ??
+        ''}`}
+    >
       <div className={`plone-modal ${show ? 'fade in' : ''}`}>
         <div
           className="plone-modal-dialog"
@@ -87,6 +90,7 @@ const Modal = props => {
           <div className="plone-modal-content" ref={modalRef}>
             <ModalContext.Provider {...props}>
               <div className="plone-modal-header">
+                {title && <h2 id={id + '_label'}>{title}</h2>}
                 <button
                   className="plone-modal-close"
                   onClick={() => {

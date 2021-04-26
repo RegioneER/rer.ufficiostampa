@@ -93,12 +93,10 @@ const ImportCSV = ({ showModal = false, setShowModal }) => {
       close={() => setShowModal(false)}
       className="modal-import-csv"
       id="modal-import-csv"
+      title={getTranslationFor('Import from CSV', 'Import from CSV')}
     >
       <Modal.Body>
         <div className="import-csv">
-          <h1 id="modal-import-csv_label">
-            {getTranslationFor('Import from CSV', 'Import from CSV')}
-          </h1>
           <p className="documentDescription">
             {getTranslationFor(
               descriptionModalRowsLabel,
