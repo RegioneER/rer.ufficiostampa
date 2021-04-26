@@ -35,7 +35,7 @@ class IComunicatoStampa(model.Schema):
         description=u"",
         required=False,
     )
-    # directives.mode(sent="hidden")
+    directives.mode(message_sent="hidden")
 
 
 class IInvitoStampa(IComunicatoStampa):

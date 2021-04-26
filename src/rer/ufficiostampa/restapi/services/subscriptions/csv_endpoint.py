@@ -107,14 +107,25 @@ class SubscriptionsCSVPost(Service):
                     default=u"You need to pass a csv file.",
                 )
             )
+        csv_data = data["data"]
         if data.get("encoding", "") == "base64":
-            csv_value = base64.b64decode(data["data"])
-            csv_value = StringIO(csv_value.decode())
+            csv_data = base64.b64decode(csv_data).decode()
+            csv_value = StringIO(csv_data)
         else:
-            csv_value = data["data"]
+            csv_value = csv_data
 
         try:
-            return {"csv": csv.DictReader(csv_value, delimiter=",")}
+            dialect = csv.Sniffer().sniff(csv_data, delimiters=";,")
+            return {
+                "csv": csv.DictReader(
+                    csv_value,
+                    lineterminator=dialect.lineterminator,
+                    quoting=dialect.quoting,
+                    doublequote=dialect.doublequote,
+                    delimiter=dialect.delimiter,
+                    quotechar=dialect.quotechar,
+                )
+            }
         except Exception as e:
             logger.exception(e)
             return {
