@@ -120,8 +120,13 @@ class DataAdd(Service):
         self.validate_form(form_data=form_data)
 
         tool = getUtility(self.store)
-        res = tool.add(form_data)
-
+        try:
+            res = tool.add(form_data)
+        except ValueError as e:
+            self.request.response.setStatus(500)
+            return dict(
+                error=dict(type="InternalServerError", message=e.message,)
+            )
         if res:
             return self.reply_no_content()
 

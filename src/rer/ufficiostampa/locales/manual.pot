@@ -196,3 +196,9 @@ msgstr ""
 
 msgid "First row should be filled with column names. Actual values should start from the second one."
 msgstr ""
+
+msgid "to_label"
+msgstr ""
+
+msgid "from_label"
+msgstr ""

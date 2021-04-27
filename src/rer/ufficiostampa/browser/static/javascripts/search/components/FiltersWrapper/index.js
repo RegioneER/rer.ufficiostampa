@@ -56,6 +56,7 @@ const FiltersWrapper = ({
         {formParameters && formParameters.length
           ? formParameters.map(parameter => (
               <FormFieldWrapper
+                isMobile={isMobile}
                 parameter={parameter}
                 key={parameter.id}
                 value={queryParameters[parameter.id]}

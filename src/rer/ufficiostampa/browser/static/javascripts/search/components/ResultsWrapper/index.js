@@ -45,14 +45,35 @@ const ResultsWrapper = ({ queryParameters, updateQueryParameters }) => {
       (acc, key) => {
         const value = queryParameters[key];
         if (value !== '' || value !== null) {
-          acc[key] = value;
+          if (key === 'created') {
+            if (value.from) {
+              if (value.to) {
+                acc['created.query'] = [
+                  value.from.format('YYYY-MM-DD 00:00:00'),
+                  value.to.format('YYYY-MM-DD 23:59:59'),
+                ];
+                acc['created.range'] = 'min:max';
+              } else {
+                acc['created.query'] = value.from.format('YYYY-MM-DD 00:00:00');
+                acc['created.range'] = 'min';
+              }
+            }
+          } else {
+            acc[key] = value;
+          }
         }
         return acc;
       },
       {
         sort_on: 'effective',
         sort_order: 'reverse',
-        metadata_fields: ['arguments', 'legislature', 'UID', 'effective'],
+        metadata_fields: [
+          'arguments',
+          'legislature',
+          'UID',
+          'effective',
+          'created',
+        ],
       },
     );
     if (!params.portal_type || params.portal_type.length === 0) {

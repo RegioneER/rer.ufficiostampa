@@ -69,11 +69,9 @@ const ImportCSV = ({ showModal = false, setShowModal }) => {
 
     Promise.all(fetches).then(data => {
       const res = data[0];
-      console.log('res', res);
       if (res.status == 200) {
         //OK
         //setShowModal(false);
-        console.log(res.data);
         setImportResult(res.data);
         fetchApi();
       } else {

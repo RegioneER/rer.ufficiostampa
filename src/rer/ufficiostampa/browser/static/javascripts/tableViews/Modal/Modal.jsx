@@ -45,8 +45,6 @@ const Modal = props => {
       return e.preventDefault();
     }
 
-    console.log(activeElement, lastElement);
-
     if (
       e.shiftKey &&
       (activeElement == firstElement || !ctiveElementIsInModal)

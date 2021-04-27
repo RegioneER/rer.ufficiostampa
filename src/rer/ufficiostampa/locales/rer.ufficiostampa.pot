@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-04-26 12:04+0000\n"
+"POT-Creation-Date: 2021-04-27 14:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -195,6 +195,11 @@ msgstr ""
 msgid "additional_addresses_title"
 msgstr ""
 
+#. Default: "E-mail address already registered."
+#: rer/ufficiostampa/subscriptions/store.py:33
+msgid "address_already_registered"
+msgstr ""
+
 #. Default: "Select one or more values."
 #: rer/ufficiostampa/interfaces/content.py:13
 msgid "arguments_help"
@@ -251,8 +256,13 @@ msgstr ""
 msgid "channels_management_label"
 msgstr ""
 
+#. Default: "Date"
+#: rer/ufficiostampa/restapi/services/search_parameters/get.py:72
+msgid "comunicati_search_created_label"
+msgstr ""
+
 #. Default: "Search text"
-#: rer/ufficiostampa/restapi/services/search_parameters/get.py:51
+#: rer/ufficiostampa/restapi/services/search_parameters/get.py:52
 msgid "comunicati_search_text_label"
 msgstr ""
 
@@ -308,7 +318,7 @@ msgid "empty_subscribers"
 msgstr ""
 
 #. Default: "Error reading csv file."
-#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:121
+#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:132
 msgid "error_reading_csv"
 msgstr ""
 
@@ -325,6 +335,9 @@ msgstr ""
 #. Default: "External sender URL"
 #: rer/ufficiostampa/interfaces/settings.py:66
 msgid "external_sender_url_label"
+msgstr ""
+
+msgid "from_label"
 msgstr ""
 
 #. Default: "If the frontend site is published with a different URL than the backend, insert it here. All links in emails will be converted with that URL."
@@ -362,12 +375,12 @@ msgstr ""
 
 #. Default: "Legislature"
 #: rer/ufficiostampa/interfaces/content.py:26
-#: rer/ufficiostampa/restapi/services/search_parameters/get.py:70
+#: rer/ufficiostampa/restapi/services/search_parameters/get.py:81
 msgid "label_legislature"
 msgstr ""
 
 #. Default: "Type"
-#: rer/ufficiostampa/restapi/services/search_parameters/get.py:60
+#: rer/ufficiostampa/restapi/services/search_parameters/get.py:61
 msgid "label_portal_type"
 msgstr ""
 
@@ -383,7 +396,7 @@ msgstr ""
 
 #. Default: "Arguments"
 #: rer/ufficiostampa/interfaces/settings.py:95
-#: rer/ufficiostampa/restapi/services/search_parameters/get.py:83
+#: rer/ufficiostampa/restapi/services/search_parameters/get.py:94
 msgid "legislature_arguments_label"
 msgstr ""
 
@@ -460,7 +473,7 @@ msgid "manage_subscriptions_request_serializer_error"
 msgstr ""
 
 #. Default: "You need to pass a file at least."
-#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:130
+#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:141
 msgid "missing_file"
 msgstr ""
 
@@ -575,7 +588,7 @@ msgid "send_preview_link"
 msgstr ""
 
 #. Default: "Subjects"
-#: rer/ufficiostampa/restapi/services/search_parameters/get.py:97
+#: rer/ufficiostampa/restapi/services/search_parameters/get.py:108
 msgid "subject_label"
 msgstr ""
 
@@ -607,6 +620,9 @@ msgstr ""
 #. Default: "Send queued with success. See the status in send history."
 #: rer/ufficiostampa/browser/send.py:402
 msgid "success_send_mail_async"
+msgstr ""
+
+msgid "to_label"
 msgstr ""
 
 msgid "toggle_filters_label"

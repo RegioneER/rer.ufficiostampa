@@ -27,9 +27,10 @@ def getVocabularyTermsForForm(vocab_name, context):
 
 
 def getTypesValues():
-    res = [{"value": "ComunicatoStampa", "label": "Comunicato Stampa"}]
-    if not api.user.is_anonymous():
-        res.append({"value": "InvitoStampa", "label": "Invito Stampa"})
+    res = [
+        {"value": "ComunicatoStampa", "label": "Comunicato Stampa"},
+        {"value": "InvitoStampa", "label": "Invito Stampa"},
+    ]
     return res
 
 
@@ -63,6 +64,16 @@ def getSearchFields():
             "type": "checkbox",
             "options": getTypesValues(),
             "default": getTypesDefault(),
+            "hidden": api.user.is_anonymous(),
+        },
+        {
+            "id": "created",
+            "label": translate(
+                _("comunicati_search_created_label", default=u"Date"),
+                context=request,
+            ),
+            "help": "",
+            "type": "date",
         },
         {
             "id": "legislature",

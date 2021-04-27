@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 from plone import api
-from rer.ufficiostampa.interfaces import ISubscriptionsStore
+from rer.ufficiostampa import _
 from rer.ufficiostampa.interfaces import ISendHistoryStore
+from rer.ufficiostampa.interfaces import ISubscriptionsStore
 from souper.soup import get_soup
 from souper.soup import Record
+from zope.globalrequest import getRequest
+from zope.i18n import translate
 from zope.interface import implementer
 
 import logging
@@ -23,6 +26,17 @@ class BaseStore(object):
         return get_soup(self.soup_name, api.portal.get())
 
     def add(self, data):
+        old_record = self.search(query={"email": data.get("email", "")})
+        if old_record:
+            raise ValueError(
+                translate(
+                    _(
+                        "address_already_registered",
+                        default=u"E-mail address already registered.",
+                    ),
+                    context=getRequest(),
+                )
+            )
         record = Record()
         for k, v in data.items():
             if k not in self.fields:

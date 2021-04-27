@@ -35,9 +35,6 @@ const apiFetch = ({ url, params, method }) => {
     data: ['POST', 'PATCH'].indexOf(method) >= 0 ? params : null,
     //paramsSerializer: params => parseParams(params),
     headers,
-  }).catch(function(error) {
-    // handle error
-    console.log(error);
   });
 };
 

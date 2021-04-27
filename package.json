@@ -77,6 +77,7 @@
         "query-string": "^7.0.0",
         "react": "^16.8.5",
         "react-data-table-component": "^6.11.7",
+        "react-dates": "^21.8.0",
         "react-dom": "^16.8.5",
         "react-paginate": "^7.1.2",
         "react-select": "^4.3.0",

@@ -34,8 +34,9 @@ class IComunicatoStampa(model.Schema):
         title=_(u"label_sent", default=u"Sent"),
         description=u"",
         required=False,
+        default=False,
     )
-    directives.mode(message_sent="hidden")
+    directives.omitted("message_sent")
 
 
 class IInvitoStampa(IComunicatoStampa):

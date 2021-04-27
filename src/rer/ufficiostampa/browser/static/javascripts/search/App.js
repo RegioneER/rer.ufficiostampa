@@ -4,6 +4,7 @@ import FiltersWrapper from './components/FiltersWrapper';
 import ResultsWrapper from './components/ResultsWrapper';
 import TranslationsWrapper from '../TranslationsContext';
 import queryString from 'query-string';
+import moment from 'moment';
 
 import './App.less';
 
@@ -45,6 +46,18 @@ const App = () => {
         case 'text':
           accumulator[parameter.id] = queryString.get(parameter.id) || '';
           break;
+        case 'date':
+          const parameterId = parameter.id;
+
+          accumulator[parameter.id] = {};
+          const [from, to] = queryString.getAll(`${parameterId}.query`);
+          if (from) {
+            accumulator[parameterId] = {
+              from: moment(from),
+              to: to && moment(to),
+            };
+          }
+          break;
         default:
           if (!queryString.get(parameter.id)) {
             //  empty querystring
@@ -67,12 +80,29 @@ const App = () => {
   const updateQueryParameters = parameter => {
     const newQueryParameters = { ...queryParameters, ...parameter };
     setQueryParameters(newQueryParameters);
+
+    // convert date field into a qs-like one
+    const qsParameters = { ...newQueryParameters };
+    if (qsParameters.created) {
+      const { from, to } = qsParameters.created;
+      if (from) {
+        if (to) {
+          qsParameters['created.query'] = [
+            from.format('YYYY-MM-DD 00:00:00'),
+            to.format('YYYY-MM-DD 23:59:59'),
+          ];
+          qsParameters['created.range'] = 'min:max';
+        } else {
+          qsParameters['created.query'] = from.format('YYYY-MM-DD 00:00:00');
+          qsParameters['created.range'] = 'min';
+        }
+      }
+      delete qsParameters.created;
+    }
     history.pushState(
       { id: 'comunicati-search' },
       'Comunicati Search',
-      `${portalUrl}/comunicati-search?${queryString.stringify(
-        newQueryParameters,
-      )}`,
+      `${portalUrl}/comunicati-search?${queryString.stringify(qsParameters)}`,
     );
   };
 

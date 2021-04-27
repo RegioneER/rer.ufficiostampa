@@ -79,23 +79,34 @@ const EditUser = ({ user }) => {
       }),
     ];
 
-    Promise.all(fetches).then(data => {
-      const res = data[0];
+    Promise.all(fetches)
+      .then(data => {
+        const res = data[0];
 
-      if (res.status == 204) {
-        //OK
-        setShowModal(false);
-        fetchApi();
-      } else {
-        setServerError(res);
-      }
-    });
+        if (res.status == 204) {
+          //OK
+          setShowModal(false);
+          fetchApi();
+        } else {
+          setServerError(res);
+        }
+      })
+      .catch(err => {
+        const data = err.response.data.error;
+        setServerError({
+          status: err.response.status,
+          statusText: data.message,
+        });
+      });
   };
 
   return (
     <Modal
       show={showModal}
-      close={() => setShowModal(false)}
+      close={() => {
+        setShowModal(false);
+        setServerError(null);
+      }}
       className="modal-edit-user"
       id="modal-edit-user"
       title={
@@ -108,7 +119,6 @@ const EditUser = ({ user }) => {
         <div className="edit-user">
           {serverError && (
             <dl className="portalMessage error" role="alert">
-              <dt>Error. Status code: {serverError.status}</dt>
               <dd>{serverError.statusText}</dd>
             </dl>
           )}
