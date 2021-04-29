@@ -27,7 +27,6 @@ from zope.interface import Interface
 from zope.interface import Invalid
 from zope.interface import provider
 from zope.schema.interfaces import IContextAwareDefaultFactory
-from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
 
 import logging
