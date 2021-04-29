@@ -3,7 +3,40 @@
         width: 100%;
     }
 
+    .DateInput {
+        width: 100%;
+
+        ~ .DateInput {
+            margin-top: 1rem;
+        }
+    }
+
     .DateRangePickerInput {
         background: none;
+    }
+
+    .DateRangePickerInput_arrow {
+        display: none;
+    }
+
+    .DateRangePickerInput_clearDates {
+        margin: 0;
+        padding: 0;
+
+        .DateRangePickerInput_clearDates_svg {
+            fill: #ccc;
+        }
+
+        &:hover,
+        &:active,
+        &:focus {
+            background: none;
+            border-radius: 0;
+            box-shadow: none;
+
+            .DateRangePickerInput_clearDates_svg {
+                fill: #999999;
+            }
+        }
     }
 }

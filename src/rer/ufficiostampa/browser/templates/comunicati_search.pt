@@ -5,6 +5,10 @@
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="rer.ufficiostampa">
 <head>
+<metal:override fill-slot="top_slot"
+    tal:define="disable_column_one python: request.set('disable_plone.leftcolumn',1);
+                disable_column_two python: request.set('disable_plone.rightcolumn',1)"
+                />
 <metal:style fill-slot="style_slot">
   <link tal:define="css python:view.get_resource_css(name='search')"
         href="${css}" rel="stylesheet" />
