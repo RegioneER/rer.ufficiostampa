@@ -518,7 +518,7 @@ msgstr "Trovati ${variable} Comunicati Stampa"
 #. Default: "revoked his subscription from these channels:"
 #: rer/ufficiostampa/browser/templates/cancel_subscriptions_notify_template.pt:8
 msgid "revoke_subscription_label"
-msgstr "si è disiscritto dai seguenti canali:"
+msgstr "si è cancellato dai seguenti canali:"
 
 msgid "save"
 msgstr "Salva"
@@ -610,7 +610,7 @@ msgstr "La sua iscrizione è stata anche rimossa dal database perché non era pi
 #. Default: "Subscriptions updated for ${site}"
 #: rer/ufficiostampa/browser/cancel_subscriptions.py:325
 msgid "subscriptions_updated_label"
-msgstr "Iscrizioni aggiornate per ${site}"
+msgstr "Cancellazione dai canali di ${site}"
 
 #. Default: "Send complete."
 #: rer/ufficiostampa/browser/send.py:342

@@ -10,6 +10,7 @@
   <!--<includeDependencies package="." />-->
   <include file="permissions.zcml" />
 
+  <include package=".behaviors" />
   <include package=".browser" />
   <include package=".restapi" />
   <include package=".subscriptions" />

@@ -43,7 +43,7 @@
           i comunicati nella sezione <em>Agenzia di informazione e comunicazione<em>.
         </p>
         <p>Seguici su Twitter (<a href="https://twitter.com/@RegioneER">@RegioneER</a>), Facebook (<a href="https://www.facebook.com/RegioneEmiliaRomagna">@RegioneEmiliaRomagna</a>)</p>
-        <p>Segreteria di redazione tel. 051 5275490</p>
+        <p class="last-item-footer">Segreteria di redazione tel. 051 5275490</p>
       </div>
       <div class="manage-subscriptions">
         <p i18n:translate="manage_subscriptions_intro">

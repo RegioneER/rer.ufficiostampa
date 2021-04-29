@@ -13,18 +13,22 @@ from rer.ufficiostampa.interfaces import ISendHistoryStore
 from rer.ufficiostampa.interfaces import ISubscriptionsStore
 from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
 from rer.ufficiostampa.utils import get_site_title
-from rer.ufficiostampa.utils import prepare_email_message
 from rer.ufficiostampa.utils import mail_from
+from rer.ufficiostampa.utils import prepare_email_message
 from smtplib import SMTPException
 from z3c.form import button
 from z3c.form import field
 from z3c.form import form
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
+from z3c.form.interfaces import ActionExecutionError
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.interface import Interface
-from z3c.form.interfaces import ActionExecutionError
 from zope.interface import Invalid
+from zope.interface import provider
+from zope.schema.interfaces import IContextAwareDefaultFactory
+from zope.component import getUtility
+from zope.schema.interfaces import IVocabularyFactory
 
 import logging
 import requests
@@ -54,6 +58,14 @@ def check_emails(value):
                 )
             )
     return True
+
+
+@provider(IContextAwareDefaultFactory)
+def default_attachments(context):
+    factory = getUtility(
+        IVocabularyFactory, "rer.ufficiostampa.vocabularies.attachments"
+    )
+    return [x.value for x in factory(context)]
 
 
 class ISendForm(Interface):
@@ -102,6 +114,7 @@ class ISendForm(Interface):
         value_type=schema.Choice(
             source="rer.ufficiostampa.vocabularies.attachments"
         ),
+        defaultFactory=default_attachments,
     )
 
 

@@ -48,6 +48,10 @@ const Menu = ({ editUser }) => {
     }
   };
 
+  const isManager = document
+    .querySelector('body')
+    .classList.contains('userrole-manager');
+
   return (
     <>
       <div className="ufficiostampa-menu-wrapper">
@@ -86,7 +90,7 @@ const Menu = ({ editUser }) => {
             </a>
           )}
         </div>
-        {!isSubscriptionPanel && (
+        {isManager && (
           <div className="right-zone">
             <button
               onClick={() => deleteAllUsers()}

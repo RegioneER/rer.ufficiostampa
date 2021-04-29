@@ -102,18 +102,6 @@ def getSearchFields():
                 vocab_name="rer.ufficiostampa.vocabularies.all_arguments",
             ),
         },
-        {
-            "id": "Subject",
-            "label": translate(
-                _("subject_label", default="Subjects"), context=request,
-            ),
-            "help": "",
-            "type": "select",
-            "multivalued": True,
-            "options": getVocabularyTermsForForm(
-                context=portal, vocab_name="plone.app.vocabularies.Keywords"
-            ),
-        },
     ]
 
 
