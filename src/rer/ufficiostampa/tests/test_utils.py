@@ -1,19 +1,13 @@
 # -*- coding: utf-8 -*-
-"""Setup tests for this package."""
-from rer.ufficiostampa.testing import RER_UFFICIOSTAMPA_INTEGRATION_TESTING
-from plone.api.portal import set_registry_record
+from datetime import datetime
+from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
-from rer.ufficiostampa.utils import defaultLegislature
+from rer.ufficiostampa.testing import RER_UFFICIOSTAMPA_INTEGRATION_TESTING
 from rer.ufficiostampa.utils import get_next_comunicato_number
-from transaction import commit
-from plone import api
-from datetime import datetime
 from zope.annotation.interfaces import IAnnotations
 
 import unittest
-import json
 
 
 class TestComunicatoNumber(unittest.TestCase):
