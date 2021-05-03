@@ -26,17 +26,6 @@ class BaseStore(object):
         return get_soup(self.soup_name, api.portal.get())
 
     def add(self, data):
-        old_record = self.search(query={"email": data.get("email", "")})
-        if old_record:
-            raise ValueError(
-                translate(
-                    _(
-                        "address_already_registered",
-                        default=u"E-mail address already registered.",
-                    ),
-                    context=getRequest(),
-                )
-            )
         record = Record()
         for k, v in data.items():
             if k not in self.fields:
@@ -153,6 +142,20 @@ class SubscriptionsStore(BaseStore):
     indexes = ["text", "channels", "email"]
     keyword_indexes = ["channels"]
     text_index = "text"
+
+    def add(self, data):
+        old_record = self.search(query={"email": data.get("email", "")})
+        if old_record:
+            raise ValueError(
+                translate(
+                    _(
+                        "address_already_registered",
+                        default=u"E-mail address already registered.",
+                    ),
+                    context=getRequest(),
+                )
+            )
+        return super(SubscriptionsStore, self).add(data=data)
 
 
 @implementer(ISendHistoryStore)
