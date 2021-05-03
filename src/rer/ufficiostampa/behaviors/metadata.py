@@ -4,7 +4,7 @@ from plone.autoform.interfaces import IFormFieldProvider
 from zope import schema
 from zope.interface import provider
 from plone.app.dexterity.behaviors.metadata import IBasic, Basic
-from plone.directives import form
+from plone.autoform import directives as form
 
 
 @provider(IFormFieldProvider)

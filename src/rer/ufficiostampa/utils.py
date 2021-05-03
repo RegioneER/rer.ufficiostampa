@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 from email.utils import formataddr
 from itsdangerous.exc import SignatureExpired, BadSignature
 from itsdangerous.url_safe import URLSafeTimedSerializer
+from persistent.dict import PersistentDict
 from plone import api
 from plone.api.exc import InvalidParameterError
 from plone.registry.interfaces import IRegistry
@@ -9,6 +11,7 @@ from Products.CMFPlone.interfaces.controlpanel import IMailSchema
 from rer.ufficiostampa import _
 from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
 from rer.ufficiostampa.interfaces.store import ISubscriptionsStore
+from zope.annotation.interfaces import IAnnotations
 from zope.component import getUtility
 from zope.globalrequest import getRequest
 
@@ -175,4 +178,24 @@ def mail_from():
     mail_settings = registry.forInterface(IMailSchema, prefix="plone")
     return formataddr(
         (mail_settings.email_from_name, mail_settings.email_from_address)
+    )
+
+
+def get_next_comunicato_number():
+    annotations = IAnnotations(api.portal.get())
+    current_year = datetime.now().year
+    if "comunicato_progressive" not in annotations:
+        annotations["comunicato_progressive"] = PersistentDict(
+            {"year": current_year, "number": 0}
+        )
+
+    comunicato_progressive = annotations["comunicato_progressive"]
+    if comunicato_progressive["year"] < current_year:
+        # first comunicato of new year
+        comunicato_progressive["year"] = current_year
+        comunicato_progressive["number"] = 0
+
+    comunicato_progressive["number"] += 1
+    return "{}/{}".format(
+        comunicato_progressive["number"], comunicato_progressive["year"]
     )

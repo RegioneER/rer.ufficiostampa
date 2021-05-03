@@ -25,6 +25,17 @@ Sono presenti due content-type uguali tra loro per la gestione di due tipi diver
 
 Sono delle pagine con due campi aggiuntivi (Argomenti e Legislatura) e folderish (in cui si può inserire solo **Immagini**, **File** e **Cartelle**).
 
+Progressivo Comunicato Stampa
+-----------------------------
+
+I comunicati stampa hanno un progressivo rispetto all'anno corrente (es: 1/2021).
+
+Ogni volta che viene pubblicato un Comunicato Stampa, viene incrementato il progressivo e il valore viene
+associato a quel comunicato (scritto in un campo).
+
+Il primo Comunicato Stampa inviato in un anno, parte col numero 1.
+
+
 Database iscritti
 =================
 

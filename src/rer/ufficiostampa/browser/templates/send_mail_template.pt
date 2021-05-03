@@ -4,6 +4,7 @@
                   description context/description|nothing;
                   title context/title|nothing;
                   text context/text|nothing;
+                  comunicato_number context/comunicato_number|nothing;
                   date python:options.get('date', '');
                   folders python:options.get('folders', '');
                   toLocalizedTime nocall:context/@@plone/toLocalizedTime;"
@@ -16,9 +17,12 @@
       <div>Giunta Regionale - Agenzia di informazione e comunicazione</div>
     </div>
     <div class="infos">
-      <p i18n:translate="send_date_label" class="date">
+      <div class="comunicato-number" tal:condition="python:comunicato_number and context.portal_type == 'ComunicatoStampa'">
+        N. ${comunicato_number}
+      </div>
+      <div i18n:translate="send_date_label" class="date">
         Date <b i18n:name="date" tal:content="python:toLocalizedTime(date, long_format=False)" />
-      </p>
+      </div>
       <p>
         All'attenzione dei Capi redattori
       </p>

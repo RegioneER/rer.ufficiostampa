@@ -36,7 +36,11 @@ class IComunicatoStampa(model.Schema):
         required=False,
         default=False,
     )
+    comunicato_number = schema.TextLine(
+        title=u"", description=u"", required=False
+    )
     directives.omitted("message_sent")
+    directives.omitted("comunicato_number")
 
 
 class IInvitoStampa(IComunicatoStampa):
