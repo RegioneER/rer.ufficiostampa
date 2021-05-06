@@ -519,7 +519,7 @@ msgid "reset_filters_label"
 msgstr "Rimuovi tutti i filtri"
 
 msgid "results_tot_label"
-msgstr "Trovato ${variable} Comunicato Stampa"
+msgstr "Trovato ${variable} risultato"
 
 msgid "results_tot_label_multi"
 msgstr "Trovati ${variable} risultati"
