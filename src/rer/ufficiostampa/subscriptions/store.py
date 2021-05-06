@@ -163,13 +163,15 @@ class SendHistoryStore(BaseStore):
     soup_name = "send_history_soup"
     soup_type = "HISTORY"
     fields = [
-        "subject",
+        "number",
+        "title",
         "type",
         "recipients",
         "channels",
         "status",
         "completed_date",
+        "url",
     ]
-    indexes = ["subject", "channels", "date", "type"]
+    indexes = ["title", "channels", "date", "type"]
     keyword_indexes = []
-    text_index = "subject"
+    text_index = "title"

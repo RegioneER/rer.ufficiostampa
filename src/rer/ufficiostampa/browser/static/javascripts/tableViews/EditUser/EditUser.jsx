@@ -82,7 +82,7 @@ const EditUser = ({ user }) => {
     Promise.all(fetches)
       .then(data => {
         const res = data[0];
-
+        console.log('ok');
         if (res.status == 204) {
           //OK
           setShowModal(false);
@@ -92,10 +92,11 @@ const EditUser = ({ user }) => {
         }
       })
       .catch(err => {
-        const data = err.response.data.error;
+        const statusText =
+          err.response.data.error?.message || err.response.data.message;
         setServerError({
           status: err.response.status,
-          statusText: data.message,
+          statusText,
         });
       });
   };

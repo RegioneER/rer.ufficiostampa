@@ -38,8 +38,8 @@ class SendHistorySoupCatalogFactory(object):
         catalog[u"channels"] = CatalogKeywordIndex(channels_indexer)
         date_indexer = NodeAttributeIndexer("date")
         catalog[u"date"] = CatalogFieldIndex(date_indexer)
-        subject_indexer = NodeAttributeIndexer("subject")
-        catalog[u"subject"] = CatalogTextIndex(subject_indexer)
+        title_indexer = NodeAttributeIndexer("title")
+        catalog[u"title"] = CatalogTextIndex(title_indexer)
         type_indexer = NodeAttributeIndexer("type")
         catalog[u"type"] = CatalogFieldIndex(type_indexer)
         return catalog

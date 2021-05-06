@@ -209,7 +209,9 @@ class SendForm(form.Form):
         intid = tool.add(
             {
                 "type": self.type_name,
-                "subject": self.context.Title(),
+                "title": self.context.Title(),
+                "number": getattr(self.context, "comunicato_number", ""),
+                "url": self.context.absolute_url(),
                 "recipients": subscribers,
                 "channels": data.get("channels", []),
                 "status": "sending",

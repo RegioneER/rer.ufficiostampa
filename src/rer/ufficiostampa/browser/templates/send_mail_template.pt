@@ -43,17 +43,21 @@
     <div id="footer">
       <div class="other-news">
         <p>
-          Tutte le notizie su <a title="Regione Emilia-Romagna" href="https://www.regione.emilia-romagna.it">www.regione.emilia-romagna.it</a>,
-          i comunicati nella sezione <em>Agenzia di informazione e comunicazione<em>.
+          Tutti i comunicati sono online su <a title="Notizie Regione Emilia-Romagna" href="https://notizie.regione.emilia-romagna.it">https://notizie.regione.emilia-romagna.it</a>
         </p>
-        <p>Seguici su Twitter (<a href="https://twitter.com/@RegioneER">@RegioneER</a>), Facebook (<a href="https://www.facebook.com/RegioneEmiliaRomagna">@RegioneEmiliaRomagna</a>)</p>
-        <p class="last-item-footer">Segreteria di redazione tel. 051 5275490</p>
+        <p>
+          Seguici su Twitter (<a href="https://twitter.com/@RegioneER">@RegioneER</a>),
+          Facebook (<a href="https://www.facebook.com/RegioneEmiliaRomagna">@RegioneEmiliaRomagna</a>),
+          Instagram (<a href="https://www.instagram.com/regione_emiliaromagna">@regione_emiliaromagna</a>),
+          Linkedin (<a href="https://www.linkedin.com/company/regione-emilia-romagna">@regione-emilia-romagna</a>)
+        </p>
+        <p class="last-item-footer">Segreteria di redazione tel. <a href="tel:051-5275490">051 5275490</a></p>
       </div>
       <div class="manage-subscriptions">
         <p i18n:translate="manage_subscriptions_intro">
-        You are receiving this email because you are subscribed to <b i18n:name="site_title">${site_title}</b>.
+        You are receiving this email because you are subscribed to <b i18n:name="site_title">${site_title}</b>
         </p>
-        <a i18n:translate="manage_subscriptions_link" href="${context/portal_url}/cancel-subscriptions-request">Manage your subscriptions</a>.
+        <a i18n:translate="delete_subscriptions_link" href="${context/portal_url}/cancel-subscriptions-request">Unsubscribe</a>
       </div>
     </div>
 </tal:root>

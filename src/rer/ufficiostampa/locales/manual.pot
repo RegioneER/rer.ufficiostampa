@@ -101,7 +101,7 @@ msgstr ""
 msgid "items_selected"
 msgstr ""
 
-msgid "Subject"
+msgid "Number"
 msgstr ""
 
 msgid "Recipients"

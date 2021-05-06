@@ -92,7 +92,19 @@ const HistoryList = ({ editUser }) => {
       sortable: false,
       width: '80px',
     },
-    { name: labels.subject, selector: 'subject', sortable: true },
+    { name: labels.number, selector: 'number', sortable: false, width: '80px' },
+    {
+      name: labels.title,
+      selector: 'title',
+      sortable: true,
+      cell: row => (
+        <div>
+          <a href={row.url} title={row.title}>
+            {row.title}
+          </a>
+        </div>
+      ),
+    },
   ];
 
   //------------FILTERING-----------
@@ -100,11 +112,13 @@ const HistoryList = ({ editUser }) => {
   const SubHeaderComponent = React.useMemo(() => {
     const handleClearText = () => {
       setResetPaginationToggle(!resetPaginationToggle);
-      setFilters({ ...filters, subject: '' });
+      const newFilters = { ...filters, title: '' };
+      setFilters(newFilters);
+      doQuery(newFilters);
     };
 
     const delayTextSubmit = value => {
-      const newFilters = { ...filters, subject: value };
+      const newFilters = { ...filters, title: value };
       if (textTimeout) {
         clearInterval(textTimeout);
       }
@@ -117,8 +131,8 @@ const HistoryList = ({ editUser }) => {
 
     const doQuery = queryFilters => {
       const params = { ...queryFilters };
-      if (params.subject?.length) {
-        params.subject = params.subject + '*';
+      if (params.title?.length) {
+        params.title = params.title + '*';
       }
       fetchApi(null, params);
     };
@@ -150,7 +164,7 @@ const HistoryList = ({ editUser }) => {
             type="text"
             placeholder={getTranslationFor('Filter history', 'Filter history')}
             aria-label={getTranslationFor('Search...', 'Search...')}
-            value={filters.subject || ''}
+            value={filters.title || ''}
             onChange={e => delayTextSubmit(e.target.value)}
           />
           <button type="button" onClick={handleClearText}>

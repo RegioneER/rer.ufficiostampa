@@ -12,7 +12,8 @@ export const getUserFieldsLables = getTranslationFor => {
 export const getHistoryFieldsLables = getTranslationFor => {
   return {
     type: getTranslationFor('Type', 'Type'),
-    subject: getTranslationFor('Subject', 'Subject'),
+    title: getTranslationFor('label_title', 'Title'),
+    number: getTranslationFor('Number', 'Number'),
     recipients: getTranslationFor('Recipients', 'Recipients'),
     date: getTranslationFor('Date', 'Date'),
     completed_date: getTranslationFor('Completed Date', 'Completed Date'),

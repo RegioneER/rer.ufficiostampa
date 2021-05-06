@@ -125,8 +125,12 @@ class DataAdd(Service):
         except ValueError as e:
             self.request.response.setStatus(500)
             return dict(
-                error=dict(type="InternalServerError", message=e.message,)
+                error=dict(
+                    type="InternalServerError",
+                    message=getattr(e, "message", e.__str__()),
+                )
             )
+
         if res:
             return self.reply_no_content()
 
