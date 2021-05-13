@@ -459,7 +459,7 @@ msgstr "Email non trovata. Impossibile aggiornare i dati."
 #: rer/ufficiostampa/browser/templates/cancel_subscriptions_mail_template.pt:32
 #: rer/ufficiostampa/browser/templates/send_mail_template.pt:58
 msgid "manage_subscriptions_intro"
-msgstr "Stai ricevendo questa email perché sei iscritto sul sito ${site_title}"
+msgstr "Stai ricevendo questa email perché sei iscritto al sito ${site_title}"
 
 #. Default: "Manage your subscriptions"
 #: rer/ufficiostampa/browser/templates/cancel_subscriptions_mail_template.pt:34
