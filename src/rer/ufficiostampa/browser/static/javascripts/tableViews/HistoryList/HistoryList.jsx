@@ -92,7 +92,7 @@ const HistoryList = ({ editUser }) => {
       sortable: false,
       width: '80px',
     },
-    { name: labels.number, selector: 'number', sortable: false, width: '80px' },
+    { name: labels.number, selector: 'number', sortable: true, width: '80px' },
     {
       name: labels.title,
       selector: 'title',

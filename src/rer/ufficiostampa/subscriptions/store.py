@@ -61,8 +61,14 @@ class BaseStore(object):
             ]
         # return all data
         records = self.soup.data.values()
+        if sort_index == "date":
+            return sorted(
+                records,
+                key=lambda k: k.attrs[sort_index] or None,
+                reverse=reverse,
+            )
         return sorted(
-            records, key=lambda k: k.attrs[sort_index], reverse=reverse
+            records, key=lambda k: k.attrs[sort_index] or "", reverse=reverse
         )
 
     def parse_query_params(self, index, value):
