@@ -23,7 +23,7 @@
             </p>
             <div class="summary">
               <h3>
-                <a href="${item/getURL}" title="${item_title}">${item_title}</a>
+                <a href="${item/getURL}" title="${item_description}">${item_title}</a>
               </h3>
             </div>
             <p class="description" tal:condition="item_description">${item_description}</p>

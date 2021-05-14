@@ -27,7 +27,7 @@ class ArgumentsVocabularyFactory(object):
 
         except (KeyError, InvalidParameterError, TypeError):
             arguments = []
-        for arg in getattr(context, "arguments", []):
+        for arg in getattr(context, "arguments", []) or []:
             if arg and arg not in arguments:
                 arguments.append(arg)
         terms = [
