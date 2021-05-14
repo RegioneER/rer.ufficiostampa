@@ -19,7 +19,7 @@
                           item_title item/Title">
             <p class="itemDate"
                 tal:condition="python:item_effective!='None'"
-                tal:content="python:view.toLocalizedTime(item_effective,long_format=0)">
+                tal:content="python:view.toLocalizedTime(item_effective,long_format=1)">
             </p>
             <div class="summary">
               <h3>
