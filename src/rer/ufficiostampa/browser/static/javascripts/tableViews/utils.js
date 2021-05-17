@@ -18,5 +18,6 @@ export const getHistoryFieldsLables = getTranslationFor => {
     date: getTranslationFor('Date', 'Date'),
     completed_date: getTranslationFor('Completed Date', 'Completed Date'),
     status: getTranslationFor('Status', 'Status'),
+    channels: getTranslationFor('subscription_channels_label', 'Channels'),
   };
 };

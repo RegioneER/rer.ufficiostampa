@@ -63,7 +63,19 @@ const HistoryList = ({ editUser }) => {
       cell: StatusCell,
       width: '50px',
     },
-    { name: labels.type, selector: 'type', sortable: true, width: '150px' },
+    {
+      name: labels.type,
+      selector: 'type',
+      sortable: true,
+      width: '150px',
+    },
+    {
+      name: labels.channels,
+      selector: 'channels',
+      sortable: false,
+      width: '150px',
+      cell: row => <div>{row.channels.join(', ')}</div>,
+    },
     {
       name: labels.date,
       selector: 'date',
@@ -71,7 +83,7 @@ const HistoryList = ({ editUser }) => {
       cell: row => (
         <div>{format(new Date(row.date), 'dd/MM/yyyy HH:mm:ss')}</div>
       ),
-      width: '180px',
+      width: '160px',
     },
     {
       name: labels.completed_date,
@@ -84,7 +96,7 @@ const HistoryList = ({ editUser }) => {
             : ''}
         </div>
       ),
-      width: '180px',
+      width: '160px',
     },
     {
       name: labels.recipients,
