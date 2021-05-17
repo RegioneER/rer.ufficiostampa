@@ -119,6 +119,9 @@ msgstr ""
 msgid "comunicato_published_on"
 msgstr ""
 
+msgid "select_noOptionsMessage"
+msgstr ""
+
 msgid "select_placeholder_multi"
 msgstr ""
 

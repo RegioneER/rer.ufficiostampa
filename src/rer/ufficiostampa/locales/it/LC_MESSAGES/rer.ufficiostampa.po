@@ -542,6 +542,9 @@ msgstr "Salva"
 msgid "search_comunicati_label"
 msgstr "Ricerca Comunicati"
 
+msgid "select_noOptionsMessage"
+msgstr "Nessun valore"
+
 msgid "select_placeholder_multi"
 msgstr "Seleziona uno o più valori"
 

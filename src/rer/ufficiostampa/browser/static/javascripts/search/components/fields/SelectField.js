@@ -3,6 +3,91 @@ import Select from 'react-select';
 import { string, shape, arrayOf, func, bool } from 'prop-types';
 import { TranslationsContext } from '../../../TranslationsContext';
 
+const ariaLiveMessages = {
+  guidance: props => {
+    const {
+      isSearchable,
+      isMulti,
+      isDisabled,
+      tabSelectsValue,
+      context,
+    } = props;
+    switch (context) {
+      case 'menu':
+        return `Usa Su e Giù per scegliere le opzioni${
+          isDisabled ? '' : ", premi Invio per selezionare l'opzione corrente"
+        }, premi ESC per uscire dal menu${
+          tabSelectsValue
+            ? ", premi Tab per selezionare l'opzione e uscire dal menu"
+            : ''
+        }.`;
+      case 'input':
+        return `${props['aria-label'] || 'Selezione'} ha il focus ${
+          isSearchable ? ', digita per affinare la lista' : ''
+        }, premi Giù per aprire il menu, ${
+          isMulti
+            ? ' premi Sinistra per avere il focus sui valori selezionati'
+            : ''
+        }`;
+      case 'value':
+        return 'Usa Sinistra e Destra per cambiare tra i valori selezionati, premi Backspace per rimuovere il valore correntemente selezionato';
+      default:
+        return '';
+    }
+  },
+  onChange: props => {
+    const { action, label = '', isDisabled } = props;
+    switch (action) {
+      case 'deselect-option':
+      case 'pop-value':
+      case 'remove-value':
+        return `opzione ${label}, deselezionata.`;
+      case 'select-option':
+        return isDisabled
+          ? `opzione ${label} è disabilitata. Seleziona un\'altra opzione.`
+          : `opzione ${label}, selezionata.`;
+      default:
+        return '';
+    }
+  },
+
+  onFocus: props => {
+    const {
+      context,
+      focused,
+      options,
+      label = '',
+      selectValue,
+      isDisabled,
+      isSelected,
+    } = props;
+
+    const getArrayIndex = (arr, item) =>
+      arr && arr.length ? `${arr.indexOf(item) + 1} di ${arr.length}` : '';
+
+    if (context === 'value' && selectValue) {
+      return `valore ${label} evidenziato, ${getArrayIndex(
+        selectValue,
+        focused,
+      )}.`;
+    }
+
+    if (context === 'menu') {
+      const disabled = isDisabled ? ' disabilitato' : '';
+      const status = `${isSelected ? 'selezionato' : 'evidenziato'}${disabled}`;
+      return `opzione ${label} ${status}, ${getArrayIndex(options, focused)}.`;
+    }
+    return '';
+  },
+
+  onFilter: props => {
+    const { inputValue, resultsMessage } = props;
+    return `${resultsMessage}${
+      inputValue ? ' per il termine di ricerca ' + inputValue : ''
+    }.`;
+  },
+};
+
 const SelectField = ({ parameter, value = [], updateQueryParameters }) => {
   const getTranslationFor = useContext(TranslationsContext);
   const { multivalued } = parameter;
@@ -29,7 +114,16 @@ const SelectField = ({ parameter, value = [], updateQueryParameters }) => {
         })}
         name={parameter.id}
         options={parameter.options}
+        noOptionsMessage={() =>
+          getTranslationFor('select_noOptionsMessage', 'Nessun valore')
+        }
         placeholder={getTranslationFor(placeholderLabel, 'Select...')}
+        ariaLiveMessages={ariaLiveMessages}
+        screenReaderStatus={({ count }) =>
+          `${count} risultat${count !== 1 ? 'i' : 'o'} disponibil${
+            count !== 1 ? 'i' : 'e'
+          }`
+        }
         onChange={options => {
           let newValue = [];
           if (options) {
