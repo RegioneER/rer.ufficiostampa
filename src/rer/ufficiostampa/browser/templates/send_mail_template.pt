@@ -55,7 +55,7 @@
       </div>
       <div class="manage-subscriptions">
         <p i18n:translate="manage_subscriptions_intro">
-        You are receiving this email because you are subscribed to <b i18n:name="site_title">${site_title}</b>
+        You are receiving this email because you are subscribed to <b i18n:name="site_title">${site_title}</b>.
         </p>
         <a i18n:translate="delete_subscriptions_link" href="${context/portal_url}/cancel-subscriptions-request">Unsubscribe</a>
       </div>

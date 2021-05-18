@@ -11,3 +11,10 @@ def setNumber(item, event):
         # already set
         return
     setattr(item, "comunicato_number", get_next_comunicato_number())
+
+
+def setEmptyNumber(item, event):
+    """
+    Reset it when copy a comunicato
+    """
+    setattr(item, "comunicato_number", "")

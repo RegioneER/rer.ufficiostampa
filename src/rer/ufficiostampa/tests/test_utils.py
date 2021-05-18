@@ -5,7 +5,8 @@ from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from rer.ufficiostampa.testing import RER_UFFICIOSTAMPA_INTEGRATION_TESTING
 from rer.ufficiostampa.utils import get_next_comunicato_number
-from zope.annotation.interfaces import IAnnotations
+from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
+from transaction import commit
 
 import unittest
 
@@ -25,8 +26,13 @@ class TestComunicatoNumber(unittest.TestCase):
         )
 
     def tearDown(self):
-        annotations = IAnnotations(self.portal)
-        annotations["comunicato_progressive"] = None
+        api.portal.set_registry_record(
+            "comunicato_year", 0, interface=IRerUfficiostampaSettings,
+        )
+        api.portal.set_registry_record(
+            "comunicato_number", 0, interface=IRerUfficiostampaSettings,
+        )
+        commit()
 
     def test_by_default_number_is_1(self):
         self.assertEqual(
@@ -43,11 +49,14 @@ class TestComunicatoNumber(unittest.TestCase):
 
     def test_calling_util_on_new_year_return_1(self):
         current_year = datetime.now().year
-        annotations = IAnnotations(self.portal)
-        annotations["comunicato_progressive"] = {
-            "year": current_year - 1,
-            "number": 123,
-        }
+        api.portal.set_registry_record(
+            "comunicato_year",
+            current_year - 1,
+            interface=IRerUfficiostampaSettings,
+        )
+        api.portal.set_registry_record(
+            "comunicato_number", 123, interface=IRerUfficiostampaSettings,
+        )
         self.assertEqual(
             get_next_comunicato_number(), "1/{}".format(current_year)
         )

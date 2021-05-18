@@ -3,7 +3,6 @@ from datetime import datetime
 from email.utils import formataddr
 from itsdangerous.exc import SignatureExpired, BadSignature
 from itsdangerous.url_safe import URLSafeTimedSerializer
-from persistent.dict import PersistentDict
 from plone import api
 from plone.api.exc import InvalidParameterError
 from plone.registry.interfaces import IRegistry
@@ -11,7 +10,6 @@ from Products.CMFPlone.interfaces.controlpanel import IMailSchema
 from rer.ufficiostampa import _
 from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
 from rer.ufficiostampa.interfaces.store import ISubscriptionsStore
-from zope.annotation.interfaces import IAnnotations
 from zope.component import getUtility
 from zope.globalrequest import getRequest
 
@@ -27,8 +25,11 @@ except ImportError:
     RER_THEME = False
 
 import json
+import logging
 import six
 import premailer
+
+logger = logging.getLogger(__name__)
 
 
 def defaultLegislature():
@@ -38,11 +39,12 @@ def defaultLegislature():
                 "legislatures", interface=IRerUfficiostampaSettings
             )
         )
-    except (KeyError, InvalidParameterError, TypeError):
-        return ""
+    except (KeyError, InvalidParameterError, TypeError) as e:
+        logger.exception(e)
+        return u""
 
     if not legislatures:
-        return ""
+        return u""
     current = legislatures[-1]
     return current.get("legislature", "")
 
@@ -182,20 +184,36 @@ def mail_from():
 
 
 def get_next_comunicato_number():
-    annotations = IAnnotations(api.portal.get())
+    comunicato_year = api.portal.get_registry_record(
+        "comunicato_year", interface=IRerUfficiostampaSettings
+    )
+    comunicato_number = api.portal.get_registry_record(
+        "comunicato_number", interface=IRerUfficiostampaSettings
+    )
     current_year = datetime.now().year
-    if "comunicato_progressive" not in annotations:
-        annotations["comunicato_progressive"] = PersistentDict(
-            {"year": current_year, "number": 0}
+
+    if comunicato_year < current_year:
+        # first comunicato of new year
+        comunicato_year = current_year
+        comunicato_number = 1
+        # update value
+        api.portal.set_registry_record(
+            "comunicato_year",
+            current_year,
+            interface=IRerUfficiostampaSettings,
+        )
+        api.portal.set_registry_record(
+            "comunicato_number",
+            comunicato_number,
+            interface=IRerUfficiostampaSettings,
+        )
+    else:
+        comunicato_number += 1
+        # update value
+        api.portal.set_registry_record(
+            "comunicato_number",
+            comunicato_number,
+            interface=IRerUfficiostampaSettings,
         )
 
-    comunicato_progressive = annotations["comunicato_progressive"]
-    if comunicato_progressive["year"] < current_year:
-        # first comunicato of new year
-        comunicato_progressive["year"] = current_year
-        comunicato_progressive["number"] = 0
-
-    comunicato_progressive["number"] += 1
-    return "{}/{}".format(
-        comunicato_progressive["number"], comunicato_progressive["year"]
-    )
+    return "{}/{}".format(comunicato_number, comunicato_year)

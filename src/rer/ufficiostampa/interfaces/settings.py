@@ -81,6 +81,26 @@ class IRerUfficiostampaSettings(model.Schema):
         ),
         required=True,
     )
+    comunicato_number = schema.Int(
+        title=_("comunicato_number_label", default=u"Comunicato number",),
+        description=_(
+            "comunicato_number_help",
+            default=u"The number of last sent Comunicato. You don't have to "
+            "edit this. It's automatically updated on every new send.",
+        ),
+        required=True,
+        default=0,
+    )
+    comunicato_year = schema.Int(
+        title=_("comunicato_year_label", default=u"Comunicato year",),
+        description=_(
+            "comunicato_year_help",
+            default=u"You don't have to edit this. It's automatically updated"
+            u" on every new year.",
+        ),
+        required=True,
+        default=2021,
+    )
 
 
 class ILegislaturesRowSchema(model.Schema):

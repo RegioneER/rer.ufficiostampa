@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-05-06 10:19+0000\n"
+"POT-Creation-Date: 2021-05-18 13:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -196,7 +196,7 @@ msgid "additional_addresses_title"
 msgstr ""
 
 #. Default: "E-mail address already registered."
-#: rer/ufficiostampa/subscriptions/store.py:151
+#: rer/ufficiostampa/subscriptions/store.py:157
 msgid "address_already_registered"
 msgstr ""
 
@@ -271,7 +271,27 @@ msgstr ""
 msgid "comunicati_stampa_layout"
 msgstr ""
 
+#. Default: "The number of last sent Comunicato. You don't have to edit this. It's automatically updated on every new send."
+#: rer/ufficiostampa/interfaces/settings.py:86
+msgid "comunicato_number_help"
+msgstr ""
+
+#. Default: "Comunicato number"
+#: rer/ufficiostampa/interfaces/settings.py:85
+msgid "comunicato_number_label"
+msgstr ""
+
 msgid "comunicato_published_on"
+msgstr ""
+
+#. Default: "You don't have to edit this. It's automatically updated on every new year."
+#: rer/ufficiostampa/interfaces/settings.py:96
+msgid "comunicato_year_help"
+msgstr ""
+
+#. Default: "Comunicato year"
+#: rer/ufficiostampa/interfaces/settings.py:95
+msgid "comunicato_year_label"
 msgstr ""
 
 #. Default: "Click on"
@@ -400,12 +420,12 @@ msgid "label_title"
 msgstr ""
 
 #. Default: "Insert a list of arguments related to this legislature. One per line."
-#: rer/ufficiostampa/interfaces/settings.py:96
+#: rer/ufficiostampa/interfaces/settings.py:116
 msgid "legislature_arguments_help"
 msgstr ""
 
 #. Default: "Arguments"
-#: rer/ufficiostampa/interfaces/settings.py:95
+#: rer/ufficiostampa/interfaces/settings.py:115
 #: rer/ufficiostampa/restapi/services/search_parameters/get.py:94
 msgid "legislature_arguments_label"
 msgstr ""
@@ -416,12 +436,12 @@ msgid "legislature_criteria_label"
 msgstr ""
 
 #. Default: "Insert the legislature name."
-#: rer/ufficiostampa/interfaces/settings.py:89
+#: rer/ufficiostampa/interfaces/settings.py:109
 msgid "legislature_help"
 msgstr ""
 
 #. Default: "Legislature"
-#: rer/ufficiostampa/interfaces/settings.py:88
+#: rer/ufficiostampa/interfaces/settings.py:108
 msgid "legislature_label"
 msgstr ""
 
@@ -542,6 +562,9 @@ msgstr ""
 msgid "search_comunicati_label"
 msgstr ""
 
+msgid "select_noOptionsMessage"
+msgstr ""
+
 msgid "select_placeholder_multi"
 msgstr ""
 
@@ -653,37 +676,37 @@ msgid "token_secret_label"
 msgstr ""
 
 #. Default: "Unable to manage subscriptions. Invalid email."
-#: rer/ufficiostampa/utils.py:141
+#: rer/ufficiostampa/utils.py:143
 msgid "unsubscribe_confirm_invalid_email"
 msgstr ""
 
 #. Default: "Unable to manage subscriptions. Invalid id."
-#: rer/ufficiostampa/utils.py:134
+#: rer/ufficiostampa/utils.py:136
 msgid "unsubscribe_confirm_invalid_id"
 msgstr ""
 
 #. Default: "Unable to manage subscriptions. Invalid parameters."
-#: rer/ufficiostampa/utils.py:125
+#: rer/ufficiostampa/utils.py:127
 msgid "unsubscribe_confirm_invalid_parameters"
 msgstr ""
 
 #. Default: "Unable to manage subscriptions. Token expired."
-#: rer/ufficiostampa/utils.py:109
+#: rer/ufficiostampa/utils.py:111
 msgid "unsubscribe_confirm_secret_expired"
 msgstr ""
 
 #. Default: "Unable to manage subscriptions. Invalid token."
-#: rer/ufficiostampa/utils.py:116
+#: rer/ufficiostampa/utils.py:118
 msgid "unsubscribe_confirm_secret_invalid"
 msgstr ""
 
 #. Default: "Unable to manage subscriptions. Token not present."
-#: rer/ufficiostampa/utils.py:78
+#: rer/ufficiostampa/utils.py:80
 msgid "unsubscribe_confirm_secret_null"
 msgstr ""
 
 #. Default: "Unable to manage subscriptions. Token keys not set in control panel."
-#: rer/ufficiostampa/utils.py:92
+#: rer/ufficiostampa/utils.py:94
 msgid "unsubscribe_confirm_secret_token_settings_error"
 msgstr ""
 
