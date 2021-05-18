@@ -1,7 +1,19 @@
 import React, { useContext } from 'react';
-import Select from 'react-select';
+import Select, { components } from 'react-select';
 import { string, shape, arrayOf, func, bool } from 'prop-types';
 import { TranslationsContext } from '../../../TranslationsContext';
+
+const SelectContainer = ({ children, ...props }) => (
+  <components.SelectContainer
+    {...props}
+    innerProps={{
+      'aria-controls': 'search-results-region',
+      'aria-atomic': true,
+    }}
+  >
+    {children}
+  </components.SelectContainer>
+);
 
 const ariaLiveMessages = {
   guidance: props => {
@@ -119,11 +131,13 @@ const SelectField = ({ parameter, value = [], updateQueryParameters }) => {
         }
         placeholder={getTranslationFor(placeholderLabel, 'Select...')}
         ariaLiveMessages={ariaLiveMessages}
+        aria-controls="search-results-region"
         screenReaderStatus={({ count }) =>
           `${count} risultat${count !== 1 ? 'i' : 'o'} disponibil${
             count !== 1 ? 'i' : 'e'
           }`
         }
+        components={{ SelectContainer }}
         onChange={options => {
           let newValue = [];
           if (options) {

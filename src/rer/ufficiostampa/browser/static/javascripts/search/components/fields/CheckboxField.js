@@ -39,6 +39,7 @@ const CheckboxField = ({ parameter, value = [], updateQueryParameters }) => {
               checked={value.includes(option.value)}
               type="checkbox"
               onChange={updateCheckboxValue}
+              aria-controls="search-results-region"
             />
             {option.label}
           </label>

@@ -28,6 +28,7 @@ const TextField = ({ parameter, value = '', updateQueryParameters }) => {
         type="text"
         value={data.text}
         onChange={e => delaySearchSubmit(e.target.value)}
+        aria-controls="search-results-region"
       />
     </React.Fragment>
   );

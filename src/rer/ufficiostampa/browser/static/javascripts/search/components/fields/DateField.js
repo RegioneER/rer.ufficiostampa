@@ -19,9 +19,14 @@ const DateField = ({
   const getTranslationFor = useContext(TranslationsContext);
   const [focusedDateInput, setFocusedDateInput] = useState(null);
 
+  // set locales for pickers
   let language = document.querySelector('html').getAttribute('lang');
   moment.locale(language);
 
+  /*
+   * close picker when tabbing elsewhere or pressing ESC
+   */
+  // for start date input (shift tab, prev)
   useEffect(() => {
     let startDateInput = document.getElementById('start-date-filter');
 
@@ -29,14 +34,15 @@ const DateField = ({
       let removeStartDateListener = startDateInput.addEventListener(
         'keydown',
         e => {
-          if (e.key === 'Tab' && e.shiftKey) setFocusedDateInput(null);
+          if ((e.key === 'Tab' && e.shiftKey) || e.key === 'ESC')
+            setFocusedDateInput(null);
         },
       );
 
       if (removeStartDateListener) return () => removeStartDateListener();
     }
   }, []);
-
+  // and for  end date input (tab, next)
   useEffect(() => {
     let endDateInput = document.getElementById('end-date-filter');
 
@@ -44,12 +50,26 @@ const DateField = ({
       let removeEndDateListener = endDateInput.addEventListener(
         'keydown',
         e => {
-          if (e.key === 'Tab' && !e.shiftKey) setFocusedDateInput(null);
+          if ((e.key === 'Tab' && !e.shiftKey) || e.key === 'ESC')
+            setFocusedDateInput(null);
         },
       );
 
       if (removeEndDateListener) return () => removeEndDateListener();
     }
+  }, []);
+
+  /*
+   * add aria-controls to date inputs for live region update
+   */
+  useEffect(() => {
+    let startDateInput = document.getElementById('start-date-filter');
+    let endDateInput = document.getElementById('end-date-filter');
+
+    if (startDateInput)
+      startDateInput.setAttribute('aria-controls', 'search-results-region');
+    if (endDateInput)
+      endDateInput.setAttribute('aria-controls', 'search-results-region');
   }, []);
 
   return (
@@ -83,6 +103,7 @@ const DateField = ({
         showClearDates
         minimumNights={0}
         isOutsideRange={() => {}}
+        aria-controls="search-results-region"
       />
     </React.Fragment>
   );

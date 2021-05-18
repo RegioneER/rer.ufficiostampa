@@ -117,7 +117,13 @@ const ResultsWrapper = ({ queryParameters, updateQueryParameters }) => {
     />
   );
   return (
-    <div className="search-results col-md-8 col-sm-12">
+    <div
+      className="search-results col-md-8 col-sm-12"
+      role="region"
+      aria-live="polite"
+      id="search-results-region"
+      aria-relevant="additions removals"
+    >
       {resultsContent}
       <a href="#comunicati-search-filters" className="sr-only">
         {getTranslationFor('go_to_search_filters', 'Go to filters')}
