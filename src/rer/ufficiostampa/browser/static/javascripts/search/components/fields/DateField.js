@@ -103,7 +103,6 @@ const DateField = ({
         showClearDates
         minimumNights={0}
         isOutsideRange={() => {}}
-        aria-controls="search-results-region"
       />
     </React.Fragment>
   );
