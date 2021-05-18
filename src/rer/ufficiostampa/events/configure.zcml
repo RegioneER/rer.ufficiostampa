@@ -10,4 +10,10 @@
           Products.CMFCore.interfaces.IActionSucceededEvent"
       handler=".comunicato.setNumber"
     />
+    <subscriber
+      for="rer.ufficiostampa.interfaces.IComunicatoStampa
+          OFS.interfaces.IObjectWillBeAddedEvent"
+      handler=".comunicato.setEmptyNumber"
+    />
+
 </configure>
