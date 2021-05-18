@@ -12,7 +12,9 @@ class View(BrowserView):
         if item.portal_type == "File":
             file_obj = getattr(item, "file", None)
             if file_obj:
-                url = "{}/@@download/file/{}".format(url, file_obj.filename)
+                url = "{}/@@download/file/{}".format(
+                    url, file_obj.filename.encode("utf-8")
+                )
         return {
             "url": url,
             "title": item.Title(),
