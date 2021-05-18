@@ -40,7 +40,7 @@ class IComunicatoStampa(model.Schema):
         title=u"", description=u"", required=False
     )
     directives.omitted("message_sent")
-    # directives.omitted("comunicato_number")
+    directives.omitted("comunicato_number")
 
 
 class IInvitoStampa(IComunicatoStampa):
