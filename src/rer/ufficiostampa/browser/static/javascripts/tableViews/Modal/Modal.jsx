@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, createRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { TranslationsContext } from '../../TranslationsContext';
 
 import './Modal.less';
@@ -21,10 +21,13 @@ const ModalFooter = ({ children }) => {
 const Modal = props => {
   const { show, close, children, className, id, title } = props;
   const getTranslationFor = useContext(TranslationsContext);
-  const modalRef = createRef();
+  const [originalFocusedNode, setOriginalFocusedNode] = useState(null);
+  const modalRef = useRef(null);
 
   const handleTabKey = e => {
-    const focusableModalElements = modalRef.current.querySelectorAll(
+    const modal =
+      modalRef?.current ?? document.querySelector('.plone-modal-content');
+    const focusableModalElements = modal.querySelectorAll(
       'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select',
     );
     const firstElement = focusableModalElements[0];
@@ -47,17 +50,23 @@ const Modal = props => {
 
     if (
       e.shiftKey &&
-      (activeElement == firstElement || !ctiveElementIsInModal)
+      (activeElement == firstElement || !activeElementIsInModal)
     ) {
       lastElement.focus();
       e.preventDefault();
     }
   };
 
+  const handleEscKey = () => {
+    if (originalFocusedNode && originalFocusedNode !== document.activeElement)
+      originalFocusedNode.focus();
+    close();
+  };
+
   useEffect(() => {
     if (show) {
       const keyListenersMap = new Map([
-        [27, close],
+        [27, handleEscKey],
         [9, handleTabKey],
       ]);
       function keyListener(e) {
@@ -66,6 +75,8 @@ const Modal = props => {
         // call the listener if it exists
         return listener && listener(e);
       }
+
+      setOriginalFocusedNode(document.activeElement);
 
       document.addEventListener('keydown', keyListener);
 

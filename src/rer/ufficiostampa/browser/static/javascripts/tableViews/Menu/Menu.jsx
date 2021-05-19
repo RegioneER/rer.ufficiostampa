@@ -3,12 +3,11 @@ import { TranslationsContext } from '../../TranslationsContext';
 import { ApiContext } from '../../ApiContext';
 import apiFetch from '../../utils/apiFetch';
 import { downloadCSV } from '../CSV/ExportCSV';
-import ImportCSV from '../CSV/ImportCSV';
 import PropTypes from 'prop-types';
 
 import './Menu.less';
 
-const Menu = ({ editUser }) => {
+const Menu = ({ editUser, setShowImportCSV }) => {
   const getTranslationFor = useContext(TranslationsContext);
   const {
     portalUrl,
@@ -18,8 +17,6 @@ const Menu = ({ editUser }) => {
     endpoint,
     setApiErrors,
   } = useContext(ApiContext);
-
-  const [showImportCSV, setShowImportCSV] = useState(false);
 
   const isSubscriptionPanel = endpoint === 'subscriptions';
   const deleteLabel = isSubscriptionPanel
@@ -110,14 +107,13 @@ const Menu = ({ editUser }) => {
           </dl>
         </div>
       )}
-
-      <ImportCSV showModal={showImportCSV} setShowModal={setShowImportCSV} />
     </>
   );
 };
 
 Menu.propTypes = {
   editUser: PropTypes.func,
+  setShowImportCSV: PropTypes.func,
 };
 
 export default Menu;

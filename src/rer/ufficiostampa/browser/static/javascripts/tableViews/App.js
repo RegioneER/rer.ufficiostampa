@@ -5,19 +5,26 @@ import Menu from './Menu/Menu';
 import UsersList from './UsersList/UsersList';
 import HistoryList from './HistoryList/HistoryList';
 import EditUser from './EditUser/EditUser';
+import ImportCSV from './CSV/ImportCSV';
 import './App.less';
 
 const App = ({ appType }) => {
   const [user, setUser] = useState(null);
+  const [showImportCSV, setShowImportCSV] = useState(false);
+
   const endpoint = appType == 'history' ? 'send-history' : 'subscriptions';
 
   let children = null;
   if (appType == 'channels') {
     children = (
       <React.Fragment>
-        <Menu editUser={() => setUser({})} />
+        <Menu
+          editUser={() => setUser({})}
+          setShowImportCSV={setShowImportCSV}
+        />
         <UsersList editUser={u => setUser(u)} />
         <EditUser user={user} />
+        <ImportCSV showModal={showImportCSV} setShowModal={setShowImportCSV} />
       </React.Fragment>
     );
   } else {
