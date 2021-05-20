@@ -78,6 +78,9 @@ const UsersList = ({ editUser }) => {
       width: '100px',
     },
   ];
+  const CustomSortIcon = (
+    <i aria-hidden={true} className="glyphicon glyphicon-triangle-bottom"></i>
+  );
 
   //------------ROW SELECTION------------
   const handleRowSelected = React.useCallback(state => {
@@ -196,8 +199,15 @@ const UsersList = ({ editUser }) => {
             value={filters.text || ''}
             onChange={e => delayTextSubmit(e.target.value)}
           />
-          <button type="button" onClick={handleClearText}>
-            X
+          <button
+            type="button"
+            onClick={handleClearText}
+            title={getTranslationFor('Clear', 'Clear')}
+          >
+            <span
+              aria-hidden={true}
+              className="glyphicon glyphicon-remove"
+            ></span>
           </button>
         </div>
       </>
@@ -233,6 +243,7 @@ const UsersList = ({ editUser }) => {
         onChangePage={handlePageChange}
         progressPending={loading}
         sortServer={true}
+        sortIcon={CustomSortIcon}
         onSort={(column, direction) => setSorting(column.selector, direction)}
         paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
         subHeader
