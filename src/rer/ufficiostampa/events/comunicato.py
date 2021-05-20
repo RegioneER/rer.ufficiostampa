@@ -18,3 +18,4 @@ def setEmptyNumber(item, event):
     Reset it when copy a comunicato
     """
     setattr(item, "comunicato_number", "")
+    setattr(item, "message_sent", False)

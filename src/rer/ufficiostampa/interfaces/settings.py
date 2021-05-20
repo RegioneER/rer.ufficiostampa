@@ -86,7 +86,7 @@ class IRerUfficiostampaSettings(model.Schema):
         description=_(
             "comunicato_number_help",
             default=u"The number of last sent Comunicato. You don't have to "
-            "edit this. It's automatically updated on every new send.",
+            "edit this. It's automatically updated when a Comunicato is published.",  # noqa
         ),
         required=True,
         default=0,

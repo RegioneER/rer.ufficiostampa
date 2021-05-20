@@ -74,8 +74,8 @@ class TestComunicatoNumber(unittest.TestCase):
         )
         current_year = datetime.now().year
 
-        self.assertEqual(getattr(comunicato1, "comunicato_number", None), None)
-        self.assertEqual(getattr(comunicato2, "comunicato_number", None), None)
+        self.assertEqual(getattr(comunicato1, "comunicato_number", ""), "")
+        self.assertEqual(getattr(comunicato2, "comunicato_number", ""), "")
 
         # now publish the first one
         api.content.transition(obj=comunicato1, transition="publish")
@@ -83,7 +83,7 @@ class TestComunicatoNumber(unittest.TestCase):
             getattr(comunicato1, "comunicato_number", None),
             "1/{}".format(current_year),
         )
-        self.assertEqual(getattr(comunicato2, "comunicato_number", None), None)
+        self.assertEqual(getattr(comunicato2, "comunicato_number", ""), "")
 
         # and then publish the second one
         api.content.transition(obj=comunicato2, transition="publish")
@@ -116,19 +116,19 @@ class TestComunicatoNumber(unittest.TestCase):
         )
         current_year = datetime.now().year
 
-        self.assertEqual(getattr(comunicato, "comunicato_number", None), None)
-        self.assertEqual(getattr(invito, "comunicato_number", None), None)
+        self.assertEqual(getattr(comunicato, "comunicato_number", ""), "")
+        self.assertEqual(getattr(invito, "comunicato_number", ""), "")
 
         # now publish the invito
         api.content.transition(obj=invito, transition="publish")
         self.assertEqual(
-            getattr(invito, "comunicato_number", None), None,
+            getattr(invito, "comunicato_number", ""), "",
         )
-        self.assertEqual(getattr(comunicato, "comunicato_number", None), None)
+        self.assertEqual(getattr(comunicato, "comunicato_number", ""), "")
 
         # and then publish the comunicato
         api.content.transition(obj=comunicato, transition="publish")
         self.assertEqual(
-            getattr(comunicato, "comunicato_number", None),
+            getattr(comunicato, "comunicato_number", ""),
             "1/{}".format(current_year),
         )

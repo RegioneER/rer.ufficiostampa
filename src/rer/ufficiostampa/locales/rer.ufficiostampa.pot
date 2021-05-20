@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-05-18 13:51+0000\n"
+"POT-Creation-Date: 2021-05-20 10:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,6 +36,14 @@ msgid "Are you sure you want to uncheck this item"
 msgstr ""
 
 msgid "CSV file should have following columns: name, surname, email, phone, channels, newspaper, date."
+msgstr ""
+
+#: rer/ufficiostampa/browser/controlpanel.py:57
+msgid "Cancel"
+msgstr ""
+
+#: rer/ufficiostampa/browser/controlpanel.py:61
+msgid "Changes canceled."
 msgstr ""
 
 #: rer/ufficiostampa/profiles/default/actions.xml
@@ -131,6 +139,10 @@ msgstr ""
 msgid "Row"
 msgstr ""
 
+#: rer/ufficiostampa/browser/controlpanel.py:53
+msgid "Save"
+msgstr ""
+
 msgid "Search..."
 msgstr ""
 
@@ -165,7 +177,7 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: rer/ufficiostampa/browser/controlpanel.py:20
+#: rer/ufficiostampa/browser/controlpanel.py:21
 msgid "Ufficio Stampa settings"
 msgstr ""
 
@@ -271,7 +283,7 @@ msgstr ""
 msgid "comunicati_stampa_layout"
 msgstr ""
 
-#. Default: "The number of last sent Comunicato. You don't have to edit this. It's automatically updated on every new send."
+#. Default: "The number of last sent Comunicato. You don't have to edit this. It's automatically updated when a Comunicato is published."
 #: rer/ufficiostampa/interfaces/settings.py:86
 msgid "comunicato_number_help"
 msgstr ""

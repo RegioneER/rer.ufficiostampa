@@ -9,6 +9,7 @@ from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
 from z3c.form import field
 from z3c.form.interfaces import HIDDEN_MODE
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from z3c.form import button
 
 
 class UfficiostampaSettingsEditForm(controlpanel.RegistryEditForm):
@@ -23,25 +24,53 @@ class UfficiostampaSettingsEditForm(controlpanel.RegistryEditForm):
     fields = field.Fields(IRerUfficiostampaSettings)
     fields["legislatures"].widgetFactory = JSONFieldWidget
 
+    @property
+    def can_manage_settings(self):
+        current = api.user.get_current()
+        return api.user.has_permission(
+            "rer.ufficiostampa: Manage Settings", user=current
+        )
+
     def updateWidgets(self):
         """
         """
         super(UfficiostampaSettingsEditForm, self).updateWidgets()
         self.widgets["legislatures"].schema = ILegislaturesRowSchema
 
-        current = api.user.get_current()
-        if not api.user.has_permission(
-            "rer.ufficiostampa: Manage Settings", user=current
-        ):
+        if not self.can_manage_settings:
             fields = [
                 "token_secret",
                 "token_salt",
                 "frontend_url",
                 "external_sender_url",
                 "css_styles",
+                "comunicato_number",
+                "comunicato_year",
             ]
             for field_id in fields:
                 self.widgets[field_id].mode = HIDDEN_MODE
+
+    @button.buttonAndHandler(_(u"Save"), name="save")
+    def handleSave(self, action):
+        super(UfficiostampaSettingsEditForm, self).handleSave(self, action)
+
+    @button.buttonAndHandler(_(u"Cancel"), name="cancel")
+    def handleCancel(self, action):
+        if not self.can_manage_settings:
+            api.portal.show_message(
+                message=_(u"Changes canceled."),
+                type="info",
+                request=self.request,
+            )
+            self.request.response.redirect(
+                u"{0}/channels-management".format(
+                    api.portal.get().absolute_url()
+                )
+            )
+        else:
+            super(UfficiostampaSettingsEditForm, self).handleCancel(
+                self, action
+            )
 
 
 class UfficiostampaSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
@@ -58,3 +87,4 @@ class UfficiostampaSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
     def can_access_controlpanels(self):
         current = api.user.get_current()
         return api.user.has_permission("Manage portal", user=current)
+
