@@ -87,4 +87,3 @@ class UfficiostampaSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
     def can_access_controlpanels(self):
         current = api.user.get_current()
         return api.user.has_permission("Manage portal", user=current)
-
