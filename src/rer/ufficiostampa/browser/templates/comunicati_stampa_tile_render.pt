@@ -37,7 +37,7 @@
                               tal:content="python:toLocalizedTime(item_effective,long_format=1)">
                             14/04/2021 14:14
                         </span>
-                        <a href="${item/getURL}" title="${item_title}">${item_title}</a>
+                        <a href="${item/getURL}" title="${item_description}">${item_title}</a>
                     </div>
                   </li>
                 </tal:results>
