@@ -9,10 +9,12 @@ from six import StringIO
 from zExceptions import BadRequest
 from zope.component import getUtility
 from zope.interface import alsoProvides
+from zope.i18n import translate
 
 import base64
 import csv
 import logging
+import six
 
 logger = logging.getLogger(__name__)
 
@@ -57,41 +59,67 @@ class SubscriptionsCSVPost(Service):
             "imported": 0,
         }
 
-        i = 0
+        i = 1
         for row in csv_data.get("csv", []):
             i += 1
             email = row.get("email", "")
             row["channels"] = row["channels"].split(",")
             if not email:
-                logger.warning("[SKIP] - row without email: {}".format(row))
-                res["skipped"].append(i - 1)
+                msg = translate(
+                    _(
+                        "skip_no_email",
+                        default=u"[${row}] - row without email",
+                        mapping={"row": i},
+                    ),
+                    context=self.request,
+                )
+                logger.warning("[SKIP] - {}".format(msg))
+                res["skipped"].append(msg)
                 continue
             records = tool.search(query={"email": email})
             if not records:
                 # add it
                 record_id = tool.add(data=row)
                 if not record_id:
-                    logger.warning("[SKIP] - Unable to add: {}".format(row))
-                    res["skipped"].append(i - 1)
+                    msg = translate(
+                        _(
+                            "skip_unable_to_add",
+                            default=u"[${row}] - unable to add",
+                            mapping={"row": i},
+                        ),
+                        context=self.request,
+                    )
+                    logger.warning("[SKIP] - {}".format(msg))
+                    res["skipped"].append(msg)
                     continue
                 res["imported"] += 1
             else:
                 if len(records) != 1:
-                    logger.warning(
-                        '[SKIP] - Multiple values for "{}" into database'.format(  # noqa
-                            email
-                        )
+                    msg = translate(
+                        _(
+                            "skip_duplicate_multiple",
+                            default=u'[${row}] - Multiple values for "${email}"',  # noqa
+                            mapping={"row": i, "email": email},
+                        ),
+                        context=self.request,
                     )
-                    res["skipped"].append(i - 1)
+                    logger.warning("[SKIP] - {}".format(msg))
+                    res["skipped"].append(msg)
                     continue
                 record = records[0]
                 if not overwrite:
-                    logger.warning(
-                        '[SKIP] - Do not update data for "{}" (overwrite not set)'.format(  # noqa
-                            email
-                        )
+                    msg = translate(
+                        _(
+                            "skip_duplicate",
+                            default=u'[${row}] - "${email}" already in database',  # noqa
+                            mapping={"row": i, "email": email},
+                        ),
+                        context=self.request,
                     )
-                    res["skipped"].append(i - 1)
+                    if six.PY2:
+                        msg = msg.encode("utf-8")
+                    logger.warning("[SKIP] - {}".format(msg))
+                    res["skipped"].append(msg)
                     continue
                 else:
                     tool.update(id=record.intid, data=row)
@@ -109,7 +137,11 @@ class SubscriptionsCSVPost(Service):
             )
         csv_data = data["data"]
         if data.get("encoding", "") == "base64":
-            csv_data = base64.b64decode(csv_data).decode()
+            csv_data = base64.b64decode(csv_data)
+            try:
+                csv_data.decode()
+            except UnicodeDecodeError:
+                pass
             csv_value = StringIO(csv_data)
         else:
             csv_value = csv_data

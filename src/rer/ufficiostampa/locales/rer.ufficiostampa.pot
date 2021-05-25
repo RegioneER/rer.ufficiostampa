@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-05-20 10:21+0000\n"
+"POT-Creation-Date: 2021-05-25 14:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -355,7 +355,7 @@ msgid "empty_subscribers"
 msgstr ""
 
 #. Default: "Error reading csv file."
-#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:132
+#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:157
 msgid "error_reading_csv"
 msgstr ""
 
@@ -514,7 +514,7 @@ msgid "manage_subscriptions_request_serializer_error"
 msgstr ""
 
 #. Default: "You need to pass a file at least."
-#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:141
+#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:166
 msgid "missing_file"
 msgstr ""
 
@@ -631,6 +631,26 @@ msgstr ""
 msgid "send_preview_link"
 msgstr ""
 
+#. Default: "[${row}] - \"${email}\" already in database"
+#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:108
+msgid "skip_duplicate"
+msgstr ""
+
+#. Default: "[${row}] - Multiple values for \"${email}\""
+#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:96
+msgid "skip_duplicate_multiple"
+msgstr ""
+
+#. Default: "[${row}] - row without email"
+#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:68
+msgid "skip_no_email"
+msgstr ""
+
+#. Default: "[${row}] - unable to add"
+#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:83
+msgid "skip_unable_to_add"
+msgstr ""
+
 #. Default: "List of available subscription channels.One per line.These channels will be used for users subscriptions and for select to which channel send a Comunicato."
 #: rer/ufficiostampa/interfaces/settings.py:23
 msgid "subscription_channels_description"
@@ -728,6 +748,6 @@ msgid "validation_invalid_email"
 msgstr ""
 
 #. Default: "You need to pass a csv file."
-#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:105
+#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:126
 msgid "wrong_content_type"
 msgstr ""

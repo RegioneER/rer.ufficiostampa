@@ -67,17 +67,26 @@ const ImportCSV = ({ showModal = false, setShowModal }) => {
       }),
     ];
 
-    Promise.all(fetches).then(data => {
-      const res = data[0];
-      if (res.status == 200) {
-        //OK
-        //setShowModal(false);
-        setImportResult(res.data);
-        fetchApi();
-      } else {
-        setServerError(res);
-      }
-    });
+    Promise.all(fetches)
+      .then(data => {
+        const res = data[0];
+        if (res.status == 200) {
+          //OK
+          //setShowModal(false);
+          setImportResult(res.data);
+          fetchApi();
+        } else {
+          setServerError(res);
+        }
+      })
+      .catch(err => {
+        const statusText =
+          err.response.data.error?.message || err.response.data.message;
+        setServerError({
+          status: err.response.status,
+          statusText,
+        });
+      });
   };
 
   const descriptionModalRowsLabel =
@@ -125,9 +134,7 @@ const ImportCSV = ({ showModal = false, setShowModal }) => {
                 </strong>
                 {importResult.skipped?.length ? '' : 0}
                 {importResult.skipped?.map(s => (
-                  <div className="skipped-row">
-                    {getTranslationFor('Row', 'Row')} {s}
-                  </div>
+                  <div className="skipped-row">{s}</div>
                 ))}
               </div>
             </div>
