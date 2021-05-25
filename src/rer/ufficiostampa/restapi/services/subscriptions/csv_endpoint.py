@@ -64,7 +64,7 @@ class SubscriptionsCSVPost(Service):
             row["channels"] = row["channels"].split(",")
             if not email:
                 logger.warning("[SKIP] - row without email: {}".format(row))
-                res["skipped"].append(i)
+                res["skipped"].append(i - 1)
                 continue
             records = tool.search(query={"email": email})
             if not records:
@@ -72,7 +72,7 @@ class SubscriptionsCSVPost(Service):
                 record_id = tool.add(data=row)
                 if not record_id:
                     logger.warning("[SKIP] - Unable to add: {}".format(row))
-                    res["skipped"].append(i)
+                    res["skipped"].append(i - 1)
                     continue
                 res["imported"] += 1
             else:
@@ -82,7 +82,7 @@ class SubscriptionsCSVPost(Service):
                             email
                         )
                     )
-                    res["skipped"].append(i)
+                    res["skipped"].append(i - 1)
                     continue
                 record = records[0]
                 if not overwrite:
@@ -91,7 +91,7 @@ class SubscriptionsCSVPost(Service):
                             email
                         )
                     )
-                    res["skipped"].append(i)
+                    res["skipped"].append(i - 1)
                     continue
                 else:
                     tool.update(id=record.intid, data=row)
