@@ -10,3 +10,4 @@ include *.json
 include *.lock
 include *.txt
 include *.yml
+prune src/rer/ufficiostampa/browser/static/dist/dev
