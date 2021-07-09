@@ -139,7 +139,7 @@ class SubscriptionsCSVPost(Service):
         if data.get("encoding", "") == "base64":
             csv_data = base64.b64decode(csv_data)
             try:
-                csv_data.decode()
+                csv_data = csv_data.decode()
             except UnicodeDecodeError:
                 pass
             csv_value = StringIO(csv_data)

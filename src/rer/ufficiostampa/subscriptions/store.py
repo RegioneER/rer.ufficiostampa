@@ -35,6 +35,9 @@ class BaseStore(object):
                     )
                 )
             else:
+                if six.PY2:
+                    if isinstance(v, str):
+                        v = v.decode("utf-8")
                 record.attrs[k] = v
         record.attrs["date"] = datetime.now()
         return self.soup.add(record)
@@ -68,7 +71,9 @@ class BaseStore(object):
                 reverse=reverse,
             )
         return sorted(
-            records, key=lambda k: k.attrs[sort_index] or "", reverse=reverse
+            records,
+            key=lambda k: k.attrs.get(sort_index, "") or "",
+            reverse=reverse,
         )
 
     def parse_query_params(self, index, value):
@@ -152,15 +157,16 @@ class SubscriptionsStore(BaseStore):
     def add(self, data):
         old_record = self.search(query={"email": data.get("email", "")})
         if old_record:
-            raise ValueError(
-                translate(
-                    _(
-                        "address_already_registered",
-                        default=u"E-mail address already registered.",
-                    ),
-                    context=getRequest(),
-                )
+            msg = translate(
+                _(
+                    "address_already_registered",
+                    default=u"E-mail address already registered.",
+                ),
+                context=getRequest(),
             )
+            if six.PY2:
+                msg = msg.encode("utf-8")
+            raise ValueError(msg)
         return super(SubscriptionsStore, self).add(data=data)
 
 

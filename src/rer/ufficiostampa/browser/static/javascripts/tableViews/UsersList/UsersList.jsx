@@ -52,8 +52,8 @@ const UsersList = ({ editUser }) => {
   const columns = [
     { name: labels.name, selector: 'name', sortable: true },
     { name: labels.surname, selector: 'surname', sortable: true },
-    { name: labels.email, selector: 'email', sortable: true },
-    { name: labels.phone, selector: 'phone', sortable: true, width: '180px' },
+    { name: labels.email, selector: 'email', sortable: false },
+    { name: labels.phone, selector: 'phone', sortable: false, width: '180px' },
     { name: labels.newspaper, selector: 'newspaper', sortable: true },
     // {
     //   name: labels.channels,
