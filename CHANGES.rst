@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.1 (unreleased)
+1.0.1 (2021-07-09)
 ------------------
 
 - Fix import for python2 and sort indexes.
