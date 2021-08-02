@@ -19,7 +19,8 @@ class SendHistoryCSVGet(DataCSVGet):
         "completed_date",
         "recipients",
         "channels",
-        "subject",
+        "title",
+        "number"
     ]
 
 
