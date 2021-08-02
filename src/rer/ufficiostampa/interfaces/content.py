@@ -20,6 +20,7 @@ class IComunicatoStampa(model.Schema):
         "arguments",
         AjaxSelectFieldWidget,
         vocabulary="rer.ufficiostampa.vocabularies.arguments",
+        pattern_options={"allowNewItems": "false"},
     )
 
     legislature = schema.TextLine(
