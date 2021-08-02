@@ -5,8 +5,10 @@ Changelog
 1.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Disallow add new items in *arguments* field.
+  [cekk]
+- Export in csv also title and number.
+  [cekk]
 
 1.0.1 (2021-07-09)
 ------------------
