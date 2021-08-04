@@ -83,7 +83,9 @@ class BaseStore(object):
             if isinstance(value, list):
                 return "{} in any({})".format(index, value)
             elif isinstance(value, six.text_type) or isinstance(value, str):
-                return "{} in any('{}')".format(index, value)
+                return "{} in any('{}')".format(
+                    index, value.replace("'", "\\'")
+                )
         else:
             return "{} == '{}'".format(index, value)
 

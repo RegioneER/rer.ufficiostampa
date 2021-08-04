@@ -32,7 +32,7 @@ class ArgumentsVocabularyFactory(object):
                 arguments.append(arg)
         terms = [
             SimpleTerm(value=x, token=x.encode("utf-8"), title=x)
-            for x in arguments
+            for x in sorted(arguments)
         ]
         return SimpleVocabulary(terms)
 

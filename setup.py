@@ -60,6 +60,7 @@ setup(
         "souper.plone",
         "itsdangerous>=1.1.0",
         "premailer",
+        'ftfy==4.4.3;python_version<="2.7"',
     ],
     extras_require={
         "test": [

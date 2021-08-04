@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from copy import deepcopy
 from datetime import datetime
+from ftfy import fix_text
 from plone.protect.interfaces import IDisableCSRFProtection
 from plone.restapi.batching import HypermediaBatch
 from plone.restapi.deserializer import json_body
@@ -99,8 +100,8 @@ class DataCSVGet(DataGet):
                 if isinstance(v, int):
                     v = str(v)
                 if v:
-                    v = json_compatible(v).encode("utf-8")
-                data[k] = v
+                    v = json_compatible(v)
+                data[k] = fix_text(v).encode("utf-8")
             rows.append(data)
         writer = csv.DictWriter(sbuf, fieldnames=self.columns, delimiter=",")
         writer.writeheader()

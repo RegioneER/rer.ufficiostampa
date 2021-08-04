@@ -9,6 +9,12 @@ Changelog
   [cekk]
 - Export in csv also title and number.
   [cekk]
+- Correctly wrap search terms with "*'*" in it.
+  [cekk]
+- Customize social viewlets to fix title and description meta tags (and also add a light dependency with rer.agidtheme.base).
+  [cekk]
+- Add dependency to ftfy to better encode csv exports.
+  [cekk]
 
 1.0.1 (2021-07-09)
 ------------------
