@@ -100,8 +100,9 @@ class DataCSVGet(DataGet):
                 if isinstance(v, int):
                     v = str(v)
                 if v:
-                    v = json_compatible(v)
-                data[k] = fix_text(v).encode("utf-8")
+                    v = fix_text(json_compatible(v))
+                    v = v.encode("utf-8")
+                data[k] = v
             rows.append(data)
         writer = csv.DictWriter(sbuf, fieldnames=self.columns, delimiter=",")
         writer.writeheader()
