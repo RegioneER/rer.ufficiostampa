@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.2 (unreleased)
+1.1.0 (2021-08-05)
 ------------------
 
 - Disallow add new items in *arguments* field.
