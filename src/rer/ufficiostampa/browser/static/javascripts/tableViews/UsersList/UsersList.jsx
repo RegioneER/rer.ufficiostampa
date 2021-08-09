@@ -240,7 +240,7 @@ const UsersList = ({ editUser }) => {
         }}
         paginationTotalRows={data.items_total}
         onChangeRowsPerPage={size => setB_size(size)}
-        onChangePage={handlePageChange}
+        onChangePage={page => handlePageChange(page, filters)}
         progressPending={loading}
         sortServer={true}
         sortIcon={CustomSortIcon}

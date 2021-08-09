@@ -212,7 +212,7 @@ const HistoryList = ({ editUser }) => {
         }}
         paginationTotalRows={data.items_total}
         onChangeRowsPerPage={size => setB_size(size)}
-        onChangePage={handlePageChange}
+        onChangePage={page => handlePageChange(page, filters)}
         progressPending={loading}
         sortServer={true}
         onSort={(column, direction) => setSorting(column.selector, direction)}

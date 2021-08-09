@@ -35,7 +35,7 @@ function ApiWrapper({ endpoint, children }) {
     }
   };
 
-  const fetchApi = (b_start = 0, query) => {
+  const fetchApi = (b_start = 0, query = {}) => {
     if (portalUrl) {
       setLoading(true);
       apiFetch({
@@ -87,8 +87,8 @@ function ApiWrapper({ endpoint, children }) {
     }
   }, [portalUrl, b_size, sort_on, sort_order]);
 
-  const handlePageChange = page => {
-    fetchApi(b_size * (page - 1));
+  const handlePageChange = (page, query = {}) => {
+    fetchApi(b_size * (page - 1), query);
   };
 
   const setSorting = (column, order) => {
