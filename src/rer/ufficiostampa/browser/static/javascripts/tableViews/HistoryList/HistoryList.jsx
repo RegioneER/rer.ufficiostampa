@@ -119,7 +119,7 @@ const HistoryList = () => {
   const SubHeaderComponent = React.useMemo(() => {
     const handleClearText = () => {
       setResetPaginationToggle(!resetPaginationToggle);
-      const newFilters = { ...query, title: '' };
+      const newFilters = { ...query, text: '' };
       setQuery(newFilters);
     };
 
@@ -150,8 +150,8 @@ const HistoryList = () => {
             type="text"
             placeholder={getTranslationFor('Filter history', 'Filter history')}
             aria-label={getTranslationFor('Search...', 'Search...')}
-            value={query.title || ''}
-            onChange={e => setQuery({ ...query, title: e.target.value })}
+            value={query.text || ''}
+            onChange={e => setQuery({ ...query, text: e.target.value })}
           />
           <button
             type="button"
