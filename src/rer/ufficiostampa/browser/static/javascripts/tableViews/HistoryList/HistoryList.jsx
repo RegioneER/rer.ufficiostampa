@@ -9,7 +9,6 @@ import {
   DEFAULT_SORT_ON,
   DEFAULT_SORT_ORDER,
 } from '../../ApiContext';
-import apiFetch from '../../utils/apiFetch';
 import { getHistoryFieldsLables } from '../utils';
 import './History.less';
 
@@ -143,7 +142,7 @@ const HistoryList = ({ editUser }) => {
 
     const doQuery = queryFilters => {
       const params = { ...queryFilters };
-      if (params.title?.length) {
+      if (params.title && params.title.length > 0) {
         params.title = params.title + '*';
       }
       fetchApi(null, params);
@@ -179,8 +178,16 @@ const HistoryList = ({ editUser }) => {
             value={filters.title || ''}
             onChange={e => delayTextSubmit(e.target.value)}
           />
-          <button type="button" onClick={handleClearText}>
-            X
+          <button
+            type="button"
+            onClick={handleClearText}
+            title={getTranslationFor('Clear', 'Clear')}
+          >
+            <span
+              aria-hidden={true}
+              className="glyphicon glyphicon-remove"
+            ></span>
+            &times;
           </button>
         </div>
       </>

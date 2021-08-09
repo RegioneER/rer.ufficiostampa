@@ -16,6 +16,8 @@ const UsersList = ({ editUser }) => {
   const getTranslationFor = useContext(TranslationsContext);
   const {
     data,
+    query,
+    setQuery,
     portalUrl,
     fetchApi,
     loading,
@@ -27,7 +29,6 @@ const UsersList = ({ editUser }) => {
   } = useContext(ApiContext);
 
   const labels = getUserFieldsLables(getTranslationFor);
-  const [filters, setFilters] = useState({});
   const [textTimeout, setTextTimeout] = useState(0);
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
   const [toggleCleared, setToggleCleared] = useState(false);
@@ -37,14 +38,16 @@ const UsersList = ({ editUser }) => {
   const ChannelsCellView = (row, index, column, id) => {
     return (
       <div className="channels">
-        {row.channels?.map((channel, index) => {
-          return (
-            <span key={index}>
-              {channel}
-              {index < row.channels.length - 1 ? ',' : ''}{' '}
-            </span>
-          );
-        })}
+        {row.channels
+          ? row.channels.map((channel, index) => {
+              return (
+                <span key={index}>
+                  {channel}
+                  {index < row.channels.length - 1 ? ',' : ''}{' '}
+                </span>
+              );
+            })
+          : []}
       </div>
     );
   };
@@ -139,30 +142,31 @@ const UsersList = ({ editUser }) => {
   const SubHeaderComponent = React.useMemo(() => {
     const handleClearText = () => {
       setResetPaginationToggle(!resetPaginationToggle);
-      const newFilters = { ...filters, text: '' };
-      setFilters(newFilters);
+      const newFilters = { ...query, text: '' };
+      setQuery(newFilters);
       doQuery(newFilters);
     };
 
     const delayTextSubmit = value => {
-      const newFilters = { ...filters, text: value };
+      const newFilters = { ...query, text: value };
       if (textTimeout) {
         clearInterval(textTimeout);
       }
       const timeout = setTimeout(() => {
         doQuery(newFilters);
       }, 1000);
-      setFilters(newFilters);
+      setQuery(newFilters);
       setTextTimeout(timeout);
     };
 
     const doQuery = queryFilters => {
       const params = { ...queryFilters };
-      if (params.text?.length) {
+      if (params.text && params.text.length > 0) {
         params.text = params.text + '*';
       }
       fetchApi(null, params);
     };
+
     return (
       <>
         <div className="search-wrapper">
@@ -176,11 +180,11 @@ const UsersList = ({ editUser }) => {
             })}
             onChange={options => {
               const newFilters = {
-                ...filters,
+                ...query,
                 channels: options ? options.value : null,
               };
-              setFilters(newFilters);
-              doQuery(newFilters);
+              setQuery(newFilters);
+              // doQuery(newFilters);
             }}
             className="type-select"
             placeholder={getTranslationFor(
@@ -196,7 +200,7 @@ const UsersList = ({ editUser }) => {
               'Filter subscribers',
             )}
             aria-label={getTranslationFor('Search...', 'Search...')}
-            value={filters.text || ''}
+            value={query.text || ''}
             onChange={e => delayTextSubmit(e.target.value)}
           />
           <button
@@ -212,7 +216,7 @@ const UsersList = ({ editUser }) => {
         </div>
       </>
     );
-  }, [filters, resetPaginationToggle, data.items]);
+  }, [query, resetPaginationToggle, data.items]);
 
   return (
     <div className="ufficio-stampa-users-list">
@@ -240,7 +244,7 @@ const UsersList = ({ editUser }) => {
         }}
         paginationTotalRows={data.items_total}
         onChangeRowsPerPage={size => setB_size(size)}
-        onChangePage={page => handlePageChange(page, filters)}
+        onChangePage={handlePageChange}
         progressPending={loading}
         sortServer={true}
         sortIcon={CustomSortIcon}

@@ -16,6 +16,8 @@ function ApiWrapper({ endpoint, children }) {
   const [data, setData] = useState({});
   const [portalUrl, setPortalUrl] = useState(null);
 
+  const [query, setQuery] = useState({});
+
   const [apiErrors, setApiErrors] = useState(null);
   const [loading, setLoading] = useState(false);
   const [b_size, setB_size] = useState(DEFAULT_B_SIZE);
@@ -24,7 +26,7 @@ function ApiWrapper({ endpoint, children }) {
   const [sort_order, setSort_order] = useState(DEFAULT_SORT_ORDER);
 
   const handleApiResponse = res => {
-    if (res?.status == 204 || res?.status == 200) {
+    if (res && (res.status == 204 || res.status == 200)) {
       //ok
     } else {
       setApiErrors(
@@ -35,7 +37,8 @@ function ApiWrapper({ endpoint, children }) {
     }
   };
 
-  const fetchApi = (b_start = 0, query = {}) => {
+  const fetchApi = (b_start = 0) => {
+    console.log(query, b_size, sort_on, sort_order);
     if (portalUrl) {
       setLoading(true);
       apiFetch({
@@ -62,8 +65,8 @@ function ApiWrapper({ endpoint, children }) {
         .catch(error => {
           setLoading(false);
           setApiErrors(
-            res
-              ? { status: res.status, statusText: res.statusText }
+            error
+              ? { status: error.status, statusText: error.statusText }
               : { status: '404', statusText: '' },
           );
         });
@@ -85,9 +88,9 @@ function ApiWrapper({ endpoint, children }) {
     if (portalUrl) {
       fetchApi();
     }
-  }, [portalUrl, b_size, sort_on, sort_order]);
+  }, [portalUrl, b_size, sort_on, sort_order, query]);
 
-  const handlePageChange = (page, query = {}) => {
+  const handlePageChange = page => {
     fetchApi(b_size * (page - 1), query);
   };
 
@@ -101,6 +104,8 @@ function ApiWrapper({ endpoint, children }) {
       value={{
         fetchApi,
         data,
+        query,
+        setQuery,
         portalUrl,
         handleApiResponse,
         setB_size,
