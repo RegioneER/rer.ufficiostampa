@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 export const getUserFieldsLables = getTranslationFor => {
   return {
     name: getTranslationFor('Name', 'Name'),
@@ -20,4 +21,20 @@ export const getHistoryFieldsLables = getTranslationFor => {
     status: getTranslationFor('Status', 'Status'),
     channels: getTranslationFor('subscription_channels_label', 'Channels'),
   };
+};
+
+export const useDebounce = (value, delay) => {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value]);
+
+  return debouncedValue;
 };

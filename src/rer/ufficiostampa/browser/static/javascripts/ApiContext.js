@@ -38,7 +38,6 @@ function ApiWrapper({ endpoint, children }) {
   };
 
   const fetchApi = (b_start = 0) => {
-    console.log(query, b_size, sort_on, sort_order);
     if (portalUrl) {
       setLoading(true);
       apiFetch({
@@ -49,6 +48,9 @@ function ApiWrapper({ endpoint, children }) {
           sort_on,
           sort_order,
           ...query,
+          ...(query.text && query.text.length > 0
+            ? { text: query.text + '*' }
+            : {}),
         },
         method: 'GET',
       })

@@ -1,15 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import DataTable from 'react-data-table-component';
 import Select from 'react-select';
 import { TranslationsContext } from '../../TranslationsContext';
 import {
   ApiContext,
-  DEFAULT_B_SIZE,
   DEFAULT_SORT_ON,
   DEFAULT_SORT_ORDER,
 } from '../../ApiContext';
 import apiFetch from '../../utils/apiFetch';
-import { getUserFieldsLables } from '../utils';
+import { getUserFieldsLables, useDebounce } from '../utils';
 import './Users.less';
 
 const UsersList = ({ editUser }) => {
@@ -35,22 +34,22 @@ const UsersList = ({ editUser }) => {
   const [selectedRows, setSelectedRows] = React.useState([]);
 
   //------------------COLUMNS----------------------
-  const ChannelsCellView = (row, index, column, id) => {
-    return (
-      <div className="channels">
-        {row.channels
-          ? row.channels.map((channel, index) => {
-              return (
-                <span key={index}>
-                  {channel}
-                  {index < row.channels.length - 1 ? ',' : ''}{' '}
-                </span>
-              );
-            })
-          : []}
-      </div>
-    );
-  };
+  // const ChannelsCellView = (row, index, column, id) => {
+  //   return (
+  //     <div className="channels">
+  //       {row.channels
+  //         ? row.channels.map((channel, index) => {
+  //             return (
+  //               <span key={index}>
+  //                 {channel}
+  //                 {index < row.channels.length - 1 ? ',' : ''}{' '}
+  //               </span>
+  //             );
+  //           })
+  //         : []}
+  //     </div>
+  //   );
+  // };
 
   const columns = [
     { name: labels.name, selector: 'name', sortable: true },
@@ -144,7 +143,6 @@ const UsersList = ({ editUser }) => {
       setResetPaginationToggle(!resetPaginationToggle);
       const newFilters = { ...query, text: '' };
       setQuery(newFilters);
-      doQuery(newFilters);
     };
 
     const delayTextSubmit = value => {
@@ -153,18 +151,9 @@ const UsersList = ({ editUser }) => {
         clearInterval(textTimeout);
       }
       const timeout = setTimeout(() => {
-        doQuery(newFilters);
+        setQuery(newFilters);
       }, 1000);
-      setQuery(newFilters);
       setTextTimeout(timeout);
-    };
-
-    const doQuery = queryFilters => {
-      const params = { ...queryFilters };
-      if (params.text && params.text.length > 0) {
-        params.text = params.text + '*';
-      }
-      fetchApi(null, params);
     };
 
     return (
@@ -175,16 +164,20 @@ const UsersList = ({ editUser }) => {
             isClearable={true}
             inputId="type"
             name={'type'}
-            options={data.channels?.map(channel => {
-              return { value: channel, label: channel };
-            })}
+            options={
+              data.channels
+                ? data.channels.map(channel => ({
+                    value: channel,
+                    label: channel,
+                  }))
+                : []
+            }
             onChange={options => {
               const newFilters = {
                 ...query,
                 channels: options ? options.value : null,
               };
               setQuery(newFilters);
-              // doQuery(newFilters);
             }}
             className="type-select"
             placeholder={getTranslationFor(
@@ -201,7 +194,8 @@ const UsersList = ({ editUser }) => {
             )}
             aria-label={getTranslationFor('Search...', 'Search...')}
             value={query.text || ''}
-            onChange={e => delayTextSubmit(e.target.value)}
+            //onChange={e => delayTextSubmit(e.target.value)}
+            onChange={e => setQuery({ ...query, text: e.target.value })}
           />
           <button
             type="button"

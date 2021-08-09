@@ -1,25 +1,23 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import DataTable from 'react-data-table-component';
 import format from 'date-fns/format';
 import { TranslationsContext } from '../../TranslationsContext';
 import Select from 'react-select';
 import {
   ApiContext,
-  DEFAULT_B_SIZE,
   DEFAULT_SORT_ON,
   DEFAULT_SORT_ORDER,
 } from '../../ApiContext';
 import { getHistoryFieldsLables } from '../utils';
 import './History.less';
 
-const HistoryList = ({ editUser }) => {
+const HistoryList = () => {
   const getTranslationFor = useContext(TranslationsContext);
   const {
     data,
-    portalUrl,
-    fetchApi,
+    query,
+    setQuery,
     loading,
-    handleApiResponse,
     setB_size,
     handlePageChange,
     b_size,
@@ -27,13 +25,11 @@ const HistoryList = ({ editUser }) => {
   } = useContext(ApiContext);
 
   const labels = getHistoryFieldsLables(getTranslationFor);
-  const [filters, setFilters] = useState({});
   const [textTimeout, setTextTimeout] = useState(0);
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
-  const [selectedRows, setSelectedRows] = React.useState([]);
 
   //------------------COLUMNS----------------------
-  const StatusCell = (row, index, column, id) => {
+  const StatusCell = row => {
     let statusIcon = '';
     switch (row.status) {
       case 'success':
@@ -123,30 +119,10 @@ const HistoryList = ({ editUser }) => {
   const SubHeaderComponent = React.useMemo(() => {
     const handleClearText = () => {
       setResetPaginationToggle(!resetPaginationToggle);
-      const newFilters = { ...filters, title: '' };
-      setFilters(newFilters);
-      doQuery(newFilters);
+      const newFilters = { ...query, title: '' };
+      setQuery(newFilters);
     };
 
-    const delayTextSubmit = value => {
-      const newFilters = { ...filters, title: value };
-      if (textTimeout) {
-        clearInterval(textTimeout);
-      }
-      const timeout = setTimeout(() => {
-        doQuery(newFilters);
-      }, 1000);
-      setFilters(newFilters);
-      setTextTimeout(timeout);
-    };
-
-    const doQuery = queryFilters => {
-      const params = { ...queryFilters };
-      if (params.title && params.title.length > 0) {
-        params.title = params.title + '*';
-      }
-      fetchApi(null, params);
-    };
     return (
       <>
         <div className="search-wrapper">
@@ -161,11 +137,10 @@ const HistoryList = ({ editUser }) => {
             ]}
             onChange={options => {
               const newFilters = {
-                ...filters,
+                ...query,
                 type: options ? options.value : null,
               };
-              setFilters(newFilters);
-              doQuery(newFilters);
+              setQuery(newFilters);
             }}
             className="type-select"
             placeholder={getTranslationFor('Select a type', 'Select a type')}
@@ -175,8 +150,8 @@ const HistoryList = ({ editUser }) => {
             type="text"
             placeholder={getTranslationFor('Filter history', 'Filter history')}
             aria-label={getTranslationFor('Search...', 'Search...')}
-            value={filters.title || ''}
-            onChange={e => delayTextSubmit(e.target.value)}
+            value={query.title || ''}
+            onChange={e => setQuery({ ...query, title: e.target.value })}
           />
           <button
             type="button"
@@ -187,12 +162,11 @@ const HistoryList = ({ editUser }) => {
               aria-hidden={true}
               className="glyphicon glyphicon-remove"
             ></span>
-            &times;
           </button>
         </div>
       </>
     );
-  }, [filters, resetPaginationToggle, data.items]);
+  }, [query, resetPaginationToggle, data.items]);
 
   return (
     <div className="ufficio-stampa-history-list">
@@ -219,7 +193,7 @@ const HistoryList = ({ editUser }) => {
         }}
         paginationTotalRows={data.items_total}
         onChangeRowsPerPage={size => setB_size(size)}
-        onChangePage={page => handlePageChange(page, filters)}
+        onChangePage={handlePageChange}
         progressPending={loading}
         sortServer={true}
         onSort={(column, direction) => setSorting(column.selector, direction)}
