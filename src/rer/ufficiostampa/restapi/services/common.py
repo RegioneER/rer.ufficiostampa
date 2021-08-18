@@ -14,6 +14,7 @@ from zope.component import getUtility
 from zope.interface import alsoProvides
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
+from zope.index.text.parsetree import ParseError
 
 import csv
 import logging
@@ -25,7 +26,12 @@ class DataGet(Service):
     def reply(self):
         tool = getUtility(self.store)
         query = self.parse_query()
-        batch = HypermediaBatch(self.request, tool.search(**query))
+        try:
+            results = tool.search(**query)
+        except ParseError as e:
+            self.request.response.setStatus(500)
+            return dict(error=dict(type="Error", message=e.message))
+        batch = HypermediaBatch(self.request, results)
         data = {
             "@id": batch.canonical_url,
             "items": [self.expand_data(x) for x in batch],
@@ -72,9 +78,7 @@ class DataCSVGet(DataGet):
                         message="Unable export. Contact site manager.",
                     )
                 )
-        self.request.response.setHeader(
-            "Content-Type", "text/comma-separated-values"
-        )
+        self.request.response.setHeader("Content-Type", "text/comma-separated-values")
         now = datetime.now()
         self.request.response.setHeader(
             "Content-Disposition",
@@ -186,9 +190,7 @@ class DataUpdate(TraversableService):
         if not res:
             return self.reply_no_content()
         if res.get("error", "") == "NotFound":
-            raise BadRequest(
-                'Unable to find item with id "{}"'.format(self.id)
-            )
+            raise BadRequest('Unable to find item with id "{}"'.format(self.id))
         self.request.response.setStatus(500)
         return dict(
             error=dict(
@@ -208,9 +210,7 @@ class DataDelete(TraversableService):
         if not res:
             return self.reply_no_content()
         if res.get("error", "") == "NotFound":
-            raise BadRequest(
-                'Unable to find item with id "{}"'.format(self.id)
-            )
+            raise BadRequest('Unable to find item with id "{}"'.format(self.id))
         self.request.response.setStatus(500)
         return dict(
             error=dict(
