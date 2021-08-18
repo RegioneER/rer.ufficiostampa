@@ -9,6 +9,10 @@ from souper.soup import Record
 from zope.globalrequest import getRequest
 from zope.i18n import translate
 from zope.interface import implementer
+from repoze.catalog.query import And
+from repoze.catalog.query import Contains
+from repoze.catalog.query import Eq
+from repoze.catalog.query import Any
 
 import logging
 import six
@@ -30,9 +34,7 @@ class BaseStore(object):
         for k, v in data.items():
             if k not in self.fields:
                 logger.warning(
-                    "[ADD {}] SKIP unkwnown field: {}".format(
-                        self.soup_type, k
-                    )
+                    "[ADD {}] SKIP unkwnown field: {}".format(self.soup_type, k)
                 )
             else:
                 if six.PY2:
@@ -46,48 +48,46 @@ class BaseStore(object):
         return len([x for x in self.soup.data.values()])
 
     def search(self, query=None, sort_index="date", reverse=True):
-        queries = []
-        if query:
-            queries = [
-                self.parse_query_params(index, value)
-                for index, value in query.items()
-                if index in self.indexes and value
-            ]
-        if queries:
+        parsed_query = self.parse_query_params(query=query)
+        if parsed_query:
             return [
                 x
                 for x in self.soup.query(
-                    " and ".join(queries),
-                    sort_index=sort_index,
-                    reverse=reverse,
+                    queryobject=parsed_query, sort_index=sort_index, reverse=reverse,
                 )
             ]
         # return all data
         records = self.soup.data.values()
         if sort_index == "date":
             return sorted(
-                records,
-                key=lambda k: k.attrs[sort_index] or None,
-                reverse=reverse,
+                records, key=lambda k: k.attrs[sort_index] or None, reverse=reverse,
             )
         return sorted(
-            records,
-            key=lambda k: k.attrs.get(sort_index, "") or "",
-            reverse=reverse,
+            records, key=lambda k: k.attrs.get(sort_index, "") or "", reverse=reverse,
         )
 
-    def parse_query_params(self, index, value):
-        if index == self.text_index:
-            return "'{}' in {}".format(value, self.text_index)
-        elif index in self.keyword_indexes:
-            if isinstance(value, list):
-                return "{} in any({})".format(index, value)
-            elif isinstance(value, six.text_type) or isinstance(value, str):
-                return "{} in any('{}')".format(
-                    index, value.replace("'", "\\'")
-                )
-        else:
-            return "{} == '{}'".format(index, value)
+    def parse_query_params(self, query):
+        if not query:
+            return []
+        queries = []
+        for index, value in query.items():
+            if not value:
+                continue
+            if index not in self.indexes:
+                continue
+            if six.PY2:
+                value = value.decode("utf-8")
+            if value == "**":
+                value = "*"
+            if index == self.text_index:
+                queries.append(Contains("text", value))
+            elif index in self.keyword_indexes:
+                queries.append(Any(index, value))
+            else:
+                queries.append(Eq(index, value))
+        if not queries:
+            return None
+        return And(*queries)
 
     def get_record(self, id):
         if isinstance(id, six.text_type) or isinstance(id, str):
@@ -107,17 +107,13 @@ class BaseStore(object):
             record = self.soup.get(id)
         except KeyError:
             logger.error(
-                '[UPDATE {}] item with id "{}" not found.'.format(
-                    self.soup_type, id
-                )
+                '[UPDATE {}] item with id "{}" not found.'.format(self.soup_type, id)
             )
             return {"error": "NotFound"}
         for k, v in data.items():
             if k not in self.fields:
                 logger.warning(
-                    "[UPDATE {}] SKIP unkwnown field: {}".format(
-                        self.soup_type, k
-                    )
+                    "[UPDATE {}] SKIP unkwnown field: {}".format(self.soup_type, k)
                 )
 
             else:

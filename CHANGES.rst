@@ -5,7 +5,10 @@ Changelog
 1.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Cleanup channels (remove duplicated ones).
+  [cekk]
+- Refactor how to perform queries (to handle also unicode problems).
+  [cekk]
 
 
 1.1.0 (2021-08-05)
