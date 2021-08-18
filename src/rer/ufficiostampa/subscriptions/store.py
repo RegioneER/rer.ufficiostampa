@@ -71,14 +71,12 @@ class BaseStore(object):
             return []
         queries = []
         for index, value in query.items():
-            if not value:
+            if not value or value in ["*", "**"]:
                 continue
             if index not in self.indexes:
                 continue
             if six.PY2:
                 value = value.decode("utf-8")
-            if value == "**":
-                value = "*"
             if index == self.text_index:
                 queries.append(Contains("text", value))
             elif index in self.keyword_indexes:
