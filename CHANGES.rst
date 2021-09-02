@@ -5,7 +5,8 @@ Changelog
 1.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Accessibilty fixes: modal focus trap + select keyboard events
+  [nzambello]
 
 
 1.1.0 (2021-08-05)
