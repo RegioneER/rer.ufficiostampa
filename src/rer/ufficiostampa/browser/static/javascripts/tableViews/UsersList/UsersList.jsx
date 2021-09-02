@@ -179,6 +179,7 @@ const UsersList = ({ editUser }) => {
               };
               setQuery(newFilters);
             }}
+            aria-label="Seleziona un canale"
             className="type-select"
             placeholder={getTranslationFor(
               'Select a channel',

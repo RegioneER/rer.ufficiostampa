@@ -143,6 +143,7 @@ const HistoryList = () => {
               setQuery(newFilters);
             }}
             className="type-select"
+            aria-label="Seleziona una tipologia"
             placeholder={getTranslationFor('Select a type', 'Select a type')}
           />
           <input
