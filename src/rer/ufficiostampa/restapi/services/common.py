@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from copy import deepcopy
 from datetime import datetime
-from ftfy import fix_text
 from plone.protect.interfaces import IDisableCSRFProtection
 from plone.restapi.batching import HypermediaBatch
 from plone.restapi.deserializer import json_body
@@ -14,9 +13,15 @@ from zope.component import getUtility
 from zope.interface import alsoProvides
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
+from zope.index.text.parsetree import ParseError
 
 import csv
+import six
 import logging
+
+if six.PY2:
+    from ftfy import fix_text
+
 
 logger = logging.getLogger(__name__)
 
@@ -25,7 +30,12 @@ class DataGet(Service):
     def reply(self):
         tool = getUtility(self.store)
         query = self.parse_query()
-        batch = HypermediaBatch(self.request, tool.search(**query))
+        try:
+            results = tool.search(**query)
+        except ParseError as e:
+            self.request.response.setStatus(500)
+            return dict(error=dict(type="Error", message=e.message))
+        batch = HypermediaBatch(self.request, results)
         data = {
             "@id": batch.canonical_url,
             "items": [self.expand_data(x) for x in batch],
@@ -72,9 +82,7 @@ class DataCSVGet(DataGet):
                         message="Unable export. Contact site manager.",
                     )
                 )
-        self.request.response.setHeader(
-            "Content-Type", "text/comma-separated-values"
-        )
+        self.request.response.setHeader("Content-Type", "text/comma-separated-values")
         now = datetime.now()
         self.request.response.setHeader(
             "Content-Disposition",
@@ -100,7 +108,9 @@ class DataCSVGet(DataGet):
                 if isinstance(v, int):
                     v = str(v)
                 if v:
-                    v = fix_text(json_compatible(v))
+                    v = json_compatible(v)
+                    if six.PY2:
+                        v = fix_text(v)
                     v = v.encode("utf-8")
                 data[k] = v
             rows.append(data)
@@ -186,9 +196,7 @@ class DataUpdate(TraversableService):
         if not res:
             return self.reply_no_content()
         if res.get("error", "") == "NotFound":
-            raise BadRequest(
-                'Unable to find item with id "{}"'.format(self.id)
-            )
+            raise BadRequest('Unable to find item with id "{}"'.format(self.id))
         self.request.response.setStatus(500)
         return dict(
             error=dict(
@@ -208,9 +216,7 @@ class DataDelete(TraversableService):
         if not res:
             return self.reply_no_content()
         if res.get("error", "") == "NotFound":
-            raise BadRequest(
-                'Unable to find item with id "{}"'.format(self.id)
-            )
+            raise BadRequest('Unable to find item with id "{}"'.format(self.id))
         self.request.response.setStatus(500)
         return dict(
             error=dict(

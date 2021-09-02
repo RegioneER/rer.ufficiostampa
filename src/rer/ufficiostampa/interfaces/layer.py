@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from rer.agidtheme.base.interfaces import IRerAgidthemeBaseLayer
+from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
 
-class IRerUfficiostampaLayer(IRerAgidthemeBaseLayer):
+class IRerUfficiostampaLayer(IDefaultBrowserLayer):
     """Marker interface that defines a browser layer."""

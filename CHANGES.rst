@@ -5,6 +5,10 @@ Changelog
 1.1.1 (unreleased)
 ------------------
 
+- Cleanup channels (remove duplicated ones).
+  [cekk]
+- Refactor how to perform queries (to handle also unicode problems).
+  [cekk]
 - Accessibilty fixes: modal focus trap + select keyboard events
   [nzambello]
 
