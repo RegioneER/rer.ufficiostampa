@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.1.1 (unreleased)
+1.2.0 (2021-09-02)
 ------------------
 
 - Cleanup channels (remove duplicated ones).
