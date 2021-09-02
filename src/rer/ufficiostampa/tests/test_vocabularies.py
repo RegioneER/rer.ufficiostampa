@@ -45,7 +45,7 @@ class TestVocabularies(unittest.TestCase):
 
     def test_vocab_returns_last_legislature_arguments(self):
         terms = [x.value for x in self.get_vocab()]
-        self.assertEqual(terms, ["foo2", "bar2"])
+        self.assertEqual(terms, ["bar2", "foo2"])
 
     def test_append_old_value_to_vocab(self):
         doc = api.content.create(
@@ -55,4 +55,4 @@ class TestVocabularies(unittest.TestCase):
             arguments=["baz"],
         )
         terms = [x.value for x in self.get_vocab(context=doc)]
-        self.assertEqual(terms, ["foo2", "bar2", "baz"])
+        self.assertEqual(terms, ["bar2", "baz", "foo2"])

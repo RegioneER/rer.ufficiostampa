@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from copy import deepcopy
 from datetime import datetime
-from ftfy import fix_text
 from plone.protect.interfaces import IDisableCSRFProtection
 from plone.restapi.batching import HypermediaBatch
 from plone.restapi.deserializer import json_body
@@ -17,7 +16,12 @@ from zope.publisher.interfaces import IPublishTraverse
 from zope.index.text.parsetree import ParseError
 
 import csv
+import six
 import logging
+
+if six.PY2:
+    from ftfy import fix_text
+
 
 logger = logging.getLogger(__name__)
 
@@ -104,7 +108,9 @@ class DataCSVGet(DataGet):
                 if isinstance(v, int):
                     v = str(v)
                 if v:
-                    v = fix_text(json_compatible(v))
+                    v = json_compatible(v)
+                    if six.PY2:
+                        v = fix_text(v)
                     v = v.encode("utf-8")
                 data[k] = v
             rows.append(data)
