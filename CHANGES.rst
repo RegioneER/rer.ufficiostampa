@@ -9,6 +9,8 @@ Changelog
   [cekk]
 - Refactor how to perform queries (to handle also unicode problems).
   [cekk]
+- Accessibilty fixes: modal focus trap + select keyboard events
+  [nzambello]
 
 
 1.1.0 (2021-08-05)

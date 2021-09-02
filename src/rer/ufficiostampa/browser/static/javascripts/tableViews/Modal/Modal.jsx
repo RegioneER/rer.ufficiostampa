@@ -27,9 +27,11 @@ const Modal = props => {
   const handleTabKey = e => {
     const modal =
       modalRef?.current ?? document.querySelector('.plone-modal-content');
-    const focusableModalElements = modal.querySelectorAll(
-      'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select',
-    );
+    const focusableModalElements = [
+      ...modal.querySelectorAll(
+        'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], input[type="file"], select',
+      ),
+    ].filter(e => !e.disabled);
     const firstElement = focusableModalElements[0];
     const lastElement =
       focusableModalElements[focusableModalElements.length - 1];
@@ -42,19 +44,44 @@ const Modal = props => {
     });
     if (
       !e.shiftKey &&
-      (activeElement == lastElement || !activeElementIsInModal)
+      (activeElement === lastElement || !activeElementIsInModal)
     ) {
+      console.log(
+        'firstElement',
+        activeElement,
+        firstElement,
+        lastElement,
+        activeElementIsInModal,
+      );
       firstElement.focus();
       return e.preventDefault();
     }
 
     if (
       e.shiftKey &&
-      (activeElement == firstElement || !activeElementIsInModal)
+      (activeElement === firstElement || !activeElementIsInModal)
     ) {
+      console.log(
+        'lastElement',
+        activeElement,
+        firstElement,
+        lastElement,
+        activeElementIsInModal,
+      );
       lastElement.focus();
-      e.preventDefault();
+      return e.preventDefault();
     }
+
+    let activeElementIndex = focusableModalElements.indexOf(activeElement);
+    let nextFousableElement =
+      focusableModalElements[activeElementIndex + (e.shiftKey ? -1 : 1)];
+    if (nextFousableElement) {
+      nextFousableElement.focus();
+      console.log(nextFousableElement, document.activeElement);
+      return e.preventDefault();
+    }
+
+    console.log('cacca');
   };
 
   const handleEscKey = () => {

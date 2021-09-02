@@ -5,8 +5,18 @@
         font-weight: 400;
     }
 
-    input[type='checkbox'] + label {
-        margin-left: 0.5rem;
+    input[type='checkbox'] {
+        & + label {
+            margin-left: 0.5rem;
+        }
+
+        &:focus {
+            outline: 3px solid;
+
+            + label {
+                text-decoration: underline;
+            }
+        }
     }
 
     &.multiselect {

@@ -3,16 +3,8 @@ import Select, { components } from 'react-select';
 import { string, shape, arrayOf, func, bool } from 'prop-types';
 import { TranslationsContext } from '../../../TranslationsContext';
 
-const SelectContainer = ({ children, ...props }) => (
-  <components.SelectContainer
-    {...props}
-    innerProps={{
-      'aria-controls': 'search-results-region',
-      'aria-atomic': true,
-    }}
-  >
-    {children}
-  </components.SelectContainer>
+const MultiValueLabel = props => (
+  <components.MultiValueLabel {...props} className="text-primary" />
 );
 
 const ariaLiveMessages = {
@@ -108,7 +100,9 @@ const SelectField = ({ parameter, value = [], updateQueryParameters }) => {
     : 'select_placeholder';
   return (
     <React.Fragment>
-      <label htmlFor={parameter.id}>{parameter.label}</label>
+      <label id={parameter.id + '-label'} htmlFor={parameter.id}>
+        {parameter.label}
+      </label>
       {parameter.help.length ? (
         <p className="discreet">{parameter.help}</p>
       ) : (
@@ -116,8 +110,7 @@ const SelectField = ({ parameter, value = [], updateQueryParameters }) => {
       )}
       <Select
         isMulti={multivalued}
-        inputId={parameter.id}
-        tabSelectsValue={false}
+        id={parameter.id}
         value={value.map(element => {
           return {
             value: element,
@@ -131,13 +124,17 @@ const SelectField = ({ parameter, value = [], updateQueryParameters }) => {
         }
         placeholder={getTranslationFor(placeholderLabel, 'Select...')}
         ariaLiveMessages={ariaLiveMessages}
+        aria-labelledby={parameter.id + '-label'}
         aria-controls="search-results-region"
+        aria-atomic={true}
         screenReaderStatus={({ count }) =>
           `${count} risultat${count !== 1 ? 'i' : 'o'} disponibil${
             count !== 1 ? 'i' : 'e'
           }`
         }
-        components={{ SelectContainer }}
+        components={{
+          MultiValueLabel,
+        }}
         onChange={options => {
           let newValue = [];
           if (options) {
