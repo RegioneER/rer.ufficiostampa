@@ -5,7 +5,8 @@ Changelog
 1.2.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Cleanup subject string before send, to remove strange characters.
+  [cekk]
 
 
 1.2.0 (2021-09-02)

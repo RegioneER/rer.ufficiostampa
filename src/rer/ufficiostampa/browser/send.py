@@ -29,6 +29,13 @@ from zope.interface import provider
 from zope.schema.interfaces import IContextAwareDefaultFactory
 from zope.schema.interfaces import IVocabularyFactory
 
+try:
+    from ftfy import fix_text
+
+    HAS_FTYFY = True
+except ImportError:
+    HAS_FTYFY = False
+
 import logging
 import requests
 import json
@@ -44,8 +51,7 @@ logger = logging.getLogger(__name__)
 
 
 def check_emails(value):
-    """Check that all values are valid email addresses
-    """
+    """Check that all values are valid email addresses"""
     reg_tool = api.portal.get_tool(name="portal_registration")
     for address in value:
         if not reg_tool.isValidEmail(address):
@@ -77,14 +83,10 @@ class ISendForm(Interface):
         ),
         required=False,
         missing_value=(),
-        value_type=schema.Choice(
-            source="rer.ufficiostampa.vocabularies.channels"
-        ),
+        value_type=schema.Choice(source="rer.ufficiostampa.vocabularies.channels"),
     )
     additional_addresses = schema.List(
-        title=_(
-            u"additional_addresses_title", default=u"Additional addresses"
-        ),
+        title=_(u"additional_addresses_title", default=u"Additional addresses"),
         description=_(
             u"additional_addresses_description",
             default=u"Insert a list of additional addressed that will receive "
@@ -98,7 +100,10 @@ class ISendForm(Interface):
     )
     notes = schema.Text(
         title=_(u"notes_title", default=u"Notes"),
-        description=_(u"notes_description", default=u"Additional notes.",),
+        description=_(
+            u"notes_description",
+            default=u"Additional notes.",
+        ),
         required=False,
     )
     attachments = schema.List(
@@ -110,9 +115,7 @@ class ISendForm(Interface):
         ),
         required=False,
         missing_value=(),
-        value_type=schema.Choice(
-            source="rer.ufficiostampa.vocabularies.attachments"
-        ),
+        value_type=schema.Choice(source="rer.ufficiostampa.vocabularies.attachments"),
         defaultFactory=default_attachments,
     )
 
@@ -133,9 +136,7 @@ class SendForm(form.Form):
         return _(
             "send_form_title",
             u"Send ${type}",
-            mapping={
-                "type": types_tool.getTypeInfo(self.context.portal_type).title
-            },
+            mapping={"type": types_tool.getTypeInfo(self.context.portal_type).title},
         )
 
     @button.buttonAndHandler(_(u"send_button", default="Send"))
@@ -155,21 +156,20 @@ class SendForm(form.Form):
             return
         return self.sendMessage(data=data)
 
-    @button.buttonAndHandler(
-        _(u"cancel_button", default="Cancel"), name="cancel"
-    )
+    @button.buttonAndHandler(_(u"cancel_button", default="Cancel"), name="cancel")
     def handleCancel(self, action):
         api.portal.show_message(
-            message=_("cancel_action", default=u"Action cancelled",),
+            message=_(
+                "cancel_action",
+                default=u"Action cancelled",
+            ),
             type=u"info",
             request=self.request,
         )
         return self.request.response.redirect(self.context.absolute_url())
 
     def sendMessage(self, data):
-        external_sender_url = self.get_value_from_settings(
-            field="external_sender_url"
-        )
+        external_sender_url = self.get_value_from_settings(field="external_sender_url")
 
         body = prepare_email_message(
             context=self.context,
@@ -241,13 +241,15 @@ class SendForm(form.Form):
     @property
     @memoize
     def subject(self):
-
-        return "{type}: {title}".format(
+        value = u"{type}: {title}".format(
             type=self.context.portal_type == "ComunicatoStampa"
             and "Comunicato Regione"  # noqa
             or "Invito Regione",  # noqa
-            title=self.context.Title(),
+            title=self.context.title,
         )
+        if six.PY2 and HAS_FTYFY:
+            return fix_text(value)
+        return value
 
     def get_subscribers(self, data):
         channels = data.get("channels", [])
@@ -341,9 +343,7 @@ class SendForm(form.Form):
         self.manage_attachments(data=data, msg=msg)
         host = api.portal.get_tool(name="MailHost")
         msg["Bcc"] = ", ".join(subscribers)
-        send_id = self.set_history_start(
-            data=data, subscribers=len(subscribers)
-        )
+        send_id = self.set_history_start(data=data, subscribers=len(subscribers))
 
         try:
             host.send(msg, charset=encoding)
@@ -353,7 +353,10 @@ class SendForm(form.Form):
             self.update_history(send_id=send_id, status="error")
             return
         api.portal.show_message(
-            message=_("success_send_mail", default=u"Send complete.",),
+            message=_(
+                "success_send_mail",
+                default=u"Send complete.",
+            ),
             request=self.request,
             type="info",
         )
@@ -363,17 +366,13 @@ class SendForm(form.Form):
 
     def send_external(self, data, body):
         frontend_url = self.get_value_from_settings(field="frontend_url")
-        external_sender_url = self.get_value_from_settings(
-            field="external_sender_url"
-        )
+        external_sender_url = self.get_value_from_settings(field="external_sender_url")
 
         channel_url = api.portal.get().absolute_url()
         if frontend_url:
             channel_url = frontend_url
         subscribers = self.get_subscribers(data)
-        send_uid = self.set_history_start(
-            data=data, subscribers=len(subscribers)
-        )
+        send_uid = self.set_history_start(data=data, subscribers=len(subscribers))
 
         payload = {
             "channel_url": channel_url,
@@ -404,7 +403,8 @@ class SendForm(form.Form):
         if response.status_code != 200:
             logger.error(
                 'Unable to send "{message}": {reason}'.format(  # noqa
-                    message=self.subject, reason=response.text,
+                    message=self.subject,
+                    reason=response.text,
                 )
             )
             self.add_send_error_message()
