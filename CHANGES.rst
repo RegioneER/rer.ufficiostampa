@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.2.1 (unreleased)
+1.2.1 (2021-09-16)
 ------------------
 
 - Cleanup subject string before send, to remove strange characters.
