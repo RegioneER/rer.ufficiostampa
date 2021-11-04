@@ -5,7 +5,8 @@ Changelog
 1.2.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Arguments field is now required.
+  [cekk]
 
 
 1.2.1 (2021-09-16)

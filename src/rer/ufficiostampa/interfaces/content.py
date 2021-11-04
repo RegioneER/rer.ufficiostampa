@@ -12,7 +12,7 @@ class IComunicatoStampa(model.Schema):
         title=_("arguments_label", default=u"Arguments"),
         description=_("arguments_help", default="Select one or more values."),
         value_type=schema.TextLine(),
-        required=False,
+        required=True,
         missing_value=(),
     )
 
@@ -37,9 +37,7 @@ class IComunicatoStampa(model.Schema):
         required=False,
         default=False,
     )
-    comunicato_number = schema.TextLine(
-        title=u"", description=u"", required=False
-    )
+    comunicato_number = schema.TextLine(title=u"", description=u"", required=False)
     directives.omitted("message_sent")
     directives.omitted("comunicato_number")
 
