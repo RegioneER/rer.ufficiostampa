@@ -5,7 +5,8 @@ Changelog
 1.2.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Normalize title and description on save.
+  [cekk]
 
 
 1.2.2 (2021-11-04)

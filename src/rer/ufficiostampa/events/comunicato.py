@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from rer.ufficiostampa.utils import get_next_comunicato_number
+from plone import api
 
 
 def setNumber(item, event):
@@ -19,3 +20,13 @@ def setEmptyNumber(item, event):
     """
     setattr(item, "comunicato_number", "")
     setattr(item, "message_sent", False)
+
+
+def fixText(item, event):
+    transform_tool = api.portal.get_tool(name="portal_transforms")
+    item.title = transform_tool.convert(
+        "html_to_web_intelligent_plain_text", item.title
+    ).getData()
+    item.description = transform_tool.convert(
+        "html_to_web_intelligent_plain_text", item.description
+    ).getData()
