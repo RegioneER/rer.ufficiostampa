@@ -7,7 +7,8 @@ Changelog
 
 - Normalize title and description on save.
   [cekk]
-
+- Add effective date in Comunicato view.
+  [cekk]
 
 1.2.2 (2021-11-04)
 ------------------

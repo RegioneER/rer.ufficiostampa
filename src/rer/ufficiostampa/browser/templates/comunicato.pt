@@ -27,7 +27,14 @@
 
 <metal:content-core fill-slot="content-core">
 <metal:content-core define-macro="content-core"
-                    tal:define="toc python:  getattr(context, 'table_of_contents', False);">
+                    tal:define="toc python:  getattr(context, 'table_of_contents', False);
+                                toLocalizedTime nocall: context/@@plone/toLocalizedTime;
+                                effective context/effective;
+                                is_published python:effective.year() != 1969">
+  <strong tal:condition="is_published"
+          tal:content="python:toLocalizedTime(effective,long_format=1)">
+    August 16, 2001 at 23:35:59
+  </strong>
   <section id="section-text">
     <div id="parent-fieldname-text" tal:condition="context/text" tal:content="structure python:context.text.output_relative_to(view.context)" tal:attributes="class python: toc and 'pat-autotoc' or ''">
       Text
