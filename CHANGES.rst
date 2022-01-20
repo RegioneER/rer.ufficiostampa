@@ -5,7 +5,8 @@ Changelog
 1.3.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- New search endpoint for comunicati (@search-comunicati). This is needed because new rer.sitesearch overrides @search endpoint and always search on SOLR.
+  [cekk]
 
 
 1.3.0 (2022-01-20)

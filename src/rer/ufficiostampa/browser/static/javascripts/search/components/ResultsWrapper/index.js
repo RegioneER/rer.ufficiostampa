@@ -86,7 +86,7 @@ const ResultsWrapper = ({ queryParameters, updateQueryParameters }) => {
         'content-type': 'application/json',
         Accept: 'application/json',
       },
-      url: `${portalUrl}/@search`,
+      url: `${portalUrl}/@search-comunicati`,
       params,
       paramsSerializer: params => parseParams(params),
     }).then(({ status, statusText, data }) => {
