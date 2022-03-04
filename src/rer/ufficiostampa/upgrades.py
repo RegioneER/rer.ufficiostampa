@@ -8,11 +8,14 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+DEFAULT_PROFILE = "profile-rer.ufficiostampa:default"
+
 
 def to_1100(context):
     tool = getUtility(ISubscriptionsStore)
     subscription_channels = api.portal.get_registry_record(
-        "subscription_channels", interface=IRerUfficiostampaSettings,
+        "subscription_channels",
+        interface=IRerUfficiostampaSettings,
     )
     for record in tool.search():
         channels = []
@@ -36,3 +39,10 @@ def to_1100(context):
 
             record._attrs["channels"] = channels
             tool.soup.reindex(records=[record])
+
+
+def to_1200(context):
+    logger.info("Enable versioning")
+    context.runImportStepFromProfile(DEFAULT_PROFILE, "typeinfo")
+    context.runImportStepFromProfile(DEFAULT_PROFILE, "plone-difftool")
+    context.runImportStepFromProfile(DEFAULT_PROFILE, "repositorytool")

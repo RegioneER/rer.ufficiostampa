@@ -5,7 +5,8 @@ Changelog
 1.4.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add versioning for Comunicato and Invito.
+  [cekk]
 
 
 1.4.0 (2022-01-20)
