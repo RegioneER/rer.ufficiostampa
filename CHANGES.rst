@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.4.1 (unreleased)
+1.5.0 (2022-03-10)
 ------------------
 
 - Add versioning for Comunicato and Invito.
