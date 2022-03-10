@@ -35,6 +35,7 @@
     <element value="plone.richtext" />
     <element value="plone.versioning" />
     <element value="plone.locking" />
+    <element value="rer.solrpush.behaviors.solr_fields.ISolrFields" />
  </property>
  <property name="schema">rer.ufficiostampa.interfaces.IInvitoStampa</property>
  <property name="model_source"></property>

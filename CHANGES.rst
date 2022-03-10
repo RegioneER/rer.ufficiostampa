@@ -7,7 +7,8 @@ Changelog
 
 - Add versioning for Comunicato and Invito.
   [cekk]
-
+- Add solrpush behavior for additional fields.
+  [cekk]
 
 1.4.0 (2022-01-20)
 ------------------
