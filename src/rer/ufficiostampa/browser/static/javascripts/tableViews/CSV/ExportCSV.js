@@ -1,15 +1,17 @@
 import apiFetch from '../../utils/apiFetch';
 import { saveAs } from 'file-saver';
 
-export const downloadCSV = (
+export const downloadCSV = ({
   portalUrl,
   endpoint,
   setApiErrors,
   getTranslationFor,
-) => {
+  query,
+}) => {
   apiFetch({
     url: portalUrl + '/@' + endpoint + '-csv',
     method: 'GET',
+    params: query,
   })
     .then(res => {
       if (!res) {
