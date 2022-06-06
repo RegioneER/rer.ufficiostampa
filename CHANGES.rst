@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.5.1 (unreleased)
+1.5.1 (2022-06-06)
 ------------------
 
 - Pass query to export-csv endpoint to export only selected subscribers.
