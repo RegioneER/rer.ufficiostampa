@@ -16,6 +16,7 @@ const Menu = ({ editUser, setShowImportCSV }) => {
     apiErrors,
     endpoint,
     setApiErrors,
+    query,
   } = useContext(ApiContext);
 
   const isSubscriptionPanel = endpoint === 'subscriptions';
@@ -71,7 +72,13 @@ const Menu = ({ editUser, setShowImportCSV }) => {
           )}
           <button
             onClick={() =>
-              downloadCSV(portalUrl, endpoint, setApiErrors, getTranslationFor)
+              downloadCSV({
+                portalUrl,
+                endpoint,
+                setApiErrors,
+                getTranslationFor,
+                query,
+              })
             }
             className="plone-btn plone-btn-primary context"
           >

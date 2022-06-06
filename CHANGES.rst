@@ -5,7 +5,8 @@ Changelog
 1.5.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Pass query to export-csv endpoint to export only selected subscribers.
+  [cekk]
 
 
 1.5.0 (2022-03-10)
