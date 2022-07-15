@@ -35,6 +35,9 @@ msgstr ""
 msgid "Edit Subscriber"
 msgstr ""
 
+msgid "Errored rows"
+msgstr ""
+
 msgid "Add Subscriber"
 msgstr ""
 

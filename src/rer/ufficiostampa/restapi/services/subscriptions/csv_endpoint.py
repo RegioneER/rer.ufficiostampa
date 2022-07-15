@@ -1,7 +1,9 @@
+
 # -*- coding: utf-8 -*-
 from plone.protect.interfaces import IDisableCSRFProtection
 from plone.restapi.deserializer import json_body
 from plone.restapi.services import Service
+from plone.schema.email import Email
 from rer.ufficiostampa import _
 from rer.ufficiostampa.interfaces import ISubscriptionsStore
 from rer.ufficiostampa.restapi.services.common import DataCSVGet
@@ -11,10 +13,13 @@ from zope.component import getUtility
 from zope.interface import alsoProvides
 from zope.i18n import translate
 
+from rer.ufficiostampa.browser.send import SendForm
+
 import base64
 import csv
 import logging
 import six
+import itertools
 
 logger = logging.getLogger(__name__)
 
@@ -54,28 +59,58 @@ class SubscriptionsCSVPost(Service):
                     message=csv_data.get("error", ""),
                 )
             )
+
+        # clone generator for validation checks and processing
+        csv_gen, csv_gen_checks = itertools.tee(csv_data.get("csv", []))
+
+        res = {"errored": []}
+
+        # check for data errors
+        for i, row in enumerate(csv_gen_checks):
+            try:
+                Email().validate(row.get("email", ""))
+            except Exception:
+                msg = translate(
+                    _(
+                        "unvalid_email",
+                        default="[${row}] - row with unvalid email",
+                        mapping={"row": i},
+                    ),
+                    context=self.request,
+                )
+                logger.warning("[ERROR] - {}".format(msg))
+                res["errored"].append(msg)
+
+            try:
+                SendForm.fields["channels"].field.validate(
+                    map(lambda r: r.strip(), row.get("channels").split(","))
+                )
+            except Exception:
+                msg = translate(
+                    _(
+                        "unvalid_channels",
+                        default="[${row}] - row with unvalid channels",
+                        mapping={"row": i},
+                    ),
+                    context=self.request,
+                )
+                logger.warning("[ERROR] - {}".format(msg))
+                res["errored"].append(msg)
+
+        # return if we have errored fields
+        if len(res["errored"]):
+            return res
+
         res = {
             "skipped": [],
             "imported": 0,
         }
 
         i = 1
-        for row in csv_data.get("csv", []):
+        for row in csv_gen:
             i += 1
             email = row.get("email", "")
             row["channels"] = row["channels"].split(",")
-            if not email:
-                msg = translate(
-                    _(
-                        "skip_no_email",
-                        default=u"[${row}] - row without email",
-                        mapping={"row": i},
-                    ),
-                    context=self.request,
-                )
-                logger.warning("[SKIP] - {}".format(msg))
-                res["skipped"].append(msg)
-                continue
             records = tool.search(query={"email": email})
             if not records:
                 # add it
