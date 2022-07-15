@@ -154,8 +154,8 @@ class SubscriptionsCSVPost(Service):
                     lineterminator=dialect.lineterminator,
                     quoting=dialect.quoting,
                     doublequote=dialect.doublequote,
-                    delimiter=dialect.delimiter,
-                    quotechar=dialect.quotechar,
+                    delimiter=str(dialect.delimiter),
+                    quotechar=str(dialect.quotechar),
                 )
             }
         except Exception as e:
