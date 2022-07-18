@@ -1,9 +1,9 @@
-
 # -*- coding: utf-8 -*-
 from plone.protect.interfaces import IDisableCSRFProtection
 from plone.restapi.deserializer import json_body
 from plone.restapi.services import Service
-from plone.schema.email import Email
+from plone.schema.email import Email, InvalidEmail
+from plone import api
 from rer.ufficiostampa import _
 from rer.ufficiostampa.interfaces import ISubscriptionsStore
 from rer.ufficiostampa.restapi.services.common import DataCSVGet
@@ -13,7 +13,7 @@ from zope.component import getUtility
 from zope.interface import alsoProvides
 from zope.i18n import translate
 
-from rer.ufficiostampa.browser.send import SendForm
+from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
 
 import base64
 import csv
@@ -63,17 +63,21 @@ class SubscriptionsCSVPost(Service):
         # clone generator for validation checks and processing
         csv_gen, csv_gen_checks = itertools.tee(csv_data.get("csv", []))
 
-        res = {"errored": []}
+        res = {
+            "errored": [],
+            "skipped": [],
+            "imported": 0,
+        }
 
         # check for data errors
         for i, row in enumerate(csv_gen_checks):
             try:
                 Email().validate(row.get("email", ""))
-            except Exception:
+            except InvalidEmail:
                 msg = translate(
                     _(
-                        "unvalid_email",
-                        default="[${row}] - row with unvalid email",
+                        "invalid_email",
+                        default="[${row}] - row with invalid email",
                         mapping={"row": i},
                     ),
                     context=self.request,
@@ -81,15 +85,23 @@ class SubscriptionsCSVPost(Service):
                 logger.warning("[ERROR] - {}".format(msg))
                 res["errored"].append(msg)
 
-            try:
-                SendForm.fields["channels"].field.validate(
-                    map(lambda r: r.strip(), row.get("channels").split(","))
+            request_channels = set(
+                map(lambda r: r.strip(), row.get("channels").split(","))
+            )
+            channels_filtered = [
+                ch
+                for ch in request_channels
+                if ch
+                in api.portal.get_registry_record(
+                    interface=IRerUfficiostampaSettings, name="subscription_channels"
                 )
-            except Exception:
+            ]
+
+            if len(request_channels) != len(channels_filtered):
                 msg = translate(
                     _(
-                        "unvalid_channels",
-                        default="[${row}] - row with unvalid channels",
+                        "invalid_channels",
+                        default="[${row}] - row with invalid channels",
                         mapping={"row": i},
                     ),
                     context=self.request,
@@ -101,14 +113,7 @@ class SubscriptionsCSVPost(Service):
         if len(res["errored"]):
             return res
 
-        res = {
-            "skipped": [],
-            "imported": 0,
-        }
-
-        i = 1
-        for row in csv_gen:
-            i += 1
+        for i, row in enumerate(csv_gen):
             email = row.get("email", "")
             row["channels"] = row["channels"].split(",")
             records = tool.search(query={"email": email})
@@ -119,7 +124,7 @@ class SubscriptionsCSVPost(Service):
                     msg = translate(
                         _(
                             "skip_unable_to_add",
-                            default=u"[${row}] - unable to add",
+                            default="[${row}] - unable to add",
                             mapping={"row": i},
                         ),
                         context=self.request,
@@ -133,7 +138,7 @@ class SubscriptionsCSVPost(Service):
                     msg = translate(
                         _(
                             "skip_duplicate_multiple",
-                            default=u'[${row}] - Multiple values for "${email}"',  # noqa
+                            default='[${row}] - Multiple values for "${email}"',  # noqa
                             mapping={"row": i, "email": email},
                         ),
                         context=self.request,
@@ -146,7 +151,7 @@ class SubscriptionsCSVPost(Service):
                     msg = translate(
                         _(
                             "skip_duplicate",
-                            default=u'[${row}] - "${email}" already in database',  # noqa
+                            default='[${row}] - "${email}" already in database',  # noqa
                             mapping={"row": i, "email": email},
                         ),
                         context=self.request,
@@ -167,7 +172,7 @@ class SubscriptionsCSVPost(Service):
             raise BadRequest(
                 _(
                     "wrong_content_type",
-                    default=u"You need to pass a csv file.",
+                    default="You need to pass a csv file.",
                 )
             )
         csv_data = data["data"]
@@ -195,16 +200,12 @@ class SubscriptionsCSVPost(Service):
             }
         except Exception as e:
             logger.exception(e)
-            return {
-                "error": _(
-                    "error_reading_csv", default=u"Error reading csv file."
-                )
-            }
+            return {"error": _("error_reading_csv", default="Error reading csv file.")}
 
     def parse_query(self):
         data = json_body(self.request)
         if "file" not in data:
             raise BadRequest(
-                _("missing_file", default=u"You need to pass a file at least.")
+                _("missing_file", default="You need to pass a file at least.")
             )
         return data
