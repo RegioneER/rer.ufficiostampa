@@ -7,6 +7,8 @@ Changelog
 
 - Additional validations for subscribers import, also new behavior if invalid email/channels passed
   [foxtrot-dfm1]
+- On channels deletion remove them from subscribers, subscribers having no more channels are removed
+  [foxtrot-dfm1]
 
 1.5.1 (2022-06-06)
 ------------------
