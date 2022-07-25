@@ -188,6 +188,11 @@ class SubscriptionsCSVPost(Service):
 
         try:
             dialect = csv.Sniffer().sniff(csv_data, delimiters=";,")
+
+            if six.PY2:
+                dialect.delimiter = dialect.delimiter.encode()
+                dialect.quotechar = dialect.quotechar.encode()
+
             return {
                 "csv": csv.DictReader(
                     csv_value,
