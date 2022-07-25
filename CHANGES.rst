@@ -5,8 +5,8 @@ Changelog
 1.5.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Additional validations for subscribers import, also new behavior if invalid email/channels passed
+  [foxtrot-dfm1]
 
 1.5.1 (2022-06-06)
 ------------------

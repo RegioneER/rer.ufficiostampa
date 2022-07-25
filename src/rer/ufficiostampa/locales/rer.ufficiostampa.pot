@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-05-25 14:22+0000\n"
+"POT-Creation-Date: 2022-07-15 13:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,6 +78,9 @@ msgstr ""
 msgid "Edit Subscriber"
 msgstr ""
 
+msgid "Errored rows"
+msgstr ""
+
 msgid "Export in CSV"
 msgstr ""
 
@@ -100,7 +103,7 @@ msgstr ""
 msgid "Imported rows"
 msgstr ""
 
-#: rer/ufficiostampa/configure.zcml:28
+#: rer/ufficiostampa/configure.zcml:30
 msgid "Installs the rer.ufficiostampa add-on."
 msgstr ""
 
@@ -119,11 +122,11 @@ msgstr ""
 msgid "Overwrite duplicates"
 msgstr ""
 
-#: rer/ufficiostampa/configure.zcml:28
+#: rer/ufficiostampa/configure.zcml:30
 msgid "RER: Ufficio Stampa"
 msgstr ""
 
-#: rer/ufficiostampa/configure.zcml:37
+#: rer/ufficiostampa/configure.zcml:39
 msgid "RER: Ufficio Stampa (uninstall)"
 msgstr ""
 
@@ -181,7 +184,7 @@ msgstr ""
 msgid "Ufficio Stampa settings"
 msgstr ""
 
-#: rer/ufficiostampa/configure.zcml:37
+#: rer/ufficiostampa/configure.zcml:39
 msgid "Uninstalls the rer.ufficiostampa add-on."
 msgstr ""
 
@@ -198,12 +201,12 @@ msgid "Vista Comunicati Stampa"
 msgstr ""
 
 #. Default: "Insert a list of additional addressed that will receive the mail. One per line. You can use this field also for testing without sending emails to all subscribed addresses."
-#: rer/ufficiostampa/browser/send.py:88
+#: rer/ufficiostampa/browser/send.py:90
 msgid "additional_addresses_description"
 msgstr ""
 
 #. Default: "Additional addresses"
-#: rer/ufficiostampa/browser/send.py:85
+#: rer/ufficiostampa/browser/send.py:89
 msgid "additional_addresses_title"
 msgstr ""
 
@@ -225,7 +228,7 @@ msgstr ""
 
 #. Default: "Action cancelled"
 #: rer/ufficiostampa/browser/cancel_subscriptions.py:308
-#: rer/ufficiostampa/browser/send.py:163
+#: rer/ufficiostampa/browser/send.py:162
 msgid "cancel_action"
 msgstr ""
 
@@ -350,17 +353,17 @@ msgid "email"
 msgstr ""
 
 #. Default: "You need to provide at least one email address or channel."
-#: rer/ufficiostampa/browser/send.py:147
+#: rer/ufficiostampa/browser/send.py:148
 msgid "empty_subscribers"
 msgstr ""
 
 #. Default: "Error reading csv file."
-#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:157
+#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:199
 msgid "error_reading_csv"
 msgstr ""
 
 #. Default: "Error sending mail. Contact site administrator."
-#: rer/ufficiostampa/browser/send.py:313
+#: rer/ufficiostampa/browser/send.py:315
 msgid "error_send_mail"
 msgstr ""
 
@@ -411,7 +414,7 @@ msgid "items_selected"
 msgstr ""
 
 #. Default: "Legislature"
-#: rer/ufficiostampa/interfaces/content.py:26
+#: rer/ufficiostampa/interfaces/content.py:27
 #: rer/ufficiostampa/restapi/services/search_parameters/get.py:81
 msgid "label_legislature"
 msgstr ""
@@ -422,7 +425,7 @@ msgid "label_portal_type"
 msgstr ""
 
 #. Default: "Sent"
-#: rer/ufficiostampa/interfaces/content.py:34
+#: rer/ufficiostampa/interfaces/content.py:35
 msgid "label_sent"
 msgstr ""
 
@@ -514,7 +517,7 @@ msgid "manage_subscriptions_request_serializer_error"
 msgstr ""
 
 #. Default: "You need to pass a file at least."
-#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:166
+#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:205
 msgid "missing_file"
 msgstr ""
 
@@ -522,12 +525,12 @@ msgid "newspaper"
 msgstr ""
 
 #. Default: "Additional notes."
-#: rer/ufficiostampa/browser/send.py:101
+#: rer/ufficiostampa/browser/send.py:103
 msgid "notes_description"
 msgstr ""
 
 #. Default: "Notes"
-#: rer/ufficiostampa/browser/send.py:100
+#: rer/ufficiostampa/browser/send.py:102
 msgid "notes_title"
 msgstr ""
 
@@ -535,7 +538,7 @@ msgid "phone"
 msgstr ""
 
 #. Default: "Allegati"
-#: rer/ufficiostampa/browser/templates/comunicato.pt:40
+#: rer/ufficiostampa/browser/templates/comunicato.pt:47
 msgid "press_attachments"
 msgstr ""
 
@@ -581,28 +584,28 @@ msgid "select_placeholder_multi"
 msgstr ""
 
 #. Default: "Select which attachment you want to send via email. You can only select first level Files and Images."
-#: rer/ufficiostampa/browser/send.py:106
+#: rer/ufficiostampa/browser/send.py:111
 msgid "send_attachments_description"
 msgstr ""
 
 #. Default: "Attachments"
-#: rer/ufficiostampa/browser/send.py:105
+#: rer/ufficiostampa/browser/send.py:110
 msgid "send_attachments_title"
 msgstr ""
 
 #. Default: "Send"
 #: rer/ufficiostampa/browser/cancel_subscriptions.py:112
-#: rer/ufficiostampa/browser/send.py:141
+#: rer/ufficiostampa/browser/send.py:142
 msgid "send_button"
 msgstr ""
 
 #. Default: "Select which channels should receive this Comunicato. All email address subscribed to this channel will receive it. "
-#: rer/ufficiostampa/browser/send.py:73
+#: rer/ufficiostampa/browser/send.py:79
 msgid "send_channels_description"
 msgstr ""
 
 #. Default: "Channels"
-#: rer/ufficiostampa/browser/send.py:72
+#: rer/ufficiostampa/browser/send.py:78
 msgid "send_channels_title"
 msgstr ""
 
@@ -612,12 +615,12 @@ msgid "send_date_label"
 msgstr ""
 
 #. Default: "Send this Comunicato or Invito to a list of recipients."
-#: rer/ufficiostampa/browser/send.py:121
+#: rer/ufficiostampa/browser/send.py:124
 msgid "send_form_help"
 msgstr ""
 
 #. Default: "Send ${type}"
-#: rer/ufficiostampa/browser/send.py:133
+#: rer/ufficiostampa/browser/send.py:136
 msgid "send_form_title"
 msgstr ""
 
@@ -632,22 +635,17 @@ msgid "send_preview_link"
 msgstr ""
 
 #. Default: "[${row}] - \"${email}\" already in database"
-#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:108
+#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:145
 msgid "skip_duplicate"
 msgstr ""
 
 #. Default: "[${row}] - Multiple values for \"${email}\""
-#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:96
+#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:132
 msgid "skip_duplicate_multiple"
 msgstr ""
 
-#. Default: "[${row}] - row without email"
-#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:68
-msgid "skip_no_email"
-msgstr ""
-
 #. Default: "[${row}] - unable to add"
-#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:83
+#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:118
 msgid "skip_unable_to_add"
 msgstr ""
 
@@ -742,12 +740,22 @@ msgstr ""
 msgid "unsubscribe_confirm_secret_token_settings_error"
 msgstr ""
 
+#. Default: "[${row}] - row with unvalid channels"
+#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:89
+msgid "unvalid_channels"
+msgstr ""
+
+#. Default: "[${row}] - row with unvalid email"
+#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:73
+msgid "unvalid_email"
+msgstr ""
+
 #. Default: "Invalid email address: ${address}"
-#: rer/ufficiostampa/browser/send.py:53
+#: rer/ufficiostampa/browser/send.py:59
 msgid "validation_invalid_email"
 msgstr ""
 
 #. Default: "You need to pass a csv file."
-#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:126
+#: rer/ufficiostampa/restapi/services/subscriptions/csv_endpoint.py:166
 msgid "wrong_content_type"
 msgstr ""
