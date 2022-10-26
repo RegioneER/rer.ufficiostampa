@@ -7,7 +7,8 @@ Changelog
 
 - Handle master/select logic for Legislature and Arguments in search form.
   [cekk]
-
+- Additional validations for subscribers import, also new behavior if invalid email/channels passed
+  [foxtrot-dfm1]
 
 1.5.1 (2022-06-06)
 ------------------

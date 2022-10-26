@@ -121,6 +121,19 @@ const ImportCSV = ({ showModal = false, setShowModal }) => {
           )}
 
           {importResult ? (
+            importResult.errored ? (
+              <div className="portalMessage alert-success import-result">
+              <div>
+                <strong>
+                  {getTranslationFor('Errored rows', 'Errored rows')}:{' '}
+                </strong>
+                {importResult.errored?.length ? '' : 0}
+                {importResult.errored?.map(s => (
+                  <div className="errored-row">{s}</div>
+                ))}
+              </div>
+            </div>
+            ) : (
             <div className="portalMessage alert-success import-result">
               <div>
                 <strong>
@@ -138,6 +151,7 @@ const ImportCSV = ({ showModal = false, setShowModal }) => {
                 ))}
               </div>
             </div>
+            )
           ) : (
             <form>
               <Field
