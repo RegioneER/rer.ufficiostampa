@@ -5,7 +5,8 @@ Changelog
 1.5.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Handle master/select logic for Legislature and Arguments in search form.
+  [cekk]
 
 
 1.5.1 (2022-06-06)
