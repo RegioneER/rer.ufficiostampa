@@ -70,11 +70,14 @@ const FormFieldWrapper = ({
     const masterValue = queryParameters[id];
     let filteredValues = [];
     for (const [key, values] of Object.entries(slave.slaveOptions)) {
-      if (!masterValue || masterValue.length === 0 || masterValue == key) {
+      if (
+        !masterValue ||
+        masterValue.length === 0 ||
+        masterValue.includes(key)
+      ) {
         filteredValues.push(...values);
       }
     }
-
     // remove duplicates
     const slaveValues = filteredValues.filter((value, index) => {
       const _value = JSON.stringify(value);
@@ -98,6 +101,7 @@ const FormFieldWrapper = ({
       // names must be equal
       return 0;
     });
+    console.log(slaveValues);
     params.push(
       <FieldWrapper
         parameter={{ ...slave, options: slaveValues }}

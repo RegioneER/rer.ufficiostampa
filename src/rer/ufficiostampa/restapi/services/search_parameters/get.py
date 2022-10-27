@@ -24,6 +24,7 @@ def getVocabularyTermsForForm(vocab_name):
     for entry in vocab:
         if entry.title != u"select_label":
             values.append({"value": entry.value, "label": entry.title})
+    values[0]["isFixed"] = True
     return values
 
 

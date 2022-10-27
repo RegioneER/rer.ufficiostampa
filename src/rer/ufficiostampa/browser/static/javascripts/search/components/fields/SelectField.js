@@ -98,6 +98,20 @@ const SelectField = ({ parameter, value = [], updateQueryParameters }) => {
   const placeholderLabel = multivalued
     ? 'select_placeholder_multi'
     : 'select_placeholder';
+
+  const styles = {
+    multiValue: (base, state) => {
+      return state.data.isFixed ? { ...base, backgroundColor: 'gray' } : base;
+    },
+    multiValueLabel: (base, state) => {
+      return state.data.isFixed
+        ? { ...base, fontWeight: 'bold', color: 'white', paddingRight: 6 }
+        : base;
+    },
+    multiValueRemove: (base, state) => {
+      return state.data.isFixed ? { ...base, display: 'none' } : base;
+    },
+  };
   return (
     <React.Fragment>
       <label id={parameter.id + '-label'} htmlFor={parameter.id}>
@@ -111,12 +125,7 @@ const SelectField = ({ parameter, value = [], updateQueryParameters }) => {
       <Select
         isMulti={multivalued}
         id={parameter.id}
-        value={value.map(element => {
-          return {
-            value: element,
-            label: element,
-          };
-        })}
+        value={parameter.options.filter(option => value.includes(option.value))}
         name={parameter.id}
         options={parameter.options}
         noOptionsMessage={() =>
@@ -135,12 +144,25 @@ const SelectField = ({ parameter, value = [], updateQueryParameters }) => {
         components={{
           MultiValueLabel,
         }}
-        onChange={options => {
-          let newValue = [];
-          if (options) {
-            newValue = multivalued
-              ? options.map(option => option.value)
-              : [options.value];
+        styles={styles}
+        isClearable={v => !v.isFixed}
+        onChange={(options, actionMeta) => {
+          let newValue = multivalued
+            ? options.map(option => option.value)
+            : [options.value];
+          switch (actionMeta.action) {
+            case 'remove-value':
+            case 'pop-value':
+              if (actionMeta.removedValue.isFixed) {
+                // we are trying to remove a fixed item
+                return;
+              }
+              break;
+            case 'clear':
+              newValue = parameter.options
+                .filter(v => v.isFixed)
+                .map(v => v.value);
+              break;
           }
           updateQueryParameters({
             [parameter.id]: newValue,
