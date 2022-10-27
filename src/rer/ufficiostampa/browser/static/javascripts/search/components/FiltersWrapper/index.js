@@ -59,7 +59,7 @@ const FiltersWrapper = ({
                 isMobile={isMobile}
                 parameter={parameter}
                 key={parameter.id}
-                value={queryParameters[parameter.id]}
+                queryParameters={queryParameters}
                 updateQueryParameters={updateQueryParameters}
               />
             ))
