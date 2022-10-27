@@ -236,6 +236,7 @@ Dove **imported** è il numero di elementi inseriti effettivamente nel db, e **s
 
 Se l'email non è valida o channels contiene uno dei canali non impostati nel panello di controllo, allora il procedimeto si interrompe e viene ritonata la risposta con
 la lista di righe del file che hanno dei valori non validi::
+    
     {
         "errored": []
     }
