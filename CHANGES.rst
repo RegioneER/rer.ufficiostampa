@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.5.3 (unreleased)
+1.6.0 (2022-10-27)
 ------------------
 
 - Handle master/select logic for Legislature and Arguments in search form.
