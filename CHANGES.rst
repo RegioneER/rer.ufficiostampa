@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.6.1 (2022-10-27)
+1.6.1 (Unreleased)
 ------------------
 
 - Fix README identation.
