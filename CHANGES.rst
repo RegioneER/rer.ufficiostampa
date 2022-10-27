@@ -1,12 +1,18 @@
 Changelog
 =========
 
+1.6.1 (Unreleased)
+------------------
 
-1.5.3 (unreleased)
+- Fix README identation.
+  [cekk]
+
+1.6.0 (2022-10-27)
 ------------------
 
 - Handle master/select logic for Legislature and Arguments in search form.
   [cekk]
+
 - Additional validations for subscribers import, also new behavior if invalid email/channels passed
   [foxtrot-dfm1]
 
