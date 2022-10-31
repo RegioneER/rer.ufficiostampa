@@ -51,14 +51,10 @@ def defaultLegislature():
 
 def get_site_title():
     registry = getUtility(IRegistry)
-    site_settings = registry.forInterface(
-        ISiteSchema, prefix="plone", check=False
-    )
+    site_settings = registry.forInterface(ISiteSchema, prefix="plone", check=False)
     site_title = getattr(site_settings, "site_title") or ""
     if RER_THEME:
-        site_subtitle_style = (
-            getattr(site_settings, "site_subtitle_style") or ""
-        )
+        site_subtitle_style = getattr(site_settings, "site_subtitle_style") or ""
         fields_value = getUtility(ICustomFields)
         site_title = fields_value.titleLang(site_title)
         site_subtitle = fields_value.subtitleLang(
@@ -178,9 +174,7 @@ def prepare_email_message(context, template, parameters):
 def mail_from():
     registry = getUtility(IRegistry)
     mail_settings = registry.forInterface(IMailSchema, prefix="plone")
-    return formataddr(
-        (mail_settings.email_from_name, mail_settings.email_from_address)
-    )
+    return formataddr((mail_settings.email_from_name, mail_settings.email_from_address))
 
 
 def get_next_comunicato_number():

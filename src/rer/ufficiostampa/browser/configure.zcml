@@ -158,4 +158,5 @@
       template="templates/comunicati_stampa_tile_render.pt"
       />
   </configure>
+
 </configure>

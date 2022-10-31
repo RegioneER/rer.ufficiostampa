@@ -13,7 +13,7 @@
     <subscriber
       for="rer.ufficiostampa.interfaces.IComunicatoStampa
           OFS.interfaces.IObjectWillBeAddedEvent"
-      handler=".comunicato.setEmptyNumber"
+      handler=".comunicato.createComunicato"
     />
     <subscriber
       for="rer.ufficiostampa.interfaces.IComunicatoStampa
