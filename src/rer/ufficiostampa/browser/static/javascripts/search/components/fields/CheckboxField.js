@@ -20,9 +20,9 @@ const CheckboxField = ({ parameter, value = [], updateQueryParameters }) => {
         [parameter.id]: [...value, target.value],
       });
     } else if (!target.checked && value.indexOf(target.value) !== -1) {
-      value.splice(value.indexOf(target.value), 1);
+      // value.splice(value.indexOf(target.value), 1);
       updateQueryParameters({
-        [parameter.id]: value,
+        [parameter.id]: value.filter(x => x !== target.value),
       });
     }
   };
