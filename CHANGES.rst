@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.6.2 (unreleased)
+1.6.2 (2022-11-03)
 ------------------
 
 - Fix field logic.
