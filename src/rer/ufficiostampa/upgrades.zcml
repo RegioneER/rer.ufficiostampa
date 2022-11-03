@@ -18,4 +18,12 @@
     profile="rer.ufficiostampa:default"
     handler=".upgrades.to_1200"
     />
+  <genericsetup:upgradeStep
+    source="1200"
+    destination="1300"
+    title="Fix legislature"
+    description=""
+    profile="rer.ufficiostampa:default"
+    handler=".upgrades.to_1300"
+    />
 </configure>

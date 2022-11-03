@@ -80,7 +80,6 @@ const App = () => {
   const updateQueryParameters = parameter => {
     const newQueryParameters = { ...queryParameters, ...parameter };
     setQueryParameters(newQueryParameters);
-
     // convert date field into a qs-like one
     const qsParameters = { ...newQueryParameters };
     if (qsParameters.created) {
@@ -108,6 +107,11 @@ const App = () => {
 
   const resetQueryParameters = () => {
     const newQueryParameters = { b_start: 0, b_size: 20 };
+    formParameters.forEach(index => {
+      if (index.default) {
+        newQueryParameters[index.id] = index.default;
+      }
+    });
     setQueryParameters(newQueryParameters);
     history.pushState(
       { id: 'comunicati-search' },
@@ -115,7 +119,6 @@ const App = () => {
       `${portalUrl}/comunicati-search`,
     );
   };
-
   return (
     <TranslationsWrapper>
       <FiltersWrapper

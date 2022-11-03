@@ -46,13 +46,6 @@ const Modal = props => {
       !e.shiftKey &&
       (activeElement === lastElement || !activeElementIsInModal)
     ) {
-      console.log(
-        'firstElement',
-        activeElement,
-        firstElement,
-        lastElement,
-        activeElementIsInModal,
-      );
       firstElement.focus();
       return e.preventDefault();
     }
@@ -61,13 +54,6 @@ const Modal = props => {
       e.shiftKey &&
       (activeElement === firstElement || !activeElementIsInModal)
     ) {
-      console.log(
-        'lastElement',
-        activeElement,
-        firstElement,
-        lastElement,
-        activeElementIsInModal,
-      );
       lastElement.focus();
       return e.preventDefault();
     }
@@ -77,11 +63,8 @@ const Modal = props => {
       focusableModalElements[activeElementIndex + (e.shiftKey ? -1 : 1)];
     if (nextFousableElement) {
       nextFousableElement.focus();
-      console.log(nextFousableElement, document.activeElement);
       return e.preventDefault();
     }
-
-    console.log('cacca');
   };
 
   const handleEscKey = () => {

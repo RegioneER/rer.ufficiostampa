@@ -4,8 +4,10 @@ Changelog
 1.6.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Fix field logic.
+  [cekk]
+- Set proper value in legislature field.
+  [cekk]
 
 1.6.1 (2022-10-27)
 ------------------

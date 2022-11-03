@@ -82,7 +82,6 @@ const EditUser = ({ user }) => {
     Promise.all(fetches)
       .then(data => {
         const res = data[0];
-        console.log('ok');
         if (res.status == 204) {
           //OK
           setShowModal(false);

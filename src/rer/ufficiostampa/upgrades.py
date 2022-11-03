@@ -46,3 +46,15 @@ def to_1200(context):
     context.runImportStepFromProfile(DEFAULT_PROFILE, "typeinfo")
     context.runImportStepFromProfile(DEFAULT_PROFILE, "plone-difftool")
     context.runImportStepFromProfile(DEFAULT_PROFILE, "repositorytool")
+
+
+def to_1300(context):
+    i = 0
+    brains = api.content.find(portal_type=["ComunicatoStampa", "InvitoStampa"])
+    tot = len(brains)
+    for brain in brains:
+        i += 1
+        if i % 100 == 0:
+            logger.info("Progress: [{}/{}]".format(i, tot))
+        item = brain.getObject()
+        setattr(item, "legislature", brain.legislature)

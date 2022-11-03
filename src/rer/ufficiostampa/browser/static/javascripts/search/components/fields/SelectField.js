@@ -144,20 +144,11 @@ const SelectField = ({ parameter, value = [], updateQueryParameters }) => {
         components={{
           MultiValueLabel,
         }}
-        styles={styles}
-        isClearable={v => !v.isFixed}
         onChange={(options, actionMeta) => {
           let newValue = multivalued
             ? options.map(option => option.value)
             : [options.value];
           switch (actionMeta.action) {
-            case 'remove-value':
-            case 'pop-value':
-              if (actionMeta.removedValue.isFixed) {
-                // we are trying to remove a fixed item
-                return;
-              }
-              break;
             case 'clear':
               newValue = parameter.options
                 .filter(v => v.isFixed)

@@ -14,17 +14,22 @@ import json
 @implementer(IVocabularyFactory)
 class ArgumentsVocabularyFactory(object):
     def __call__(self, context):
+        stored = getattr(context.aq_base, "legislature", "")
+        arguments = []
         try:
             legislatures = json.loads(
                 api.portal.get_registry_record(
                     "legislatures", interface=IRerUfficiostampaSettings
                 )
             )
-            if legislatures:
+            if not legislatures:
+                pass
+            for data in legislatures:
+                if data.get("legislature", "") == stored:
+                    arguments = data.get("arguments", [])
+                    break
+            if not arguments:
                 arguments = legislatures[-1].get("arguments", [])
-            else:
-                arguments = []
-
         except (KeyError, InvalidParameterError, TypeError):
             arguments = []
         for arg in getattr(context, "arguments", []) or []:
@@ -42,7 +47,8 @@ class ChannelsVocabularyFactory(object):
     def __call__(self, context):
         try:
             subscription_channels = api.portal.get_registry_record(
-                "subscription_channels", interface=IRerUfficiostampaSettings,
+                "subscription_channels",
+                interface=IRerUfficiostampaSettings,
             )
         except (KeyError, InvalidParameterError):
             subscription_channels = []
@@ -80,9 +86,7 @@ class LegislaturesVocabularyFactory(object):
                     "legislatures", interface=IRerUfficiostampaSettings
                 )
             )
-            registry_legislatures = [
-                x.get("legislature", "") for x in registry_val
-            ]
+            registry_legislatures = [x.get("legislature", "") for x in registry_val]
             registry_legislatures.reverse()
         except (KeyError, InvalidParameterError, TypeError):
             registry_legislatures = []
@@ -90,9 +94,7 @@ class LegislaturesVocabularyFactory(object):
         pc = api.portal.get_tool(name="portal_catalog")
         catalog_legislatures = pc.uniqueValuesFor("legislature")
 
-        legislatures = [
-            x for x in registry_legislatures if x in catalog_legislatures
-        ]
+        legislatures = [x for x in registry_legislatures if x in catalog_legislatures]
         return safe_simplevocabulary_from_values(legislatures)
 
 

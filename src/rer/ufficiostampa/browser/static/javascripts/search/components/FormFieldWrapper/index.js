@@ -101,7 +101,6 @@ const FormFieldWrapper = ({
       // names must be equal
       return 0;
     });
-    console.log(slaveValues);
     params.push(
       <FieldWrapper
         parameter={{ ...slave, options: slaveValues }}
