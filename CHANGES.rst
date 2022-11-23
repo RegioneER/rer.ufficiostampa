@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.6.3 (unreleased)
+1.6.3 (2022-11-23)
 ------------------
 
 - Read value of slave form fields from the querystring.
