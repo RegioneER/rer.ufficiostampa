@@ -32,7 +32,7 @@ function TranslationsWrapper({ children }) {
       })
       .catch(function(error) {
         // handle error
-        console.log(error);
+        console.error(error);
       });
   }, []);
 

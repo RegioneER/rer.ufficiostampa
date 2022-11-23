@@ -39,39 +39,43 @@ const App = () => {
     });
   }, []);
 
-  const initializeQueryParameters = parameters => {
+  const getValueFromQuery = parameter => {
     const queryString = new URLSearchParams(window.location.search);
-    const newParameters = parameters.reduce((accumulator, parameter) => {
-      switch (parameter.type) {
-        case 'text':
-          accumulator[parameter.id] = queryString.get(parameter.id) || '';
-          break;
-        case 'date':
-          const parameterId = parameter.id;
-
-          accumulator[parameter.id] = {};
-          const [from, to] = queryString.getAll(`${parameterId}.query`);
-          if (from) {
-            accumulator[parameterId] = {
-              from: moment(from),
-              to: to && moment(to),
-            };
-          }
-          break;
-        default:
-          if (!queryString.get(parameter.id)) {
-            //  empty querystring
-            if (parameter.default) {
-              accumulator[parameter.id] = parameter.default;
-            } else {
-              accumulator[parameter.id] = [];
-            }
-          } else {
-            accumulator[parameter.id] = queryString.getAll(parameter.id);
-          }
-          break;
+    switch (parameter.type) {
+      case 'text':
+        return queryString.get(parameter.id) || '';
+      case 'date': {
+        const parameterId = parameter.id;
+        let value = {};
+        const [from, to] = queryString.getAll(`${parameterId}.query`);
+        if (from) {
+          value[parameterId] = {
+            from: moment(from),
+            to: to && moment(to),
+          };
+        }
+        return value;
       }
+      default:
+        if (!queryString.get(parameter.id)) {
+          //  empty querystring
+          if (parameter.default) {
+            return parameter.default;
+          } else {
+            return [];
+          }
+        } else {
+          return queryString.getAll(parameter.id);
+        }
+    }
+  };
 
+  const initializeQueryParameters = parameters => {
+    const newParameters = parameters.reduce((accumulator, parameter) => {
+      accumulator[parameter.id] = getValueFromQuery(parameter);
+      if (parameter.slave) {
+        accumulator[parameter.slave.id] = getValueFromQuery(parameter.slave);
+      }
       return accumulator;
     }, {});
     setQueryParameters({ ...queryParameters, ...newParameters });
@@ -119,6 +123,7 @@ const App = () => {
       `${portalUrl}/comunicati-search`,
     );
   };
+
   return (
     <TranslationsWrapper>
       <FiltersWrapper

@@ -4,7 +4,8 @@ Changelog
 1.6.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Read value of slave form fields from the querystring.
+  [cekk]
 
 
 1.6.2 (2022-11-03)
