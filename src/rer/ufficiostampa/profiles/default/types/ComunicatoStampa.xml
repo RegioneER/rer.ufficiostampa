@@ -37,6 +37,7 @@
     <element value="plone.versioning" />
     <element value="plone.locking" />
     <element value="rer.solrpush.behaviors.solr_fields.ISolrFields" />
+    <element value="collective.dexteritytextindexer" />
  </property>
  <property name="schema">rer.ufficiostampa.interfaces.IComunicatoStampa</property>
  <property name="model_source"></property>

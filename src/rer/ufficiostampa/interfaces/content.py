@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from collective.dexteritytextindexer.utils import searchable
+from plone.app.contenttypes.behaviors.richtext import IRichText
 from plone.app.z3cform.widget import AjaxSelectFieldWidget
 from plone.autoform import directives
 from plone.supermodel import model
@@ -38,8 +40,12 @@ class IComunicatoStampa(model.Schema):
         default=False,
     )
     comunicato_number = schema.TextLine(title=u"", description=u"", required=False)
+
     directives.omitted("message_sent")
     directives.omitted("comunicato_number")
+
+    # set text field as searchable in SearchableText
+    searchable(IRichText, "text")
 
 
 class IInvitoStampa(IComunicatoStampa):

@@ -26,4 +26,12 @@
     profile="rer.ufficiostampa:default"
     handler=".upgrades.to_1300"
     />
+  <genericsetup:upgradeStep source="1300"
+    destination="1400"
+    title="Improve SearchableText"
+    description=""
+    profile="rer.ufficiostampa:default"
+    handler=".upgrades.to_1400"
+    />
+
 </configure>

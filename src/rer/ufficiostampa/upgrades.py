@@ -58,3 +58,19 @@ def to_1300(context):
             logger.info("Progress: [{}/{}]".format(i, tot))
         item = brain.getObject()
         setattr(item, "legislature", brain.legislature)
+
+
+def to_1400(context):
+    logger.info("Enable collective.dexteritytextindexer behavior")
+    context.runImportStepFromProfile(DEFAULT_PROFILE, "typeinfo")
+
+    logger.info("Reindex contents")
+    i = 0
+    brains = api.content.find(portal_type=["ComunicatoStampa", "InvitoStampa"])
+    tot = len(brains)
+    for brain in brains:
+        i += 1
+        if i % 100 == 0:
+            logger.info("Progress: [{}/{}]".format(i, tot))
+        item = brain.getObject()
+        item.reindexObject(idxs=["SearchableText"])

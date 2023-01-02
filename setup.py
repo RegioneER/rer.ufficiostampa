@@ -52,15 +52,16 @@ setup(
     install_requires=[
         "setuptools",
         # -*- Extra requirements: -*-
-        "z3c.jbot",
-        "plone.api>=1.8.4",
-        "plone.restapi",
-        "plone.app.dexterity",
-        "collective.z3cform.jsonwidget",
-        "souper.plone",
-        "itsdangerous>=1.1.0",
-        "premailer",
         'ftfy==4.4.3;python_version<="2.7"',
+        "collective.z3cform.jsonwidget",
+        "collective.dexteritytextindexer",
+        "itsdangerous>=1.1.0",
+        "plone.api>=1.8.4",
+        "plone.app.dexterity",
+        "plone.restapi",
+        "premailer",
+        "souper.plone",
+        "z3c.jbot",
     ],
     extras_require={
         "test": [
