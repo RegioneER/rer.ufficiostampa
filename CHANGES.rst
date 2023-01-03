@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.6.4 (unreleased)
+1.6.4 (2023-01-03)
 ------------------
 
 - Index also text from contents.
