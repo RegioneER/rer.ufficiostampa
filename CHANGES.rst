@@ -4,7 +4,8 @@ Changelog
 1.6.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add querystring modifiers for keyord indexes to prevent utf-8 errors.
+  [cekk]
 
 
 1.6.4 (2023-01-03)

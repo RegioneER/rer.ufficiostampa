@@ -46,5 +46,15 @@
   <!-- indexer per i destinatari -->
   <adapter name="arguments" factory=".indexer.arguments" />
   <adapter name="legislature" factory=".indexer.legislature" />
+  
+  <!-- query index modifiers -->
+  <utility
+    factory=".query_index_modifiers.Arguments"
+    provides="plone.app.querystring.interfaces.IParsedQueryIndexModifier"
+    name="arguments" />
+  <utility
+    factory=".query_index_modifiers.Legislature"
+    provides="plone.app.querystring.interfaces.IParsedQueryIndexModifier"
+    name="legislature" />
 
 </configure>
