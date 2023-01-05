@@ -8,6 +8,7 @@ from plone.restapi.testing import PloneRestApiDXLayer
 from plone.testing import z2
 
 import collective.MockMailHost
+import collective.dexteritytextindexer
 import collective.z3cform.jsonwidget
 import rer.ufficiostampa
 import souper.plone
@@ -22,7 +23,7 @@ class RerUfficiostampaLayer(PloneSandboxLayer):
         # Load any other ZCML that is required for your tests.
         # The z3c.autoinclude feature is disabled in the Plone fixture base
         # layer.
-
+        self.loadZCML(package=collective.dexteritytextindexer)
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=rer.ufficiostampa)
         self.loadZCML(package=collective.z3cform.jsonwidget)
@@ -52,9 +53,8 @@ class RerUfficiostampaLayerApi(PloneRestApiDXLayer):
     defaultBases = (PLONE_APP_CONTENTTYPES_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
-        super(RerUfficiostampaLayerApi, self).setUpZope(
-            app, configurationContext
-        )
+        super(RerUfficiostampaLayerApi, self).setUpZope(app, configurationContext)
+        self.loadZCML(package=collective.dexteritytextindexer)
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=rer.ufficiostampa)
         self.loadZCML(package=collective.z3cform.jsonwidget)
