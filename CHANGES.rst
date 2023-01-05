@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.6.5 (unreleased)
+1.6.5 (2023-01-05)
 ------------------
 
 - Add querystring modifiers for keyord indexes to prevent utf-8 errors.
