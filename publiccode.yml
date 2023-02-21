@@ -6,7 +6,6 @@ publiccodeYmlVersion: '0.2'
 categories:
   - application-development
   - content-management
-logo: docs/rer-logo.png
 dependsOn:
   open:
     - name: Plone
