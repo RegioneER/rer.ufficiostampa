@@ -19,8 +19,50 @@ description:
       - Comunicati Stampa
       - Ricerca
     longDescription: >
-      
-    shortDescription: Prodotto per gestire (creare e inviare a canali di iscritti) comunicati e inviti stampa
+## Funzionalità dello strumento
+
+Tipi di contenuto: Comunicato stampa e Invito stampa. Gestione iscritti (in genere gironalisti). Gestione Legislatura e argomenti. Impostazioni avanzate per l’invio di comunicati e Inviti stampa. Ricerca avanzata per comunicati stampa.
+
+## Nuovi tipi di contenuti
+
+### Comunicato stampa
+
+Oltre alla descrizione e al testo, questo contenuto contiene i campi “Legislatura” e “Argomenti” (questi in regione Emilia-Romagna coincidono con le deleghe degli assessorati). Il contenuto Comunicato stampa è di tipo folderish: ammette l’inserimento di cartelle e allegati (file ed immagini). Può essere spedito a canali di giornalisti solo quando è in stato pubblicato.
+
+### Invito stampa
+
+Analogo al comunicato stampa, con la differenza che questo tipo di contenuto non viene mai pubblicato, resta in stato privato e viene solo spedito ai canali di giornalisti (non viene visualizzato online).
+
+## Gestione iscritti (giornalisti)
+
+Permette la gestione di canale e di iscritti (giornalisti) a cui inviare i comunicati stampa.
+
+Con profilazione di **gestori comunicati stampa** è possibile definire i *Canali* a cui assegnare elenchi di giornalisti.
+
+Con profilazione  da **editor** è possibile:
+
+- Aggiungere un iscritto a uno o più canali
+- Eliminare un iscritto  da uno o da tutti canali
+- Importare gli iscritti direttamente dal file CSV
+- Esportare gli iscritti direttamente nel file CSV
+- Cercare un iscritto
+- Filtrare gli iscritti a un canale
+
+## Gestione Legislatura e argomenti
+
+Con profilazione di **Gestore comunicati stampa** è possibile definire una nuova *Legislatura* e assegnare a questa nuovi *argomenti* (nel caso della Regione Emilia-Romagna questi coincidono con le deleghe degli assessorati).
+
+In automatico, nell’edit dei contenuti Comunicato stampa e Invito stampa comparirà di default nel campo *Legislatura* l’ultima definita e nel campo *Argomenti* sarà possibile selezionarne uno tra quelli assegnati all’ultima legislatura.
+
+### Impostazioni avanzate per l’invio di comunicati stampa
+
+Con profilo di **editor** è possibile inviare comunicati stampa, inviti stampa a uno o più canali e visualizzare lo storico degli invii.
+
+### Ricerca avanzata per comunicati stampa
+
+Consente di consultare un motore di ricerca dedicato ai comunicati stampa e filtrare testo, periodo temporale, legislatura e argomenti.
+     
+    shortDescription: Gestione (creazione e invio a canali) di comunicati e inviti stampa. Consente la gestione (creazione e assegnazione) dei canali di giornalisti
     screenshots:
 developmentStatus: stable
 it:
