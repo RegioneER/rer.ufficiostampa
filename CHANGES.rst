@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.6.6 (unreleased)
+1.6.6 (2023-03-14)
 ------------------
 
 - Do not send duplicated emails lowering all addresses before send.
