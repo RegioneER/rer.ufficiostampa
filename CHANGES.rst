@@ -4,7 +4,8 @@ Changelog
 1.6.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Do not send duplicated emails lowering all addresses before send.
+  [cekk]
 
 
 1.6.5 (2023-01-05)

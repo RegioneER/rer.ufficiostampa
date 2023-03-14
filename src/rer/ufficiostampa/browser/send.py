@@ -257,9 +257,9 @@ class SendForm(form.Form):
         tool = getUtility(ISubscriptionsStore)
         for channel in channels:
             records = tool.search(query={"channels": channel})
-            subscribers.update([x.attrs.get("email", "") for x in records])
+            subscribers.update([x.attrs.get("email", "").lower() for x in records])
 
-        subscribers.update(data.get("additional_addresses", []))
+        subscribers.update([x.lower() for x in data.get("additional_addresses", [])])
         return sorted(list(subscribers))
 
     def get_folders_attachments(self):
