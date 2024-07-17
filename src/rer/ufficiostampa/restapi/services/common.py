@@ -16,7 +16,6 @@ from zope.publisher.interfaces import IPublishTraverse
 
 import csv
 import logging
-import six
 
 
 logger = logging.getLogger(__name__)
@@ -105,8 +104,6 @@ class DataCSVGet(DataGet):
                     v = str(v)
                 if v:
                     v = json_compatible(v)
-                    if six.PY2:
-                        v = fix_text(v)
                     v = v.encode("utf-8")
                 data[k] = v
             rows.append(data)

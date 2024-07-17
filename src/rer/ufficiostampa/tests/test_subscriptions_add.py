@@ -88,7 +88,7 @@ class TestSubscriptionsGet(unittest.TestCase):
             json={
                 "channels": ["foo"],
                 "email": "foo@foo.it",
-                "unknown": "mistery",
+                "unknown": "mystery",
                 "name": "John",
                 "surname": "Doe",
                 "phone": "123456",

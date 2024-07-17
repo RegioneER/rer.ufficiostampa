@@ -1,5 +1,5 @@
-from collective.dexteritytextindexer.utils import searchable
 from plone.app.contenttypes.behaviors.richtext import IRichText
+from plone.app.dexterity.textindexer import searchable
 from plone.app.z3cform.widget import AjaxSelectFieldWidget
 from plone.autoform import directives
 from plone.supermodel import model

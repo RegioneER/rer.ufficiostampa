@@ -15,11 +15,12 @@ long_description = "\n\n".join(
 
 setup(
     name="rer.ufficiostampa",
-    version="1.6.7.dev0",
+    version="2.0.0.dev0",
     description="Policy for Ufficio Stampa",
     long_description=long_description,
     # Get more from https://pypi.org/classifiers/
     classifiers=[
+        "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
         "Framework :: Plone",
         "Framework :: Plone :: Addon",
@@ -52,8 +53,8 @@ setup(
     install_requires=[
         "setuptools",
         # -*- Extra requirements: -*-
-        'ftfy==4.4.3;python_version<="2.7"',
-        "collective.z3cform.jsonwidget",
+        # 'ftfy==4.4.3;python_version<="2.7"',
+        # "collective.z3cform.jsonwidget",
         # "collective.dexteritytextindexer",
         "itsdangerous>=1.1.0",
         "plone.api>=1.8.4",

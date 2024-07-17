@@ -35,7 +35,7 @@ class TestTool(unittest.TestCase):
             {
                 "channels": ["foo"],
                 "email": "foo@foo.it",
-                "unknown": "mistery",
+                "unknown": "???",
                 "name": "John",
                 "surname": "Doe",
                 "phone": "123456",

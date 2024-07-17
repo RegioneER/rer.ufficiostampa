@@ -1,7 +1,7 @@
 from plone.app.dexterity import _
-from plone.app.dexterity import searchable
 from plone.app.dexterity.behaviors.metadata import Basic
 from plone.app.dexterity.behaviors.metadata import IBasic
+from plone.app.dexterity.textindexer import searchable
 from plone.autoform import directives as form
 from plone.autoform.interfaces import IFormFieldProvider
 from zope import schema

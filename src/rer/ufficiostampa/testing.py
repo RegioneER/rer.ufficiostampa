@@ -8,7 +8,8 @@ from plone.testing import z2
 
 import collective.dexteritytextindexer
 import collective.MockMailHost
-import collective.z3cform.jsonwidget
+
+# import collective.z3cform.jsonwidget
 import plone.restapi
 import rer.ufficiostampa
 import souper.plone
@@ -25,7 +26,7 @@ class RerUfficiostampaLayer(PloneSandboxLayer):
         self.loadZCML(package=collective.dexteritytextindexer)
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=rer.ufficiostampa)
-        self.loadZCML(package=collective.z3cform.jsonwidget)
+        # self.loadZCML(package=collective.z3cform.jsonwidget)
         self.loadZCML(package=souper.plone)
 
     def setUpPloneSite(self, portal):
@@ -56,7 +57,7 @@ class RerUfficiostampaLayerApi(PloneRestApiDXLayer):
         self.loadZCML(package=collective.dexteritytextindexer)
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=rer.ufficiostampa)
-        self.loadZCML(package=collective.z3cform.jsonwidget)
+        # self.loadZCML(package=collective.z3cform.jsonwidget)
         self.loadZCML(package=souper.plone)
 
     def setUpPloneSite(self, portal):

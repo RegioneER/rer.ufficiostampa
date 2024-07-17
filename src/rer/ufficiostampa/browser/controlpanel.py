@@ -1,7 +1,8 @@
-from collective.z3cform.jsonwidget.browser.widget import JSONFieldWidget
+# from collective.z3cform.jsonwidget.browser.widget import JSONFieldWidget
 from plone import api
 from plone.app.registry.browser import controlpanel
-from Products.CMFPlone.resources import add_bundle_on_request
+
+# from Products.CMFPlone.resources import add_bundle_on_request
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from rer.ufficiostampa import _
 from rer.ufficiostampa.interfaces import ILegislaturesRowSchema
@@ -20,7 +21,7 @@ class UfficiostampaSettingsEditForm(controlpanel.RegistryEditForm):
     description = ""
 
     fields = field.Fields(IRerUfficiostampaSettings)
-    fields["legislatures"].widgetFactory = JSONFieldWidget
+    # fields["legislatures"].widgetFactory = JSONFieldWidget
 
     @property
     def can_manage_settings(self):
@@ -60,7 +61,7 @@ class UfficiostampaSettingsEditForm(controlpanel.RegistryEditForm):
                 request=self.request,
             )
             self.request.response.redirect(
-                "{}/channels-management".format(api.portal.get().absolute_url())
+                f"{api.portal.get().absolute_url()}/channels-management"
             )
         else:
             super().handleCancel(self, action)
@@ -73,7 +74,7 @@ class UfficiostampaSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
     index = ViewPageTemplateFile("templates/controlpanel_layout.pt")
 
     def __call__(self):
-        add_bundle_on_request(self.request, "z3cform-jsonwidget-bundle")
+        # add_bundle_on_request(self.request, "z3cform-jsonwidget-bundle")
         return super().__call__()
 
     def can_access_controlpanels(self):

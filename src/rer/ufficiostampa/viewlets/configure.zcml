@@ -16,7 +16,7 @@
         layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
         />
   </configure>
-  <!-- questo lo customizzo così perché al momento in rer.agidtheme.base non è ancora stata customizzata questa viewlet -->
+  <!-- questo lo customizzo così perché in rer.agidtheme.base non è ancora stata customizzata questa viewlet -->
   <configure package="plone.app.layout.viewlets">
     <browser:viewlet
         name="plone.abovecontenttitle.socialtags"

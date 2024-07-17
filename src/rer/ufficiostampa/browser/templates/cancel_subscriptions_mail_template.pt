@@ -9,11 +9,13 @@
   <div id="logo">
     <img alt="Regione Emilia-Romagna"
          src="${context/portal_url}/++plone++rer.ufficiostampa/logo_rer.gif"
+         i18n:attributes="alt"
     />
-    <div>Giunta Regionale - Agenzia di informazione e comunicazione</div>
+    <div i18n:translate="">Giunta Regionale - Agenzia di informazione e comunicazione</div>
   </div>
   <p i18n:translate="confirm_help">
-    You received this email because someone asked to cancel your subscriptions on
+     You received this email because someone asked to cancel your
+    subscriptions on
     <b i18n:name="site_title">${site_title}</b>.
   </p>
   <p>
@@ -28,20 +30,23 @@
   </b>
   <div id="footer">
     <div class="other-news">
-      <p>
+      <p i18n:translate="">
         Tutte le notizie su
         <a href="https://www.regione.emilia-romagna.it"
            title="Regione Emilia-Romagna"
-        >www.regione.emilia-romagna.it</a>,
-        i comunicati nella sezione
-        <em>Agenzia di informazione e comunicazione<em>.
-          </em></em></p>
-      <p>Seguici su Twitter (<a href="https://twitter.com/@RegioneER">@RegioneER</a>), Facebook (<a href="https://www.facebook.com/RegioneEmiliaRomagna">@RegioneEmiliaRomagna</a>)</p>
-      <p class="last-item-footer">Segreteria di redazione tel. 051 5275490</p>
+           i18n:attributes="title"
+        >www.regione.emilia-romagna.it</a>, i comunicati nella
+        sezione
+        <em>Agenzia di informazione e comunicazione</em>.</p>
+      <p i18n:translate="">Seguici su Twitter (<a href="https://twitter.com/@RegioneER">@RegioneER</a>), Facebook (<a href="https://www.facebook.com/RegioneEmiliaRomagna">@RegioneEmiliaRomagna</a>)</p>
+      <p class="last-item-footer"
+         i18n:translate=""
+      >Segreteria di redazione tel. 051 5275490</p>
     </div>
     <div class="manage-subscriptions">
       <p i18n:translate="manage_subscriptions_intro">
-      You are receiving this email because you are subscribed to
+         You are receiving this email because you are
+      subscribed to
         <b i18n:name="site_title">${site_title}</b>.
       </p>
       <a href="${context/portal_url}/cancel-subscriptions-request"

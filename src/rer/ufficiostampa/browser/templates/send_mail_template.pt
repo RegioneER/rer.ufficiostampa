@@ -21,12 +21,15 @@
   <div id="logo">
     <img alt="Regione Emilia-Romagna"
          src="${context/portal_url}/++plone++rer.ufficiostampa/logo_rer.gif"
+         i18n:attributes="alt"
+         i18n:translate=""
     />
-    <div>Giunta Regionale - Agenzia di informazione e comunicazione</div>
+    <div i18n:translate="">Giunta Regionale - Agenzia di informazione e comunicazione</div>
   </div>
   <div class="infos">
     <div class="comunicato-number"
          tal:condition="python:comunicato_number and context.portal_type == 'ComunicatoStampa'"
+         i18n:translate=""
     >
         N. ${comunicato_number}
     </div>
@@ -38,7 +41,7 @@
          i18n:name="date"
       ></b>
     </div>
-    <p>
+    <p i18n:translate="">
         All'attenzione dei Capi redattori
     </p>
   </div>
@@ -68,20 +71,25 @@
 
   <div id="footer">
     <div class="other-news">
-      <p>
+      <p i18n:translate="">
           Tutti i comunicati sono online su
         <a href="https://notizie.regione.emilia-romagna.it"
            title="Notizie Regione Emilia-Romagna"
+           i18n:attributes="title"
         >https://notizie.regione.emilia-romagna.it</a>
       </p>
-      <p>
+      <p i18n:translate="">
         Seguici su Twitter (<a href="https://twitter.com/@RegioneER">@RegioneER</a>),
         Facebook (<a href="https://www.facebook.com/RegioneEmiliaRomagna">@RegioneEmiliaRomagna</a>),
         Instagram (<a href="https://www.instagram.com/regione_emiliaromagna">@regione_emiliaromagna</a>),
         Linkedin (<a href="https://www.linkedin.com/company/regione-emilia-romagna">@regione-emilia-romagna</a>)
       </p>
-      <p class="last-item-footer">Segreteria di redazione tel.
-        <a href="tel:051-5275490">051 5275490</a></p>
+      <p class="last-item-footer"
+         i18n:translate=""
+      >Segreteria di redazione tel.
+        <a href="tel:051-5275490"
+           i18n:translate=""
+        >051 5275490</a></p>
     </div>
     <div class="manage-subscriptions">
       <p i18n:translate="manage_subscriptions_intro">

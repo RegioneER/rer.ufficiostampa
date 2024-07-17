@@ -4,6 +4,7 @@ include *.rst
 global-exclude *.pyc
 exclude .babelrc
 exclude .nvmrc
+exclude .coveragerc
 include *.GPL
 include *.js
 include *.json
