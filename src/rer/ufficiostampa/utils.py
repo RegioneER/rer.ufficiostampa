@@ -14,21 +14,11 @@ from zope.component import getUtility
 from zope.globalrequest import getRequest
 
 
-try:
-    # rer.agidtheme overrides site tile field
-    from rer.agidtheme.base.interfaces import IRERSiteSchema as ISiteSchema
-    from rer.agidtheme.base.utility.interfaces import ICustomFields
-
-    RER_THEME = True
-except ImportError:
-    from Products.CMFPlone.interfaces.controlpanel import ISiteSchema
-
-    RER_THEME = False
+from Products.CMFPlone.interfaces.controlpanel import ISiteSchema
 
 import json
 import logging
 import premailer
-import six
 
 
 logger = logging.getLogger(__name__)
@@ -55,18 +45,6 @@ def get_site_title():
     registry = getUtility(IRegistry)
     site_settings = registry.forInterface(ISiteSchema, prefix="plone", check=False)
     site_title = getattr(site_settings, "site_title") or ""
-    if RER_THEME:
-        site_subtitle_style = getattr(site_settings, "site_subtitle_style") or ""
-        fields_value = getUtility(ICustomFields)
-        site_title = fields_value.titleLang(site_title)
-        site_subtitle = fields_value.subtitleLang(
-            getattr(site_settings, "site_subtitle") or "{}"
-        )
-        if site_subtitle and site_subtitle_style == "subtitle-normal":
-            site_title += f" {site_subtitle}"
-
-    if six.PY2:
-        site_title = site_title.decode("utf-8")
     return site_title
 
 

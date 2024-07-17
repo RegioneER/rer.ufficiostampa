@@ -14,7 +14,6 @@ from zope.i18n import translate
 from zope.interface import implementer
 
 import logging
-import six
 
 
 logger = logging.getLogger(__name__)
@@ -34,9 +33,6 @@ class BaseStore:
             if k not in self.fields:
                 logger.warning(f"[ADD {self.soup_type}] SKIP unkwnown field: {k}")
             else:
-                if six.PY2:
-                    if isinstance(v, str):
-                        v = v.decode("utf-8")
                 record.attrs[k] = v
         record.attrs["date"] = datetime.now()
         return self.soup.add(record)
@@ -78,8 +74,6 @@ class BaseStore:
                 continue
             if index not in self.indexes:
                 continue
-            if six.PY2:
-                value = value.decode("utf-8")
             if index == self.text_index:
                 queries.append(Contains("text", value))
             elif index in self.keyword_indexes:
@@ -159,8 +153,6 @@ class SubscriptionsStore(BaseStore):
                 ),
                 context=getRequest(),
             )
-            if six.PY2:
-                msg = msg.encode("utf-8")
             raise ValueError(msg)
         return super().add(data=data)
 

@@ -27,21 +27,11 @@ from zope.interface import Invalid
 from zope.interface import provider
 from zope.schema.interfaces import IContextAwareDefaultFactory
 from zope.schema.interfaces import IVocabularyFactory
-
-
-try:
-    from ftfy import fix_text
-
-    HAS_FTYFY = True
-except ImportError:
-    HAS_FTYFY = False
-
 from email.message import EmailMessage
 
 import json
 import logging
 import requests
-import six
 
 
 logger = logging.getLogger(__name__)
@@ -244,8 +234,6 @@ class SendForm(form.Form):
             or "Invito Regione",  # noqa
             title=self.context.title,
         )
-        if six.PY2 and HAS_FTYFY:
-            return fix_text(value)
         return value
 
     def get_subscribers(self, data):

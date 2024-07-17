@@ -18,7 +18,6 @@ import base64
 import csv
 import itertools
 import logging
-import six
 
 
 logger = logging.getLogger(__name__)
@@ -156,8 +155,6 @@ class SubscriptionsCSVPost(Service):
                         ),
                         context=self.request,
                     )
-                    if six.PY2:
-                        msg = msg.encode("utf-8")
                     logger.warning(f"[SKIP] - {msg}")
                     res["skipped"].append(msg)
                     continue
@@ -188,10 +185,6 @@ class SubscriptionsCSVPost(Service):
 
         try:
             dialect = csv.Sniffer().sniff(csv_data, delimiters=";,")
-
-            if six.PY2:
-                dialect.delimiter = dialect.delimiter.encode()
-                dialect.quotechar = dialect.quotechar.encode()
 
             return {
                 "csv": csv.DictReader(
