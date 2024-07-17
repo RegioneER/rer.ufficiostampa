@@ -30,7 +30,7 @@ class TestSubscriptionsGet(unittest.TestCase):
         api.user.create(
             email="memberuser@example.com",
             username="memberuser",
-            password="secret",
+            password="secret123",
         )
 
         self.api_session = RelativeSession(self.portal_url)
@@ -61,7 +61,7 @@ class TestSubscriptionsGet(unittest.TestCase):
     def test_gestore_comunicati_can_get_data(self):
         api_session = RelativeSession(self.portal_url)
         api_session.headers.update({"Accept": "application/json"})
-        api_session.auth = ("memberuser", "secret")
+        api_session.auth = ("memberuser", "secret123")
 
         url = f"{self.portal_url}/@subscriptions"
         self.assertEqual(api_session.get(url).status_code, 401)
