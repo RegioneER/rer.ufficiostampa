@@ -1,37 +1,39 @@
 <configure
-  xmlns="http://namespaces.zope.org/zope"
-  xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    >
 
   <genericsetup:upgradeStep
-    source="1000"
-    destination="1100"
-    title="Upgrade to 1100"
-    description=""
-    profile="rer.ufficiostampa:default"
-    handler=".upgrades.to_1100"
-    />
+      title="Upgrade to 1100"
+      description=""
+      profile="rer.ufficiostampa:default"
+      source="1000"
+      destination="1100"
+      handler=".upgrades.to_1100"
+      />
   <genericsetup:upgradeStep
-    source="1100"
-    destination="1200"
-    title="Add versioning"
-    description=""
-    profile="rer.ufficiostampa:default"
-    handler=".upgrades.to_1200"
-    />
+      title="Add versioning"
+      description=""
+      profile="rer.ufficiostampa:default"
+      source="1100"
+      destination="1200"
+      handler=".upgrades.to_1200"
+      />
   <genericsetup:upgradeStep
-    source="1200"
-    destination="1300"
-    title="Fix legislature"
-    description=""
-    profile="rer.ufficiostampa:default"
-    handler=".upgrades.to_1300"
-    />
-  <genericsetup:upgradeStep source="1300"
-    destination="1400"
-    title="Improve SearchableText"
-    description=""
-    profile="rer.ufficiostampa:default"
-    handler=".upgrades.to_1400"
-    />
+      title="Fix legislature"
+      description=""
+      profile="rer.ufficiostampa:default"
+      source="1200"
+      destination="1300"
+      handler=".upgrades.to_1300"
+      />
+  <genericsetup:upgradeStep
+      title="Improve SearchableText"
+      description=""
+      profile="rer.ufficiostampa:default"
+      source="1300"
+      destination="1400"
+      handler=".upgrades.to_1400"
+      />
 
 </configure>

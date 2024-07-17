@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.app.contenttypes.testing import PLONE_APP_CONTENTTYPES_FIXTURE
 from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
@@ -7,12 +6,12 @@ from plone.app.testing import PloneSandboxLayer
 from plone.restapi.testing import PloneRestApiDXLayer
 from plone.testing import z2
 
-import collective.MockMailHost
 import collective.dexteritytextindexer
+import collective.MockMailHost
 import collective.z3cform.jsonwidget
+import plone.restapi
 import rer.ufficiostampa
 import souper.plone
-import plone.restapi
 
 
 class RerUfficiostampaLayer(PloneSandboxLayer):
@@ -53,7 +52,7 @@ class RerUfficiostampaLayerApi(PloneRestApiDXLayer):
     defaultBases = (PLONE_APP_CONTENTTYPES_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
-        super(RerUfficiostampaLayerApi, self).setUpZope(app, configurationContext)
+        super().setUpZope(app, configurationContext)
         self.loadZCML(package=collective.dexteritytextindexer)
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=rer.ufficiostampa)

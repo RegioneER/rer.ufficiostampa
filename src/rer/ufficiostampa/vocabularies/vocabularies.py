@@ -1,18 +1,18 @@
-# -*- coding: utf-8 -*-
-from zope.interface import implementer
-from zope.schema.interfaces import IVocabularyFactory
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
 from plone import api
 from plone.api.exc import InvalidParameterError
-from plone.app.vocabularies.terms import safe_simplevocabulary_from_values
 from plone.app.vocabularies.catalog import KeywordsVocabulary
+from plone.app.vocabularies.terms import safe_simplevocabulary_from_values
+from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
+from zope.interface import implementer
+from zope.schema.interfaces import IVocabularyFactory
+from zope.schema.vocabulary import SimpleTerm
+from zope.schema.vocabulary import SimpleVocabulary
 
 import json
 
 
 @implementer(IVocabularyFactory)
-class ArgumentsVocabularyFactory(object):
+class ArgumentsVocabularyFactory:
     def __call__(self, context):
         stored = getattr(context.aq_base, "legislature", "")
         arguments = []
@@ -43,7 +43,7 @@ class ArgumentsVocabularyFactory(object):
 
 
 @implementer(IVocabularyFactory)
-class ChannelsVocabularyFactory(object):
+class ChannelsVocabularyFactory:
     def __call__(self, context):
         try:
             subscription_channels = api.portal.get_registry_record(
@@ -56,7 +56,7 @@ class ChannelsVocabularyFactory(object):
 
 
 @implementer(IVocabularyFactory)
-class AttachmentsVocabularyFactory(object):
+class AttachmentsVocabularyFactory:
     def __call__(self, context):
         terms = []
         for child in context.listFolderContents(
@@ -73,7 +73,7 @@ class AttachmentsVocabularyFactory(object):
 
 
 @implementer(IVocabularyFactory)
-class LegislaturesVocabularyFactory(object):
+class LegislaturesVocabularyFactory:
     def __call__(self, context):
         """
         return a list of legislature names.

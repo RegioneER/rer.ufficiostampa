@@ -1,25 +1,25 @@
-# -*- coding: utf-8 -*-
+from io import StringIO
+from plone import api
 from plone.protect.interfaces import IDisableCSRFProtection
 from plone.restapi.deserializer import json_body
 from plone.restapi.services import Service
-from plone.schema.email import Email, InvalidEmail
-from plone import api
+from plone.schema.email import Email
+from plone.schema.email import InvalidEmail
 from rer.ufficiostampa import _
 from rer.ufficiostampa.interfaces import ISubscriptionsStore
+from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
 from rer.ufficiostampa.restapi.services.common import DataCSVGet
-from six import StringIO
 from zExceptions import BadRequest
 from zope.component import getUtility
-from zope.interface import alsoProvides
 from zope.i18n import translate
-
-from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
+from zope.interface import alsoProvides
 
 import base64
 import csv
+import itertools
 import logging
 import six
-import itertools
+
 
 logger = logging.getLogger(__name__)
 
@@ -82,7 +82,7 @@ class SubscriptionsCSVPost(Service):
                     ),
                     context=self.request,
                 )
-                logger.warning("[ERROR] - {}".format(msg))
+                logger.warning(f"[ERROR] - {msg}")
                 res["errored"].append(msg)
 
             request_channels = set(
@@ -106,7 +106,7 @@ class SubscriptionsCSVPost(Service):
                     ),
                     context=self.request,
                 )
-                logger.warning("[ERROR] - {}".format(msg))
+                logger.warning(f"[ERROR] - {msg}")
                 res["errored"].append(msg)
 
         # return if we have errored fields
@@ -129,7 +129,7 @@ class SubscriptionsCSVPost(Service):
                         ),
                         context=self.request,
                     )
-                    logger.warning("[SKIP] - {}".format(msg))
+                    logger.warning(f"[SKIP] - {msg}")
                     res["skipped"].append(msg)
                     continue
                 res["imported"] += 1
@@ -143,7 +143,7 @@ class SubscriptionsCSVPost(Service):
                         ),
                         context=self.request,
                     )
-                    logger.warning("[SKIP] - {}".format(msg))
+                    logger.warning(f"[SKIP] - {msg}")
                     res["skipped"].append(msg)
                     continue
                 record = records[0]
@@ -158,7 +158,7 @@ class SubscriptionsCSVPost(Service):
                     )
                     if six.PY2:
                         msg = msg.encode("utf-8")
-                    logger.warning("[SKIP] - {}".format(msg))
+                    logger.warning(f"[SKIP] - {msg}")
                     res["skipped"].append(msg)
                     continue
                 else:

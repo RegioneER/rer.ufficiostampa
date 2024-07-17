@@ -1,13 +1,13 @@
-# -*- coding: utf-8 -*-
-from rer.ufficiostampa.testing import (
-    RER_UFFICIOSTAMPA_API_FUNCTIONAL_TESTING,  # noqa: E501,
-)
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
+from rer.ufficiostampa.testing import (  # noqa: E501,
+    RER_UFFICIOSTAMPA_API_FUNCTIONAL_TESTING,
+)
+
 import transaction
 import unittest
 
@@ -34,7 +34,7 @@ class TestSubscriptionsGet(unittest.TestCase):
         self.anon_api_session = RelativeSession(self.portal_url)
         self.anon_api_session.headers.update({"Accept": "application/json"})
 
-        self.url = "{}/@subscriptions".format(self.portal_url)
+        self.url = f"{self.portal_url}/@subscriptions"
         transaction.commit()
 
     def tearDown(self):
@@ -42,9 +42,7 @@ class TestSubscriptionsGet(unittest.TestCase):
         self.anon_api_session.close()
 
     def test_anon_cant_post_data(self):
-        self.assertEqual(
-            self.anon_api_session.post(self.url, json={}).status_code, 401
-        )
+        self.assertEqual(self.anon_api_session.post(self.url, json={}).status_code, 401)
 
     def test_gestore_comunicati_can_post_data(self):
         api_session = RelativeSession(self.portal_url)
@@ -65,13 +63,9 @@ class TestSubscriptionsGet(unittest.TestCase):
         email and channel are required.
         """
         self.assertEqual(self.api_session.post(self.url).status_code, 400)
+        self.assertEqual(self.api_session.post(self.url, json={}).status_code, 400)
         self.assertEqual(
-            self.api_session.post(self.url, json={}).status_code, 400
-        )
-        self.assertEqual(
-            self.api_session.post(
-                self.url, json={"channels": ["foo"]}
-            ).status_code,
+            self.api_session.post(self.url, json={"channels": ["foo"]}).status_code,
             400,
         )
         self.assertEqual(
@@ -85,9 +79,7 @@ class TestSubscriptionsGet(unittest.TestCase):
         self.api_session.post(
             self.url, json={"channels": ["foo"], "email": "foo@foo.it"}
         )
-        self.assertEqual(
-            self.api_session.get(self.url).json()["items_total"], 1
-        )
+        self.assertEqual(self.api_session.get(self.url).json()["items_total"], 1)
 
     def test_store_only_known_fields(self):
 

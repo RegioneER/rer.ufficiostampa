@@ -3,26 +3,27 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone"
     xmlns:zcml="http://namespaces.zope.org/zcml"
-    i18n_domain="rer.ufficiostampa">
+    i18n_domain="rer.ufficiostampa"
+    >
 
-    <subscriber
+  <subscriber
       for="rer.ufficiostampa.interfaces.IComunicatoStampa
-          Products.CMFCore.interfaces.IActionSucceededEvent"
+           Products.CMFCore.interfaces.IActionSucceededEvent"
       handler=".comunicato.setNumber"
-    />
-    <subscriber
+      />
+  <subscriber
       for="rer.ufficiostampa.interfaces.IComunicatoStampa
-          OFS.interfaces.IObjectWillBeAddedEvent"
+           OFS.interfaces.IObjectWillBeAddedEvent"
       handler=".comunicato.createComunicato"
-    />
-    <subscriber
+      />
+  <subscriber
       for="rer.ufficiostampa.interfaces.IComunicatoStampa
-          zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
       handler=".comunicato.fixText"
-    />
-    <subscriber
+      />
+  <subscriber
       for="rer.ufficiostampa.interfaces.IInvitoStampa
-          zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
       handler=".comunicato.fixText"
-    />
+      />
 </configure>

@@ -1,6 +1,9 @@
-# -*- coding: utf-8 -*-
 from datetime import datetime
 from plone import api
+from repoze.catalog.query import And
+from repoze.catalog.query import Any
+from repoze.catalog.query import Contains
+from repoze.catalog.query import Eq
 from rer.ufficiostampa import _
 from rer.ufficiostampa.interfaces import ISendHistoryStore
 from rer.ufficiostampa.interfaces import ISubscriptionsStore
@@ -9,20 +12,16 @@ from souper.soup import Record
 from zope.globalrequest import getRequest
 from zope.i18n import translate
 from zope.interface import implementer
-from repoze.catalog.query import And
-from repoze.catalog.query import Contains
-from repoze.catalog.query import Eq
-from repoze.catalog.query import Any
 
 import logging
 import six
 
+
 logger = logging.getLogger(__name__)
 
 
-class BaseStore(object):
-    """
-    """
+class BaseStore:
+    """ """
 
     @property
     def soup(self):
@@ -33,9 +32,7 @@ class BaseStore(object):
         record = Record()
         for k, v in data.items():
             if k not in self.fields:
-                logger.warning(
-                    "[ADD {}] SKIP unkwnown field: {}".format(self.soup_type, k)
-                )
+                logger.warning(f"[ADD {self.soup_type}] SKIP unkwnown field: {k}")
             else:
                 if six.PY2:
                     if isinstance(v, str):
@@ -53,17 +50,23 @@ class BaseStore(object):
             return [
                 x
                 for x in self.soup.query(
-                    queryobject=parsed_query, sort_index=sort_index, reverse=reverse,
+                    queryobject=parsed_query,
+                    sort_index=sort_index,
+                    reverse=reverse,
                 )
             ]
         # return all data
         records = self.soup.data.values()
         if sort_index == "date":
             return sorted(
-                records, key=lambda k: k.attrs[sort_index] or None, reverse=reverse,
+                records,
+                key=lambda k: k.attrs[sort_index] or None,
+                reverse=reverse,
             )
         return sorted(
-            records, key=lambda k: k.attrs.get(sort_index, "") or "", reverse=reverse,
+            records,
+            key=lambda k: k.attrs.get(sort_index, "") or "",
+            reverse=reverse,
         )
 
     def parse_query_params(self, query):
@@ -88,7 +91,7 @@ class BaseStore(object):
         return And(*queries)
 
     def get_record(self, id):
-        if isinstance(id, six.text_type) or isinstance(id, str):
+        if isinstance(id, str) or isinstance(id, str):
             try:
                 id = int(id)
             except ValueError as e:
@@ -104,15 +107,11 @@ class BaseStore(object):
         try:
             record = self.soup.get(id)
         except KeyError:
-            logger.error(
-                '[UPDATE {}] item with id "{}" not found.'.format(self.soup_type, id)
-            )
+            logger.error(f'[UPDATE {self.soup_type}] item with id "{id}" not found.')
             return {"error": "NotFound"}
         for k, v in data.items():
             if k not in self.fields:
-                logger.warning(
-                    "[UPDATE {}] SKIP unkwnown field: {}".format(self.soup_type, k)
-                )
+                logger.warning(f"[UPDATE {self.soup_type}] SKIP unkwnown field: {k}")
 
             else:
                 record.attrs[k] = v
@@ -156,14 +155,14 @@ class SubscriptionsStore(BaseStore):
             msg = translate(
                 _(
                     "address_already_registered",
-                    default=u"E-mail address already registered.",
+                    default="E-mail address already registered.",
                 ),
                 context=getRequest(),
             )
             if six.PY2:
                 msg = msg.encode("utf-8")
             raise ValueError(msg)
-        return super(SubscriptionsStore, self).add(data=data)
+        return super().add(data=data)
 
 
 @implementer(ISendHistoryStore)

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from datetime import datetime
 from plone.protect.interfaces import IDisableCSRFProtection
 from plone.restapi.deserializer import json_body
@@ -8,6 +7,7 @@ from zope.component import getUtility
 from zope.interface import alsoProvides
 
 import logging
+
 
 logger = logging.getLogger(__name__)
 
@@ -22,9 +22,7 @@ class SendCompletePost(Service):
         if not send_uid:
             self.request.response.setStatus(400)
             return dict(
-                error=dict(
-                    type="BadRequest", message='Missing "send_uid" parameter'
-                )
+                error=dict(type="BadRequest", message='Missing "send_uid" parameter')
             )
         # Disable CSRF protection
         alsoProvides(self.request, IDisableCSRFProtection)
@@ -42,9 +40,7 @@ class SendCompletePost(Service):
         except Exception as e:
             logger.exception(e)
             self.request.response.setStatus(500)
-            return dict(
-                error=dict(type="InternalServerError", message=e.message)
-            )
+            return dict(error=dict(type="InternalServerError", message=e.message))
         if res and "error" in res:
             if res["error"] == "NotFound":
                 self.request.response.setStatus(500)

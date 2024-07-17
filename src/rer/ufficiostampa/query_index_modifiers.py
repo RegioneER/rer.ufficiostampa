@@ -1,14 +1,11 @@
-# -*- coding: utf8 -*-
 from plone.app.querystring.interfaces import IParsedQueryIndexModifier
 from zope.interface import implementer
-
 
 import six
 
 
 @implementer(IParsedQueryIndexModifier)
-class BaseModifier(object):
-
+class BaseModifier:
     """
     This field in Plone currently uses a utf-8 encoded string.
     When a catalog query tries to compare a unicode string from the
@@ -23,7 +20,7 @@ class BaseModifier(object):
     def __call__(self, value):
         query = value["query"]
         # query can be a unicode string or a list of unicode strings.
-        if isinstance(query, six.text_type):
+        if isinstance(query, str):
             query = query.encode("utf-8")
         elif isinstance(query, list):
             # We do not want to change the collections' own query string,
@@ -33,7 +30,7 @@ class BaseModifier(object):
             # unicode strings
             i = 0
             for item in copy_of_query:
-                if isinstance(item, six.text_type):
+                if isinstance(item, str):
                     copy_of_query[i] = item.encode("utf-8")
                 i += 1
             query = copy_of_query

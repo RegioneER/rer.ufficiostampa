@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
-from Products.Five import BrowserView
-from rer.ufficiostampa.utils import get_site_title
-from plone import api
-from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
-from plone.api.exc import InvalidParameterError
 from DateTime import DateTime
+from plone import api
+from plone.api.exc import InvalidParameterError
+from Products.Five import BrowserView
+from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
+from rer.ufficiostampa.utils import get_site_title
 from rer.ufficiostampa.utils import prepare_email_message
 
 

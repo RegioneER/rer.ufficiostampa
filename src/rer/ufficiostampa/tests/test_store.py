@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
-from rer.ufficiostampa.testing import RER_UFFICIOSTAMPA_FUNCTIONAL_TESTING
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-from zope.component import getUtility
 from rer.ufficiostampa.interfaces import ISubscriptionsStore
+from rer.ufficiostampa.testing import RER_UFFICIOSTAMPA_FUNCTIONAL_TESTING
+from zope.component import getUtility
 
 import transaction
 import unittest
@@ -125,14 +124,10 @@ class TestTool(unittest.TestCase):
         # search by channel
         self.assertEqual(len(tool.search(query={"channels": "foo"})), 2)
         self.assertEqual(len(tool.search(query={"channels": "baz"})), 1)
-        self.assertEqual(
-            len(tool.search(query={"channels": ["foo", "bar"]})), 2
-        )
+        self.assertEqual(len(tool.search(query={"channels": ["foo", "bar"]})), 2)
 
         # combined search
-        self.assertEqual(
-            len(tool.search(query={"channels": "foo", "text": "Jack"})), 1
-        )
+        self.assertEqual(len(tool.search(query={"channels": "foo", "text": "Jack"})), 1)
 
     def test_clear(self):
         tool = getUtility(ISubscriptionsStore)

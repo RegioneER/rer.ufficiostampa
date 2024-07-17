@@ -1,15 +1,15 @@
-# -*- coding: utf-8 -*-
 """Setup tests for this package."""
-from rer.ufficiostampa.testing import RER_UFFICIOSTAMPA_INTEGRATION_TESTING
+
 from plone.api.portal import set_registry_record
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
+from rer.ufficiostampa.testing import RER_UFFICIOSTAMPA_INTEGRATION_TESTING
 from rer.ufficiostampa.utils import defaultLegislature
 from transaction import commit
 
-import unittest
 import json
+import unittest
 
 
 class TestUtils(unittest.TestCase):

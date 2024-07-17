@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.tiles.collection import _
 from collective.tiles.collection.interfaces import ICollectionTileRenderer
 from Products.Five.browser import BrowserView

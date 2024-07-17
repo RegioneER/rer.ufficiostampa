@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Installer for the rer.ufficiostampa package."""
 
 from setuptools import find_packages
@@ -24,11 +23,12 @@ setup(
         "Environment :: Web Environment",
         "Framework :: Plone",
         "Framework :: Plone :: Addon",
-        "Framework :: Plone :: 5.2",
+        "Framework :: Plone :: 6.0",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Operating System :: OS Independent",
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
     ],
@@ -48,13 +48,13 @@ setup(
     package_dir={"": "src"},
     include_package_data=True,
     zip_safe=False,
-    python_requires="==2.7, >=3.6",
+    python_requires=">=3.8",
     install_requires=[
         "setuptools",
         # -*- Extra requirements: -*-
         'ftfy==4.4.3;python_version<="2.7"',
         "collective.z3cform.jsonwidget",
-        "collective.dexteritytextindexer",
+        # "collective.dexteritytextindexer",
         "itsdangerous>=1.1.0",
         "plone.api>=1.8.4",
         "plone.app.dexterity",

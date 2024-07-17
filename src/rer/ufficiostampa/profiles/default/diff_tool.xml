@@ -1,11 +1,15 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <object>
- <difftypes purge="False">
-  <type portal_type="ComunicatoStampa">
-   <field name="any" difftype="Compound Diff for Dexterity types"/>
-  </type>
-  <type portal_type="InvitoStampa">
-   <field name="any" difftype="Compound Diff for Dexterity types"/>
-  </type>
- </difftypes>
+  <difftypes purge="False">
+    <type portal_type="ComunicatoStampa">
+      <field difftype="Compound Diff for Dexterity types"
+             name="any"
+      />
+    </type>
+    <type portal_type="InvitoStampa">
+      <field difftype="Compound Diff for Dexterity types"
+             name="any"
+      />
+    </type>
+  </difftypes>
 </object>

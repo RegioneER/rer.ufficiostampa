@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone import api
 from plone.restapi.services import Service
 from rer.ufficiostampa import _
@@ -22,7 +21,7 @@ def getVocabularyTermsForForm(vocab_name):
     vocab = utility(portal)
 
     for entry in vocab:
-        if entry.title != u"select_label":
+        if entry.title != "select_label":
             values.append({"value": entry.value, "label": entry.title})
     values[0]["isFixed"] = True
     return values
@@ -70,7 +69,7 @@ def getSearchFields():
         {
             "id": "SearchableText",
             "label": translate(
-                _("comunicati_search_text_label", default=u"Search text"),
+                _("comunicati_search_text_label", default="Search text"),
                 context=request,
             ),
             "help": "",
@@ -91,7 +90,7 @@ def getSearchFields():
         {
             "id": "created",
             "label": translate(
-                _("comunicati_search_created_label", default=u"Date"),
+                _("comunicati_search_created_label", default="Date"),
                 context=request,
             ),
             "help": "",
@@ -117,7 +116,7 @@ def getSearchFields():
                 "help": "",
                 "type": "select",
                 "multivalued": True,
-                "slaveOptions": getArguments()
+                "slaveOptions": getArguments(),
                 # "options": getVocabularyTermsForForm(
                 #     context=portal,
                 #     vocab_name="rer.ufficiostampa.vocabularies.all_arguments",
@@ -130,7 +129,7 @@ def getSearchFields():
 @implementer(IPublishTraverse)
 class SearchParametersGet(Service):
     def __init__(self, context, request):
-        super(SearchParametersGet, self).__init__(context, request)
+        super().__init__(context, request)
 
     def reply(self):
         return getSearchFields()

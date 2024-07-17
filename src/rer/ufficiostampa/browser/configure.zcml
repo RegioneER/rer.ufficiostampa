@@ -3,10 +3,14 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone"
     xmlns:zcml="http://namespaces.zope.org/zcml"
-    i18n_domain="rer.ufficiostampa">
+    i18n_domain="rer.ufficiostampa"
+    >
 
   <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
-  <include package="z3c.jbot" file="meta.zcml" />
+  <include
+      package="z3c.jbot"
+      file="meta.zcml"
+      />
   <browser:jbot
       directory="overrides"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
@@ -14,124 +18,124 @@
 
   <!-- Publish static files -->
   <plone:static
+      directory="static"
       name="rer.ufficiostampa"
       type="plone"
-      directory="static"
       />
 
-    <browser:page
+  <browser:page
       name="ufficiostampa-settings"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".controlpanel.UfficiostampaSettingsControlPanel"
       permission="rer.ufficiostampa.ManageChannels"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
-    <browser:page
+  <browser:page
       name="view"
       for="rer.ufficiostampa.interfaces.IComunicatoStampa"
-      template="templates/comunicato.pt"
-      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       class=".comunicato_view.View"
+      template="templates/comunicato.pt"
       permission="zope2.View"
+      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       menu="plone_displayviews"
       title="View Comunicato"
       />
-    <browser:page
+  <browser:page
       name="view"
       for="rer.ufficiostampa.interfaces.IInvitoStampa"
-      template="templates/comunicato.pt"
-      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       class=".comunicato_view.View"
+      template="templates/comunicato.pt"
       permission="zope2.View"
+      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       menu="plone_displayviews"
       title="View Invito"
       />
 
-    <browser:page
-      for="rer.ufficiostampa.interfaces.IComunicatoStampa"
+  <browser:page
       name="send-preview"
+      for="rer.ufficiostampa.interfaces.IComunicatoStampa"
       class=".send_preview.View"
       template="templates/send_preview.pt"
       permission="rer.ufficiostampa.Send"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
-    <browser:page
-      for="rer.ufficiostampa.interfaces.IInvitoStampa"
+  <browser:page
       name="send-preview"
+      for="rer.ufficiostampa.interfaces.IInvitoStampa"
       class=".send_preview.View"
       template="templates/send_preview.pt"
       permission="rer.ufficiostampa.Send"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
 
-    <!-- channels-management -->
-    <browser:page
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+  <!-- channels-management -->
+  <browser:page
       name="channels-management"
-      template="templates/channels_management.pt"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".react_views.View"
+      template="templates/channels_management.pt"
       permission="rer.ufficiostampa.ManageChannels"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
-    />
+      />
 
-    <!-- send history -->
-    <browser:page
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+  <!-- send history -->
+  <browser:page
       name="history-management"
-      template="templates/history_management.pt"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".react_views.View"
+      template="templates/history_management.pt"
       permission="rer.ufficiostampa.AccessHistory"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
-    />
+      />
 
-    <!-- search -->
-    <browser:page
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+  <!-- search -->
+  <browser:page
       name="comunicati-search"
-      template="templates/comunicati_search.pt"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".react_views.View"
+      template="templates/comunicati_search.pt"
       permission="zope2.View"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
-    />
-    <!-- manage subscriptions -->
-    <browser:page
+      />
+  <!-- manage subscriptions -->
+  <browser:page
       name="cancel-subscriptions-request"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".cancel_subscriptions.CancelSubscriptionsRequestForm"
       permission="zope2.View"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
-    <browser:page
+  <browser:page
       name="cancel-subscriptions"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".cancel_subscriptions.CancelSubscriptionsForm"
       permission="zope2.View"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
-    <browser:page
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+  <browser:page
       name="cancel_subscriptions_mail_template"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       template="templates/cancel_subscriptions_mail_template.pt"
       permission="zope2.View"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
-    <browser:page
+  <browser:page
       name="send"
       for="rer.ufficiostampa.interfaces.IComunicatoStampa"
       class=".send.SendForm"
       permission="rer.ufficiostampa.Send"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
-    <browser:page
-      for="rer.ufficiostampa.interfaces.IComunicatoStampa"
+  <browser:page
       name="send_mail_template"
+      for="rer.ufficiostampa.interfaces.IComunicatoStampa"
       template="templates/send_mail_template.pt"
       permission="rer.ufficiostampa.Send"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
-    <browser:page
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+  <browser:page
       name="cancel_subscriptions_notify_template"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       template="templates/cancel_subscriptions_notify_template.pt"
       permission="zope2.View"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
@@ -139,24 +143,24 @@
 
   <!-- collection views -->
   <browser:page
-    for="plone.app.contenttypes.interfaces.ICollection"
-    name="comunicati_collection_view"
-    class="plone.app.contenttypes.browser.collection.CollectionView"
-    template="templates/comunicati_collection_view.pt"
-    permission="zope2.View"
-    layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
-    menu="plone_displayviews"
-    title="Vista Comunicati Stampa"
-    />
+      name="comunicati_collection_view"
+      for="plone.app.contenttypes.interfaces.ICollection"
+      class="plone.app.contenttypes.browser.collection.CollectionView"
+      template="templates/comunicati_collection_view.pt"
+      permission="zope2.View"
+      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
+      menu="plone_displayviews"
+      title="Vista Comunicati Stampa"
+      />
   <configure zcml:condition="installed collective.tiles.collection">
     <browser:page
-      name="comunicati_stampa_renderer"
-      permission="zope2.View"
-      for="*"
-      class=".collection_renderers.ComunicatiStampaRendererView"
-      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
-      template="templates/comunicati_stampa_tile_render.pt"
-      />
+        name="comunicati_stampa_renderer"
+        for="*"
+        class=".collection_renderers.ComunicatiStampaRendererView"
+        template="templates/comunicati_stampa_tile_render.pt"
+        permission="zope2.View"
+        layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
+        />
   </configure>
 
 </configure>

@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 from rer.ufficiostampa.interfaces import ISendHistoryStore
-from rer.ufficiostampa.restapi.services.common import DataGet
-from rer.ufficiostampa.restapi.services.common import DataCSVGet
 from rer.ufficiostampa.restapi.services.common import DataClear
+from rer.ufficiostampa.restapi.services.common import DataCSVGet
+from rer.ufficiostampa.restapi.services.common import DataGet
 
 
 class SendHistoryGet(DataGet):
@@ -20,7 +19,7 @@ class SendHistoryCSVGet(DataCSVGet):
         "recipients",
         "channels",
         "title",
-        "number"
+        "number",
     ]
 
 

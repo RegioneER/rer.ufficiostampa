@@ -1,10 +1,10 @@
-# -*- coding: utf-8 -*-
-from zope.component import getUtility
-from rer.ufficiostampa.interfaces import ISubscriptionsStore
-from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
 from plone import api
+from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
+from rer.ufficiostampa.interfaces import ISubscriptionsStore
+from zope.component import getUtility
 
 import logging
+
 
 logger = logging.getLogger(__name__)
 
@@ -55,7 +55,7 @@ def to_1300(context):
     for brain in brains:
         i += 1
         if i % 100 == 0:
-            logger.info("Progress: [{}/{}]".format(i, tot))
+            logger.info(f"Progress: [{i}/{tot}]")
         item = brain.getObject()
         setattr(item, "legislature", brain.legislature)
 
@@ -71,6 +71,6 @@ def to_1400(context):
     for brain in brains:
         i += 1
         if i % 100 == 0:
-            logger.info("Progress: [{}/{}]".format(i, tot))
+            logger.info(f"Progress: [{i}/{tot}]")
         item = brain.getObject()
         item.reindexObject(idxs=["SearchableText"])

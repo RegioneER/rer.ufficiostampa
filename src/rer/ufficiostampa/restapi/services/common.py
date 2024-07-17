@@ -1,26 +1,22 @@
-# -*- coding: utf-8 -*-
 from copy import deepcopy
 from datetime import datetime
+from io import StringIO
 from plone.protect.interfaces import IDisableCSRFProtection
 from plone.restapi.batching import HypermediaBatch
 from plone.restapi.deserializer import json_body
 from plone.restapi.search.utils import unflatten_dotted_dict
 from plone.restapi.serializer.converters import json_compatible
 from plone.restapi.services import Service
-from six import StringIO
 from zExceptions import BadRequest
 from zope.component import getUtility
+from zope.index.text.parsetree import ParseError
 from zope.interface import alsoProvides
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
-from zope.index.text.parsetree import ParseError
 
 import csv
-import six
 import logging
-
-if six.PY2:
-    from ftfy import fix_text
+import six
 
 
 logger = logging.getLogger(__name__)
@@ -162,10 +158,10 @@ class DataAdd(Service):
 
 @implementer(IPublishTraverse)
 class TraversableService(Service):
-    """ Update an entry """
+    """Update an entry"""
 
     def __init__(self, context, request):
-        super(TraversableService, self).__init__(context, request)
+        super().__init__(context, request)
         self.id = ""
         self.errors = {}
 
@@ -182,7 +178,7 @@ class TraversableService(Service):
 
 
 class DataUpdate(TraversableService):
-    """ Update an entry """
+    """Update an entry"""
 
     def reply(self):
         alsoProvides(self.request, IDisableCSRFProtection)
@@ -196,7 +192,7 @@ class DataUpdate(TraversableService):
         if not res:
             return self.reply_no_content()
         if res.get("error", "") == "NotFound":
-            raise BadRequest('Unable to find item with id "{}"'.format(self.id))
+            raise BadRequest(f'Unable to find item with id "{self.id}"')
         self.request.response.setStatus(500)
         return dict(
             error=dict(
@@ -216,7 +212,7 @@ class DataDelete(TraversableService):
         if not res:
             return self.reply_no_content()
         if res.get("error", "") == "NotFound":
-            raise BadRequest('Unable to find item with id "{}"'.format(self.id))
+            raise BadRequest(f'Unable to find item with id "{self.id}"')
         self.request.response.setStatus(500)
         return dict(
             error=dict(

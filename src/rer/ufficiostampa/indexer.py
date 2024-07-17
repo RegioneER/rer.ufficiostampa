@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.indexer.decorator import indexer
 from rer.ufficiostampa.interfaces import IComunicatoStampa
 
