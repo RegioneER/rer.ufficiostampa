@@ -5,7 +5,7 @@ from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
 from rer.ufficiostampa.testing import RER_UFFICIOSTAMPA_INTEGRATION_TESTING
-from rer.ufficiostampa.utils import defaultLegislature
+from rer.ufficiostampa.behaviors.legislature import defaultLegislature
 from transaction import commit
 
 import json

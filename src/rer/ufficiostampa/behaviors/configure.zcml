@@ -12,10 +12,18 @@
 
   <plone:behavior
       name="rer.ufficiostampa.basic"
-      title="Basic Title and description metadata for Comunicati"
+      title="Basic metadata for Comunicati"
       description="Adds title and description fields."
       factory=".metadata.BasicComunicati"
       provides=".metadata.IBasicComunicati"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      />
+
+  <plone:behavior
+      name="rer.ufficiostampa.legislature"
+      title="Legislature metadata for Comunicati"
+      description=""
+      provides=".legislature.ILegislatureComunicati"
       for="plone.dexterity.interfaces.IDexterityContent"
       />
 

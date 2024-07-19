@@ -24,23 +24,6 @@ import premailer
 logger = logging.getLogger(__name__)
 
 
-def defaultLegislature():
-    try:
-        legislatures = json.loads(
-            api.portal.get_registry_record(
-                "legislatures", interface=IRerUfficiostampaSettings
-            )
-        )
-    except (KeyError, InvalidParameterError, TypeError) as e:
-        logger.exception(e)
-        return ""
-
-    if not legislatures:
-        return ""
-    current = legislatures[-1]
-    return current.get("legislature", "")
-
-
 def get_site_title():
     registry = getUtility(IRegistry)
     site_settings = registry.forInterface(ISiteSchema, prefix="plone", check=False)
