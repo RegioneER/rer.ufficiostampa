@@ -24,7 +24,6 @@
       title="Legislature metadata for Comunicati"
       description=""
       provides=".legislature.ILegislatureComunicati"
-      for="plone.dexterity.interfaces.IDexterityContent"
       />
 
 </configure>
