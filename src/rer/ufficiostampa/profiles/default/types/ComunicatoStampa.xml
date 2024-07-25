@@ -21,6 +21,7 @@
     <element value="Image" />
     <element value="File" />
     <element value="Folder" />
+    <element value="Document" />
   </property>
   <property name="allow_discussion">False</property>
   <property name="default_view">view</property>
@@ -39,11 +40,14 @@
     <element value="plone.namefromtitle" />
     <element value="plone.allowdiscussion" />
     <element value="plone.excludefromnavigation" />
+    <element value="plone.leadimage" />
+    <element value="kitconcept.seo" />
     <element value="plone.shortname" />
     <element value="plone.richtext" />
     <element value="plone.versioning" />
     <element value="plone.locking" />
     <element value="plone.textindexer" />
+    <element value="volto.preview_image" />
 
     <!-- TODO: su profilo rer aggiungere
       <element value="rer.solrpush.behaviors.solr_fields.ISolrFields" /> 
