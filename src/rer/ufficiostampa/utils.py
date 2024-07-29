@@ -7,16 +7,13 @@ from plone import api
 from plone.api.exc import InvalidParameterError
 from plone.registry.interfaces import IRegistry
 from Products.CMFPlone.interfaces.controlpanel import IMailSchema
+from Products.CMFPlone.interfaces.controlpanel import ISiteSchema
 from rer.ufficiostampa import _
 from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
 from rer.ufficiostampa.interfaces.store import ISubscriptionsStore
 from zope.component import getUtility
 from zope.globalrequest import getRequest
 
-
-from Products.CMFPlone.interfaces.controlpanel import ISiteSchema
-
-import json
 import logging
 import premailer
 

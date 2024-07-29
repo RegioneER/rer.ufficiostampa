@@ -1,4 +1,3 @@
-from plone import api
 from plone.dexterity.interfaces import IDexterityFTI
 from Products.CMFPlone.interfaces import INonInstallable
 from Products.CMFPlone.utils import get_installer

@@ -1,15 +1,16 @@
+from plone import api
+from plone.api.exc import InvalidParameterError
 from plone.app.dexterity import _
 from plone.autoform import directives as form
 from plone.autoform.interfaces import IFormFieldProvider
+from plone.supermodel import model
+from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
 from zope import schema
 from zope.interface import provider
-from plone.supermodel import model
-from plone import api
-from plone.api.exc import InvalidParameterError
-from rer.ufficiostampa import _
-from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
+
 import json
 import logging
+
 
 logger = logging.getLogger(__name__)
 

@@ -1,15 +1,21 @@
 # from collective.z3cform.jsonwidget.browser.widget import JSONFieldWidget
 from plone import api
 from plone.app.registry.browser import controlpanel
+from plone.restapi.controlpanels import RegistryConfigletPanel
 
 # from Products.CMFPlone.resources import add_bundle_on_request
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from rer.ufficiostampa import _
 from rer.ufficiostampa.interfaces import ILegislaturesRowSchema
+from rer.ufficiostampa.interfaces import IRerUfficiostampaLayer
 from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
+from rer.ufficiostampa.interfaces.settings import IUfficioStampaControlPanel
 from z3c.form import button
 from z3c.form import field
 from z3c.form.interfaces import HIDDEN_MODE
+from zope.component import adapter
+from zope.interface import implementer
+from zope.interface import Interface
 
 
 class UfficiostampaSettingsEditForm(controlpanel.RegistryEditForm):
@@ -80,3 +86,16 @@ class UfficiostampaSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
     def can_access_controlpanels(self):
         current = api.user.get_current()
         return api.user.has_permission("Manage portal", user=current)
+
+
+@adapter(Interface, IRerUfficiostampaLayer)
+@implementer(IUfficioStampaControlPanel)
+class UfficiostampaConfigletPanel(RegistryConfigletPanel):
+    """Volto control panel"""
+
+    schema = IRerUfficiostampaSettings
+    schema_prefix = None
+    configlet_id = "rer.ufficiostampa"
+    configlet_category_id = "Products"
+    title = _("Ufficio Stampa settings")
+    group = "Products"

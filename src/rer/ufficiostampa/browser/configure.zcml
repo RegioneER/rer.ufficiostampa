@@ -30,6 +30,12 @@
       permission="rer.ufficiostampa.ManageChannels"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
+
+ <adapter
+    factory=".controlpanel.UfficiostampaConfigletPanel"
+    provides="rer.ufficiostampa.interfaces.settings.IUfficioStampaControlPanel"
+    name="rer.ufficiostampa" />
+
   <browser:page
       name="view"
       for="rer.ufficiostampa.interfaces.IComunicatoStampa"

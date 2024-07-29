@@ -7,7 +7,7 @@ from plone.restapi.testing import PloneRestApiDXLayer
 from plone.testing import z2
 
 # import collective.dexteritytextindexer
-import collective.MockMailHost
+# import collective.MockMailHost
 
 # import collective.z3cform.jsonwidget
 import plone.restapi

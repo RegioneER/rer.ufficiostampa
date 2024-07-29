@@ -1,3 +1,4 @@
+from plone.restapi.controlpanels import IControlpanel
 from plone.supermodel import model
 from rer.ufficiostampa import _
 from zope import schema
@@ -14,7 +15,7 @@ class IRerUfficiostampaSettings(model.Schema):
             default="This is a list of all legislatures. The last one is the"
             " one used to fill fields in a new Comunicato.",
         ),
-        required=True,
+        required=False,
     )
 
     subscription_channels = schema.List(
@@ -136,3 +137,7 @@ class ILegislaturesRowSchema(model.Schema):
         required=True,
         value_type=schema.TextLine(),
     )
+
+
+class IUfficioStampaControlPanel(IControlpanel):
+    """Control panel for Ufficio Stampa settings."""

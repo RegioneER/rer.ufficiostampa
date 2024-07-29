@@ -3,9 +3,9 @@
 from plone.api.portal import set_registry_record
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
+from rer.ufficiostampa.behaviors.legislature import defaultLegislature
 from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
 from rer.ufficiostampa.testing import RER_UFFICIOSTAMPA_INTEGRATION_TESTING
-from rer.ufficiostampa.behaviors.legislature import defaultLegislature
 from transaction import commit
 
 import json

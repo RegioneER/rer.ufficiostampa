@@ -1,5 +1,6 @@
 from datetime import datetime
 from DateTime import DateTime
+from email.message import EmailMessage
 from plone import api
 from plone import schema
 from plone.api.exc import InvalidParameterError
@@ -27,7 +28,6 @@ from zope.interface import Invalid
 from zope.interface import provider
 from zope.schema.interfaces import IContextAwareDefaultFactory
 from zope.schema.interfaces import IVocabularyFactory
-from email.message import EmailMessage
 
 import json
 import logging

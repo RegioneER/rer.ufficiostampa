@@ -2,11 +2,11 @@ from plone.app.dexterity import _
 from plone.app.dexterity.behaviors.metadata import Basic
 from plone.app.dexterity.behaviors.metadata import IBasic
 from plone.app.dexterity.textindexer import searchable
+from plone.app.z3cform.widget import AjaxSelectFieldWidget
 from plone.autoform import directives as form
 from plone.autoform.interfaces import IFormFieldProvider
 from zope import schema
 from zope.interface import provider
-from plone.app.z3cform.widget import AjaxSelectFieldWidget
 
 
 @provider(IFormFieldProvider)
