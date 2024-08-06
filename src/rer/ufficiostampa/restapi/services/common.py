@@ -209,18 +209,15 @@ class DataDelete(TraversableService):
             raise BadRequest("Missing id")
         alsoProvides(self.request, IDisableCSRFProtection)
         tool = getUtility(self.store)
-        res = tool.delete(id=self.id, ids=form_data.get("id"))
-        if not res:
-            return self.reply_no_content()
-        if res.get("error", "") == "NotFound":
-            raise BadRequest(f'Unable to find item with id "{self.id}"')
-        self.request.response.setStatus(500)
-        return dict(
-            error=dict(
-                type="InternalServerError",
-                message="Unable to delete item. Contact site manager.",
-            )
-        )
+        if self.id:
+            res = tool.delete(id=self.id)
+            if res:
+                raise BadRequest(f'Unable to delete item with id "{self.id}"')
+        for id in form_data.get("id", []):
+            res = tool.delete(id=id)
+            if res:
+                raise BadRequest(f'Unable to delete item with id "{id}"')
+        return self.reply_no_content()
 
 
 class DataClear(Service):

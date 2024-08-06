@@ -95,7 +95,7 @@ class TestSubscriptionsDelete(unittest.TestCase):
 
         res = self.api_session.delete(f"{self.url}/123", json={})
         self.assertEqual(res.status_code, 400)
-        self.assertEqual(res.json()["message"], 'Unable to find item with id "123"')
+        self.assertEqual(res.json()["message"], 'Unable to delete item with id "123"')
 
     def test_correctly_delete_data(self):
         url = f"{self.url}/{self.id_1}"
