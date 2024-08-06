@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <object xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-  name="portal_controlpanel"
-  i18n:domain="rer.ufficiostampa"
+        name="portal_controlpanel"
+        i18n:domain="rer.ufficiostampa"
 >
 
   <configlet action_id="rer.ufficiostampa"
-    appId="ufficiostampa"
-    category="Products"
-    condition_expr=""
-    icon_expr=""
-    title="Configurazione Ufficio Stampa"
-    url_expr="string:${portal_url}/@@ufficiostampa-settings"
-    visible="True"
-    i18n:attributes="title"
+             appId="ufficiostampa"
+             category="Products"
+             condition_expr=""
+             icon_expr=""
+             title="Configurazione Ufficio Stampa"
+             url_expr="string:${portal_url}/@@ufficiostampa-settings"
+             visible="True"
+             i18n:attributes="title"
   >
     <permission>rer.ufficiostampa: Manage Channels</permission>
   </configlet>
 
   <configlet action_id="rer.ufficiostampa-managechannels"
-    appId="ufficiostampa-managechannels"
-    category="Products"
-    condition_expr=""
-    icon_expr=""
-    title="Ufficio Stampa - Gestione Canali"
-    url_expr="string:${portal_url}/@@channels-management"
-    visible="True"
-    i18n:attributes="title"
+             appId="ufficiostampa-managechannels"
+             category="Products"
+             condition_expr=""
+             icon_expr=""
+             title="Ufficio Stampa - Gestione Canali"
+             url_expr="string:${portal_url}/@@channels-management"
+             visible="True"
+             i18n:attributes="title"
   >
     <permission>rer.ufficiostampa: Manage Channels</permission>
   </configlet>
 
   <configlet action_id="rer.ufficiostampa-managehistory"
-    appId="ufficiostampa-managehistory"
-    category="Products"
-    condition_expr=""
-    icon_expr=""
-    title="Ufficio Stampa - Storico Invio Comunicati  "
-    url_expr="string:${portal_url}/@@history-management"
-    visible="True"
-    i18n:attributes="title"
+             appId="ufficiostampa-managehistory"
+             category="Products"
+             condition_expr=""
+             icon_expr=""
+             title="Ufficio Stampa - Storico Invio Comunicati  "
+             url_expr="string:${portal_url}/@@history-management"
+             visible="True"
+             i18n:attributes="title"
   >
     <permission>rer.ufficiostampa: Manage Channels</permission>
   </configlet>

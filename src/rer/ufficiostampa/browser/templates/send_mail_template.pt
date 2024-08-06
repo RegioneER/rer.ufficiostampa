@@ -5,53 +5,52 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       lang="en"
       xml:lang="en"
-      i18n:domain="rer.ufficiostampa"
       tal:omit-tag=""
+      i18n:domain="rer.ufficiostampa"
 >
-<tal:root define="
-            notes python:options.get('notes', '');
-            css python:options.get('css', '');
-            site_title python:options.get('site_title', '');
-            description context/description|nothing;
-            title context/title|nothing;
-            text context/text|nothing;
-            comunicato_number context/comunicato_number|nothing;
-            date python:options.get('date', '');
-            folders python:options.get('folders', '');
-            toLocalizedTime nocall:context/@@plone/toLocalizedTime;
-          "
->
-  <style tal:condition="css">${css}</style>
-  <div class="comunicato-note"
-       tal:condition="notes"
-       tal:content="notes"
-  >
-  </div>
-   <h1 class="comunicato-title"
-      tal:condition="title"
-  >${title}</h1>
-  <p class="comunicato-description"
-     tal:condition="description"
-  >${description}</p>
+  <tal:root define="
+              notes python:options.get('notes', '');
+              css python:options.get('css', '');
+              site_title python:options.get('site_title', '');
+              description context/description|nothing;
+              title context/title|nothing;
+              text context/text|nothing;
+              comunicato_number context/comunicato_number|nothing;
+              date python:options.get('date', '');
+              folders python:options.get('folders', '');
+              toLocalizedTime nocall:context/@@plone/toLocalizedTime;
+            ">
+    <style tal:condition="css">${css}</style>
+    <div class="comunicato-note"
+         tal:condition="notes"
+         tal:content="notes"
+    >
+    </div>
+    <h1 class="comunicato-title"
+        tal:condition="title"
+    >${title}</h1>
+    <p class="comunicato-description"
+       tal:condition="description"
+    >${description}</p>
 
-  <div class="comunicato-text"
-       tal:condition="text"
-       tal:content="structure text/output"
-  ></div>
+    <div class="comunicato-text"
+         tal:condition="text"
+         tal:content="structure text/output"
+    ></div>
 
-  <div class="comunicato-folders"
-       tal:condition="folders"
-  >
-    <ul>
-      <li tal:repeat="folder folders">
-        <a href="${folder/absolute_url}"
-           title="${folder/title}"
-        >${folder/title}</a>
-      </li>
-    </ul>
-  </div>
+    <div class="comunicato-folders"
+         tal:condition="folders"
+    >
+      <ul>
+        <li tal:repeat="folder folders">
+          <a href="${folder/absolute_url}"
+             title="${folder/title}"
+          >${folder/title}</a>
+        </li>
+      </ul>
+    </div>
 
-  <div id="footer">
-  </div>
-</tal:root>
+    <div id="footer">
+    </div>
+  </tal:root>
 </html>

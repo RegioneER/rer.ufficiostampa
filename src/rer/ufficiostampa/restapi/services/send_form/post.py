@@ -9,6 +9,7 @@ from rer.ufficiostampa import _
 from rer.ufficiostampa.interfaces import ISendHistoryStore
 from rer.ufficiostampa.interfaces import ISubscriptionsStore
 from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
+
 # from rer.ufficiostampa.utils import decode_token
 from rer.ufficiostampa.utils import get_site_title
 from rer.ufficiostampa.utils import mail_from

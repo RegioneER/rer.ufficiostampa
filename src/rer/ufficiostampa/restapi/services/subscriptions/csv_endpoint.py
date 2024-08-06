@@ -128,9 +128,9 @@ class SubscriptionsCSVPost(Service):
                 logger.warning(f"[ERROR] - {msg}")
                 res["errored"].append(msg)
 
-            request_channels = set(
-                [r.strip() for r in (row.get("channels") or "").split(",")]
-            )
+            request_channels = {
+                r.strip() for r in (row.get("channels") or "").split(",")
+            }
             if not request_channels:
                 msg = translate(
                     _(

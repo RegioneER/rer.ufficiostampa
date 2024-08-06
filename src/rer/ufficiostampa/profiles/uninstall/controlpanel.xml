@@ -10,13 +10,13 @@
              title="Configurazione Ufficio Stampa"
   >
 </configlet>
-<configlet action_id="rer.ufficiostampa-managechannels"
+  <configlet action_id="rer.ufficiostampa-managechannels"
              appId="ufficiostampa-managechannels"
              remove="True"
              title="Ufficio Stampa - Gestione Canali"
   >
 </configlet>
-<configlet action_id="rer.ufficiostampa-managehistory"
+  <configlet action_id="rer.ufficiostampa-managehistory"
              appId="ufficiostampa-managehistory"
              remove="True"
              title="Ufficio Stampa - Gestione Canali"
