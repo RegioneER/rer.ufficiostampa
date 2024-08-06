@@ -1,45 +1,57 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <rolemap>
   <roles>
-    <role name="Gestore Comunicati"/>
+    <role name="Gestore Comunicati" />
   </roles>
   <permissions>
-    <permission name="rer.ufficiostampa: Manage Settings" acquire="True">
+    <permission acquire="True"
+                name="rer.ufficiostampa: Manage Settings"
+    >
       <role name="Manager" />
       <role name="Site Administrator" />
     </permission>
-    <permission name="rer.ufficiostampa: Manage Channels" acquire="True">
+    <permission acquire="True"
+                name="rer.ufficiostampa: Manage Channels"
+    >
       <role name="Manager" />
       <role name="Site Administrator" />
       <role name="Gestore Comunicati" />
     </permission>
-    <permission name="rer.ufficiostampa: Access History" acquire="True">
+    <permission acquire="True"
+                name="rer.ufficiostampa: Access History"
+    >
       <role name="Manager" />
       <role name="Site Administrator" />
       <role name="Gestore Comunicati" />
-      <role name="Contributor"/>
-      <role name="Editor"/>
+      <role name="Contributor" />
+      <role name="Editor" />
     </permission>
-    <permission name="rer.ufficiostampa: Add Comunicato Stampa" acquire="True">
+    <permission acquire="True"
+                name="rer.ufficiostampa: Add Comunicato Stampa"
+    >
       <role name="Manager" />
       <role name="Site Administrator" />
-      <role name="Owner"/>
-      <role name="Contributor"/>
-      <role name="Editor"/>
+      <role name="Owner" />
+      <role name="Contributor" />
+      <role name="Editor" />
     </permission>
-    <permission name="rer.ufficiostampa: Add Invito Stampa" acquire="True">
+    <permission acquire="True"
+                name="rer.ufficiostampa: Add Invito Stampa"
+    >
       <role name="Manager" />
       <role name="Site Administrator" />
-      <role name="Owner"/>
-      <role name="Contributor"/>
-      <role name="Editor"/>
+      <role name="Owner" />
+      <role name="Contributor" />
+      <role name="Editor" />
     </permission>
-    <permission name="rer.ufficiostampa: Send" acquire="True">
+    <permission acquire="True"
+                name="rer.ufficiostampa: Send"
+    >
       <role name="Manager" />
       <role name="Site Administrator" />
-      <role name="Gestore Comunicati"/>
-      <role name="Contributor"/>
-      <role name="Editor"/>
+      <role name="Gestore Comunicati" />
+      <role name="Contributor" />
+      <role name="Editor" />
     </permission>
   </permissions>
 </rolemap>

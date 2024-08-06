@@ -32,7 +32,7 @@ const Field = ({
       // Convert the file to base64 text
       reader.readAsDataURL(file);
 
-      // on reader load somthing...
+      // on reader load something...
       reader.onload = () => {
         // Make a fileInfo Object
         const base64String = reader.result

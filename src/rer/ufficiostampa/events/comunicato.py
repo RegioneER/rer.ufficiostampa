@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
-from rer.ufficiostampa.utils import get_next_comunicato_number
 from plone import api
+from rer.ufficiostampa.utils import get_next_comunicato_number
 
 
 def setNumber(item, event):

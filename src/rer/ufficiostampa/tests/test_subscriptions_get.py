@@ -1,8 +1,4 @@
-# -*- coding: utf-8 -*-
 from datetime import datetime
-from rer.ufficiostampa.testing import (
-    RER_UFFICIOSTAMPA_API_FUNCTIONAL_TESTING,  # noqa: E501,
-)
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
@@ -11,6 +7,9 @@ from plone.app.testing import TEST_USER_ID
 from plone.restapi.serializer.converters import json_compatible
 from plone.restapi.testing import RelativeSession
 from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
+from rer.ufficiostampa.testing import (  # noqa: E501,
+    RER_UFFICIOSTAMPA_API_FUNCTIONAL_TESTING,
+)
 from souper.soup import get_soup
 from souper.soup import Record
 
@@ -31,7 +30,7 @@ class TestSubscriptionsGet(unittest.TestCase):
         api.user.create(
             email="memberuser@example.com",
             username="memberuser",
-            password="secret",
+            password="secret123",
         )
 
         self.api_session = RelativeSession(self.portal_url)
@@ -52,19 +51,19 @@ class TestSubscriptionsGet(unittest.TestCase):
         transaction.commit()
 
     def test_anon_cant_get_data(self):
-        url = "{}/@subscriptions".format(self.portal_url)
+        url = f"{self.portal_url}/@subscriptions"
         self.assertEqual(self.anon_api_session.get(url).status_code, 401)
 
     def test_admin_get_data(self):
-        url = "{}/@subscriptions".format(self.portal_url)
+        url = f"{self.portal_url}/@subscriptions"
         self.assertEqual(self.api_session.get(url).status_code, 200)
 
     def test_gestore_comunicati_can_get_data(self):
         api_session = RelativeSession(self.portal_url)
         api_session.headers.update({"Accept": "application/json"})
-        api_session.auth = ("memberuser", "secret")
+        api_session.auth = ("memberuser", "secret123")
 
-        url = "{}/@subscriptions".format(self.portal_url)
+        url = f"{self.portal_url}/@subscriptions"
         self.assertEqual(api_session.get(url).status_code, 401)
 
         setRoles(self.portal, "memberuser", ["Gestore Comunicati"])
@@ -74,7 +73,7 @@ class TestSubscriptionsGet(unittest.TestCase):
         api_session.close()
 
     def test_endpoint_returns_also_subscription_channels(self):
-        url = "{}/@subscriptions".format(self.portal_url)
+        url = f"{self.portal_url}/@subscriptions"
         response = self.api_session.get(url)
         res = response.json()
         self.assertEqual(res["channels"], [])
@@ -91,7 +90,7 @@ class TestSubscriptionsGet(unittest.TestCase):
         self.assertEqual(res["channels"], ["foo", "bar"])
 
     def test_endpoint_returns_data(self):
-        url = "{}/@subscriptions".format(self.portal_url)
+        url = f"{self.portal_url}/@subscriptions"
         response = self.api_session.get(url)
         res = response.json()
         self.assertEqual(res["items_total"], 0)
@@ -106,7 +105,7 @@ class TestSubscriptionsGet(unittest.TestCase):
         intid = soup.add(record)
         transaction.commit()
 
-        url = "{}/@subscriptions".format(self.portal_url)
+        url = f"{self.portal_url}/@subscriptions"
         response = self.api_session.get(url)
         res = response.json()
 
