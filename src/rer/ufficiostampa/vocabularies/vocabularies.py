@@ -59,14 +59,15 @@ class ChannelsVocabularyFactory:
 class AttachmentsVocabularyFactory:
     def __call__(self, context):
         terms = []
-        for child in context.listFolderContents(
-            contentFilter={"portal_type": ["File", "Image"]}
+        for brain in api.portal.get_tool("portal_catalog")(
+            portal_type=["File", "Image"],
+            path={"query": "/".join(context.getPhysicalPath())},
         ):
             terms.append(
                 SimpleTerm(
-                    value=child.getId(),
-                    token=child.getId(),
-                    title=child.Title(),
+                    value=brain.UID,
+                    token=brain.UID,
+                    title=brain.Title,
                 )
             )
         return SimpleVocabulary(terms)

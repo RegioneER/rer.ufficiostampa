@@ -36,4 +36,13 @@
       handler=".upgrades.to_1400"
       />
 
+  <genericsetup:upgradeStep
+      title="Upgrade to 2.x (Plone6)"
+      description=""
+      profile="rer.ufficiostampa:default"
+      source="1400"
+      destination="2000"
+      handler=".upgrades.to_2000"
+      />
+
 </configure>

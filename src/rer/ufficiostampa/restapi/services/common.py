@@ -1,5 +1,6 @@
 from copy import deepcopy
 from datetime import datetime
+from defusedcsv import csv
 from io import StringIO
 from plone.protect.interfaces import IDisableCSRFProtection
 from plone.restapi.batching import HypermediaBatch
@@ -14,7 +15,6 @@ from zope.interface import alsoProvides
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
 
-import csv
 import logging
 
 
@@ -66,7 +66,6 @@ class DataGet(Service):
 
 class DataCSVGet(DataGet):
     def render(self):
-
         data = self.get_data()
         if isinstance(data, dict):
             if data.get("error", False):
@@ -77,7 +76,7 @@ class DataCSVGet(DataGet):
                         message="Unable export. Contact site manager.",
                     )
                 )
-        self.request.response.setHeader("Content-Type", "text/comma-separated-values")
+        self.request.response.setHeader("Content-Type", "text/csv")
         now = datetime.now()
         self.request.response.setHeader(
             "Content-Disposition",
@@ -85,14 +84,15 @@ class DataCSVGet(DataGet):
                 type=self.type, date=now.strftime("%d%m%Y-%H%M%S")
             ),
         )
-        self.request.response.write(data)
+        return data
+        # self.request.response.write(data)
 
     def get_data(self):
+        """get data for csv export"""
         tool = getUtility(self.store)
         query = self.parse_query()
         sbuf = StringIO()
         rows = []
-
         for item in tool.search(**query):
             data = {}
             for k, v in item.attrs.items():
@@ -100,11 +100,13 @@ class DataCSVGet(DataGet):
                     continue
                 if isinstance(v, list):
                     v = ", ".join(v)
-                if isinstance(v, int):
+                elif isinstance(v, int):
                     v = str(v)
-                if v:
-                    v = json_compatible(v)
-                    v = v.encode("utf-8")
+                elif isinstance(v, datetime):
+                    v = v.strftime("%Y-%m-%d %H:%M:%S")
+                # if v:
+                #     v = json_compatible(v)
+                #     v = v.encode("utf-8")
                 data[k] = v
             rows.append(data)
         writer = csv.DictWriter(sbuf, fieldnames=self.columns, delimiter=",")
@@ -179,6 +181,7 @@ class DataUpdate(TraversableService):
 
     def reply(self):
         alsoProvides(self.request, IDisableCSRFProtection)
+
         if not self.id:
             raise BadRequest("Missing id")
 
@@ -201,11 +204,12 @@ class DataUpdate(TraversableService):
 
 class DataDelete(TraversableService):
     def reply(self):
-        alsoProvides(self.request, IDisableCSRFProtection)
-        if not self.id:
+        form_data = json_body(self.request)
+        if not self.id and not form_data.get("id"):
             raise BadRequest("Missing id")
+        alsoProvides(self.request, IDisableCSRFProtection)
         tool = getUtility(self.store)
-        res = tool.delete(id=self.id)
+        res = tool.delete(id=self.id, ids=form_data.get("id"))
         if not res:
             return self.reply_no_content()
         if res.get("error", "") == "NotFound":

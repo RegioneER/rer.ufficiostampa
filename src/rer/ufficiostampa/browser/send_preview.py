@@ -9,11 +9,12 @@ from rer.ufficiostampa.utils import prepare_email_message
 
 class View(BrowserView):
     def get_html(self):
+        notes = self.request.form.get("notes")
         return prepare_email_message(
             context=self.context,
             template="@@send_mail_template",
             parameters={
-                "notes": "test notes",
+                "notes": notes,
                 "site_title": get_site_title(),
                 "date": DateTime(),
                 "folders": self.get_folders_attachments(),

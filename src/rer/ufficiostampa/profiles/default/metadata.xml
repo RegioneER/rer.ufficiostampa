@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-  <version>1400</version>
+  <version>2000</version>
   <dependencies>
     <!-- <dependency>profile-collective.z3cform.jsonwidget:default</dependency> -->
     <dependency>profile-souper.plone:default</dependency>

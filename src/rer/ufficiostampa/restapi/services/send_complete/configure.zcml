@@ -4,12 +4,17 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     >
 
-  <plone:service
-      method="POST"
-      factory=".post.SendCompletePost"
-      for="plone.app.layout.navigation.interfaces.INavigationRoot"
-      permission="zope2.View"
-      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
-      name="@send-complete"
-      />
+  <!--
+       * UNUSED
+       * 
+       * <plone:service
+       *     method="POST"
+       *     factory=".post.SendCompletePost"
+       *     for="plone.app.layout.navigation.interfaces.INavigationRoot"
+       *     permission="zope2.View"
+       *     layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
+       *     name="@send-complete"
+       *     />
+  -->
+
 </configure>

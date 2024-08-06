@@ -74,3 +74,10 @@ def to_1400(context):
             logger.info(f"Progress: [{i}/{tot}]")
         item = brain.getObject()
         item.reindexObject(idxs=["SearchableText"])
+
+
+def to_2000(context):
+    # TODO: fix types (do not run)
+
+    # reinstall controlpanels
+    context.runImportStepFromProfile(DEFAULT_PROFILE, "controlpanel")

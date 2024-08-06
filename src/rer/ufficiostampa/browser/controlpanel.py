@@ -90,7 +90,7 @@ class UfficiostampaSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
 
 @adapter(Interface, IRerUfficiostampaLayer)
 @implementer(IUfficioStampaControlPanel)
-class UfficiostampaConfigletPanel(RegistryConfigletPanel):
+class UfficiostampaSettingsConfigletPanel(RegistryConfigletPanel):
     """Volto control panel"""
 
     schema = IRerUfficiostampaSettings
@@ -98,4 +98,32 @@ class UfficiostampaConfigletPanel(RegistryConfigletPanel):
     configlet_id = "rer.ufficiostampa"
     configlet_category_id = "Products"
     title = _("Ufficio Stampa settings")
+    group = "Products"
+
+
+@adapter(Interface, IRerUfficiostampaLayer)
+@implementer(IUfficioStampaControlPanel)
+class UfficiostampaChannelsConfigletPanel(RegistryConfigletPanel):
+    """Volto control panel"""
+
+    schema = None
+    schema_prefix = None
+    configlet_id = "rer.ufficiostampa-managechannels"
+    configlet_category_id = "Products"
+    title = _("Ufficio Stampa - Geestione degli iscritti")
+    # TODO: definire un gruppo specifico per ufficio stampa ?
+    group = "Products"
+
+
+@adapter(Interface, IRerUfficiostampaLayer)
+@implementer(IUfficioStampaControlPanel)
+class UfficiostampaHistoryConfigletPanel(RegistryConfigletPanel):
+    """Volto control panel"""
+
+    schema = None
+    schema_prefix = None
+    configlet_id = "rer.ufficiostampa-managehistory"
+    configlet_category_id = "Products"
+    title = _("Ufficio Stampa - Strorico invio comunicati")
+    # TODO: definire un gruppo specifico per ufficio stampa ?
     group = "Products"

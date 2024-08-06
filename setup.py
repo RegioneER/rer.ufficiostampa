@@ -70,6 +70,7 @@ setup(
         "souper.plone",
         "z3c.form",
         "z3c.jbot",
+        "defusedcsv",
     ],
     extras_require={
         "test": [

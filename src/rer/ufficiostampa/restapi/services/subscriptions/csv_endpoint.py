@@ -18,6 +18,7 @@ import base64
 import csv
 import itertools
 import logging
+import re
 
 
 logger = logging.getLogger(__name__)
@@ -33,20 +34,42 @@ COLUMNS = [
 ]
 
 
+# @implementer(IPublishTraverse)
 class SubscriptionsCSVGet(DataCSVGet):
     type = "subscriptions"
     store = ISubscriptionsStore
     columns = COLUMNS
 
+    # def __init__(self, context, request):
+    #     super().__init__(context, request)
+    #     self.id = ""
+    #     self.errors = {}
 
+    # def publishTraverse(self, request, name):
+    #     # Consume any path segments after /@addons as parameters
+    #     try:
+    #         self.id = int(id)
+    #     except ValueError:
+    #         raise BadRequest("Id should be a number.")
+    #     return self
+
+
+# XXX: cambiata la gestione degli errori, da rivedere l'implementazione Rect su Plone Classic UI
 class SubscriptionsCSVPost(Service):
     def reply(self):
         alsoProvides(self.request, IDisableCSRFProtection)
-        query = self.parse_query()
         tool = getUtility(ISubscriptionsStore)
+        query = self.parse_query()
 
         clear = query.get("clear", False)
         overwrite = query.get("overwrite", False)
+        # has_header = query.get("has_header", False)
+        # csv_separator = query.get("csv_separator", ",")
+        subscription_channels = set(
+            api.portal.get_registry_record(
+                interface=IRerUfficiostampaSettings, name="subscription_channels"
+            )
+        )
         if clear:
             tool.clear()
         csv_data = self.get_csv_data(data=query["file"])
@@ -59,8 +82,14 @@ class SubscriptionsCSVPost(Service):
                 )
             )
 
+        # TODO: manage has_header
+
         # clone generator for validation checks and processing
-        csv_gen, csv_gen_checks = itertools.tee(csv_data.get("csv", []))
+        rows = [row for row in csv_data["csv"]]
+
+        if not rows:
+            # TODO: warning empty csv
+            raise BadRequest(_("empty_csv", default="Empty csv file."))
 
         res = {
             "errored": [],
@@ -68,8 +97,24 @@ class SubscriptionsCSVPost(Service):
             "imported": 0,
         }
 
+        # required fields: email, channels
+        for required in ["email", "channels"]:
+            if "required" not in rows[0]:
+                res["errored"].append(
+                    translate(
+                        _(
+                            "missing_required",
+                            default="Missing required field: ${field}",
+                            mapping={"field": required},
+                        ),
+                        context=self.request,
+                    )
+                )
+        if res["errored"]:
+            raise BadRequest("; ".join(res["errored"]))
+
         # check for data errors
-        for i, row in enumerate(csv_gen_checks):
+        for i, row in enumerate(rows):
             try:
                 Email().validate(row.get("email", ""))
             except InvalidEmail:
@@ -85,23 +130,29 @@ class SubscriptionsCSVPost(Service):
                 res["errored"].append(msg)
 
             request_channels = set(
-                map(lambda r: r.strip(), row.get("channels").split(","))
+                [r.strip() for r in (row.get("channels") or "").split(",")]
             )
-            channels_filtered = [
-                ch
-                for ch in request_channels
-                if ch
-                in api.portal.get_registry_record(
-                    interface=IRerUfficiostampaSettings, name="subscription_channels"
+            if not request_channels:
+                msg = translate(
+                    _(
+                        "missing_channels",
+                        default="[${row}] - row with missing channels",
+                        mapping={"row": i},
+                    ),
+                    context=self.request,
                 )
-            ]
+                logger.warning(f"[ERROR] - {msg}")
+                res["errored"].append(msg)
+                continue
 
-            if len(request_channels) != len(channels_filtered):
+            channels_invalid = request_channels.difference(subscription_channels)
+
+            if channels_invalid:
                 msg = translate(
                     _(
                         "invalid_channels",
-                        default="[${row}] - row with invalid channels",
-                        mapping={"row": i},
+                        default="[${row}] - row with invalid channels: ${channels}",
+                        mapping={"row": i, "channels": ", ".join(channels_invalid)},
                     ),
                     context=self.request,
                 )
@@ -110,9 +161,9 @@ class SubscriptionsCSVPost(Service):
 
         # return if we have errored fields
         if len(res["errored"]):
-            return res
+            raise BadRequest("; ".join(res["errored"]))
 
-        for i, row in enumerate(csv_gen):
+        for i, row in enumerate(rows):
             email = row.get("email", "")
             row["channels"] = row["channels"].split(",")
             records = tool.search(query={"email": email})
@@ -165,7 +216,10 @@ class SubscriptionsCSVPost(Service):
         return res
 
     def get_csv_data(self, data):
-        if data.get("content-type", "") != "text/comma-separated-values":
+        if data.get("content-type", "") not in (
+            "text/comma-separated-values",
+            "text/csv",
+        ):
             raise BadRequest(
                 _(
                     "wrong_content_type",
@@ -174,6 +228,7 @@ class SubscriptionsCSVPost(Service):
             )
         csv_data = data["data"]
         if data.get("encoding", "") == "base64":
+            csv_data = re.sub(r"^data:.*;base64,", "", csv_data)
             csv_data = base64.b64decode(csv_data)
             try:
                 csv_data = csv_data.decode()
@@ -185,7 +240,6 @@ class SubscriptionsCSVPost(Service):
 
         try:
             dialect = csv.Sniffer().sniff(csv_data, delimiters=";,")
-
             return {
                 "csv": csv.DictReader(
                     csv_value,

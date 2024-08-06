@@ -132,9 +132,19 @@ def prepare_email_message(context, template, parameters):
 
 
 def mail_from():
-    registry = getUtility(IRegistry)
-    mail_settings = registry.forInterface(IMailSchema, prefix="plone")
-    return formataddr((mail_settings.email_from_name, mail_settings.email_from_address))
+    try:
+        email_from_name = api.portal.get_registry_record(
+            "email_from_name", interface=IRerUfficiostampaSettings
+        )
+        email_from_address = api.portal.get_registry_record(
+            "email_from_address", interface=IRerUfficiostampaSettings
+        )
+    except (KeyError, InvalidParameterError):
+        registry = getUtility(IRegistry)
+        mail_settings = registry.forInterface(IMailSchema, prefix="plone")
+        email_from_address = mail_settings.email_from_address
+        email_from_name = mail_settings.email_from_name
+    return formataddr((email_from_name, email_from_address))
 
 
 def get_next_comunicato_number():

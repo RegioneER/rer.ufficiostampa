@@ -18,6 +18,30 @@ class IRerUfficiostampaSettings(model.Schema):
         required=False,
     )
 
+    email_from_name = schema.TextLine(
+        title=_(
+            "email_from_name_label",
+            default="Email from name",
+        ),
+        description=_(
+            "email_from_name_help",
+            default="Insert the name of the sender for emails.",
+        ),
+        required=True,
+    )
+
+    email_from_address = schema.TextLine(
+        title=_(
+            "email_from_address_label",
+            default="Email from address",
+        ),
+        description=_(
+            "email_from_address_help",
+            default="Insert the email address of the sender for emails.",
+        ),
+        required=True,
+    )
+
     subscription_channels = schema.List(
         title=_("subscription_channels_label", default="Subscription Channels"),
         description=_(
@@ -82,7 +106,7 @@ class IRerUfficiostampaSettings(model.Schema):
             "css_styles_help",
             default="Insert a list of CSS styles for received emails.",
         ),
-        required=True,
+        required=False,
     )
     comunicato_number = schema.Int(
         title=_(
@@ -141,3 +165,11 @@ class ILegislaturesRowSchema(model.Schema):
 
 class IUfficioStampaControlPanel(IControlpanel):
     """Control panel for Ufficio Stampa settings."""
+
+
+class IUfficioStampaManageChannels(IControlpanel):
+    """Schema for managing subscription channels."""
+
+
+class IUfficioStampaManageHistory(IControlpanel):
+    """Schema for managing subscription channels."""

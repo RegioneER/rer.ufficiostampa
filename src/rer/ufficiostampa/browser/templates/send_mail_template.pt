@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      lang="en"
+      xml:lang="en"
+      i18n:domain="rer.ufficiostampa"
+      tal:omit-tag=""
+>
 <tal:root define="
             notes python:options.get('notes', '');
             css python:options.get('css', '');
@@ -10,7 +20,6 @@
             folders python:options.get('folders', '');
             toLocalizedTime nocall:context/@@plone/toLocalizedTime;
           "
-          i18n:domain="rer.ufficiostampa"
 >
   <style tal:condition="css">${css}</style>
   <div class="comunicato-note"
@@ -18,34 +27,7 @@
        tal:content="notes"
   >
   </div>
-  <div id="logo">
-    <img alt="Regione Emilia-Romagna"
-         src="${context/portal_url}/++plone++rer.ufficiostampa/logo_rer.gif"
-         i18n:attributes="alt"
-         i18n:translate=""
-    />
-    <div i18n:translate="">Giunta Regionale - Agenzia di informazione e comunicazione</div>
-  </div>
-  <div class="infos">
-    <div class="comunicato-number"
-         tal:condition="python:comunicato_number and context.portal_type == 'ComunicatoStampa'"
-         i18n:translate=""
-    >
-        N. ${comunicato_number}
-    </div>
-    <div class="date"
-         i18n:translate="send_date_label"
-    >
-        Date
-      <b tal:content="python:toLocalizedTime(date, long_format=False)"
-         i18n:name="date"
-      ></b>
-    </div>
-    <p i18n:translate="">
-        All'attenzione dei Capi redattori
-    </p>
-  </div>
-  <h1 class="comunicato-title"
+   <h1 class="comunicato-title"
       tal:condition="title"
   >${title}</h1>
   <p class="comunicato-description"
@@ -70,35 +52,6 @@
   </div>
 
   <div id="footer">
-    <div class="other-news">
-      <p i18n:translate="">
-          Tutti i comunicati sono online su
-        <a href="https://notizie.regione.emilia-romagna.it"
-           title="Notizie Regione Emilia-Romagna"
-           i18n:attributes="title"
-        >https://notizie.regione.emilia-romagna.it</a>
-      </p>
-      <p i18n:translate="">
-        Seguici su Twitter (<a href="https://twitter.com/@RegioneER">@RegioneER</a>),
-        Facebook (<a href="https://www.facebook.com/RegioneEmiliaRomagna">@RegioneEmiliaRomagna</a>),
-        Instagram (<a href="https://www.instagram.com/regione_emiliaromagna">@regione_emiliaromagna</a>),
-        Linkedin (<a href="https://www.linkedin.com/company/regione-emilia-romagna">@regione-emilia-romagna</a>)
-      </p>
-      <p class="last-item-footer"
-         i18n:translate=""
-      >Segreteria di redazione tel.
-        <a href="tel:051-5275490"
-           i18n:translate=""
-        >051 5275490</a></p>
-    </div>
-    <div class="manage-subscriptions">
-      <p i18n:translate="manage_subscriptions_intro">
-        You are receiving this email because you are subscribed to
-        <b i18n:name="site_title">${site_title}</b>.
-      </p>
-      <a href="${context/portal_url}/cancel-subscriptions-request"
-         i18n:translate="delete_subscriptions_link"
-      >Unsubscribe</a>
-    </div>
   </div>
 </tal:root>
+</html>

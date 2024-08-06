@@ -111,17 +111,28 @@ class BaseStore:
                 record.attrs[k] = v
         self.soup.reindex(records=[record])
 
-    def delete(self, id):
-        try:
-            record = self.soup.get(id)
-        except KeyError:
-            logger.error(
-                '[DELETE {}] Subscription with id "{}" not found.'.format(
-                    self.soup_type, id
+    def delete(self, id, ids=[]):
+        if id:
+            ids = [id]
+        for id in ids:
+            try:
+                del self.soup[self.soup.get(id)]
+            except KeyError:
+                logger.error(
+                    '[DELETE %s] Subscription with id "%s" not found.',
+                    self.soup_type,
+                    id,
                 )
-            )
-            return {"error": "NotFound"}
-        del self.soup[record]
+        # try:
+        #     record = self.soup.get(id)
+        # except KeyError:
+        #     logger.error(
+        #         '[DELETE {}] Subscription with id "{}" not found.'.format(
+        #             self.soup_type, id
+        #         )
+        #     )
+        #     return {"error": "NotFound"}
+        # del self.soup[record]
 
     def clear(self):
         self.soup.clear()

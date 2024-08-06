@@ -13,4 +13,13 @@
       name="@send-comunicato-schema"
       />
 
+  <plone:service
+      method="POST"
+      factory=".post.SendComunicato"
+      for="rer.ufficiostampa.interfaces.IComunicatoStampa"
+      permission="rer.ufficiostampa.Send"
+      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
+      name="@send-comunicato"
+      />
+
 </configure>

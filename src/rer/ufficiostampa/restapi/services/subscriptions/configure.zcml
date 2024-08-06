@@ -12,6 +12,17 @@
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       name="@subscriptions"
       />
+
+<!--
+  <browser:page
+      name="subscriptions-csv"
+      class=".csv_endpoint.DownloadView"
+      for="plone.app.layout.navigation.interfaces.INavigationRoot"
+      permission="rer.ufficiostampa.ManageChannels"
+      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
+      />
+-->
+
   <plone:service
       method="GET"
       factory=".csv_endpoint.SubscriptionsCSVGet"
@@ -20,6 +31,7 @@
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       name="@subscriptions-csv"
       />
+
   <plone:service
       method="POST"
       factory=".csv_endpoint.SubscriptionsCSVPost"

@@ -11,6 +11,7 @@
       package="z3c.jbot"
       file="meta.zcml"
       />
+
   <browser:jbot
       directory="overrides"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
@@ -32,9 +33,19 @@
       />
 
  <adapter
-    factory=".controlpanel.UfficiostampaConfigletPanel"
+    factory=".controlpanel.UfficiostampaSettingsConfigletPanel"
     provides="rer.ufficiostampa.interfaces.settings.IUfficioStampaControlPanel"
     name="rer.ufficiostampa" />
+
+ <adapter
+    factory=".controlpanel.UfficiostampaChannelsConfigletPanel"
+    provides="rer.ufficiostampa.interfaces.settings.IUfficioStampaManageChannels"
+    name="ufficiostampa-managechannels" />
+
+ <adapter
+    factory=".controlpanel.UfficiostampaHistoryConfigletPanel"
+    provides="rer.ufficiostampa.interfaces.settings.IUfficioStampaManageHistory"
+    name="ufficiostampa-managehistory" />
 
   <browser:page
       name="view"
@@ -65,6 +76,7 @@
       permission="rer.ufficiostampa.Send"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
+
   <browser:page
       name="send-preview"
       for="rer.ufficiostampa.interfaces.IInvitoStampa"
