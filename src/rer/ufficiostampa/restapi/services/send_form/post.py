@@ -9,7 +9,7 @@ from rer.ufficiostampa import _
 from rer.ufficiostampa.interfaces import ISendHistoryStore
 from rer.ufficiostampa.interfaces import ISubscriptionsStore
 from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
-from rer.ufficiostampa.utils import decode_token
+# from rer.ufficiostampa.utils import decode_token
 from rer.ufficiostampa.utils import get_site_title
 from rer.ufficiostampa.utils import mail_from
 from rer.ufficiostampa.utils import prepare_email_message
@@ -42,7 +42,7 @@ class SendComunicato(Service):
         # if errors:
         #     self.status = self.formErrorsMessage
         #     return
-        self.sendMessage(data=data)
+        return self.sendMessage(data=data)
 
     def get_value_from_settings(self, field):
         try:
@@ -52,18 +52,19 @@ class SendComunicato(Service):
         except (KeyError, InvalidParameterError):
             return None
 
-    def get_subscribers(self, data):
-        channels = data.get("channels", [])
-        subscribers = set()
-        tool = getUtility(ISubscriptionsStore)
+    def get_channels(self, data):
         vocab = getUtility(
             IVocabularyFactory, name="rer.ufficiostampa.vocabularies.channels"
         )
-        for channel in channels:
-            try:
-                channel = vocab(self.context).getTermByToken(channel).value
-            except LookupError:
-                continue
+        return [
+            vocab(self.context).getTermByToken(x).value
+            for x in data.get("channels", [])
+        ]
+
+    def get_subscribers(self, data):
+        subscribers = set()
+        tool = getUtility(ISubscriptionsStore)
+        for channel in self.get_channels(data):
             records = tool.search(query={"channels": channel})
             subscribers.update([x.attrs.get("email", "").lower() for x in records])
         subscribers.update([x.lower() for x in data.get("additional_addresses", [])])
@@ -96,7 +97,7 @@ class SendComunicato(Service):
 
     # TODO: move to utility ?
     def send_internal(self, data, body):
-        subscribers = self.get_subscribers(data)
+        rcpts = self.get_subscribers(data)
         encoding = api.portal.get_registry_record(
             "plone.email_charset", default="utf-8"
         )
@@ -109,10 +110,10 @@ class SendComunicato(Service):
 
         self.manage_attachments(data=data, msg=msg)
         host = api.portal.get_tool(name="MailHost")
-        msg["Bcc"] = ", ".join(subscribers)
+        msg["Bcc"] = ", ".join(rcpts)
 
         # log start
-        send_id = self.set_history_start(data=data, subscribers=len(subscribers))
+        send_id = self.set_history_start(data=data, subscribers=len(rcpts))
 
         try:
             host.send(msg, charset=encoding)
@@ -132,6 +133,10 @@ class SendComunicato(Service):
 
         if send_id:
             self.update_history(send_id=send_id, status="success")
+        return {
+            "status": "success",
+            "id": send_id,
+        }
 
     def manage_attachments(self, data, msg):
         attachments = self.get_attachments(data=data)
@@ -194,7 +199,7 @@ class SendComunicato(Service):
                 "number": getattr(self.context, "comunicato_number", ""),
                 "url": self.context.absolute_url(),
                 "recipients": subscribers,
-                "channels": data.get("channels", []),
+                "channels": self.get_channels(data),
                 "status": "sending",
             }
         )

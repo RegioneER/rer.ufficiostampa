@@ -32,20 +32,23 @@
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
 
- <adapter
-    factory=".controlpanel.UfficiostampaSettingsConfigletPanel"
-    provides="rer.ufficiostampa.interfaces.settings.IUfficioStampaControlPanel"
-    name="rer.ufficiostampa" />
+  <adapter
+      factory=".controlpanel.UfficiostampaSettingsConfigletPanel"
+      provides="rer.ufficiostampa.interfaces.settings.IUfficioStampaControlPanel"
+      name="rer.ufficiostampa"
+      />
 
- <adapter
-    factory=".controlpanel.UfficiostampaChannelsConfigletPanel"
-    provides="rer.ufficiostampa.interfaces.settings.IUfficioStampaManageChannels"
-    name="ufficiostampa-managechannels" />
+  <adapter
+      factory=".controlpanel.UfficiostampaChannelsConfigletPanel"
+      provides="rer.ufficiostampa.interfaces.settings.IUfficioStampaManageChannels"
+      name="ufficiostampa-managechannels"
+      />
 
- <adapter
-    factory=".controlpanel.UfficiostampaHistoryConfigletPanel"
-    provides="rer.ufficiostampa.interfaces.settings.IUfficioStampaManageHistory"
-    name="ufficiostampa-managehistory" />
+  <adapter
+      factory=".controlpanel.UfficiostampaHistoryConfigletPanel"
+      provides="rer.ufficiostampa.interfaces.settings.IUfficioStampaManageHistory"
+      name="ufficiostampa-managehistory"
+      />
 
   <browser:page
       name="view"
@@ -73,6 +76,14 @@
       for="rer.ufficiostampa.interfaces.IComunicatoStampa"
       class=".send_preview.View"
       template="templates/send_preview.pt"
+      permission="rer.ufficiostampa.Send"
+      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
+      />
+
+  <browser:page
+      name="download"
+      for=".send_preview.IView"
+      class=".send_preview.Download"
       permission="rer.ufficiostampa.Send"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />

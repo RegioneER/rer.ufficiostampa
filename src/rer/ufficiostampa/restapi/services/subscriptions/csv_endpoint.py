@@ -16,7 +16,6 @@ from zope.interface import alsoProvides
 
 import base64
 import csv
-import itertools
 import logging
 import re
 

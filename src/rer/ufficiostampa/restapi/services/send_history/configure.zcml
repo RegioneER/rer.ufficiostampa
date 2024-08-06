@@ -13,6 +13,7 @@
       name="@send-history"
       />
 
+  <!-- DEPRECATED -->
   <plone:service
       method="GET"
       factory=".get.SendHistoryCSVGet"
@@ -22,6 +23,7 @@
       name="@send-history-csv"
       />
 
+  <!-- DEPRECATED -->
   <plone:service
       method="GET"
       factory=".get.SendHistoryClearGet"
@@ -30,4 +32,5 @@
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       name="@send-history-clear"
       />
+
 </configure>
