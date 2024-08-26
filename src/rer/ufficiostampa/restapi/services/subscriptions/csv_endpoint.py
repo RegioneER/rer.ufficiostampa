@@ -15,7 +15,7 @@ from zope.i18n import translate
 from zope.interface import alsoProvides
 
 import base64
-import csv
+from defusedcsv import csv
 import logging
 import re
 
@@ -31,7 +31,7 @@ COLUMNS = [
     "newspaper",
     "date",
 ]
-
+REQUIRED = ["email", "channels"]
 
 # @implementer(IPublishTraverse)
 class SubscriptionsCSVGet(DataCSVGet):
@@ -96,9 +96,9 @@ class SubscriptionsCSVPost(Service):
             "imported": 0,
         }
 
-        # required fields: email, channels
-        for required in ["email", "channels"]:
-            if "required" not in rows[0]:
+        # required fields: (e.g. email, channels)
+        for required in REQUIRED:
+            if required not in rows[0]:
                 res["errored"].append(
                     translate(
                         _(
@@ -120,8 +120,8 @@ class SubscriptionsCSVPost(Service):
                 msg = translate(
                     _(
                         "invalid_email",
-                        default="[${row}] - row with invalid email",
-                        mapping={"row": i},
+                        default="[${row}] - row with invalid email ${email}",
+                        mapping={"row": i, "email": row.get("email", "")},
                     ),
                     context=self.request,
                 )
