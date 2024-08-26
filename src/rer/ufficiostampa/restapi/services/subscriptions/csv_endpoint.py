@@ -1,3 +1,4 @@
+from defusedcsv import csv
 from io import StringIO
 from plone import api
 from plone.protect.interfaces import IDisableCSRFProtection
@@ -15,7 +16,6 @@ from zope.i18n import translate
 from zope.interface import alsoProvides
 
 import base64
-from defusedcsv import csv
 import logging
 import re
 
@@ -32,6 +32,7 @@ COLUMNS = [
     "date",
 ]
 REQUIRED = ["email", "channels"]
+
 
 # @implementer(IPublishTraverse)
 class SubscriptionsCSVGet(DataCSVGet):
