@@ -18,7 +18,7 @@ class IBasicComunicati(IBasic):
         title=_("arguments_label", default="Arguments"),
         description=_("arguments_help", default="Select one or more values."),
         value_type=schema.TextLine(),
-        required=True,
+        required=False,
         missing_value=(),
     )
 
@@ -36,3 +36,14 @@ class BasicComunicati(Basic):
     """
     Basic methods to store title and description
     """
+
+    def _get_arguments(self):
+        return self.context.arguments
+
+    def _set_arguments(self, value):
+        # if not isinstance(value, str):
+        #     raise ValueError("Description must be text.")
+        self.context.arguments = value
+
+    arguments = property(_get_arguments, _set_arguments)
+
