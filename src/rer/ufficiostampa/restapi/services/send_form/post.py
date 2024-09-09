@@ -172,12 +172,16 @@ class SendComunicato(Service):
 
     @property
     def subject(self):
-        value = "{type}: {title}".format(
-            type=self.context.portal_type == "ComunicatoStampa"
-            and "Comunicato Regione"  # noqa
-            or "Invito Regione",  # noqa
-            title=self.context.title,
-        )
+        if self.context.portal_type == "ComunicatoStampa":
+            value = f"Comunicato Stampa: {self.context.title}"
+        else:
+            value = self.context.title
+        # value = "{type}: {title}".format(
+        #     type=self.context.portal_type == "ComunicatoStampa"
+        #     and "Comunicato Regione"  # noqa
+        #     or "Invito Regione",  # noqa
+        #     title=self.context.title,
+        # )
         return value
 
     @property
