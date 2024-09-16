@@ -38,6 +38,8 @@ class BasicComunicati(Basic):
     """
 
     def _get_arguments(self):
+        if self.context.arguments is None:
+            return ()
         return self.context.arguments
 
     def _set_arguments(self, value):
