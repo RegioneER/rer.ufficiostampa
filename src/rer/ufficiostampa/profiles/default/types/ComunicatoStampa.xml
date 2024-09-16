@@ -31,7 +31,6 @@
   <property name="add_permission">rer.ufficiostampa.AddComunicatoStampa</property>
   <property name="klass">rer.ufficiostampa.content.ComunicatoStampa</property>
   <property name="behaviors">
-    <element value="rer.ufficiostampa.basic" />
     <element value="plone.categorization" />
     <element value="plone.publication" />
     <element value="plone.ownership" />
@@ -46,18 +45,15 @@
     <element value="plone.locking" />
     <element value="plone.textindexer" />
     <element value="volto.preview_image" />
-
+ 
     <!-- TODO: su profilo rer aggiungere
       <element value="rer.solrpush.behaviors.solr_fields.ISolrFields" /> 
+      <element value="rer.ufficiostampa.basic" />
       <element value="rer.ufficiostampa.legislature" />
     -->
 
     <!-- TODO:
     nel policy per integrazione con io-comune
-
-    togliere:
-    <element value="rer.ufficiostampa.basic" />
-    <element value="rer.ufficiostampa.legislature" />
 
     aggiungere:
     <element value="plone.basic" />
