@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.6.7 (unreleased)
+1.6.7 (2024-09-19)
 ------------------
 
 - Change Twitter with X in email templates.
