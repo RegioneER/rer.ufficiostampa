@@ -4,7 +4,8 @@ Changelog
 1.6.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Change Twitter with X in email templates.
+  [cekk]
 
 
 1.6.6 (2023-03-14)
