@@ -16,7 +16,7 @@ long_description = "\n\n".join(
 
 setup(
     name="rer.ufficiostampa",
-    version="1.6.7",
+    version="1.6.8.dev0",
     description="Policy for Ufficio Stampa",
     long_description=long_description,
     # Get more from https://pypi.org/classifiers/
