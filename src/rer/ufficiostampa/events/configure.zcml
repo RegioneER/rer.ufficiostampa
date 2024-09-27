@@ -25,4 +25,9 @@
           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
       handler=".comunicato.fixText"
     />
+    <subscriber
+      for="rer.ufficiostampa.interfaces.IRerUfficiostampaSettings
+          plone.registry.interfaces.IRecordModifiedEvent"
+      handler=".registry.channelsDeletionHandler"
+    />
 </configure>
