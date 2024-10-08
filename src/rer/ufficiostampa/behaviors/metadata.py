@@ -48,4 +48,3 @@ class BasicComunicati(Basic):
         self.context.arguments = value
 
     arguments = property(_get_arguments, _set_arguments)
-

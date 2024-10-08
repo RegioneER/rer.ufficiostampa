@@ -82,6 +82,7 @@ class SendComunicato(Service):
                 "date": datetime.now(),
                 # ??? perchè qui si usano i folder, poi nell'invio si usano gli attachments ?
                 "folders": self.get_folders_attachments(),
+                "links": self.get_links_attachments(),
             },
         )
         if external_sender_url:
@@ -95,6 +96,11 @@ class SendComunicato(Service):
         return self.context.listFolderContents(
             contentFilter={"portal_type": ["Folder"]}
         )
+
+    def get_links_attachments(self):
+        return [
+            b.getObject() for b in api.content.find(self.context, portal_type=["Link"])
+        ]
 
     # TODO: move to utility ?
     def send_internal(self, data, body):

@@ -39,6 +39,19 @@
     ></div>
 
     <div class="comunicato-folders"
+      tal:condition="options/links|nothing"
+    >
+      <ul>
+        <li tal:repeat="link options/links|nothing">
+          <a href="${link/remoteUrl}"
+            title="${link/title}"
+          >${link/title}</a>
+          <p tal:condition="link/description|nothing">${link/description}</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="comunicato-folders"
          tal:condition="folders"
     >
       <ul>

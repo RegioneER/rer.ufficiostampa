@@ -135,6 +135,37 @@ class IRerUfficiostampaSettings(model.Schema):
         default=2021,
     )
 
+    default_acura_di = schema.TextLine(
+        title=_(
+            "default_acura_di_label",
+            default="Default a cura di",
+        ),
+        description=_(
+            "default_acura_di_help",
+            default="Inserire il percorso della pagina a cura di predefinita.",
+        ),
+        required=False,
+        default="/amministrazione/aree-amministrative/ufficio-stampa",
+    )
+
+    default_argomenti = schema.List(
+        title=_(
+            "default_argomenti_label",
+            default="Default argomenti",
+        ),
+        description=_(
+            "default_argomenti_help",
+            default="Inserire i percorsi delle pagine argomenti predefinite."
+            "Una per riga.",
+        ),
+        required=False,
+        default=[
+            "/argomenti/sala-stampa",
+            "/argomenti/comunicazione-istituzionale",
+        ],
+        value_type=schema.TextLine(),
+    )
+
 
 class ILegislaturesRowSchema(model.Schema):
     legislature = schema.SourceText(

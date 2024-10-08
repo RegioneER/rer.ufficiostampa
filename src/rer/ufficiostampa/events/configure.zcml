@@ -9,7 +9,7 @@
   <subscriber
       for="rer.ufficiostampa.interfaces.IComunicatoStampa
            Products.CMFCore.interfaces.IActionSucceededEvent"
-      handler=".comunicato.setNumber"
+      handler=".comunicato.changeWorkflow"
       />
   <subscriber
       for="rer.ufficiostampa.interfaces.IComunicatoStampa

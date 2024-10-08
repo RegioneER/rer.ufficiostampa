@@ -1,3 +1,6 @@
+# CLASSICUI
+# DEPRECATED
+
 from datetime import datetime
 from DateTime import DateTime
 from email.message import EmailMessage
@@ -103,7 +106,9 @@ class ISendForm(Interface):
         required=False,
         missing_value=(),
         value_type=schema.Choice(source="rer.ufficiostampa.vocabularies.attachments"),
-        defaultFactory=default_attachments,
+        # questa factory mette di default tutti gli allegati del comunicato,
+        # la richiesta è di avere il default vuoto
+        # defaultFactory=default_attachments,
     )
 
 

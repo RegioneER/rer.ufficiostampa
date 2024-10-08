@@ -6,6 +6,7 @@
     >
 
   <adapter factory=".types.ACuraDiJsonSchemaProvider" name="a_cura_di" />
+  <adapter factory=".types.ArgomentiJsonSchemaProvider" name="tassonomia_argomenti" />
 
 </configure>
   

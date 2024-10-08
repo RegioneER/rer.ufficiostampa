@@ -60,7 +60,7 @@ class AttachmentsVocabularyFactory:
     def __call__(self, context):
         terms = []
         for brain in api.portal.get_tool("portal_catalog")(
-            portal_type=["File", "Image"],
+            portal_type=["File", "Image", "Link"],
             path={"query": "/".join(context.getPhysicalPath())},
         ):
             terms.append(

@@ -27,6 +27,7 @@ class View(BrowserView):
                 "site_title": get_site_title(),
                 "date": DateTime(),
                 "folders": self.get_folders_attachments(),
+                "links": self.get_links_attachments(),
             },
         )
 
@@ -44,6 +45,11 @@ class View(BrowserView):
         return self.context.listFolderContents(
             contentFilter={"portal_type": ["Folder"]}
         )
+
+    def get_links_attachments(self):
+        return [
+            b.getObject() for b in api.content.find(self.context, portal_type=["Link"])
+        ]
 
 
 @implementer(IPublishTraverse)
