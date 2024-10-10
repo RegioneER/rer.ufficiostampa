@@ -1,11 +1,11 @@
-# -*- coding: utf-8 -*-
 """Setup tests for this package."""
-from rer.ufficiostampa.testing import (
-    RER_UFFICIOSTAMPA_INTEGRATION_TESTING,
-)  # noqa: E501
+
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
+from rer.ufficiostampa.testing import (  # noqa: E501
+    RER_UFFICIOSTAMPA_INTEGRATION_TESTING,
+)
 
 import unittest
 
@@ -31,12 +31,15 @@ class TestSetup(unittest.TestCase):
 
     def test_product_installed(self):
         """Test if rer.ufficiostampa is installed."""
-        self.assertTrue(self.installer.isProductInstalled("rer.ufficiostampa"))
+        if hasattr(self.installer, "is_product_installed"):
+            self.assertTrue(self.installer.is_product_installed("rer.ufficiostampa"))
+        else:
+            self.assertTrue(self.installer.isProductInstalled("rer.ufficiostampa"))
 
     def test_browserlayer(self):
         """Test that IRerUfficiostampaLayer is registered."""
-        from rer.ufficiostampa.interfaces import IRerUfficiostampaLayer
         from plone.browserlayer import utils
+        from rer.ufficiostampa.interfaces import IRerUfficiostampaLayer
 
         self.assertIn(IRerUfficiostampaLayer, utils.registered_layers())
 
@@ -53,18 +56,22 @@ class TestUninstall(unittest.TestCase):
             self.installer = api.portal.get_tool("portal_quickinstaller")
         roles_before = api.user.get_roles(TEST_USER_ID)
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
-        self.installer.uninstallProducts(["rer.ufficiostampa"])
+        if hasattr(self.installer, "uninstall_product"):
+            self.installer.uninstall_product("rer.ufficiostampa")
+        else:
+            self.installer.uninstallProducts(["rer.ufficiostampa"])
         setRoles(self.portal, TEST_USER_ID, roles_before)
 
     def test_product_uninstalled(self):
         """Test if rer.ufficiostampa is cleanly uninstalled."""
-        self.assertFalse(
-            self.installer.isProductInstalled("rer.ufficiostampa")
-        )
+        if hasattr(self.installer, "is_product_installed"):
+            self.assertFalse(self.installer.is_product_installed("rer.ufficiostampa"))
+        else:
+            self.assertFalse(self.installer.isProductInstalled("rer.ufficiostampa"))
 
     def test_browserlayer_removed(self):
         """Test that IRerUfficiostampaLayer is removed."""
-        from rer.ufficiostampa.interfaces import IRerUfficiostampaLayer
         from plone.browserlayer import utils
+        from rer.ufficiostampa.interfaces import IRerUfficiostampaLayer
 
         self.assertNotIn(IRerUfficiostampaLayer, utils.registered_layers())

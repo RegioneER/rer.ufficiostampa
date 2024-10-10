@@ -1,13 +1,19 @@
-<?xml version="1.0"?>
-<object name="portal_catalog" meta_type="Plone Catalog Tool">
+<?xml version="1.0" encoding="utf-8"?>
+<object meta_type="Plone Catalog Tool"
+        name="portal_catalog"
+>
 
- <index name="arguments" meta_type="KeywordIndex">
-  <indexed_attr value="arguments"/>
- </index>
- <index name="legislature" meta_type="KeywordIndex">
-  <indexed_attr value="legislature"/>
- </index>
- 
- <column value="arguments"/>
- <column value="legislature"/>
+  <index meta_type="KeywordIndex"
+         name="arguments"
+  >
+    <indexed_attr value="arguments" />
+  </index>
+  <index meta_type="KeywordIndex"
+         name="legislature"
+  >
+    <indexed_attr value="legislature" />
+  </index>
+
+  <column value="arguments" />
+  <column value="legislature" />
 </object>

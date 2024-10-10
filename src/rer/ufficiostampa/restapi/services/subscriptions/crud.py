@@ -1,13 +1,12 @@
-# -*- coding: utf-8 -*-
 from plone import api
 from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
 from rer.ufficiostampa.interfaces import ISubscriptionsStore
-from zExceptions import BadRequest
-from rer.ufficiostampa.restapi.services.common import DataGet
 from rer.ufficiostampa.restapi.services.common import DataAdd
-from rer.ufficiostampa.restapi.services.common import DataUpdate
-from rer.ufficiostampa.restapi.services.common import DataDelete
 from rer.ufficiostampa.restapi.services.common import DataClear
+from rer.ufficiostampa.restapi.services.common import DataDelete
+from rer.ufficiostampa.restapi.services.common import DataGet
+from rer.ufficiostampa.restapi.services.common import DataUpdate
+from zExceptions import BadRequest
 
 
 class SubscriptionsGet(DataGet):
@@ -15,7 +14,7 @@ class SubscriptionsGet(DataGet):
     store = ISubscriptionsStore
 
     def reply(self):
-        data = super(SubscriptionsGet, self).reply()
+        data = super().reply()
         data["channels"] = api.portal.get_registry_record(
             "subscription_channels", interface=IRerUfficiostampaSettings
         )
@@ -31,13 +30,11 @@ class SubscriptionAdd(DataAdd):
         """
         for field in ["channels", "email"]:
             if not form_data.get(field, ""):
-                raise BadRequest(
-                    "Campo obbligatorio mancante: {}".format(field)
-                )
+                raise BadRequest(f"Campo obbligatorio mancante: {field}")
 
 
 class SubscriptionUpdate(DataUpdate):
-    """ Update an entry """
+    """Update an entry"""
 
     store = ISubscriptionsStore
 
