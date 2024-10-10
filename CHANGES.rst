@@ -2,10 +2,17 @@ Changelog
 =========
 
 2.0.0 (unreleased)
-------------------
+=======
 
 - Plone 6
   [mamico]
+
+
+1.6.7 (2024-09-19)
+------------------
+
+- Change Twitter with X in email templates.
+  [cekk]
 
 
 1.6.6 (2023-03-14)
