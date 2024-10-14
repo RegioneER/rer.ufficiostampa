@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 from datetime import datetime
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
+from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
 from rer.ufficiostampa.testing import RER_UFFICIOSTAMPA_INTEGRATION_TESTING
 from rer.ufficiostampa.utils import get_next_comunicato_number
-from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
 from transaction import commit
 
 import unittest
@@ -27,25 +26,23 @@ class TestComunicatoNumber(unittest.TestCase):
 
     def tearDown(self):
         api.portal.set_registry_record(
-            "comunicato_year", 0, interface=IRerUfficiostampaSettings,
+            "comunicato_year",
+            0,
+            interface=IRerUfficiostampaSettings,
         )
         api.portal.set_registry_record(
-            "comunicato_number", 0, interface=IRerUfficiostampaSettings,
+            "comunicato_number",
+            0,
+            interface=IRerUfficiostampaSettings,
         )
         commit()
 
     def test_by_default_number_is_1(self):
-        self.assertEqual(
-            get_next_comunicato_number(), "1/{}".format(datetime.now().year)
-        )
+        self.assertEqual(get_next_comunicato_number(), f"1/{datetime.now().year}")
 
     def test_calling_util_twice_return_a_new_number(self):
-        self.assertEqual(
-            get_next_comunicato_number(), "1/{}".format(datetime.now().year)
-        )
-        self.assertEqual(
-            get_next_comunicato_number(), "2/{}".format(datetime.now().year)
-        )
+        self.assertEqual(get_next_comunicato_number(), f"1/{datetime.now().year}")
+        self.assertEqual(get_next_comunicato_number(), f"2/{datetime.now().year}")
 
     def test_calling_util_on_new_year_return_1(self):
         current_year = datetime.now().year
@@ -55,11 +52,11 @@ class TestComunicatoNumber(unittest.TestCase):
             interface=IRerUfficiostampaSettings,
         )
         api.portal.set_registry_record(
-            "comunicato_number", 123, interface=IRerUfficiostampaSettings,
+            "comunicato_number",
+            123,
+            interface=IRerUfficiostampaSettings,
         )
-        self.assertEqual(
-            get_next_comunicato_number(), "1/{}".format(current_year)
-        )
+        self.assertEqual(get_next_comunicato_number(), f"1/{current_year}")
 
     def test_publishing_comunicato_increase_number_and_set_it_to_content(self):
         comunicato1 = api.content.create(
@@ -81,7 +78,7 @@ class TestComunicatoNumber(unittest.TestCase):
         api.content.transition(obj=comunicato1, transition="publish")
         self.assertEqual(
             getattr(comunicato1, "comunicato_number", None),
-            "1/{}".format(current_year),
+            f"1/{current_year}",
         )
         self.assertEqual(getattr(comunicato2, "comunicato_number", ""), "")
 
@@ -89,7 +86,7 @@ class TestComunicatoNumber(unittest.TestCase):
         api.content.transition(obj=comunicato2, transition="publish")
         self.assertEqual(
             getattr(comunicato2, "comunicato_number", None),
-            "2/{}".format(current_year),
+            f"2/{current_year}",
         )
 
         #  if i retract and re-publish it, the number doesn't change
@@ -97,11 +94,9 @@ class TestComunicatoNumber(unittest.TestCase):
         api.content.transition(obj=comunicato1, transition="publish")
         self.assertEqual(
             getattr(comunicato1, "comunicato_number", None),
-            "1/{}".format(current_year),
+            f"1/{current_year}",
         )
-        self.assertEqual(
-            get_next_comunicato_number(), "3/{}".format(current_year)
-        )
+        self.assertEqual(get_next_comunicato_number(), f"3/{current_year}")
 
     def test_publishing_invito_does_not_increase_number_and_set_it_to_content(
         self,
@@ -112,7 +107,9 @@ class TestComunicatoNumber(unittest.TestCase):
             container=self.portal,
         )
         invito = api.content.create(
-            type="InvitoStampa", title="Invito 2", container=self.portal,
+            type="InvitoStampa",
+            title="Invito 2",
+            container=self.portal,
         )
         current_year = datetime.now().year
 
@@ -122,7 +119,8 @@ class TestComunicatoNumber(unittest.TestCase):
         # now publish the invito
         api.content.transition(obj=invito, transition="publish")
         self.assertEqual(
-            getattr(invito, "comunicato_number", ""), "",
+            getattr(invito, "comunicato_number", ""),
+            "",
         )
         self.assertEqual(getattr(comunicato, "comunicato_number", ""), "")
 
@@ -130,5 +128,5 @@ class TestComunicatoNumber(unittest.TestCase):
         api.content.transition(obj=comunicato, transition="publish")
         self.assertEqual(
             getattr(comunicato, "comunicato_number", ""),
-            "1/{}".format(current_year),
+            f"1/{current_year}",
         )

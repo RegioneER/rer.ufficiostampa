@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Installer for the rer.ufficiostampa package."""
 
 from setuptools import find_packages
@@ -16,19 +15,21 @@ long_description = "\n\n".join(
 
 setup(
     name="rer.ufficiostampa",
-    version="1.6.8.dev0",
+    version="2.0.0.dev0",
     description="Policy for Ufficio Stampa",
     long_description=long_description,
     # Get more from https://pypi.org/classifiers/
     classifiers=[
+        "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
         "Framework :: Plone",
         "Framework :: Plone :: Addon",
-        "Framework :: Plone :: 5.2",
+        "Framework :: Plone :: 6.0",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Operating System :: OS Independent",
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
     ],
@@ -48,20 +49,28 @@ setup(
     package_dir={"": "src"},
     include_package_data=True,
     zip_safe=False,
-    python_requires="==2.7, >=3.6",
+    python_requires=">=3.8",
     install_requires=[
         "setuptools",
         # -*- Extra requirements: -*-
-        'ftfy==4.4.3;python_version<="2.7"',
-        "collective.z3cform.jsonwidget",
-        "collective.dexteritytextindexer",
+        # 'ftfy==4.4.3;python_version<="2.7"',
+        # "collective.z3cform.jsonwidget",
+        # "collective.dexteritytextindexer",
+        "Products.CMFPlone",
+        "Products.CMFCore",
+        "Zope",
         "itsdangerous>=1.1.0",
+        "plone.base",
         "plone.api>=1.8.4",
         "plone.app.dexterity",
+        "plone.app.contenttypes",
         "plone.restapi",
         "premailer",
+        "requests",
         "souper.plone",
+        "z3c.form",
         "z3c.jbot",
+        "defusedcsv",
     ],
     extras_require={
         "test": [
@@ -71,7 +80,8 @@ setup(
             # plone_coredev tests as of 2016-04-01.
             "plone.testing>=5.0.0",
             "plone.app.contenttypes",
-            "plone.app.robotframework[debug]",
+            "plone.app.iterate",
+            "plone.app.robotframework",
             "collective.MockMailHost",
         ],
     },

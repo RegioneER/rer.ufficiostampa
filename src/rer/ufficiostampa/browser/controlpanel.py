@@ -1,28 +1,33 @@
-# -*- coding: utf-8 -*-
-from collective.z3cform.jsonwidget.browser.widget import JSONFieldWidget
+# from collective.z3cform.jsonwidget.browser.widget import JSONFieldWidget
 from plone import api
 from plone.app.registry.browser import controlpanel
-from Products.CMFPlone.resources import add_bundle_on_request
+from plone.restapi.controlpanels import RegistryConfigletPanel
+
+# from Products.CMFPlone.resources import add_bundle_on_request
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from rer.ufficiostampa import _
 from rer.ufficiostampa.interfaces import ILegislaturesRowSchema
+from rer.ufficiostampa.interfaces import IRerUfficiostampaLayer
 from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
+from rer.ufficiostampa.interfaces.settings import IUfficioStampaControlPanel
+from z3c.form import button
 from z3c.form import field
 from z3c.form.interfaces import HIDDEN_MODE
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from z3c.form import button
+from zope.component import adapter
+from zope.interface import implementer
+from zope.interface import Interface
 
 
 class UfficiostampaSettingsEditForm(controlpanel.RegistryEditForm):
-    """
-    """
+    """ """
 
     schema = IRerUfficiostampaSettings
     id = "UfficiostampaSettingsEditForm"
-    label = _(u"Ufficio Stampa settings")
-    description = u""
+    label = _("Ufficio Stampa settings")
+    description = ""
 
     fields = field.Fields(IRerUfficiostampaSettings)
-    fields["legislatures"].widgetFactory = JSONFieldWidget
+    # fields["legislatures"].widgetFactory = JSONFieldWidget
 
     @property
     def can_manage_settings(self):
@@ -32,9 +37,8 @@ class UfficiostampaSettingsEditForm(controlpanel.RegistryEditForm):
         )
 
     def updateWidgets(self):
-        """
-        """
-        super(UfficiostampaSettingsEditForm, self).updateWidgets()
+        """ """
+        super().updateWidgets()
         self.widgets["legislatures"].schema = ILegislaturesRowSchema
 
         if not self.can_manage_settings:
@@ -50,40 +54,76 @@ class UfficiostampaSettingsEditForm(controlpanel.RegistryEditForm):
             for field_id in fields:
                 self.widgets[field_id].mode = HIDDEN_MODE
 
-    @button.buttonAndHandler(_(u"Save"), name="save")
+    @button.buttonAndHandler(_("Save"), name="save")
     def handleSave(self, action):
-        super(UfficiostampaSettingsEditForm, self).handleSave(self, action)
+        super().handleSave(self, action)
 
-    @button.buttonAndHandler(_(u"Cancel"), name="cancel")
+    @button.buttonAndHandler(_("Cancel"), name="cancel")
     def handleCancel(self, action):
         if not self.can_manage_settings:
             api.portal.show_message(
-                message=_(u"Changes canceled."),
+                message=_("Changes canceled."),
                 type="info",
                 request=self.request,
             )
             self.request.response.redirect(
-                u"{0}/channels-management".format(
-                    api.portal.get().absolute_url()
-                )
+                f"{api.portal.get().absolute_url()}/channels-management"
             )
         else:
-            super(UfficiostampaSettingsEditForm, self).handleCancel(
-                self, action
-            )
+            super().handleCancel(self, action)
 
 
 class UfficiostampaSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
-    """
-    """
+    """ """
 
     form = UfficiostampaSettingsEditForm
     index = ViewPageTemplateFile("templates/controlpanel_layout.pt")
 
     def __call__(self):
-        add_bundle_on_request(self.request, "z3cform-jsonwidget-bundle")
-        return super(UfficiostampaSettingsControlPanel, self).__call__()
+        # add_bundle_on_request(self.request, "z3cform-jsonwidget-bundle")
+        return super().__call__()
 
     def can_access_controlpanels(self):
         current = api.user.get_current()
         return api.user.has_permission("Manage portal", user=current)
+
+
+@adapter(Interface, IRerUfficiostampaLayer)
+@implementer(IUfficioStampaControlPanel)
+class UfficiostampaSettingsConfigletPanel(RegistryConfigletPanel):
+    """Volto control panel"""
+
+    schema = IRerUfficiostampaSettings
+    schema_prefix = None
+    configlet_id = "rer.ufficiostampa"
+    configlet_category_id = "Products"
+    title = _("Ufficio Stampa settings")
+    group = "Products"
+
+
+@adapter(Interface, IRerUfficiostampaLayer)
+@implementer(IUfficioStampaControlPanel)
+class UfficiostampaChannelsConfigletPanel(RegistryConfigletPanel):
+    """Volto control panel"""
+
+    schema = None
+    schema_prefix = None
+    configlet_id = "rer.ufficiostampa-managechannels"
+    configlet_category_id = "Products"
+    title = _("Ufficio Stampa - Geestione degli iscritti")
+    # TODO: definire un gruppo specifico per ufficio stampa ?
+    group = "Products"
+
+
+@adapter(Interface, IRerUfficiostampaLayer)
+@implementer(IUfficioStampaControlPanel)
+class UfficiostampaHistoryConfigletPanel(RegistryConfigletPanel):
+    """Volto control panel"""
+
+    schema = None
+    schema_prefix = None
+    configlet_id = "rer.ufficiostampa-managehistory"
+    configlet_category_id = "Products"
+    title = _("Ufficio Stampa - Strorico invio comunicati")
+    # TODO: definire un gruppo specifico per ufficio stampa ?
+    group = "Products"

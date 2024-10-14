@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.app.contenttypes.testing import PLONE_APP_CONTENTTYPES_FIXTURE
 from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
@@ -7,12 +6,14 @@ from plone.app.testing import PloneSandboxLayer
 from plone.restapi.testing import PloneRestApiDXLayer
 from plone.testing import z2
 
-import collective.MockMailHost
-import collective.dexteritytextindexer
-import collective.z3cform.jsonwidget
+# import collective.z3cform.jsonwidget
+import plone.restapi
 import rer.ufficiostampa
 import souper.plone
-import plone.restapi
+
+
+# import collective.dexteritytextindexer
+# import collective.MockMailHost
 
 
 class RerUfficiostampaLayer(PloneSandboxLayer):
@@ -23,10 +24,10 @@ class RerUfficiostampaLayer(PloneSandboxLayer):
         # Load any other ZCML that is required for your tests.
         # The z3c.autoinclude feature is disabled in the Plone fixture base
         # layer.
-        self.loadZCML(package=collective.dexteritytextindexer)
+        # self.loadZCML(package=collective.dexteritytextindexer)
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=rer.ufficiostampa)
-        self.loadZCML(package=collective.z3cform.jsonwidget)
+        # self.loadZCML(package=collective.z3cform.jsonwidget)
         self.loadZCML(package=souper.plone)
 
     def setUpPloneSite(self, portal):
@@ -53,11 +54,11 @@ class RerUfficiostampaLayerApi(PloneRestApiDXLayer):
     defaultBases = (PLONE_APP_CONTENTTYPES_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
-        super(RerUfficiostampaLayerApi, self).setUpZope(app, configurationContext)
-        self.loadZCML(package=collective.dexteritytextindexer)
+        super().setUpZope(app, configurationContext)
+        # self.loadZCML(package=collective.dexteritytextindexer)
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=rer.ufficiostampa)
-        self.loadZCML(package=collective.z3cform.jsonwidget)
+        # self.loadZCML(package=collective.z3cform.jsonwidget)
         self.loadZCML(package=souper.plone)
 
     def setUpPloneSite(self, portal):

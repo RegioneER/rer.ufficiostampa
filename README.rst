@@ -240,6 +240,12 @@ la lista di righe del file che hanno dei valori non validi::
     {
         "errored": []
     }
+    
+Invio asincrono tramite servizio esterno
+========================================
+
+https://github.com/RegioneER/rer.newsletterdispatcher.flask
+
 
 Installazione
 =============

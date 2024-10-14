@@ -1,17 +1,17 @@
-# -*- coding: utf-8 -*-
-from rer.ufficiostampa.utils import get_next_comunicato_number
 from plone import api
+from rer.ufficiostampa.utils import get_next_comunicato_number
 
 
-def setNumber(item, event):
-    if item.portal_type != "ComunicatoStampa":
-        return
-    if event.action != "publish":
-        return
-    if getattr(item, "comunicato_number", ""):
-        # already set
-        return
-    setattr(item, "comunicato_number", get_next_comunicato_number())
+def changeWorkflow(item, event):
+    if event.action == "publish":
+        # recursive publish
+        for obj in item.objectValues():
+            if api.content.get_state(obj) == "private":
+                api.content.transition(obj, "publish")
+        if item.portal_type == "ComunicatoStampa" and not getattr(
+            item, "comunicato_number", ""
+        ):
+            setattr(item, "comunicato_number", get_next_comunicato_number())
 
 
 def createComunicato(item, event):

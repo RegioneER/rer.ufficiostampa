@@ -1,9 +1,11 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:zcml="http://namespaces.zope.org/zcml">
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    >
 
   <include package=".subscriptions" />
   <include package=".send_history" />
+  <include package=".send_form" />
   <include package=".send_complete" />
   <include package=".search_parameters" />
   <include package=".search_comunicati" />
