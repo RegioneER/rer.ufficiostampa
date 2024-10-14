@@ -170,7 +170,6 @@ class SendForm(form.Form):
                 "notes": data.get("notes", ""),
                 "site_title": get_site_title(),
                 "date": DateTime(),
-                "folders": self.get_folders_attachments(),
             },
         )
 
@@ -255,13 +254,6 @@ class SendForm(form.Form):
 
         subscribers.update([x.lower() for x in data.get("additional_addresses", [])])
         return sorted(list(subscribers))
-
-    def get_folders_attachments(self):
-        if self.context.portal_type == "InvitoStampa":
-            return []
-        return self.context.listFolderContents(
-            contentFilter={"portal_type": ["Folder"]}
-        )
 
     def get_attachments(self, data):
         attachments = []

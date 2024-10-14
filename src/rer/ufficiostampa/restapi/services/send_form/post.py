@@ -11,6 +11,7 @@ from rer.ufficiostampa.interfaces import ISubscriptionsStore
 from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
 
 # from rer.ufficiostampa.utils import decode_token
+from rer.ufficiostampa.utils import get_attachments
 from rer.ufficiostampa.utils import get_site_title
 from rer.ufficiostampa.utils import mail_from
 from rer.ufficiostampa.utils import prepare_email_message
@@ -80,27 +81,13 @@ class SendComunicato(Service):
                 "notes": data.get("notes", ""),
                 "site_title": get_site_title(),
                 "date": datetime.now(),
-                # ??? perchè qui si usano i folder, poi nell'invio si usano gli attachments ?
-                "folders": self.get_folders_attachments(),
-                "links": self.get_links_attachments(),
+                "links": self.get_links_attachments(data),
             },
         )
         if external_sender_url:
             return self.send_external(data=data, body=body)
         else:
             return self.send_internal(data=data, body=body)
-
-    def get_folders_attachments(self):
-        # if self.context.portal_type == "InvitoStampa":
-        #     return []
-        return self.context.listFolderContents(
-            contentFilter={"portal_type": ["Folder"]}
-        )
-
-    def get_links_attachments(self):
-        return [
-            b.getObject() for b in api.content.find(self.context, portal_type=["Link"])
-        ]
 
     # TODO: move to utility ?
     def send_internal(self, data, body):
@@ -156,25 +143,10 @@ class SendComunicato(Service):
             )
 
     def get_attachments(self, data):
-        attachments = []
-        for uid in data.get("attachments", []):
-            item = api.content.get(UID=uid)
-            if not item:
-                continue
-            if item.portal_type == "Image":
-                field = item.image
-            elif item.portal_type == "File":
-                field = item.file
-            else:
-                raise BadRequest(_("Invalid attachment type"))
-            attachments.append(
-                {
-                    "data": field.data,
-                    "filename": field.filename,
-                    "content_type": item.content_type(),
-                }
-            )
-        return attachments
+        return get_attachments(data)
+
+    def get_links_attachments(self, data):
+        return get_attachments(data, as_link=True)
 
     @property
     def subject(self):

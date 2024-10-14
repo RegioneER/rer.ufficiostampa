@@ -11,6 +11,7 @@ from Products.CMFPlone.interfaces.controlpanel import ISiteSchema
 from rer.ufficiostampa import _
 from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
 from rer.ufficiostampa.interfaces.store import ISubscriptionsStore
+from zExceptions import BadRequest
 from zope.component import getUtility
 from zope.globalrequest import getRequest
 
@@ -181,3 +182,56 @@ def get_next_comunicato_number():
         )
 
     return f"{comunicato_number}/{comunicato_year}"
+
+
+MAX_ATTACHMENT_SIZE = 1 * 1024 * 1024
+
+
+def get_attachments(data, as_link=False, max_attachment_size=MAX_ATTACHMENT_SIZE):
+    attachments = []
+    for uid in data.get("attachments", []):
+        item = api.content.get(UID=uid)
+        field = None
+        if not item:
+            continue
+        if item.portal_type == "Image":
+            field = item.image
+            if field.size > max_attachment_size and not as_link:
+                continue
+            if field.size <= max_attachment_size and as_link:
+                continue
+        elif item.portal_type == "File":
+            field = item.file
+            if field.size > max_attachment_size and not as_link:
+                continue
+            if field.size <= max_attachment_size and as_link:
+                continue
+        elif item.portal_type == "Link":
+            if not as_link:
+                continue
+        else:
+            raise BadRequest(_("Invalid attachment type"))
+        if as_link:
+            if item.portal_type == "Link":
+                url = item.remoteUrl
+            else:
+                url = item.absolute_url()
+            attachments.append(
+                {
+                    "url": url,
+                    "title": item.Title(),
+                    "description": item.Description(),
+                }
+            )
+        else:
+            attachments.append(
+                {
+                    "data": field.data,
+                    "filename": field.filename,
+                    "content_type": item.content_type(),
+                    "url": item.absolute_url(),
+                    "title": item.Title(),
+                    "description": item.Description(),
+                }
+            )
+    return attachments

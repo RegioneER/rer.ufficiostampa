@@ -17,7 +17,6 @@
               text context/text|nothing;
               comunicato_number context/comunicato_number|nothing;
               date python:options.get('date', '');
-              folders python:options.get('folders', '');
               toLocalizedTime nocall:context/@@plone/toLocalizedTime;
             ">
     <style tal:condition="css">${css}</style>
@@ -43,22 +42,10 @@
     >
       <ul>
         <li tal:repeat="link options/links|nothing">
-          <a href="${link/remoteUrl}"
+          <a href="${link/url}"
             title="${link/title}"
           >${link/title}</a>
           <p tal:condition="link/description|nothing">${link/description}</p>
-        </li>
-      </ul>
-    </div>
-
-    <div class="comunicato-folders"
-         tal:condition="folders"
-    >
-      <ul>
-        <li tal:repeat="folder folders">
-          <a href="${folder/absolute_url}"
-             title="${folder/title}"
-          >${folder/title}</a>
         </li>
       </ul>
     </div>

@@ -3,6 +3,7 @@ from plone import api
 from plone.api.exc import InvalidParameterError
 from Products.Five import BrowserView
 from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
+from rer.ufficiostampa.utils import get_attachments
 from rer.ufficiostampa.utils import get_site_title
 from rer.ufficiostampa.utils import prepare_email_message
 from zope.interface import implementer
@@ -26,8 +27,7 @@ class View(BrowserView):
                 "notes": notes,
                 "site_title": get_site_title(),
                 "date": DateTime(),
-                "folders": self.get_folders_attachments(),
-                "links": self.get_links_attachments(),
+                "links": get_attachments(data=self.request.form, as_link=True),
             },
         )
 
@@ -39,17 +39,8 @@ class View(BrowserView):
         except (KeyError, InvalidParameterError):
             return ""
 
-    def get_folders_attachments(self):
-        if self.context.portal_type == "InvitoStampa":
-            return []
-        return self.context.listFolderContents(
-            contentFilter={"portal_type": ["Folder"]}
-        )
-
-    def get_links_attachments(self):
-        return [
-            b.getObject() for b in api.content.find(self.context, portal_type=["Link"])
-        ]
+    def get_attachments(self):
+        return get_attachments(data=self.request.form)
 
 
 @implementer(IPublishTraverse)
