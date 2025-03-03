@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0.1 (unreleased)
+2.0.1 (2025-03-03)
 ------------------
 
 - Re-enable async send.
