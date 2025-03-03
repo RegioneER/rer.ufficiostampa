@@ -31,9 +31,13 @@
   <div id="footer">
     <div class="other-news">
       <p>
-        Tutte le notizie su <a title="Regione Emilia-Romagna" href="https://www.regione.emilia-romagna.it">www.regione.emilia-romagna.it</a>,
-        i comunicati nella sezione <em>Agenzia di informazione e comunicazione<em>.
-      </p>
+        Tutte le notizie su
+        <a href="https://www.regione.emilia-romagna.it"
+           title="Regione Emilia-Romagna"
+        >www.regione.emilia-romagna.it</a>,
+        i comunicati nella sezione
+        <em>Agenzia di informazione e comunicazione<em>.
+          </em></em></p>
       <p>Seguici su X (<a href="https://x.com/@RegioneER">@RegioneER</a>), Facebook (<a href="https://www.facebook.com/RegioneEmiliaRomagna">@RegioneEmiliaRomagna</a>)</p>
       <p class="last-item-footer">Segreteria di redazione tel. 051 5275490</p>
     </div>

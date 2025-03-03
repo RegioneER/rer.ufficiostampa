@@ -45,7 +45,7 @@
     <element value="plone.locking" />
     <element value="plone.textindexer" />
     <element value="volto.preview_image" />
- 
+
     <!-- TODO: su profilo rer aggiungere
       <element value="rer.solrpush.behaviors.solr_fields.ISolrFields" /> 
       <element value="rer.ufficiostampa.basic" />

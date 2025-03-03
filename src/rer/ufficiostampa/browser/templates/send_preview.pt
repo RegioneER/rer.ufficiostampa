@@ -8,14 +8,20 @@
 >
 
   <style tal:content="view/get_styles"></style>
-  <body> 
-    <div tal:content="structure view/get_html"/>
+  <body>
+    <div tal:content="structure view/get_html"></div>
     <hr />
-    <div tal:define="attachments view/get_attachments" tal:condition="attachments">
+    <div tal:define="
+           attachments view/get_attachments;
+         "
+         tal:condition="attachments"
+    >
       <h3>Allegati</h3>
       <ul>
         <li tal:repeat="item attachments">
-          <a download="download" href="${item/url}">${item/filename}</a>
+          <a download="download"
+             href="${item/url}"
+          >${item/filename}</a>
         </li>
       </ul>
     </div>

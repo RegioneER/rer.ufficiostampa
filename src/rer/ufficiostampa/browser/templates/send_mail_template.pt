@@ -38,12 +38,12 @@
     ></div>
 
     <div class="comunicato-folders"
-      tal:condition="options/links|nothing"
+         tal:condition="options/links|nothing"
     >
       <ul>
         <li tal:repeat="link options/links|nothing">
           <a href="${link/url}"
-            title="${link/title}"
+             title="${link/title}"
           >${link/title}</a>
           <p tal:condition="link/description|nothing">${link/description}</p>
         </li>
@@ -53,7 +53,10 @@
     <div id="footer">
       <div class="other-news">
         <p>
-          Tutti i comunicati sono online su <a title="Notizie Regione Emilia-Romagna" href="https://notizie.regione.emilia-romagna.it">https://notizie.regione.emilia-romagna.it</a>
+          Tutti i comunicati sono online su
+          <a href="https://notizie.regione.emilia-romagna.it"
+             title="Notizie Regione Emilia-Romagna"
+          >https://notizie.regione.emilia-romagna.it</a>
         </p>
         <p>
           Seguici su X (<a href="https://x.com/@RegioneER">@RegioneER</a>),
@@ -61,13 +64,17 @@
           Instagram (<a href="https://www.instagram.com/regione_emiliaromagna">@regione_emiliaromagna</a>),
           Linkedin (<a href="https://www.linkedin.com/company/regione-emilia-romagna">@regione-emilia-romagna</a>)
         </p>
-        <p class="last-item-footer">Segreteria di redazione tel. <a href="tel:051-5275490">051 5275490</a></p>
+        <p class="last-item-footer">Segreteria di redazione tel.
+          <a href="tel:051-5275490">051 5275490</a></p>
       </div>
       <div class="manage-subscriptions">
         <p i18n:translate="manage_subscriptions_intro">
-        You are receiving this email because you are subscribed to <b i18n:name="site_title">${site_title}</b>.
+        You are receiving this email because you are subscribed to
+          <b i18n:name="site_title">${site_title}</b>.
         </p>
-        <a i18n:translate="delete_subscriptions_link" href="${context/portal_url}/cancel-subscriptions-request">Unsubscribe</a>
+        <a href="${context/portal_url}/cancel-subscriptions-request"
+           i18n:translate="delete_subscriptions_link"
+        >Unsubscribe</a>
       </div>
     </div>
   </tal:root>
