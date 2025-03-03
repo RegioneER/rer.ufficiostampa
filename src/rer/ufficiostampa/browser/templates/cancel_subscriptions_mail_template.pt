@@ -2,9 +2,7 @@
             site_title python:options['site_title'];
             url python:options['url'];
             css python:options['css'];
-          "
-          i18n:domain="rer.ufficiostampa"
->
+          ">
   <style tal:condition="css">${css}</style>
   <div id="logo">
     <img alt="Regione Emilia-Romagna"
@@ -30,18 +28,24 @@
   </b>
   <div id="footer">
     <div class="other-news">
-      <p>
+      <p i18n:translate="all_news_label">
         Tutte le notizie su
         <a href="https://www.regione.emilia-romagna.it"
            title="Regione Emilia-Romagna"
+           i18n:attributes="title"
         >www.regione.emilia-romagna.it</a>,
         i comunicati nella sezione
         <em>Agenzia di informazione e comunicazione<em>.
           </em></em></p>
-      <p>Seguici su X (<a href="https://x.com/@RegioneER">@RegioneER</a>), Facebook (<a href="https://www.facebook.com/RegioneEmiliaRomagna">@RegioneEmiliaRomagna</a>)</p>
-      <p class="last-item-footer">Segreteria di redazione tel. 051 5275490</p>
+      <p i18n:translate="social_links_label">
+        Seguici su X (<a href="https://x.com/@RegioneER">@RegioneER</a>), Facebook (<a href="https://www.facebook.com/RegioneEmiliaRomagna">@RegioneEmiliaRomagna</a>)</p>
+      <p class="last-item-footer"
+         i18n:translate="contact_tel_label"
+      >Segreteria di redazione tel. 051 5275490</p>
     </div>
-    <div class="manage-subscriptions">
+    <div class="manage-subscriptions"
+         i18n:domain="rer.ufficiostampa"
+    >
       <p i18n:translate="manage_subscriptions_intro">
          You are receiving this email because you are
       subscribed to

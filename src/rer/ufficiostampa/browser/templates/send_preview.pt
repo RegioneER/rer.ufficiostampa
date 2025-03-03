@@ -16,7 +16,7 @@
          "
          tal:condition="attachments"
     >
-      <h3>Allegati</h3>
+      <h3 i18n:translate="attachments_label">Allegati</h3>
       <ul>
         <li tal:repeat="item attachments">
           <a download="download"

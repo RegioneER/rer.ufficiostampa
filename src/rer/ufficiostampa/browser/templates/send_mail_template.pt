@@ -53,18 +53,24 @@
     <div id="footer">
       <div class="other-news">
         <p>
-          Tutti i comunicati sono online su
+          <span tal:omit-tag=""
+                i18n:translate="all_news_label"
+          >Tutti i comunicati sono online su</span>
           <a href="https://notizie.regione.emilia-romagna.it"
              title="Notizie Regione Emilia-Romagna"
+             i18n:attributes="title"
+             i18n:translate="all_news_link"
           >https://notizie.regione.emilia-romagna.it</a>
         </p>
-        <p>
+        <p i18n:translate="social_links_label">
           Seguici su X (<a href="https://x.com/@RegioneER">@RegioneER</a>),
           Facebook (<a href="https://www.facebook.com/RegioneEmiliaRomagna">@RegioneEmiliaRomagna</a>),
           Instagram (<a href="https://www.instagram.com/regione_emiliaromagna">@regione_emiliaromagna</a>),
           Linkedin (<a href="https://www.linkedin.com/company/regione-emilia-romagna">@regione-emilia-romagna</a>)
         </p>
-        <p class="last-item-footer">Segreteria di redazione tel.
+        <p class="last-item-footer"
+           i18n:translate="segreteria_label"
+        >Segreteria di redazione tel.
           <a href="tel:051-5275490">051 5275490</a></p>
       </div>
       <div class="manage-subscriptions">
