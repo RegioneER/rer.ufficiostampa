@@ -1,6 +1,9 @@
-# -*- coding: utf-8 -*-
+# CLASSICUI
+# DEPRECATED
+
 from datetime import datetime
 from DateTime import DateTime
+from email.message import EmailMessage
 from plone import api
 from plone import schema
 from plone.api.exc import InvalidParameterError
@@ -29,22 +32,9 @@ from zope.interface import provider
 from zope.schema.interfaces import IContextAwareDefaultFactory
 from zope.schema.interfaces import IVocabularyFactory
 
-try:
-    from ftfy import fix_text
-
-    HAS_FTYFY = True
-except ImportError:
-    HAS_FTYFY = False
-
+import json
 import logging
 import requests
-import json
-import six
-
-if six.PY2:
-    from email.message import Message as EmailMessage
-else:
-    from email.message import EmailMessage
 
 
 logger = logging.getLogger(__name__)
@@ -75,23 +65,23 @@ def default_attachments(context):
 
 class ISendForm(Interface):
     channels = schema.List(
-        title=_(u"send_channels_title", default=u"Channels"),
+        title=_("send_channels_title", default="Channels"),
         description=_(
-            u"send_channels_description",
-            default=u"Select which channels should receive this Comunicato. "
-            u"All email address subscribed to this channel will receive it. ",
+            "send_channels_description",
+            default="Select which channels should receive this Comunicato. "
+            "All email address subscribed to this channel will receive it. ",
         ),
         required=False,
         missing_value=(),
         value_type=schema.Choice(source="rer.ufficiostampa.vocabularies.channels"),
     )
     additional_addresses = schema.List(
-        title=_(u"additional_addresses_title", default=u"Additional addresses"),
+        title=_("additional_addresses_title", default="Additional addresses"),
         description=_(
-            u"additional_addresses_description",
-            default=u"Insert a list of additional addressed that will receive "
-            u"the mail. One per line. You can use this field also for testing "
-            u"without sending emails to all subscribed addresses.",
+            "additional_addresses_description",
+            default="Insert a list of additional addressed that will receive "
+            "the mail. One per line. You can use this field also for testing "
+            "without sending emails to all subscribed addresses.",
         ),
         required=False,
         missing_value=(),
@@ -99,31 +89,33 @@ class ISendForm(Interface):
         constraint=check_emails,
     )
     notes = schema.Text(
-        title=_(u"notes_title", default=u"Notes"),
+        title=_("notes_title", default="Notes"),
         description=_(
-            u"notes_description",
-            default=u"Additional notes.",
+            "notes_description",
+            default="Additional notes.",
         ),
         required=False,
     )
     attachments = schema.List(
-        title=_(u"send_attachments_title", default=u"Attachments"),
+        title=_("send_attachments_title", default="Attachments"),
         description=_(
-            u"send_attachments_description",
-            default=u"Select which attachment you want to send via email. "
-            u"You can only select first level Files and Images.",
+            "send_attachments_description",
+            default="Select which attachment you want to send via email. "
+            "You can only select first level Files and Images.",
         ),
         required=False,
         missing_value=(),
         value_type=schema.Choice(source="rer.ufficiostampa.vocabularies.attachments"),
-        defaultFactory=default_attachments,
+        # questa factory mette di default tutti gli allegati del comunicato,
+        # la richiesta è di avere il default vuoto
+        # defaultFactory=default_attachments,
     )
 
 
 class SendForm(form.Form):
     description = _(
         "send_form_help",
-        u"Send this Comunicato or Invito to a list of recipients.",
+        "Send this Comunicato or Invito to a list of recipients.",
     )
     ignoreContext = True
     fields = field.Fields(ISendForm)
@@ -135,11 +127,11 @@ class SendForm(form.Form):
         types_tool = api.portal.get_tool(name="portal_types")
         return _(
             "send_form_title",
-            u"Send ${type}",
+            "Send ${type}",
             mapping={"type": types_tool.getTypeInfo(self.context.portal_type).title},
         )
 
-    @button.buttonAndHandler(_(u"send_button", default="Send"))
+    @button.buttonAndHandler(_("send_button", default="Send"))
     def handleSave(self, action):
         data, errors = self.extractData()
         if not self.get_subscribers(data=data):
@@ -147,7 +139,7 @@ class SendForm(form.Form):
                 Invalid(
                     _(
                         "empty_subscribers",
-                        default=u"You need to provide at least one email address or channel.",  # noqa
+                        default="You need to provide at least one email address or channel.",  # noqa
                     )
                 )
             )
@@ -156,14 +148,14 @@ class SendForm(form.Form):
             return
         return self.sendMessage(data=data)
 
-    @button.buttonAndHandler(_(u"cancel_button", default="Cancel"), name="cancel")
+    @button.buttonAndHandler(_("cancel_button", default="Cancel"), name="cancel")
     def handleCancel(self, action):
         api.portal.show_message(
             message=_(
                 "cancel_action",
-                default=u"Action cancelled",
+                default="Action cancelled",
             ),
-            type=u"info",
+            type="info",
             request=self.request,
         )
         return self.request.response.redirect(self.context.absolute_url())
@@ -178,7 +170,6 @@ class SendForm(form.Form):
                 "notes": data.get("notes", ""),
                 "site_title": get_site_title(),
                 "date": DateTime(),
-                "folders": self.get_folders_attachments(),
             },
         )
 
@@ -241,14 +232,16 @@ class SendForm(form.Form):
     @property
     @memoize
     def subject(self):
-        value = u"{type}: {title}".format(
-            type=self.context.portal_type == "ComunicatoStampa"
-            and "Comunicato Regione"  # noqa
-            or "Invito Regione",  # noqa
-            title=self.context.title,
-        )
-        if six.PY2 and HAS_FTYFY:
-            return fix_text(value)
+        # value = "{type}: {title}".format(
+        #     type=self.context.portal_type == "ComunicatoStampa"
+        #     and "Comunicato Regione"  # noqa
+        #     or "Invito Regione",  # noqa
+        #     title=self.context.title,
+        # )
+        if self.context.portal_type == "InvitoStampa":
+            value = f"Invito: {self.context.title}"
+        else:
+            value = f"Comunicato: {self.context.title}"
         return value
 
     def get_subscribers(self, data):
@@ -261,13 +254,6 @@ class SendForm(form.Form):
 
         subscribers.update([x.lower() for x in data.get("additional_addresses", [])])
         return sorted(list(subscribers))
-
-    def get_folders_attachments(self):
-        if self.context.portal_type == "InvitoStampa":
-            return []
-        return self.context.listFolderContents(
-            contentFilter={"portal_type": ["Folder"]}
-        )
 
     def get_attachments(self, data):
         attachments = []
@@ -314,7 +300,7 @@ class SendForm(form.Form):
         api.portal.show_message(
             message=_(
                 "error_send_mail",
-                default=u"Error sending mail. Contact site administrator.",
+                default="Error sending mail. Contact site administrator.",
             ),
             request=self.request,
             type="error",
@@ -355,7 +341,7 @@ class SendForm(form.Form):
         api.portal.show_message(
             message=_(
                 "success_send_mail",
-                default=u"Send complete.",
+                default="Send complete.",
             ),
             request=self.request,
             type="info",
@@ -415,8 +401,7 @@ class SendForm(form.Form):
         api.portal.show_message(
             message=_(
                 "success_send_mail_async",
-                default=u"Send queued with success. "
-                u"See the status in send history.",
+                default="Send queued with success. " "See the status in send history.",
             ),
             request=self.request,
             type="info",

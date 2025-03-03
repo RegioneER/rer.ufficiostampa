@@ -1,10 +1,11 @@
 Changelog
 =========
 
-1.6.8 (unreleased)
+2.0.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Plone 6 compatibility.
+  [mamico]
 
 
 1.6.7 (2024-09-19)
@@ -24,7 +25,7 @@ Changelog
 1.6.5 (2023-01-05)
 ------------------
 
-- Add querystring modifiers for keyord indexes to prevent utf-8 errors.
+- Add querystring modifiers for keyword indexes to prevent utf-8 errors.
   [cekk]
 
 
@@ -53,7 +54,7 @@ Changelog
 1.6.1 (2022-10-27)
 ------------------
 
-- Fix README identation.
+- Fix README indentation.
   [cekk]
 
 1.6.0 (2022-10-27)
@@ -116,7 +117,7 @@ Changelog
   [cekk]
 - Refactor how to perform queries (to handle also unicode problems).
   [cekk]
-- Accessibilty fixes: modal focus trap + select keyboard events
+- Accessibility fixes: modal focus trap + select keyboard events
   [nzambello]
 
 

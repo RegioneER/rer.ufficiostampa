@@ -1,26 +1,21 @@
-# -*- coding: utf-8 -*-
 from copy import deepcopy
 from datetime import datetime
+from defusedcsv import csv
+from io import StringIO
 from plone.protect.interfaces import IDisableCSRFProtection
 from plone.restapi.batching import HypermediaBatch
 from plone.restapi.deserializer import json_body
 from plone.restapi.search.utils import unflatten_dotted_dict
 from plone.restapi.serializer.converters import json_compatible
 from plone.restapi.services import Service
-from six import StringIO
 from zExceptions import BadRequest
 from zope.component import getUtility
+from zope.index.text.parsetree import ParseError
 from zope.interface import alsoProvides
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
-from zope.index.text.parsetree import ParseError
 
-import csv
-import six
 import logging
-
-if six.PY2:
-    from ftfy import fix_text
 
 
 logger = logging.getLogger(__name__)
@@ -71,7 +66,6 @@ class DataGet(Service):
 
 class DataCSVGet(DataGet):
     def render(self):
-
         data = self.get_data()
         if isinstance(data, dict):
             if data.get("error", False):
@@ -82,7 +76,7 @@ class DataCSVGet(DataGet):
                         message="Unable export. Contact site manager.",
                     )
                 )
-        self.request.response.setHeader("Content-Type", "text/comma-separated-values")
+        self.request.response.setHeader("Content-Type", "text/csv")
         now = datetime.now()
         self.request.response.setHeader(
             "Content-Disposition",
@@ -90,14 +84,15 @@ class DataCSVGet(DataGet):
                 type=self.type, date=now.strftime("%d%m%Y-%H%M%S")
             ),
         )
-        self.request.response.write(data)
+        return data
+        # self.request.response.write(data)
 
     def get_data(self):
+        """get data for csv export"""
         tool = getUtility(self.store)
         query = self.parse_query()
         sbuf = StringIO()
         rows = []
-
         for item in tool.search(**query):
             data = {}
             for k, v in item.attrs.items():
@@ -105,13 +100,13 @@ class DataCSVGet(DataGet):
                     continue
                 if isinstance(v, list):
                     v = ", ".join(v)
-                if isinstance(v, int):
+                elif isinstance(v, int):
                     v = str(v)
-                if v:
-                    v = json_compatible(v)
-                    if six.PY2:
-                        v = fix_text(v)
-                    v = v.encode("utf-8")
+                elif isinstance(v, datetime):
+                    v = v.strftime("%Y-%m-%d %H:%M:%S")
+                # if v:
+                #     v = json_compatible(v)
+                #     v = v.encode("utf-8")
                 data[k] = v
             rows.append(data)
         writer = csv.DictWriter(sbuf, fieldnames=self.columns, delimiter=",")
@@ -162,10 +157,10 @@ class DataAdd(Service):
 
 @implementer(IPublishTraverse)
 class TraversableService(Service):
-    """ Update an entry """
+    """Update an entry"""
 
     def __init__(self, context, request):
-        super(TraversableService, self).__init__(context, request)
+        super().__init__(context, request)
         self.id = ""
         self.errors = {}
 
@@ -182,10 +177,11 @@ class TraversableService(Service):
 
 
 class DataUpdate(TraversableService):
-    """ Update an entry """
+    """Update an entry"""
 
     def reply(self):
         alsoProvides(self.request, IDisableCSRFProtection)
+
         if not self.id:
             raise BadRequest("Missing id")
 
@@ -196,7 +192,7 @@ class DataUpdate(TraversableService):
         if not res:
             return self.reply_no_content()
         if res.get("error", "") == "NotFound":
-            raise BadRequest('Unable to find item with id "{}"'.format(self.id))
+            raise BadRequest(f'Unable to find item with id "{self.id}"')
         self.request.response.setStatus(500)
         return dict(
             error=dict(
@@ -208,22 +204,20 @@ class DataUpdate(TraversableService):
 
 class DataDelete(TraversableService):
     def reply(self):
-        alsoProvides(self.request, IDisableCSRFProtection)
-        if not self.id:
+        form_data = json_body(self.request)
+        if not self.id and not form_data.get("id"):
             raise BadRequest("Missing id")
+        alsoProvides(self.request, IDisableCSRFProtection)
         tool = getUtility(self.store)
-        res = tool.delete(id=self.id)
-        if not res:
-            return self.reply_no_content()
-        if res.get("error", "") == "NotFound":
-            raise BadRequest('Unable to find item with id "{}"'.format(self.id))
-        self.request.response.setStatus(500)
-        return dict(
-            error=dict(
-                type="InternalServerError",
-                message="Unable to delete item. Contact site manager.",
-            )
-        )
+        if self.id:
+            res = tool.delete(id=self.id)
+            if res:
+                raise BadRequest(f'Unable to delete item with id "{self.id}"')
+        for id in form_data.get("id", []):
+            res = tool.delete(id=id)
+            if res:
+                raise BadRequest(f'Unable to delete item with id "{id}"')
+        return self.reply_no_content()
 
 
 class DataClear(Service):

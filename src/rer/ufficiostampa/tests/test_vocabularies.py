@@ -1,17 +1,17 @@
-# -*- coding: utf-8 -*-
 """Setup tests for this package."""
-from rer.ufficiostampa.testing import RER_UFFICIOSTAMPA_INTEGRATION_TESTING
+
+from plone import api
 from plone.api.portal import set_registry_record
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
+from rer.ufficiostampa.testing import RER_UFFICIOSTAMPA_INTEGRATION_TESTING
 from transaction import commit
 from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
-from plone import api
 
-import unittest
 import json
+import unittest
 
 
 class TestVocabularies(unittest.TestCase):

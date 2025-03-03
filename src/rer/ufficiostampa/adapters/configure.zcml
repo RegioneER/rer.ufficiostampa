@@ -1,0 +1,17 @@
+
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    i18n_domain="plone.restapi"
+    >
+
+  <adapter
+      factory=".types.ACuraDiJsonSchemaProvider"
+      name="a_cura_di"
+      />
+  <adapter
+      factory=".types.ArgomentiJsonSchemaProvider"
+      name="tassonomia_argomenti"
+      />
+
+</configure>
