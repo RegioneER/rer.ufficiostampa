@@ -4,7 +4,7 @@ Changelog
 2.0.0 (unreleased)
 =======
 
-- Plone 6
+- Plone 6 compatibility.
   [mamico]
 
 
