@@ -235,3 +235,13 @@ def get_attachments(data, as_link=False, max_attachment_size=MAX_ATTACHMENT_SIZE
                 }
             )
     return attachments
+
+
+def get_attachments_external(data):
+    return [
+        (
+            x["filename"],
+            (x["filename"], x["data"], x["content_type"]),
+        )
+        for x in get_attachments(data)
+    ]

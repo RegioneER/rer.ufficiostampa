@@ -4,7 +4,8 @@ Changelog
 2.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Re-enable async send.
+  [cekk]
 
 
 2.0.0 (2025-03-03)
