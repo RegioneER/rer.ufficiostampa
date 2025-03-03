@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0.0 (unreleased)
+2.0.0 (2025-03-03)
 ------------------
 
 - Plone 6 compatibility. For Plone <= 5.2 use 1.x releases.
