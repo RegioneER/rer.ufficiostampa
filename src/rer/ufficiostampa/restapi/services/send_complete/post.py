@@ -18,6 +18,7 @@ class SendCompletePost(Service):
 
         send_uid = data.get("send_uid", None)
         error = data.get("error", False)
+        error_message = data.get("error_message", None)
 
         if not send_uid:
             self.request.response.setStatus(400)
@@ -35,6 +36,7 @@ class SendCompletePost(Service):
                 data={
                     "completed_date": datetime.now(),
                     "status": error and "error" or "success",
+                    "status_message": error_message,
                 },
             )
         except Exception as e:

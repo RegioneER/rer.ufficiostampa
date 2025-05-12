@@ -167,6 +167,7 @@ class SendHistoryStore(BaseStore):
         "recipients",
         "channels",
         "status",
+        "status_message",
         "completed_date",
         "url",
     ]

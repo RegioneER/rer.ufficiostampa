@@ -4,7 +4,8 @@ Changelog
 2.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add error_message field in history data.
+  [cekk]
 
 
 2.0.1 (2025-03-03)
