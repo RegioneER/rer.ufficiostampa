@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0.2 (unreleased)
+2.0.2 (2025-05-12)
 ------------------
 
 - Add error_message field in history data.
