@@ -15,7 +15,6 @@ import unittest
 
 
 class TestSubscriptionsDelete(unittest.TestCase):
-
     layer = RER_UFFICIOSTAMPA_API_FUNCTIONAL_TESTING
 
     def setUp(self):
@@ -88,7 +87,6 @@ class TestSubscriptionsDelete(unittest.TestCase):
         api_session.close()
 
     def test_bad_request_if_pass_wrong_id(self):
-
         res = self.api_session.delete(f"{self.url}/foo", json={})
         self.assertEqual(res.status_code, 400)
         self.assertEqual(res.json()["message"], "Id should be a number.")

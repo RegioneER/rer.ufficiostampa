@@ -9,7 +9,6 @@ import unittest
 
 
 class TestTool(unittest.TestCase):
-
     layer = RER_UFFICIOSTAMPA_FUNCTIONAL_TESTING
 
     def setUp(self):

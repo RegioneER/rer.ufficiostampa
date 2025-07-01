@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
-from zope.interface import implementer
-from zope.schema.interfaces import IVocabularyFactory
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
+from Acquisition import aq_base
 from plone import api
 from plone.api.exc import InvalidParameterError
-from plone.app.vocabularies.terms import safe_simplevocabulary_from_values
 from plone.app.vocabularies.catalog import KeywordsVocabulary
-from Acquisition import aq_base
+from plone.app.vocabularies.terms import safe_simplevocabulary_from_values
+from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
+from zope.interface import implementer
+from zope.schema.interfaces import IVocabularyFactory
+from zope.schema.vocabulary import SimpleTerm
+from zope.schema.vocabulary import SimpleVocabulary
 
 import json
 

@@ -24,7 +24,6 @@ class BaseStore:
 
     @property
     def soup(self):
-
         return get_soup(self.soup_name, api.portal.get())
 
     def add(self, data):

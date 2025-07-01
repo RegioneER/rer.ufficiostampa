@@ -1,9 +1,8 @@
-from Products.Five import BrowserView
 from plone import api
+from Products.Five import BrowserView
 
 
 class View(BrowserView):
-
     def __call__(self):
         portal_type = self.context.portal_type
         if portal_type not in ["ComunicatoStampa", "InvitoStampa"]:

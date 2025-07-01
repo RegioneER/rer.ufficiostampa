@@ -10,7 +10,6 @@ from zExceptions import BadRequest
 
 
 class SubscriptionsGet(DataGet):
-
     store = ISubscriptionsStore
 
     def reply(self):

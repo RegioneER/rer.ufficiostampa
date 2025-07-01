@@ -57,7 +57,7 @@
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
   <!-- end send preview -->
-  
+
   <browser:page
       name="send_mail_template"
       for="rer.ufficiostampa.interfaces.IComunicatoStampa"

@@ -18,7 +18,6 @@ import unittest
 
 
 class TestSubscriptionsGet(unittest.TestCase):
-
     layer = RER_UFFICIOSTAMPA_API_FUNCTIONAL_TESTING
 
     def setUp(self):

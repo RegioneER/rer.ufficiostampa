@@ -1,12 +1,12 @@
 # from plone.app.contenttypes.behaviors.richtext import IRichText
 # from plone.app.dexterity.textindexer import searchable
+from plone import api
 from plone.autoform import directives as form
 from plone.supermodel import model
 from rer.ufficiostampa import _
 from zope import schema
-from plone import api
-from zope.interface import Invalid
 from zope.interface import Interface
+from zope.interface import Invalid
 
 
 def check_emails(value):

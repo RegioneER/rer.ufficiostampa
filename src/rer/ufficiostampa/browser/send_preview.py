@@ -2,7 +2,6 @@ from datetime import datetime
 from plone import api
 from plone.api.exc import InvalidParameterError
 from Products.Five import BrowserView
-from rer.ufficiostampa import _
 from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
 from rer.ufficiostampa.utils import get_attachments
 from rer.ufficiostampa.utils import get_folder_attachments
@@ -19,7 +18,6 @@ class IView(Interface):
 
 @implementer(IView)
 class View(BrowserView):
-
     def get_html(self):
         notes = self.request.form.get("notes")
         return prepare_email_message(
@@ -47,7 +45,6 @@ class View(BrowserView):
 
 @implementer(IPublishTraverse)
 class Download(BrowserView):
-
     def publishTraverse(self, request, id):
         return self
 
