@@ -245,3 +245,20 @@ def get_attachments_external(data):
         )
         for x in get_attachments(data)
     ]
+
+
+def get_folder_attachments(context):
+    """ """
+    attachments = []
+    for child in context.listFolderContents(
+        contentFilter={"portal_type": ["CartellaStampa"]}
+    ):
+        if len(child.keys()) > 0:
+            attachments.append(
+                {
+                    "url": child.absolute_url(),
+                    "title": child.Title(),
+                    "description": child.Description(),
+                }
+            )
+    return attachments

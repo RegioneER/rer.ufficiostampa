@@ -18,6 +18,11 @@
       />
   <subscriber
       for="rer.ufficiostampa.interfaces.IComunicatoStampa
+           zope.lifecycleevent.interfaces.IObjectAddedEvent"
+      handler=".comunicato.createCartellaStampa"
+      />
+  <subscriber
+      for="rer.ufficiostampa.interfaces.IComunicatoStampa
            zope.lifecycleevent.interfaces.IObjectModifiedEvent"
       handler=".comunicato.fixText"
       />

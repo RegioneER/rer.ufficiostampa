@@ -44,6 +44,13 @@
       <role name="Contributor" />
       <role name="Editor" />
     </permission>
+    <permission acquire="True" name="rer.ufficiostampa: Add Cartella Stampa">
+      <role name="Manager" />
+      <role name="Site Administrator" />
+      <role name="Owner" />
+      <role name="Contributor" />
+      <role name="Editor" />
+    </permission>
     <permission acquire="True"
                 name="rer.ufficiostampa: Send"
     >

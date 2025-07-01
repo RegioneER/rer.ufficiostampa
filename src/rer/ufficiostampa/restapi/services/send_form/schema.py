@@ -5,7 +5,7 @@ from plone.restapi.types.utils import get_fieldsets
 from plone.restapi.types.utils import get_jsonschema_properties
 from plone.restapi.types.utils import iter_fields
 from rer.ufficiostampa import _
-from rer.ufficiostampa.browser.send import ISendForm
+from rer.ufficiostampa.interfaces import ISendForm
 
 
 class SendComunicatoSchema(Service):

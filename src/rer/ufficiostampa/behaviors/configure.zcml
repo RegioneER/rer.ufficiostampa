@@ -11,11 +11,19 @@
       />
 
   <plone:behavior
-      name="rer.ufficiostampa.basic"
+      name="rer.ufficiostampa.basic-comunicato"
       title="Basic metadata for Comunicati"
       description="Adds title and description fields."
-      factory=".metadata.BasicComunicati"
-      provides=".metadata.IBasicComunicati"
+      factory=".metadata.BasicComunicato"
+      provides=".metadata.IBasicComunicato"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      />
+  <plone:behavior
+      name="rer.ufficiostampa.basic-invito"
+      title="Basic metadata for Inviti"
+      description="Adds title and description fields."
+      factory=".metadata.BasicInvito"
+      provides=".metadata.IBasicInvito"
       for="plone.dexterity.interfaces.IDexterityContent"
       />
 

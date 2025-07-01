@@ -1,9 +1,11 @@
-from DateTime import DateTime
+from datetime import datetime
 from plone import api
 from plone.api.exc import InvalidParameterError
 from Products.Five import BrowserView
+from rer.ufficiostampa import _
 from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
 from rer.ufficiostampa.utils import get_attachments
+from rer.ufficiostampa.utils import get_folder_attachments
 from rer.ufficiostampa.utils import get_site_title
 from rer.ufficiostampa.utils import prepare_email_message
 from zope.interface import implementer
@@ -26,8 +28,8 @@ class View(BrowserView):
             parameters={
                 "notes": notes,
                 "site_title": get_site_title(),
-                "date": DateTime(),
-                "links": get_attachments(data=self.request.form, as_link=True),
+                "date": datetime.now(),
+                "folders": get_folder_attachments(context=self.context),
             },
         )
 

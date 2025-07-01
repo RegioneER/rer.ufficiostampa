@@ -15,6 +15,7 @@ from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
 # from rer.ufficiostampa.utils import decode_token
 from rer.ufficiostampa.utils import get_attachments
 from rer.ufficiostampa.utils import get_attachments_external
+from rer.ufficiostampa.utils import get_folder_attachments
 from rer.ufficiostampa.utils import get_site_title
 from rer.ufficiostampa.utils import mail_from
 from rer.ufficiostampa.utils import prepare_email_message
@@ -34,7 +35,7 @@ logger = logging.getLogger(__name__)
 
 class SendComunicato(Service):
     def reply(self):
-        # TODO: use rer.ufficiostampa.browser.send.ISendForm
+        # TODO: use rer.ufficiostampa.interfaces import ISendForm
         alsoProvides(self.request, IDisableCSRFProtection)
         data = json_body(self.request)
         rcpts = self.get_subscribers(data=data)
@@ -83,13 +84,13 @@ class SendComunicato(Service):
                 "notes": data.get("notes", ""),
                 "site_title": get_site_title(),
                 "date": datetime.now(),
-                "links": self.get_links_attachments(data),
+                "folders": get_folder_attachments(context=self.context),
             },
         )
         if external_sender_url:
             return self.send_external(data=data, body=body)
-        else:
-            return self.send_internal(data=data, body=body)
+
+        return self.send_internal(data=data, body=body)
 
     # TODO: move to utility ?
     def send_internal(self, data, body):

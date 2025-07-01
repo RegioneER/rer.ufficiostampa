@@ -31,19 +31,22 @@
   <property name="add_permission">rer.ufficiostampa.AddInvitoStampa</property>
   <property name="klass">rer.ufficiostampa.content.InvitoStampa</property>
   <property name="behaviors">
-    <element value="rer.ufficiostampa.basic" />
+    <element value="rer.ufficiostampa.basic-invito" />
     <element value="plone.categorization" />
     <element value="plone.publication" />
     <element value="plone.ownership" />
     <element value="plone.namefromtitle" />
     <element value="plone.allowdiscussion" />
     <element value="plone.excludefromnavigation" />
-    <element value="plone.shortname" />
     <element value="plone.richtext" />
+    <element value="rer.ufficiostampa.legislature" />
+    <element value="plone.leadimage" />
+    <element value="plone.shortname" />
     <element value="plone.versioning" />
     <element value="plone.locking" />
-    <element value="rer.solrpush.behaviors.solr_fields.ISolrFields" />
     <element value="plone.textindexer" />
+    <element value="volto.preview_image" />
+    <element value="kitconcept.seo" />
   </property>
   <property name="schema">rer.ufficiostampa.interfaces.IInvitoStampa</property>
   <property name="model_source" />

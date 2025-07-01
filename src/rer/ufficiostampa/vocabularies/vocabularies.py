@@ -1,20 +1,21 @@
-from plone import api
-from plone.api.exc import InvalidParameterError
-from plone.app.vocabularies.catalog import KeywordsVocabulary
-from plone.app.vocabularies.terms import safe_simplevocabulary_from_values
-from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
+# -*- coding: utf-8 -*-
 from zope.interface import implementer
 from zope.schema.interfaces import IVocabularyFactory
-from zope.schema.vocabulary import SimpleTerm
-from zope.schema.vocabulary import SimpleVocabulary
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
+from plone import api
+from plone.api.exc import InvalidParameterError
+from plone.app.vocabularies.terms import safe_simplevocabulary_from_values
+from plone.app.vocabularies.catalog import KeywordsVocabulary
+from Acquisition import aq_base
 
 import json
 
 
 @implementer(IVocabularyFactory)
-class ArgumentsVocabularyFactory:
+class ArgumentsVocabularyFactory(object):
     def __call__(self, context):
-        stored = getattr(context.aq_base, "legislature", "")
+        stored = getattr(aq_base(context), "legislature", "")
         arguments = []
         try:
             legislatures = json.loads(
@@ -43,7 +44,7 @@ class ArgumentsVocabularyFactory:
 
 
 @implementer(IVocabularyFactory)
-class ChannelsVocabularyFactory:
+class ChannelsVocabularyFactory(object):
     def __call__(self, context):
         try:
             subscription_channels = api.portal.get_registry_record(
@@ -56,25 +57,24 @@ class ChannelsVocabularyFactory:
 
 
 @implementer(IVocabularyFactory)
-class AttachmentsVocabularyFactory:
+class AttachmentsVocabularyFactory(object):
     def __call__(self, context):
         terms = []
-        for brain in api.portal.get_tool("portal_catalog")(
-            portal_type=["File", "Image", "Link"],
-            path={"query": "/".join(context.getPhysicalPath())},
+        for child in context.listFolderContents(
+            contentFilter={"portal_type": ["File", "Image"]}
         ):
             terms.append(
                 SimpleTerm(
-                    value=brain.UID,
-                    token=brain.UID,
-                    title=brain.Title,
+                    value=child.UID(),
+                    token=child.UID(),
+                    title=child.Title(),
                 )
             )
         return SimpleVocabulary(terms)
 
 
 @implementer(IVocabularyFactory)
-class LegislaturesVocabularyFactory:
+class LegislaturesVocabularyFactory(object):
     def __call__(self, context):
         """
         return a list of legislature names.

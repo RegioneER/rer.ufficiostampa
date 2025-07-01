@@ -29,6 +29,16 @@ def createComunicato(item, event):
     setattr(item, "legislature", getattr(item, "legislature", ""))
 
 
+def createCartellaStampa(item, event):
+    if item.portal_type == "ComunicatoStampa":
+        api.content.create(
+            container=item,
+            type="CartellaStampa",
+            title="Cartella Stampa",
+            id="cartella-stampa",
+        )
+
+
 def fixText(item, event):
     transform_tool = api.portal.get_tool(name="portal_transforms")
     item.title = transform_tool.convert(
