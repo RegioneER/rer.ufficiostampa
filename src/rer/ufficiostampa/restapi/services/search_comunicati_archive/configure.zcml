@@ -1,0 +1,20 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    >
+
+  <plone:service
+      method="GET"
+      factory=".get.SearchComunicatiArchiveGet"
+      for="zope.interface.Interface"
+      permission="zope2.View"
+      name="@search-comunicati-archive"
+      />
+  <plone:service
+      method="GET"
+      factory=".get.DettaglioComunicatoArchiveGet"
+      for="zope.interface.Interface"
+      permission="zope2.View"
+      name="@dettaglio-comunicato-archive"
+      />
+</configure>

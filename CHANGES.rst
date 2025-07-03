@@ -4,7 +4,10 @@ Changelog
 2.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Revert to RER functionalities.
+  [cekk]
+- Add restapi endpoints to search old comunicati.
+  [cekk]
 
 
 2.0.2 (2025-05-12)
