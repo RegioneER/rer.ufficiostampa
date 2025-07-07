@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
+from plone import api
 from plone.restapi.batching import HypermediaBatch
-from plone.restapi.services import Service
 from plone.restapi.search.utils import unflatten_dotted_dict
 from plone.restapi.serializer.converters import json_compatible
+from plone.restapi.services import Service
 from rer.ufficiostampa.restapi.services.search_comunicati_archive.search_handler import (
-    RicercaComunicatiAdvanced,
     DettaglioComunicato,
 )
-from plone import api
+from rer.ufficiostampa.restapi.services.search_comunicati_archive.search_handler import (
+    RicercaComunicatiAdvanced,
+)
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
 
@@ -51,9 +53,9 @@ class SearchComunicatiArchiveGet(Service):
         results["items"] = []
         for brain in batch:
             data = {k: json_compatible(v) for (k, v) in brain.items()}
-            data["@id"] = (
-                f"{portal_url}/@dettaglio-comunicato-archive/{brain.get('codice', '')}"
-            )
+            data[
+                "@id"
+            ] = f"{portal_url}/@dettaglio-comunicato-archive/{brain.get('codice', '')}"
 
             results["items"].append(data)
 
@@ -90,7 +92,6 @@ class DettaglioComunicatoArchiveGet(Service):
         return self
 
     def reply(self):
-
         codice = self.params and self.params[0] or None
         if not codice:
             self.request.response.setStatus(404)

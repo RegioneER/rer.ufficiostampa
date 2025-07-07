@@ -60,5 +60,10 @@
       <role name="Contributor" />
       <role name="Editor" />
     </permission>
+
+    <!-- this is needed to access elevate settings controlpanel -->
+    <permission name="Plone Site Setup: Overview" acquire="True">
+      <role name="Gestore Comunicati" />
+    </permission>
   </permissions>
 </rolemap>

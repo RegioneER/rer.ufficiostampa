@@ -40,21 +40,7 @@ class SubscriptionsCSVGet(DataCSVGet):
     store = ISubscriptionsStore
     columns = COLUMNS
 
-    # def __init__(self, context, request):
-    #     super().__init__(context, request)
-    #     self.id = ""
-    #     self.errors = {}
 
-    # def publishTraverse(self, request, name):
-    #     # Consume any path segments after /@addons as parameters
-    #     try:
-    #         self.id = int(id)
-    #     except ValueError:
-    #         raise BadRequest("Id should be a number.")
-    #     return self
-
-
-# XXX: cambiata la gestione degli errori, da rivedere l'implementazione Rect su Plone Classic UI
 class SubscriptionsCSVPost(Service):
     def reply(self):
         alsoProvides(self.request, IDisableCSRFProtection)
@@ -83,7 +69,6 @@ class SubscriptionsCSVPost(Service):
             )
 
         # TODO: manage has_header
-
         # clone generator for validation checks and processing
         rows = [row for row in csv_data["csv"]]
 
@@ -130,19 +115,9 @@ class SubscriptionsCSVPost(Service):
                 res["errored"].append(msg)
 
             request_channels = {
-                r.strip() for r in (row.get("channels") or "").split(",")
+                r.strip() for r in (row.get("channels") or "").split(",") if r.strip()
             }
             if not request_channels:
-                msg = translate(
-                    _(
-                        "missing_channels",
-                        default="[${row}] - row with missing channels",
-                        mapping={"row": i},
-                    ),
-                    context=self.request,
-                )
-                logger.warning(f"[ERROR] - {msg}")
-                res["errored"].append(msg)
                 continue
 
             channels_invalid = request_channels.difference(subscription_channels)

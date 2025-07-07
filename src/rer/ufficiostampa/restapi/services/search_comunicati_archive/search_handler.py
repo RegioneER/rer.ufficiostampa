@@ -1,13 +1,13 @@
 from datetime import datetime
-import zoneinfo
+from plone.app.event.base import default_timezone
 from urllib.parse import urlencode
 from zExceptions import BadRequest
-import lxml.etree
-import requests
 
-import os
 import logging
-from plone.app.event.base import default_timezone
+import lxml.etree
+import os
+import requests
+import zoneinfo
 
 
 logger = logging.getLogger(__name__)
@@ -72,8 +72,11 @@ class Service(object):
 
     def read_url(self, url):
         try:
+            headers = {
+                "User-Agent": "Plone RER",
+            }
             # text
-            return requests.get(url, timeout=self.timeout).content
+            return requests.get(url, timeout=self.timeout, headers=headers).content
         except Exception:
             logger.exception("Error reading %s (timeout=%s)", url, self.timeout)
             return ""

@@ -1,4 +1,5 @@
 from datetime import datetime
+from functools import partial
 from plone import api
 from repoze.catalog.query import And
 from repoze.catalog.query import Any
@@ -14,6 +15,7 @@ from zope.i18n import translate
 from zope.interface import implementer
 
 import logging
+import re
 
 
 logger = logging.getLogger(__name__)
@@ -40,9 +42,18 @@ class BaseStore:
         return len([x for x in self.soup.data.values()])
 
     def search(self, query=None, sort_index="date", reverse=True):
+        """
+        we do manual filter for searchable text because had some indexing problems
+        when importing data.
+        """
+        text = ""
+        if query and "text" in query:
+            text = query.pop("text")
+
+        res = []
         parsed_query = self.parse_query_params(query=query)
         if parsed_query:
-            return [
+            res = [
                 x
                 for x in self.soup.query(
                     queryobject=parsed_query,
@@ -50,19 +61,35 @@ class BaseStore:
                     reverse=reverse,
                 )
             ]
-        # return all data
-        records = self.soup.data.values()
-        if sort_index == "date":
-            return sorted(
-                records,
-                key=lambda k: k.attrs[sort_index] or None,
-                reverse=reverse,
-            )
-        return sorted(
-            records,
-            key=lambda k: k.attrs.get(sort_index, "") or "",
-            reverse=reverse,
-        )
+        else:
+            # return all data
+            records = self.soup.data.values()
+            if sort_index == "date":
+                res = sorted(
+                    records,
+                    key=lambda k: k.attrs[sort_index] or None,
+                    reverse=reverse,
+                )
+            else:
+                res = sorted(
+                    records,
+                    key=lambda k: k.attrs.get(sort_index, "") or "",
+                    reverse=reverse,
+                )
+        if not text:
+            return res
+
+        filter_text = partial(self.filter_by_text, text=text)
+
+        return list(filter(filter_text, res))
+
+    def filter_by_text(self, record, text):
+        for attr in ["name", "surname", "email"]:
+            words = re.split(r"[^a-zA-Z0-9]+", record.attrs.get(attr, ""))
+            match = any(w.startswith(text) for w in words)
+            if match:
+                return True
+        return False
 
     def parse_query_params(self, query):
         if not query:
