@@ -33,14 +33,14 @@ class SearchComunicatiArchiveGet(Service):
 
     def reply(self):
         query = self.fix_form()
-        if query:
+        if not query or query.keys() == ["b_size", "b_start"]:
+            comunicati = []
+        else:
             comunicati = (
                 RicercaComunicatiAdvanced(empty_if_errors=True, **query)
                 .as_list()
                 .get("results", [])
             )
-        else:
-            comunicati = []
         batch = HypermediaBatch(self.request, comunicati)
         portal_url = api.portal.get().absolute_url()
         results = {}
@@ -53,9 +53,9 @@ class SearchComunicatiArchiveGet(Service):
         results["items"] = []
         for brain in batch:
             data = {k: json_compatible(v) for (k, v) in brain.items()}
-            data[
-                "@id"
-            ] = f"{portal_url}/@dettaglio-comunicato-archive/{brain.get('codice', '')}"
+            data["@id"] = (
+                f"{portal_url}/@dettaglio-comunicato-archive/{brain.get('codice', '')}"
+            )
 
             results["items"].append(data)
 
@@ -64,7 +64,8 @@ class SearchComunicatiArchiveGet(Service):
     def fix_form(self):
         form = self.request.form.copy()
         form = unflatten_dotted_dict(form)
-        if form.keys() == ["b_size"] or form.keys() == ["b_size", "b_start"]:
+        keys = list(form.keys())
+        if keys == ["b_size"] or keys == ["b_size", "b_start"]:
             # non vogliamo tornare tutti i risultati
             return {}
         query = {
