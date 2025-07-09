@@ -33,14 +33,6 @@ class IComunicatoStampa(model.Schema):
     )
     comunicato_number = schema.TextLine(title="", description="", required=False)
 
-    tipologia_news = schema.TextLine(
-        title=_("label_tipologia_news", default="Tipologia News"),
-        description="",
-        required=True,
-        default="Comunicato Stampa",
-        readonly=True,
-    )
-    form.mode(tipologia_news="hidden")
     form.omitted("message_sent")
     form.omitted("comunicato_number")
 

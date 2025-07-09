@@ -40,12 +40,10 @@
     <element value="plone.excludefromnavigation" />
     <element value="plone.richtext" />
     <element value="rer.ufficiostampa.legislature" />
-    <element value="plone.leadimage" />
     <element value="plone.shortname" />
     <element value="plone.versioning" />
     <element value="plone.locking" />
     <element value="plone.textindexer" />
-    <element value="volto.preview_image" />
     <element value="kitconcept.seo" />
   </property>
   <property name="schema">rer.ufficiostampa.interfaces.IInvitoStampa</property>

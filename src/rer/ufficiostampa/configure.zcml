@@ -55,7 +55,7 @@
       />
 
   <!-- query index modifiers -->
-  <utility
+  <!-- <utility
       factory=".query_index_modifiers.Arguments"
       provides="plone.app.querystring.interfaces.IParsedQueryIndexModifier"
       name="arguments"
@@ -64,6 +64,6 @@
       factory=".query_index_modifiers.Legislature"
       provides="plone.app.querystring.interfaces.IParsedQueryIndexModifier"
       name="legislature"
-      />
+      /> -->
 
 </configure>

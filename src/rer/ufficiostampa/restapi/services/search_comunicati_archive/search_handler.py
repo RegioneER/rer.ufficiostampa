@@ -203,6 +203,7 @@ class DettaglioComunicato(XmlService):
             "area": root.find("Area").text,
             "data_e_ora": to_datetime(root.find("DataEOra").text),
             "permalink": permalink and permalink.text or "",
+            "title": root.find("Titolo").text,
             "titolo": root.find("Titolo").text,
             "oggetto": root.find("Oggetto").text,
             "sommario": root.find("Sommario").text,

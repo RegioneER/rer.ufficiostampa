@@ -1,11 +1,11 @@
 from plone import api
 from plone.api.exc import InvalidParameterError
-from plone.app.dexterity import _
 from plone.app.z3cform.widget import AjaxSelectFieldWidget
 from plone.autoform import directives
 from plone.autoform import directives as form
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.supermodel import model
+from rer.ufficiostampa import _
 from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
 from zope import schema
 from zope.interface import provider

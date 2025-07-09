@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-07-17 10:49+0000\n"
+"POT-Creation-Date: 2025-07-07 15:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,18 +25,10 @@ msgstr ""
 msgid "${name} (${email}) x <ul> <li> <span>x</span> </li> </ul> <p>x</p>"
 msgstr ""
 
-#: ../browser/templates/send_mail_template.pt:90
-msgid "051 5275490"
-msgstr ""
-
 msgid "Actions"
 msgstr ""
 
 msgid "Add Subscriber"
-msgstr ""
-
-#: ../browser/templates/send_mail_template.pt:44
-msgid "All'attenzione dei Capi redattori"
 msgstr ""
 
 msgid "Are you sure you want to delete all history?"
@@ -54,22 +46,34 @@ msgstr ""
 msgid "CSV file should have following columns: name, surname, email, phone, channels, newspaper, date."
 msgstr ""
 
-#: ../browser/controlpanel.py:55
+#: ../browser/controlpanel.py:61
 msgid "Cancel"
 msgstr ""
 
-#: ../browser/controlpanel.py:59
+#: ../browser/controlpanel.py:65
 msgid "Changes canceled."
-msgstr ""
-
-#: ../profiles/default/actions.xml
-msgid "Channels management"
 msgstr ""
 
 msgid "Clean all data before import"
 msgstr ""
 
 msgid "Completed Date"
+msgstr ""
+
+#: ../profiles/default/actions.xml
+msgid "Comunicati Stampa: Invio"
+msgstr ""
+
+#: ../profiles/default/actions.xml
+msgid "Comunicati stampa: gestione canali"
+msgstr ""
+
+#: ../profiles/default/actions.xml
+msgid "Comunicati stampa: impostazioni"
+msgstr ""
+
+#: ../profiles/default/actions.xml
+msgid "Comunicati stampa: storico invii"
 msgstr ""
 
 #: ../profiles/default/controlpanel.xml
@@ -94,6 +98,10 @@ msgstr ""
 msgid "Edit Subscriber"
 msgstr ""
 
+#: ../restapi/services/send_form/post.py:121
+msgid "Errore non previsto durante l'invio del comunicato"
+msgstr ""
+
 msgid "Errored rows"
 msgstr ""
 
@@ -109,15 +117,6 @@ msgstr ""
 msgid "First row should be filled with column names. Actual values should start from the second one."
 msgstr ""
 
-#: ../browser/templates/cancel_subscriptions_mail_template.pt:14
-#: ../browser/templates/send_mail_template.pt:27
-msgid "Giunta Regionale - Agenzia di informazione e comunicazione"
-msgstr ""
-
-#: ../profiles/default/actions.xml
-msgid "History management"
-msgstr ""
-
 msgid "Import from CSV"
 msgstr ""
 
@@ -128,8 +127,8 @@ msgstr ""
 msgid "Installs the rer.ufficiostampa add-on."
 msgstr ""
 
-#: ../browser/templates/send_mail_template.pt:30
-msgid "N. ${comunicato_number}"
+#: ../utils.py:213
+msgid "Invalid attachment type"
 msgstr ""
 
 msgid "Name"
@@ -139,10 +138,6 @@ msgid "No send history found"
 msgstr ""
 
 msgid "No subscribers found"
-msgstr ""
-
-#: ../browser/templates/send_mail_template.pt:76
-msgid "Notizie Regione Emilia-Romagna"
 msgstr ""
 
 msgid "Number"
@@ -162,11 +157,6 @@ msgstr ""
 msgid "Recipients"
 msgstr ""
 
-#: ../browser/templates/cancel_subscriptions_mail_template.pt:10
-#: ../browser/templates/send_mail_template.pt:22
-msgid "Regione Emilia-Romagna"
-msgstr ""
-
 msgid "Remove file"
 msgstr ""
 
@@ -176,27 +166,11 @@ msgstr ""
 msgid "Row"
 msgstr ""
 
-#: ../browser/controlpanel.py:51
+#: ../browser/controlpanel.py:57
 msgid "Save"
 msgstr ""
 
 msgid "Search..."
-msgstr ""
-
-#: ../browser/templates/cancel_subscriptions_mail_template.pt:42
-msgid "Segreteria di redazione tel. 051 5275490"
-msgstr ""
-
-#: ../browser/templates/send_mail_template.pt:90
-msgid "Segreteria di redazione tel. <a href=\"tel:051-5275490\">x</a>"
-msgstr ""
-
-#: ../browser/templates/cancel_subscriptions_mail_template.pt:41
-msgid "Seguici su Twitter (<a href=\"https://twitter.com/@RegioneER\">@RegioneER</a>), Facebook (<a href=\"https://www.facebook.com/RegioneEmiliaRomagna\">@RegioneEmiliaRomagna</a>)"
-msgstr ""
-
-#: ../browser/templates/send_mail_template.pt:81
-msgid "Seguici su Twitter (<a href=\"https://twitter.com/@RegioneER\">@RegioneER</a>), Facebook (<a href=\"https://www.facebook.com/RegioneEmiliaRomagna\">@RegioneEmiliaRomagna</a>), Instagram (<a href=\"https://www.instagram.com/regione_emiliaromagna\">@regione_emiliaromagna</a>), Linkedin (<a href=\"https://www.linkedin.com/company/regione-emilia-romagna\">@regione-emilia-romagna</a>)"
 msgstr ""
 
 msgid "Select a channel"
@@ -206,6 +180,10 @@ msgid "Select a type"
 msgstr ""
 
 msgid "Select at least one channel"
+msgstr ""
+
+#: ../restapi/services/send_form/schema.py:12
+msgid "Send Comunicato Schema"
 msgstr ""
 
 msgid "Settings"
@@ -227,18 +205,23 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
-#: ../browser/templates/cancel_subscriptions_mail_template.pt:35
-msgid "Tutte le notizie su <a href=\"https://www.regione.emilia-romagna.it\" title=\"x\">www.regione.emilia-romagna.it</a>, i comunicati nella sezione <em>Agenzia di informazione e comunicazione</em>."
-msgstr ""
-
-#: ../browser/templates/send_mail_template.pt:76
-msgid "Tutti i comunicati sono online su <a href=\"https://notizie.regione.emilia-romagna.it\" title=\"x\">https://notizie.regione.emilia-romagna.it</a>"
-msgstr ""
-
 msgid "Type"
 msgstr ""
 
-#: ../browser/controlpanel.py:20
+#: ../browser/controlpanel.py:113
+msgid "Ufficio Stampa - Geestione degli iscritti"
+msgstr ""
+
+#: ../profiles/default/controlpanel.xml
+msgid "Ufficio Stampa - Gestione Canali"
+msgstr ""
+
+#: ../browser/controlpanel.py:127
+#: ../profiles/default/controlpanel.xml
+msgid "Ufficio Stampa - Storico Invio Comunicati"
+msgstr ""
+
+#: ../browser/controlpanel.py:26
 msgid "Ufficio Stampa settings"
 msgstr ""
 
@@ -246,87 +229,33 @@ msgstr ""
 msgid "Uninstalls the rer.ufficiostampa add-on."
 msgstr ""
 
-#: ../browser/configure.zcml:42
-msgid "View Comunicato"
-msgstr ""
-
-#: ../browser/configure.zcml:52
-msgid "View Invito"
-msgstr ""
-
-#: ../browser/configure.zcml:154
-msgid "Vista Comunicati Stampa"
-msgstr ""
-
 #. Default: "Insert a list of additional addressed that will receive the mail. One per line. You can use this field also for testing without sending emails to all subscribed addresses."
-#: ../browser/send.py:87
+#: ../interfaces/content.py:65
 msgid "additional_addresses_description"
 msgstr ""
 
 #. Default: "Additional addresses"
-#: ../browser/send.py:86
+#: ../interfaces/content.py:64
 msgid "additional_addresses_title"
 msgstr ""
 
 #. Default: "E-mail address already registered."
-#: ../subscriptions/store.py:156
+#: ../subscriptions/store.py:175
 msgid "address_already_registered"
 msgstr ""
 
 #. Default: "Select one or more values."
-#: ../interfaces/content.py:14
+#: ../behaviors/legislature.py:41
 msgid "arguments_help"
 msgstr ""
 
 #. Default: "Arguments"
-#: ../interfaces/content.py:13
+#: ../behaviors/legislature.py:40
 #: ../profiles/default/registry.xml
 msgid "arguments_label"
 msgstr ""
 
-#. Default: "Action cancelled"
-#: ../browser/cancel_subscriptions.py:299
-#: ../browser/send.py:159
-msgid "cancel_action"
-msgstr ""
-
-#. Default: "Cancel"
-#: ../browser/cancel_subscriptions.py:296
-#: ../browser/send.py:156
-msgid "cancel_button"
-msgstr ""
-
-#. Default: "Manage channels subscriptions cancel for ${site}"
-#: ../browser/cancel_subscriptions.py:205
-msgid "cancel_subscription_subject_label"
-msgstr ""
-
-#. Default: "If you want to cancel your subscriptions, please insert your email address. You will receive an email with the link. That link will expire in 24 hours."
-#: ../browser/cancel_subscriptions.py:97
-msgid "cancel_subscriptions_request_help"
-msgstr ""
-
-#. Default: "Delete me"
-#: ../browser/cancel_subscriptions.py:96
-msgid "cancel_subscriptions_request_title"
-msgstr ""
-
-#. Default: "You will receive an email with a link to manage your cancellation."
-#: ../browser/cancel_subscriptions.py:170
-msgid "cancel_subscriptions_send_success"
-msgstr ""
-
-#. Default: "Cancel registered."
-#: ../browser/cancel_subscriptions.py:289
-msgid "cancel_subscriptions_success"
-msgstr ""
-
 msgid "channels"
-msgstr ""
-
-#. Default: "Channels management"
-#: ../browser/templates/channels_management.pt:29
-msgid "channels_management_label"
 msgstr ""
 
 #. Default: "Date"
@@ -339,18 +268,13 @@ msgstr ""
 msgid "comunicati_search_text_label"
 msgstr ""
 
-#. Default: "Comunicati Stampa"
-#: ../browser/collection_renderers.py:10
-msgid "comunicati_stampa_layout"
-msgstr ""
-
 #. Default: "The number of last sent Comunicato. You don't have to edit this. It's automatically updated when a Comunicato is published."
-#: ../interfaces/settings.py:91
+#: ../interfaces/settings.py:116
 msgid "comunicato_number_help"
 msgstr ""
 
 #. Default: "Comunicato number"
-#: ../interfaces/settings.py:87
+#: ../interfaces/settings.py:112
 msgid "comunicato_number_label"
 msgstr ""
 
@@ -358,80 +282,75 @@ msgid "comunicato_published_on"
 msgstr ""
 
 #. Default: "You don't have to edit this. It's automatically updated on every new year."
-#: ../interfaces/settings.py:104
+#: ../interfaces/settings.py:129
 msgid "comunicato_year_help"
 msgstr ""
 
 #. Default: "Comunicato year"
-#: ../interfaces/settings.py:100
+#: ../interfaces/settings.py:125
 msgid "comunicato_year_label"
 msgstr ""
 
-#. Default: "Click on"
-#: ../browser/templates/cancel_subscriptions_mail_template.pt:22
-msgid "confirm_click_on_label"
-msgstr ""
-
-#. Default: "This link will expire in 24 hours."
-#: ../browser/templates/cancel_subscriptions_mail_template.pt:28
-msgid "confirm_expire"
-msgstr ""
-
-#. Default: "You received this email because someone asked to cancel your subscriptions on ${site_title}."
-#: ../browser/templates/cancel_subscriptions_mail_template.pt:19
-msgid "confirm_help"
-msgstr ""
-
-#. Default: "or ignore this email."
-#: ../browser/templates/cancel_subscriptions_mail_template.pt:26
-msgid "confirm_ignore_label"
-msgstr ""
-
-#. Default: "confirmation link"
-#: ../browser/templates/cancel_subscriptions_mail_template.pt:23
-msgid "confirm_link_label"
-msgstr ""
-
 #. Default: "Insert a list of CSS styles for received emails."
-#: ../interfaces/settings.py:80
+#: ../interfaces/settings.py:105
 msgid "css_styles_help"
 msgstr ""
 
 #. Default: "Styles"
-#: ../interfaces/settings.py:76
+#: ../interfaces/settings.py:101
 msgid "css_styles_label"
 msgstr ""
 
 #. Default: "Unsubscribe"
-#: ../browser/templates/send_mail_template.pt:99
+#: ../browser/templates/send_mail_template.pt:60
 msgid "delete_subscriptions_link"
 msgstr ""
 
 msgid "email"
 msgstr ""
 
+#. Default: "Insert the email address of the sender for emails."
+#: ../interfaces/settings.py:38
+msgid "email_from_address_help"
+msgstr ""
+
+#. Default: "Email from address"
+#: ../interfaces/settings.py:34
+msgid "email_from_address_label"
+msgstr ""
+
+#. Default: "Insert the name of the sender for emails."
+#: ../interfaces/settings.py:26
+msgid "email_from_name_help"
+msgstr ""
+
+#. Default: "Email from name"
+#: ../interfaces/settings.py:22
+msgid "email_from_name_label"
+msgstr ""
+
+#. Default: "Empty csv file."
+#: ../restapi/services/subscriptions/csv_endpoint.py:77
+msgid "empty_csv"
+msgstr ""
+
 #. Default: "You need to provide at least one email address or channel."
-#: ../browser/send.py:145
+#: ../restapi/services/send_form/post.py:44
 msgid "empty_subscribers"
 msgstr ""
 
 #. Default: "Error reading csv file."
-#: ../restapi/services/subscriptions/csv_endpoint.py:208
+#: ../restapi/services/subscriptions/csv_endpoint.py:230
 msgid "error_reading_csv"
 msgstr ""
 
-#. Default: "Error sending mail. Contact site administrator."
-#: ../browser/send.py:312
-msgid "error_send_mail"
-msgstr ""
-
 #. Default: "If you want to send emails with an external tool (rer.newsletterdispatcher.flask), insert the url of the service here. If empty, all emails will be sent from Plone."
-#: ../interfaces/settings.py:66
+#: ../interfaces/settings.py:91
 msgid "external_sender_url_help"
 msgstr ""
 
 #. Default: "External sender URL"
-#: ../interfaces/settings.py:65
+#: ../interfaces/settings.py:90
 msgid "external_sender_url_label"
 msgstr ""
 
@@ -439,12 +358,12 @@ msgid "from_label"
 msgstr ""
 
 #. Default: "If the frontend site is published with a different URL than the backend, insert it here. All links in emails will be converted with that URL."
-#: ../interfaces/settings.py:56
+#: ../interfaces/settings.py:81
 msgid "frontend_url_help"
 msgstr ""
 
 #. Default: "Frontend URL"
-#: ../interfaces/settings.py:55
+#: ../interfaces/settings.py:80
 msgid "frontend_url_label"
 msgstr ""
 
@@ -454,18 +373,13 @@ msgstr ""
 msgid "go_to_search_results"
 msgstr ""
 
-#. Default: "History management"
-#: ../browser/templates/history_management.pt:30
-msgid "history_management_label"
-msgstr ""
-
-#. Default: "[${row}] - row with invalid channels"
-#: ../restapi/services/subscriptions/csv_endpoint.py:102
+#. Default: "[${row}] - row with invalid channels: ${channels}"
+#: ../restapi/services/subscriptions/csv_endpoint.py:127
 msgid "invalid_channels"
 msgstr ""
 
-#. Default: "[${row}] - row with invalid email"
-#: ../restapi/services/subscriptions/csv_endpoint.py:78
+#. Default: "[${row}] - row with invalid email ${email}"
+#: ../restapi/services/subscriptions/csv_endpoint.py:107
 msgid "invalid_email"
 msgstr ""
 
@@ -481,8 +395,13 @@ msgstr ""
 msgid "items_selected"
 msgstr ""
 
+#. Default: "Summary"
+#: ../behaviors/metadata.py:16
+msgid "label_description"
+msgstr ""
+
 #. Default: "Legislature"
-#: ../interfaces/content.py:28
+#: ../behaviors/legislature.py:55
 #: ../restapi/services/search_parameters/get.py:102
 msgid "label_legislature"
 msgstr ""
@@ -493,22 +412,22 @@ msgid "label_portal_type"
 msgstr ""
 
 #. Default: "Sent"
-#: ../interfaces/content.py:36
+#: ../interfaces/content.py:29
 msgid "label_sent"
 msgstr ""
 
 #. Default: "Title"
-#: ../behaviors/metadata.py:13
+#: ../behaviors/metadata.py:12
 msgid "label_title"
 msgstr ""
 
 #. Default: "Insert a list of arguments related to this legislature. One per line."
-#: ../interfaces/settings.py:131
+#: ../interfaces/settings.py:156
 msgid "legislature_arguments_help"
 msgstr ""
 
 #. Default: "Arguments"
-#: ../interfaces/settings.py:127
+#: ../interfaces/settings.py:152
 #: ../restapi/services/search_parameters/get.py:113
 msgid "legislature_arguments_label"
 msgstr ""
@@ -519,103 +438,63 @@ msgid "legislature_criteria_label"
 msgstr ""
 
 #. Default: "Insert the legislature name."
-#: ../interfaces/settings.py:120
+#: ../interfaces/settings.py:145
 msgid "legislature_help"
 msgstr ""
 
 #. Default: "Legislature"
-#: ../interfaces/settings.py:116
+#: ../interfaces/settings.py:141
 msgid "legislature_label"
 msgstr ""
 
 #. Default: "This is a list of all legislatures. The last one is the one used to fill fields in a new Comunicato."
-#: ../interfaces/settings.py:12
+#: ../interfaces/settings.py:13
 msgid "legislatures_help"
 msgstr ""
 
 #. Default: "List of legislatures"
-#: ../interfaces/settings.py:8
+#: ../interfaces/settings.py:9
 msgid "legislatures_label"
 msgstr ""
 
-#. Default: "Deselect the channels that you do not want to be subscribed anymore."
-#: ../browser/cancel_subscriptions.py:81
-msgid "manage_subscriptions_channels_title"
-msgstr ""
-
-#. Default: "Email"
-#: ../browser/cancel_subscriptions.py:71
-msgid "manage_subscriptions_email_title"
-msgstr ""
-
-#. Default: "This is the list of your subscriptions."
-#: ../browser/cancel_subscriptions.py:230
-msgid "manage_subscriptions_help"
-msgstr ""
-
-#. Default: "Mail not found. Unable to change settings."
-#: ../browser/cancel_subscriptions.py:266
-msgid "manage_subscriptions_inexistent_mail"
-msgstr ""
-
 #. Default: "You are receiving this email because you are subscribed to ${site_title}."
-#: ../browser/templates/cancel_subscriptions_mail_template.pt:50
-#: ../browser/templates/send_mail_template.pt:97
+#: ../browser/templates/cancel_subscriptions_mail_template.pt:52
+#: ../browser/templates/send_mail_template.pt:58
 msgid "manage_subscriptions_intro"
 msgstr ""
 
 #. Default: "Manage your subscriptions"
-#: ../browser/templates/cancel_subscriptions_mail_template.pt:52
+#: ../browser/templates/cancel_subscriptions_mail_template.pt:54
 msgid "manage_subscriptions_link"
 msgstr ""
 
-#. Default: "Unable to send manage subscriptions link. Please contact site administrator."
-#: ../browser/cancel_subscriptions.py:163
-msgid "manage_subscriptions_not_send"
-msgstr ""
-
-#. Default: "Mail not found. Unable to send the link."
-#: ../browser/cancel_subscriptions.py:122
-msgid "manage_subscriptions_request_inexistent_mail"
-msgstr ""
-
-#. Default: "Serializer secret and salt not set in control panel. Unable to send the link."
-#: ../browser/cancel_subscriptions.py:136
-msgid "manage_subscriptions_request_serializer_error"
-msgstr ""
-
 #. Default: "You need to pass a file at least."
-#: ../restapi/services/subscriptions/csv_endpoint.py:214
+#: ../restapi/services/subscriptions/csv_endpoint.py:236
 msgid "missing_file"
+msgstr ""
+
+#. Default: "Missing required field: ${field}"
+#: ../restapi/services/subscriptions/csv_endpoint.py:90
+msgid "missing_required"
 msgstr ""
 
 msgid "newspaper"
 msgstr ""
 
 #. Default: "Additional notes."
-#: ../browser/send.py:100
+#: ../interfaces/content.py:78
 msgid "notes_description"
 msgstr ""
 
 #. Default: "Notes"
-#: ../browser/send.py:99
+#: ../interfaces/content.py:77
 msgid "notes_title"
 msgstr ""
 
 msgid "phone"
 msgstr ""
 
-#. Default: "Allegati"
-#: ../browser/templates/comunicato.pt:73
-msgid "press_attachments"
-msgstr ""
-
 msgid "refine_search_label"
-msgstr ""
-
-#. Default: "Resend"
-#: ../browser/templates/comunicato.pt:26
-msgid "resend_link"
 msgstr ""
 
 msgid "reset_filters_label"
@@ -635,16 +514,6 @@ msgstr ""
 msgid "save"
 msgstr ""
 
-#. Default: "Save"
-#: ../browser/cancel_subscriptions.py:256
-msgid "save_button"
-msgstr ""
-
-#. Default: "Search Comunicati"
-#: ../browser/templates/comunicati_search.pt:28
-msgid "search_comunicati_label"
-msgstr ""
-
 msgid "select_noOptionsMessage"
 msgstr ""
 
@@ -652,99 +521,58 @@ msgid "select_placeholder_multi"
 msgstr ""
 
 #. Default: "Select which attachment you want to send via email. You can only select first level Files and Images."
-#: ../browser/send.py:108
+#: ../interfaces/content.py:86
 msgid "send_attachments_description"
 msgstr ""
 
 #. Default: "Attachments"
-#: ../browser/send.py:107
+#: ../interfaces/content.py:85
 msgid "send_attachments_title"
 msgstr ""
 
-#. Default: "Send"
-#: ../browser/cancel_subscriptions.py:111
-#: ../browser/send.py:139
-msgid "send_button"
-msgstr ""
-
 #. Default: "Select which channels should receive this Comunicato. All email address subscribed to this channel will receive it. "
-#: ../browser/send.py:76
+#: ../interfaces/content.py:54
 msgid "send_channels_description"
 msgstr ""
 
 #. Default: "Channels"
-#: ../browser/send.py:75
+#: ../interfaces/content.py:53
 msgid "send_channels_title"
 msgstr ""
 
 #. Default: "Date ${date}"
-#: ../browser/templates/send_mail_template.pt:40
+#: ../browser/templates/send_mail_template.pt:23
 msgid "send_date_label"
 msgstr ""
 
-#. Default: "Send this Comunicato or Invito to a list of recipients."
-#: ../browser/send.py:121
-msgid "send_form_help"
-msgstr ""
-
-#. Default: "Send ${type}"
-#: ../browser/send.py:133
-msgid "send_form_title"
-msgstr ""
-
-#. Default: "Send"
-#: ../browser/templates/comunicato.pt:23
-msgid "send_link"
-msgstr ""
-
-#. Default: "See preview"
-#: ../browser/templates/comunicato.pt:30
-msgid "send_preview_link"
-msgstr ""
-
 #. Default: "[${row}] - \"${email}\" already in database"
-#: ../restapi/services/subscriptions/csv_endpoint.py:152
+#: ../restapi/services/subscriptions/csv_endpoint.py:177
 msgid "skip_duplicate"
 msgstr ""
 
 #. Default: "[${row}] - Multiple values for \"${email}\""
-#: ../restapi/services/subscriptions/csv_endpoint.py:139
+#: ../restapi/services/subscriptions/csv_endpoint.py:164
 msgid "skip_duplicate_multiple"
 msgstr ""
 
 #. Default: "[${row}] - unable to add"
-#: ../restapi/services/subscriptions/csv_endpoint.py:125
+#: ../restapi/services/subscriptions/csv_endpoint.py:150
 msgid "skip_unable_to_add"
 msgstr ""
 
 #. Default: "List of available subscription channels.One per line.These channels will be used for users subscriptions and for select to which channel send a Comunicato."
-#: ../interfaces/settings.py:22
+#: ../interfaces/settings.py:47
 msgid "subscription_channels_description"
 msgstr ""
 
 #. Default: "Subscription Channels"
-#: ../interfaces/settings.py:21
+#: ../interfaces/settings.py:46
 msgid "subscription_channels_label"
 msgstr ""
 
 #. Default: "His subscription has been deleted from the database because he is not subscribed to any channel at all."
 #: ../browser/templates/cancel_subscriptions_notify_template.pt:20
 msgid "subscription_deleted_label"
-msgstr ""
-
-#. Default: "Subscriptions updated for ${site}"
-#: ../browser/cancel_subscriptions.py:319
-msgid "subscriptions_updated_label"
-msgstr ""
-
-#. Default: "Send complete."
-#: ../browser/send.py:353
-msgid "success_send_mail"
-msgstr ""
-
-#. Default: "Send queued with success. See the status in send history."
-#: ../browser/send.py:413
-msgid "success_send_mail_async"
 msgstr ""
 
 msgid "to_label"
@@ -754,66 +582,66 @@ msgid "toggle_filters_label"
 msgstr ""
 
 #. Default: "Insert the salt for token generation. This, in conjunction with the secret, will generate unique tokens for subscriptions management links."
-#: ../interfaces/settings.py:45
+#: ../interfaces/settings.py:70
 msgid "token_salt_help"
 msgstr ""
 
 #. Default: "Token salt"
-#: ../interfaces/settings.py:44
+#: ../interfaces/settings.py:69
 msgid "token_salt_label"
 msgstr ""
 
 #. Default: "Insert the secret key for token generation."
-#: ../interfaces/settings.py:37
+#: ../interfaces/settings.py:62
 msgid "token_secret_help"
 msgstr ""
 
 #. Default: "Token secret"
-#: ../interfaces/settings.py:36
+#: ../interfaces/settings.py:61
 msgid "token_secret_label"
 msgstr ""
 
 #. Default: "Unable to manage subscriptions. Invalid email."
-#: ../utils.py:141
+#: ../utils.py:100
 msgid "unsubscribe_confirm_invalid_email"
 msgstr ""
 
 #. Default: "Unable to manage subscriptions. Invalid id."
-#: ../utils.py:134
+#: ../utils.py:93
 msgid "unsubscribe_confirm_invalid_id"
 msgstr ""
 
 #. Default: "Unable to manage subscriptions. Invalid parameters."
-#: ../utils.py:125
+#: ../utils.py:84
 msgid "unsubscribe_confirm_invalid_parameters"
 msgstr ""
 
 #. Default: "Unable to manage subscriptions. Token expired."
-#: ../utils.py:109
+#: ../utils.py:68
 msgid "unsubscribe_confirm_secret_expired"
 msgstr ""
 
 #. Default: "Unable to manage subscriptions. Invalid token."
-#: ../utils.py:116
+#: ../utils.py:75
 msgid "unsubscribe_confirm_secret_invalid"
 msgstr ""
 
 #. Default: "Unable to manage subscriptions. Token not present."
-#: ../utils.py:78
+#: ../utils.py:37
 msgid "unsubscribe_confirm_secret_null"
 msgstr ""
 
 #. Default: "Unable to manage subscriptions. Token keys not set in control panel."
-#: ../utils.py:92
+#: ../utils.py:51
 msgid "unsubscribe_confirm_secret_token_settings_error"
 msgstr ""
 
 #. Default: "Invalid email address: ${address}"
-#: ../browser/send.py:56
+#: ../interfaces/content.py:18
 msgid "validation_invalid_email"
 msgstr ""
 
 #. Default: "You need to pass a csv file."
-#: ../restapi/services/subscriptions/csv_endpoint.py:173
+#: ../restapi/services/subscriptions/csv_endpoint.py:199
 msgid "wrong_content_type"
 msgstr ""
