@@ -47,7 +47,14 @@ class SendComunicato(Service):
                 )
             )
 
-        return self.sendMessage(data=data)
+        res = self.sendMessage(data=data)
+
+        if res.get("status", "") == "error":
+            self.request.response.setStatus(400)
+            return dict(
+                error=dict(type="BadRequest", message=res.get("status_message", ""))
+            )
+        return res
 
     def get_value_from_settings(self, field):
         try:
@@ -112,20 +119,22 @@ class SendComunicato(Service):
         # log start
         send_id = self.set_history_start(data=data, subscribers=len(rcpts))
 
+        res = {"status": "success", "id": send_id}
+
         try:
             host.send(msg, charset=encoding)
         except (SMTPException, RuntimeError) as e:
             logger.exception(e)
-            # self.add_send_error_message()
-            self.update_history(send_id=send_id, status="error")
-            raise BadRequest(_("Errore non previsto durante l'invio del comunicato"))
+            msg = "Errore non previsto durante l'invio del comunicato"
+            self.update_history(send_id=send_id, status="error", status_message=msg)
+
+            res["status"] = "error"
+            res["status_message"] = msg
+            return res
 
         if send_id:
             self.update_history(send_id=send_id, status="success")
-        return {
-            "status": "success",
-            "id": send_id,
-        }
+        return res
 
     def send_external(self, data, body):
         external_sender_url = self.get_value_from_settings(field="external_sender_url")
@@ -151,24 +160,30 @@ class SendComunicato(Service):
             params["data"] = json.dumps(payload)
             params["headers"] = {"Content-Type": "application/json"}
 
+        res = {"status": "success", "id": send_uid}
+
         try:
             response = requests.post(**params)
         except (ConnectionError, Timeout) as e:
             logger.exception(e)
-            self.add_send_error_message()
+            msg = "Errore non previsto durante l'invio del comunicato"
             if send_uid:
-                self.update_history(send_id=send_uid, status="error")
-            return
+                self.update_history(
+                    send_id=send_uid, status="error", status_message=msg
+                )
+            res["status"] = "error"
+            res["status_message"] = msg
+            return res
         if response.status_code != 200:
-            logger.error(f'Unable to send "{self.subject}": {response.text}')
-            self.add_send_error_message()
+            msg = f'Impossibile spedire il comunicato "{self.subject}": {response.text}'
+            logger.error(msg)
             if send_uid:
-                self.update_history(send_id=send_uid, status="error")
-            return
-        return {
-            "status": "success",
-            "id": send_uid,
-        }
+                self.update_history(
+                    send_id=send_uid, status="error", status_message=msg
+                )
+            res["status"] = "error"
+            res["status_message"] = msg
+        return res
 
     def manage_attachments(self, data, msg):
         attachments = self.get_attachments(data=data)
@@ -221,11 +236,15 @@ class SendComunicato(Service):
         return intid
 
     # TODO: move to utility ?
-    def update_history(self, send_id, status):
+    def update_history(self, send_id, status, status_message=""):
         tool = getUtility(ISendHistoryStore)
         res = tool.update(
             id=send_id,
-            data={"completed_date": datetime.now(), "status": status},
+            data={
+                "completed_date": datetime.now(),
+                "status": status,
+                "status_message": status_message,
+            },
         )
         if res and "error" in res:
             logger.error(
