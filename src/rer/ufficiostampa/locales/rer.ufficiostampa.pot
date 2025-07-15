@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-07-07 15:14+0000\n"
+"POT-Creation-Date: 2025-07-15 13:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -96,10 +96,6 @@ msgid "Edit"
 msgstr ""
 
 msgid "Edit Subscriber"
-msgstr ""
-
-#: ../restapi/services/send_form/post.py:121
-msgid "Errore non previsto durante l'invio del comunicato"
 msgstr ""
 
 msgid "Errored rows"
@@ -269,12 +265,12 @@ msgid "comunicati_search_text_label"
 msgstr ""
 
 #. Default: "The number of last sent Comunicato. You don't have to edit this. It's automatically updated when a Comunicato is published."
-#: ../interfaces/settings.py:116
+#: ../interfaces/settings.py:131
 msgid "comunicato_number_help"
 msgstr ""
 
 #. Default: "Comunicato number"
-#: ../interfaces/settings.py:112
+#: ../interfaces/settings.py:127
 msgid "comunicato_number_label"
 msgstr ""
 
@@ -282,27 +278,27 @@ msgid "comunicato_published_on"
 msgstr ""
 
 #. Default: "You don't have to edit this. It's automatically updated on every new year."
-#: ../interfaces/settings.py:129
+#: ../interfaces/settings.py:144
 msgid "comunicato_year_help"
 msgstr ""
 
 #. Default: "Comunicato year"
-#: ../interfaces/settings.py:125
+#: ../interfaces/settings.py:140
 msgid "comunicato_year_label"
 msgstr ""
 
 #. Default: "Insert a list of CSS styles for received emails."
-#: ../interfaces/settings.py:105
+#: ../interfaces/settings.py:112
 msgid "css_styles_help"
 msgstr ""
 
 #. Default: "Styles"
-#: ../interfaces/settings.py:101
+#: ../interfaces/settings.py:108
 msgid "css_styles_label"
 msgstr ""
 
 #. Default: "Unsubscribe"
-#: ../browser/templates/send_mail_template.pt:60
+#: ../browser/templates/send_mail_template.pt:61
 msgid "delete_subscriptions_link"
 msgstr ""
 
@@ -310,22 +306,22 @@ msgid "email"
 msgstr ""
 
 #. Default: "Insert the email address of the sender for emails."
-#: ../interfaces/settings.py:38
+#: ../interfaces/settings.py:45
 msgid "email_from_address_help"
 msgstr ""
 
 #. Default: "Email from address"
-#: ../interfaces/settings.py:34
+#: ../interfaces/settings.py:41
 msgid "email_from_address_label"
 msgstr ""
 
 #. Default: "Insert the name of the sender for emails."
-#: ../interfaces/settings.py:26
+#: ../interfaces/settings.py:33
 msgid "email_from_name_help"
 msgstr ""
 
 #. Default: "Email from name"
-#: ../interfaces/settings.py:22
+#: ../interfaces/settings.py:29
 msgid "email_from_name_label"
 msgstr ""
 
@@ -345,12 +341,12 @@ msgid "error_reading_csv"
 msgstr ""
 
 #. Default: "If you want to send emails with an external tool (rer.newsletterdispatcher.flask), insert the url of the service here. If empty, all emails will be sent from Plone."
-#: ../interfaces/settings.py:91
+#: ../interfaces/settings.py:98
 msgid "external_sender_url_help"
 msgstr ""
 
 #. Default: "External sender URL"
-#: ../interfaces/settings.py:90
+#: ../interfaces/settings.py:97
 msgid "external_sender_url_label"
 msgstr ""
 
@@ -358,12 +354,12 @@ msgid "from_label"
 msgstr ""
 
 #. Default: "If the frontend site is published with a different URL than the backend, insert it here. All links in emails will be converted with that URL."
-#: ../interfaces/settings.py:81
+#: ../interfaces/settings.py:88
 msgid "frontend_url_help"
 msgstr ""
 
 #. Default: "Frontend URL"
-#: ../interfaces/settings.py:80
+#: ../interfaces/settings.py:87
 msgid "frontend_url_label"
 msgstr ""
 
@@ -422,12 +418,12 @@ msgid "label_title"
 msgstr ""
 
 #. Default: "Insert a list of arguments related to this legislature. One per line."
-#: ../interfaces/settings.py:156
+#: ../interfaces/settings.py:171
 msgid "legislature_arguments_help"
 msgstr ""
 
 #. Default: "Arguments"
-#: ../interfaces/settings.py:152
+#: ../interfaces/settings.py:167
 #: ../restapi/services/search_parameters/get.py:113
 msgid "legislature_arguments_label"
 msgstr ""
@@ -438,28 +434,38 @@ msgid "legislature_criteria_label"
 msgstr ""
 
 #. Default: "Insert the legislature name."
-#: ../interfaces/settings.py:145
+#: ../interfaces/settings.py:160
 msgid "legislature_help"
 msgstr ""
 
 #. Default: "Legislature"
-#: ../interfaces/settings.py:141
+#: ../interfaces/settings.py:156
 msgid "legislature_label"
 msgstr ""
 
 #. Default: "This is a list of all legislatures. The last one is the one used to fill fields in a new Comunicato."
-#: ../interfaces/settings.py:13
+#: ../interfaces/settings.py:20
 msgid "legislatures_help"
 msgstr ""
 
 #. Default: "List of legislatures"
-#: ../interfaces/settings.py:9
+#: ../interfaces/settings.py:16
 msgid "legislatures_label"
+msgstr ""
+
+#. Default: "Insert a logo that will be used in the emails."
+#: ../interfaces/settings.py:120
+msgid "mail_logo_help"
+msgstr ""
+
+#. Default: "Mail logo"
+#: ../interfaces/settings.py:119
+msgid "mail_logo_label"
 msgstr ""
 
 #. Default: "You are receiving this email because you are subscribed to ${site_title}."
 #: ../browser/templates/cancel_subscriptions_mail_template.pt:52
-#: ../browser/templates/send_mail_template.pt:58
+#: ../browser/templates/send_mail_template.pt:59
 msgid "manage_subscriptions_intro"
 msgstr ""
 
@@ -541,7 +547,7 @@ msgid "send_channels_title"
 msgstr ""
 
 #. Default: "Date ${date}"
-#: ../browser/templates/send_mail_template.pt:23
+#: ../browser/templates/send_mail_template.pt:24
 msgid "send_date_label"
 msgstr ""
 
@@ -561,12 +567,12 @@ msgid "skip_unable_to_add"
 msgstr ""
 
 #. Default: "List of available subscription channels.One per line.These channels will be used for users subscriptions and for select to which channel send a Comunicato."
-#: ../interfaces/settings.py:47
+#: ../interfaces/settings.py:54
 msgid "subscription_channels_description"
 msgstr ""
 
 #. Default: "Subscription Channels"
-#: ../interfaces/settings.py:46
+#: ../interfaces/settings.py:53
 msgid "subscription_channels_label"
 msgstr ""
 
@@ -582,22 +588,22 @@ msgid "toggle_filters_label"
 msgstr ""
 
 #. Default: "Insert the salt for token generation. This, in conjunction with the secret, will generate unique tokens for subscriptions management links."
-#: ../interfaces/settings.py:70
+#: ../interfaces/settings.py:77
 msgid "token_salt_help"
 msgstr ""
 
 #. Default: "Token salt"
-#: ../interfaces/settings.py:69
+#: ../interfaces/settings.py:76
 msgid "token_salt_label"
 msgstr ""
 
 #. Default: "Insert the secret key for token generation."
-#: ../interfaces/settings.py:62
+#: ../interfaces/settings.py:69
 msgid "token_secret_help"
 msgstr ""
 
 #. Default: "Token secret"
-#: ../interfaces/settings.py:61
+#: ../interfaces/settings.py:68
 msgid "token_secret_label"
 msgstr ""
 
