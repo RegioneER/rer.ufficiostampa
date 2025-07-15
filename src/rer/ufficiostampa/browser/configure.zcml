@@ -51,7 +51,7 @@
   <browser:page
       name="send-preview"
       for="rer.ufficiostampa.interfaces.IComunicatoStampa"
-      class=".send_preview.View"
+      class=".send_mail_helpers.SendPreviewView"
       template="templates/send_preview.pt"
       permission="rer.ufficiostampa.Send"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
@@ -59,15 +59,18 @@
 
   <browser:page
       name="download"
-      for=".send_preview.IView"
-      class=".send_preview.Download"
+      for=".send_mail_helpers.IView"
+      class=".send_mail_helpers.Download"
       permission="rer.ufficiostampa.Send"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
+
+  
   <!-- end send preview -->
 
   <browser:page
       name="send_mail_template"
+      class=".send_mail_helpers.SendMailView"
       for="rer.ufficiostampa.interfaces.IComunicatoStampa"
       template="templates/send_mail_template.pt"
       permission="rer.ufficiostampa.Send"
@@ -81,4 +84,18 @@
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
 
+
+    <!-- Logo -->
+    <browser:page
+      name="ufficiostampa-logo"
+      for="plone.app.layout.navigation.interfaces.INavigationRoot"
+      class=".send_mail_helpers.UfficioStampaLogoView"
+      permission="zope.Public"
+      />
+  <browser:page
+      name="images"
+      for="rer.ufficiostampa.interfaces.IUfficioStampaLogoView"
+      class=".send_mail_helpers.ImagesLogoView"
+      permission="zope.Public"
+      />
 </configure>

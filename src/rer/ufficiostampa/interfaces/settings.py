@@ -1,7 +1,14 @@
 from plone.restapi.controlpanels import IControlpanel
 from plone.supermodel import model
 from rer.ufficiostampa import _
+from zope.interface import Interface
 from zope import schema
+
+
+class IUfficioStampaLogoView(Interface):
+    """
+    Marker interface for logo
+    """
 
 
 class IRerUfficiostampaSettings(model.Schema):
@@ -105,6 +112,14 @@ class IRerUfficiostampaSettings(model.Schema):
         description=_(
             "css_styles_help",
             default="Insert a list of CSS styles for received emails.",
+        ),
+        required=False,
+    )
+    mail_logo = schema.Bytes(
+        title=_("mail_logo_label", default="Mail logo"),
+        description=_(
+            "mail_logo_help",
+            default="Insert a logo that will be used in the emails.",
         ),
         required=False,
     )

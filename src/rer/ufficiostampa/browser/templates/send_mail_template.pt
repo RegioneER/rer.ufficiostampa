@@ -7,12 +7,13 @@
                   comunicato_number context/comunicato_number|nothing;
                   date python:options.get('date', '');
                   folders python:options.get('folders', '');
+                  logo_url view/get_logo_url;
                   toLocalizedTime nocall:context/@@plone/toLocalizedTime;" i18n:domain="rer.ufficiostampa">
   <style tal:condition="css">${css}</style>
   <div class="comunicato-note" tal:condition="notes" tal:content="notes">
   </div>
-  <div id="logo">
-    <img src="${context/portal_url}/++plone++rer.ufficiostampa/logo_rer.gif" alt="Regione Emilia-Romagna" />
+  <div id="logo" tal:condition="logo_url">
+    <img src="${logo_url}" alt="Regione Emilia-Romagna" />
     <div>Giunta Regionale - Agenzia di informazione e comunicazione</div>
   </div>
   <div class="infos">
