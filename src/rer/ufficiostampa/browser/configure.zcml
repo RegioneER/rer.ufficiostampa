@@ -5,6 +5,14 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="rer.ufficiostampa"
     >
+
+  <!-- Publish static files -->
+  <plone:static
+      directory="static"
+      name="rer.ufficiostampa"
+      type="plone"
+      />
+
   <browser:page
       name="ufficiostampa-settings"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
