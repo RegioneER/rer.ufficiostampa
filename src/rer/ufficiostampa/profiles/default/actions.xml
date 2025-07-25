@@ -1,7 +1,7 @@
 <object xmlns:i18n="http://xml.zope.org/namespaces/i18n" meta_type="Plone Actions Tool" name="portal_actions">
   <object name="object" purge="False">
     <object meta_type="CMF Action" name="ufficiostampa-send" i18n:domain="rer.ufficiostampa">
-      <property name="title" i18n:translate="">Comunicati Stampa: Invio</property>
+      <property name="title" i18n:translate="">Invia comunicato/invito</property>
       <property name="url_expr">string:${object_url}/@send-comunicato</property>
       <property name="link_target"></property>
       <property name="icon_expr"></property>
@@ -12,7 +12,7 @@
       <property name="visible">True</property>
     </object>
     <object meta_type="CMF Action" name="ufficiostampa-channels-management" i18n:domain="rer.ufficiostampa">
-      <property name="title" i18n:translate="">Comunicati stampa: gestione canali</property>
+      <property name="title" i18n:translate="">Gestione degli iscritti</property>
       <property name="url_expr">string:${globals_view/navigationRootUrl}/controlpanel/ufficiostampa-managechannels</property>
       <property name="link_target"></property>
       <property name="icon_expr"></property>
@@ -22,7 +22,7 @@
       <property name="visible">True</property>
     </object>
     <object meta_type="CMF Action" name="ufficiostampa-history-management" i18n:domain="rer.ufficiostampa">
-      <property name="title" i18n:translate="">Comunicati stampa: storico invii</property>
+      <property name="title" i18n:translate="">Storico invii</property>
       <property name="url_expr">string:${globals_view/navigationRootUrl}/controlpanel/ufficiostampa-managehistory</property>
       <property name="link_target"></property>
       <property name="icon_expr"></property>

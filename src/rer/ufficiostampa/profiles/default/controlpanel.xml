@@ -9,7 +9,7 @@
              category="Products"
              condition_expr=""
              icon_expr=""
-             title="Configurazione Ufficio Stampa"
+             title="Ufficio Stampa"
              url_expr="string:${portal_url}/@@ufficiostampa-settings"
              visible="True"
              i18n:attributes="title"

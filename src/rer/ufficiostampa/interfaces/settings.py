@@ -150,6 +150,18 @@ class IRerUfficiostampaSettings(model.Schema):
         default=2021,
     )
 
+    recursive_publish = schema.Bool(
+        title=_("recursive_publish_label", default="Recursive publish"),
+        description=_(
+            "recursive_publish_help",
+            default="If checked, when a Comunicato/Invito is published, all its "
+            "children will be published too. This is useful to publish "
+            "all the Cartelle Stampa and Allegati related to a Comunicato.",
+        ),
+        required=False,
+        default=False,
+    )
+
 
 class ILegislaturesRowSchema(model.Schema):
     legislature = schema.SourceText(

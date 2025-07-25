@@ -1,17 +1,37 @@
 from plone import api
 from rer.ufficiostampa.utils import get_next_comunicato_number
+from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
 
 
 def changeWorkflow(item, event):
     if event.action == "publish":
-        # recursive publish
-        for obj in item.objectValues():
-            if api.content.get_state(obj) == "private":
-                api.content.transition(obj, "publish")
         if item.portal_type == "ComunicatoStampa" and not getattr(
             item, "comunicato_number", ""
         ):
             setattr(item, "comunicato_number", get_next_comunicato_number())
+    try:
+        recursive_publish = api.portal.get_registry_record(
+            "recursive_publish",
+            interface=IRerUfficiostampaSettings,
+        )
+    except KeyError:
+        recursive_publish = False
+    if not recursive_publish:
+        return
+
+    if event.action in ["publish", "retract", "reject"]:
+        # recursive publish/unpublish contents
+        for brain in api.content.find(context=item):
+            if brain.UID == item.UID():
+                continue
+            obj = brain.getObject()
+            if event.action == "publish" and brain.review_state == "private":
+                api.content.transition(obj, "publish")
+            elif (
+                event.action in ["retract", "reject"]
+                and brain.review_state == "published"
+            ):
+                api.content.transition(obj, event.action)
 
 
 def createComunicato(item, event):
