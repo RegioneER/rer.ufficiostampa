@@ -1,6 +1,7 @@
 from plone import api
 from rer.ufficiostampa.utils import get_next_comunicato_number
 from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
+from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 
 
 def changeWorkflow(item, event):
@@ -57,6 +58,10 @@ def createCartellaStampa(item, event):
             title="Cartella Stampa",
             id="cartella-stampa",
         )
+        # disable CartellaStampa from allowed types
+        constraints_context = ISelectableConstrainTypes(item)
+        constraints_context.setConstrainTypesMode(1)
+        constraints_context.setLocallyAllowedTypes(["Image", "File"])
 
 
 def fixText(item, event):
