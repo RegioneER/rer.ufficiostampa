@@ -46,6 +46,7 @@
     <element value="plone.locking" />
     <element value="plone.textindexer" />
     <element value="kitconcept.seo" />
+    <element value="plone.constraintypes" />
 
     <!-- TODO: su profilo rer aggiungere
       <element value="rer.solrpush.behaviors.solr_fields.ISolrFields" /> 
