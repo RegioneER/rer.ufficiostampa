@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-07-15 13:38+0000\n"
+"POT-Creation-Date: 2025-07-29 14:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,23 +61,7 @@ msgid "Completed Date"
 msgstr ""
 
 #: ../profiles/default/actions.xml
-msgid "Comunicati Stampa: Invio"
-msgstr ""
-
-#: ../profiles/default/actions.xml
-msgid "Comunicati stampa: gestione canali"
-msgstr ""
-
-#: ../profiles/default/actions.xml
 msgid "Comunicati stampa: impostazioni"
-msgstr ""
-
-#: ../profiles/default/actions.xml
-msgid "Comunicati stampa: storico invii"
-msgstr ""
-
-#: ../profiles/default/controlpanel.xml
-msgid "Configurazione Ufficio Stampa"
 msgstr ""
 
 msgid "Date"
@@ -113,6 +97,10 @@ msgstr ""
 msgid "First row should be filled with column names. Actual values should start from the second one."
 msgstr ""
 
+#: ../profiles/default/actions.xml
+msgid "Gestione degli iscritti"
+msgstr ""
+
 msgid "Import from CSV"
 msgstr ""
 
@@ -125,6 +113,10 @@ msgstr ""
 
 #: ../utils.py:213
 msgid "Invalid attachment type"
+msgstr ""
+
+#: ../profiles/default/actions.xml
+msgid "Invia comunicato/invito"
 msgstr ""
 
 msgid "Name"
@@ -191,6 +183,10 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
+#: ../profiles/default/actions.xml
+msgid "Storico invii"
+msgstr ""
+
 msgid "Subscribers"
 msgstr ""
 
@@ -202,6 +198,10 @@ msgid "Text"
 msgstr ""
 
 msgid "Type"
+msgstr ""
+
+#: ../profiles/default/controlpanel.xml
+msgid "Ufficio Stampa"
 msgstr ""
 
 #: ../browser/controlpanel.py:113
@@ -418,12 +418,12 @@ msgid "label_title"
 msgstr ""
 
 #. Default: "Insert a list of arguments related to this legislature. One per line."
-#: ../interfaces/settings.py:171
+#: ../interfaces/settings.py:183
 msgid "legislature_arguments_help"
 msgstr ""
 
 #. Default: "Arguments"
-#: ../interfaces/settings.py:167
+#: ../interfaces/settings.py:179
 #: ../restapi/services/search_parameters/get.py:113
 msgid "legislature_arguments_label"
 msgstr ""
@@ -434,12 +434,12 @@ msgid "legislature_criteria_label"
 msgstr ""
 
 #. Default: "Insert the legislature name."
-#: ../interfaces/settings.py:160
+#: ../interfaces/settings.py:172
 msgid "legislature_help"
 msgstr ""
 
 #. Default: "Legislature"
-#: ../interfaces/settings.py:156
+#: ../interfaces/settings.py:168
 msgid "legislature_label"
 msgstr ""
 
@@ -498,6 +498,16 @@ msgid "notes_title"
 msgstr ""
 
 msgid "phone"
+msgstr ""
+
+#. Default: "If checked, when a Comunicato/Invito is published, all its children will be published too. This is useful to publish all the Cartelle Stampa and Allegati related to a Comunicato."
+#: ../interfaces/settings.py:155
+msgid "recursive_publish_help"
+msgstr ""
+
+#. Default: "Recursive publish"
+#: ../interfaces/settings.py:154
+msgid "recursive_publish_label"
 msgstr ""
 
 msgid "refine_search_label"

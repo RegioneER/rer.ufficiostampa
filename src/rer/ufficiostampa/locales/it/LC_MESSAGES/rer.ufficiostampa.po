@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-07-15 13:38+0000\n"
+"POT-Creation-Date: 2025-07-29 14:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,24 +61,8 @@ msgid "Completed Date"
 msgstr "Concluso"
 
 #: ../profiles/default/actions.xml
-msgid "Comunicati Stampa: Invio"
-msgstr "Comunicati Stampa: Invio"
-
-#: ../profiles/default/actions.xml
-msgid "Comunicati stampa: gestione canali"
-msgstr "Comunicati stampa: gestione canali"
-
-#: ../profiles/default/actions.xml
 msgid "Comunicati stampa: impostazioni"
 msgstr "Comunicati stampa: impostazioni"
-
-#: ../profiles/default/actions.xml
-msgid "Comunicati stampa: storico invii"
-msgstr "Comunicati stampa: storico invii"
-
-#: ../profiles/default/controlpanel.xml
-msgid "Configurazione Ufficio Stampa"
-msgstr "Configurazione Ufficio Stampa"
 
 msgid "Date"
 msgstr "Data di invio"
@@ -113,6 +97,10 @@ msgstr "Filtra gli iscritti"
 msgid "First row should be filled with column names. Actual values should start from the second one."
 msgstr "La prima riga deve contenere i nomi delle colonne. Gli iscritti devono iniziare dalla seconda."
 
+#: ../profiles/default/actions.xml
+msgid "Gestione degli iscritti"
+msgstr ""
+
 msgid "Import from CSV"
 msgstr "Importa da CSV"
 
@@ -126,6 +114,10 @@ msgstr "Installa the rer.ufficiostampa."
 #: ../utils.py:213
 msgid "Invalid attachment type"
 msgstr "Tipologia file non consentito per gli allegati"
+
+#: ../profiles/default/actions.xml
+msgid "Invia comunicato/invito"
+msgstr ""
 
 msgid "Name"
 msgstr "Nome"
@@ -191,6 +183,10 @@ msgstr "Righe ignorate"
 msgid "Status"
 msgstr "Stato"
 
+#: ../profiles/default/actions.xml
+msgid "Storico invii"
+msgstr ""
+
 msgid "Subscribers"
 msgstr "Iscritti"
 
@@ -203,6 +199,10 @@ msgstr "Testo"
 
 msgid "Type"
 msgstr "Tipologia"
+
+#: ../profiles/default/controlpanel.xml
+msgid "Ufficio Stampa"
+msgstr ""
 
 #: ../browser/controlpanel.py:113
 msgid "Ufficio Stampa - Geestione degli iscritti"
@@ -418,12 +418,12 @@ msgid "label_title"
 msgstr "Titolo"
 
 #. Default: "Insert a list of arguments related to this legislature. One per line."
-#: ../interfaces/settings.py:171
+#: ../interfaces/settings.py:183
 msgid "legislature_arguments_help"
 msgstr "Inserisci una lista di argomenti a cui si fa riferimento."
 
 #. Default: "Arguments"
-#: ../interfaces/settings.py:167
+#: ../interfaces/settings.py:179
 #: ../restapi/services/search_parameters/get.py:113
 msgid "legislature_arguments_label"
 msgstr "Argomenti"
@@ -434,12 +434,12 @@ msgid "legislature_criteria_label"
 msgstr "Legislatura"
 
 #. Default: "Insert the legislature name."
-#: ../interfaces/settings.py:160
+#: ../interfaces/settings.py:172
 msgid "legislature_help"
 msgstr "Inserisci il nome della legislatura."
 
 #. Default: "Legislature"
-#: ../interfaces/settings.py:156
+#: ../interfaces/settings.py:168
 msgid "legislature_label"
 msgstr "Legislatura"
 
@@ -499,6 +499,16 @@ msgstr "Note"
 
 msgid "phone"
 msgstr "Telefono"
+
+#. Default: "If checked, when a Comunicato/Invito is published, all its children will be published too. This is useful to publish all the Cartelle Stampa and Allegati related to a Comunicato."
+#: ../interfaces/settings.py:155
+msgid "recursive_publish_help"
+msgstr "Se selezionato, quando un Comunicato/Invito viene pubblicato, tutti i suoi figli verranno pubblicati. Questo è utile per pubblicare tutte le Cartelle Stampa e gli Allegati collegati a un Comunicato."
+
+#. Default: "Recursive publish"
+#: ../interfaces/settings.py:154
+msgid "recursive_publish_label"
+msgstr "Pubblicazione ricorsiva"
 
 msgid "refine_search_label"
 msgstr "Raffina la tua ricerca"
