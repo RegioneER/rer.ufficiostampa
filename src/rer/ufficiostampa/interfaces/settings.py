@@ -173,7 +173,17 @@ class IRerUfficiostampaSettings(model.Schema):
         required=False,
         default=True,
     )
-
+    max_attachments_size = schema.Int(
+        title=_("max_attachments_size_label", default="Max attachments size"),
+        description=_(
+            "max_attachments_size_help",
+            default="Set max attachments size that will sent via email. "
+            "If an attachment exceed that size, it will be discarded. "
+            "Set 0 to not limit the size.",
+        ),
+        required=False,
+        default=0,
+    )
     directives.write_permission(token_secret="rer.ufficiostampa.ManageSettings")
     directives.write_permission(token_salt="rer.ufficiostampa.ManageSettings")
     directives.write_permission(frontend_url="rer.ufficiostampa.ManageSettings")
@@ -185,6 +195,7 @@ class IRerUfficiostampaSettings(model.Schema):
     directives.write_permission(
         all_attachments_selected="rer.ufficiostampa.ManageSettings"
     )
+    directives.write_permission(max_attachments_size="rer.ufficiostampa.ManageSettings")
 
 
 class ILegislaturesRowSchema(model.Schema):
