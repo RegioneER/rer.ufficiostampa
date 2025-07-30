@@ -31,7 +31,7 @@
   <property name="default_view_fallback">False</property>
   <property name="add_permission">rer.ufficiostampa.AddComunicatoStampa</property>
   <property name="klass">rer.ufficiostampa.content.ComunicatoStampa</property>
-  <property name="behaviors">
+  <property name="behaviors" purge="False">
     <element value="rer.ufficiostampa.basic-comunicato" />
     <element value="plone.categorization" />
     <element value="plone.publication" />

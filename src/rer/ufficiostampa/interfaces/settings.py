@@ -184,11 +184,14 @@ class IRerUfficiostampaSettings(model.Schema):
         required=False,
         default=0,
     )
+    directives.write_permission(email_from_name="rer.ufficiostampa.ManageSettings")
+    directives.write_permission(email_from_address="rer.ufficiostampa.ManageSettings")
     directives.write_permission(token_secret="rer.ufficiostampa.ManageSettings")
     directives.write_permission(token_salt="rer.ufficiostampa.ManageSettings")
     directives.write_permission(frontend_url="rer.ufficiostampa.ManageSettings")
     directives.write_permission(external_sender_url="rer.ufficiostampa.ManageSettings")
     directives.write_permission(css_styles="rer.ufficiostampa.ManageSettings")
+    directives.write_permission(mail_logo="rer.ufficiostampa.ManageSettings")
     directives.write_permission(comunicato_number="rer.ufficiostampa.ManageSettings")
     directives.write_permission(comunicato_year="rer.ufficiostampa.ManageSettings")
     directives.write_permission(recursive_publish="rer.ufficiostampa.ManageSettings")

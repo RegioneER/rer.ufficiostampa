@@ -1,6 +1,8 @@
 from plone.dexterity.interfaces import IDexterityFTI
 from Products.CMFPlone.interfaces import INonInstallable
 from Products.CMFPlone.utils import get_installer
+from plone.registry.interfaces import IRegistry
+from Products.CMFPlone.interfaces import ISearchSchema
 from zope.component import getUtility
 from zope.interface import implementer
 
@@ -42,6 +44,24 @@ def post_install(context):
             "design.plone.contenttypes.behavior.exclude_from_search",
             True,
         )
+        set_behavior(
+            "CartellaStampa",
+            "design.plone.contenttypes.behavior.exclude_from_search",
+            True,
+        )
+
+        disable_searchable_types()
+
+
+def disable_searchable_types(context=None):
+    # remove some types from search enabled ones
+
+    registry = getUtility(IRegistry)
+    settings = registry.forInterface(ISearchSchema, prefix="plone")
+    remove_types = ["CartellaStampa"]
+    types = set(settings.types_not_searched)
+    types.update(remove_types)
+    settings.types_not_searched = tuple(types)
 
 
 def uninstall(context):

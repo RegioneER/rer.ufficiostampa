@@ -52,12 +52,17 @@ def createComunicato(item, event):
 
 def createCartellaStampa(item, event):
     if item.portal_type == "ComunicatoStampa":
-        api.content.create(
+        cartella_stampa = api.content.create(
             container=item,
             type="CartellaStampa",
             title="Cartella Stampa",
             id="cartella-stampa",
         )
+
+        # exclude from search
+        cartella_stampa.exclude_from_search = True
+        cartella_stampa.reindexObject(idxs=["exclude_from_search"])
+
         # disable CartellaStampa from allowed types
         constraints_context = ISelectableConstrainTypes(item)
         constraints_context.setConstrainTypesMode(1)
