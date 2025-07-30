@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-07-29 14:04+0000\n"
+"POT-Creation-Date: 2025-07-30 09:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -99,7 +99,7 @@ msgstr "La prima riga deve contenere i nomi delle colonne. Gli iscritti devono i
 
 #: ../profiles/default/actions.xml
 msgid "Gestione degli iscritti"
-msgstr ""
+msgstr "Gestione degli iscritti"
 
 msgid "Import from CSV"
 msgstr "Importa da CSV"
@@ -117,7 +117,7 @@ msgstr "Tipologia file non consentito per gli allegati"
 
 #: ../profiles/default/actions.xml
 msgid "Invia comunicato/invito"
-msgstr ""
+msgstr "Invia comunicato/invito"
 
 msgid "Name"
 msgstr "Nome"
@@ -185,7 +185,7 @@ msgstr "Stato"
 
 #: ../profiles/default/actions.xml
 msgid "Storico invii"
-msgstr ""
+msgstr "Storico invii"
 
 msgid "Subscribers"
 msgstr "Iscritti"
@@ -202,7 +202,7 @@ msgstr "Tipologia"
 
 #: ../profiles/default/controlpanel.xml
 msgid "Ufficio Stampa"
-msgstr ""
+msgstr "Ufficio Stampa"
 
 #: ../browser/controlpanel.py:113
 msgid "Ufficio Stampa - Geestione degli iscritti"
@@ -226,19 +226,29 @@ msgid "Uninstalls the rer.ufficiostampa add-on."
 msgstr "Disinstalla rer.ufficiostampa."
 
 #. Default: "Insert a list of additional addressed that will receive the mail. One per line. You can use this field also for testing without sending emails to all subscribed addresses."
-#: ../interfaces/content.py:65
+#: ../interfaces/content.py:87
 msgid "additional_addresses_description"
 msgstr "Inserisci una lista di indirizzi email aggiuntivi che riceveranno questa mail. Uno per riga. Puoi utilizzare questo campo (senza selezionare dei canali) anche per fare degli invii di prova prima di inviarla a tutti i destinatari. Gli invii di prova non verranno tracciati nello storico."
 
 #. Default: "Additional addresses"
-#: ../interfaces/content.py:64
+#: ../interfaces/content.py:86
 msgid "additional_addresses_title"
 msgstr "Indirizzi aggiuntivi"
 
 #. Default: "E-mail address already registered."
-#: ../subscriptions/store.py:175
+#: ../subscriptions/store.py:150
 msgid "address_already_registered"
 msgstr "Indirizzo e-mail già iscritto."
+
+#. Default: "If checked, in Comunicato/Invito send form, you will have all attachments selected by default."
+#: ../interfaces/settings.py:169
+msgid "all_attachments_selected_help"
+msgstr "Se selezionato, nel form di invio di Comunicati/Inviti, vedrai tutti gli allegati selezionati di default."
+
+#. Default: "Show all attachments by default"
+#: ../interfaces/settings.py:166
+msgid "all_attachments_selected_label"
+msgstr "Allega tutti i file di default"
 
 #. Default: "Select one or more values."
 #: ../behaviors/legislature.py:41
@@ -265,12 +275,12 @@ msgid "comunicati_search_text_label"
 msgstr "Ricerca testuale"
 
 #. Default: "The number of last sent Comunicato. You don't have to edit this. It's automatically updated when a Comunicato is published."
-#: ../interfaces/settings.py:131
+#: ../interfaces/settings.py:132
 msgid "comunicato_number_help"
 msgstr "Il numero dell'ultimo comunicato spedito. Questo valore si aggiorna automaticamente ad ogni pubblicazione di un nuovo comunicato stampa."
 
 #. Default: "Comunicato number"
-#: ../interfaces/settings.py:127
+#: ../interfaces/settings.py:128
 msgid "comunicato_number_label"
 msgstr "Numero comunicato"
 
@@ -278,22 +288,22 @@ msgid "comunicato_published_on"
 msgstr "Pubblicato il"
 
 #. Default: "You don't have to edit this. It's automatically updated on every new year."
-#: ../interfaces/settings.py:144
+#: ../interfaces/settings.py:145
 msgid "comunicato_year_help"
 msgstr "Non devi modificare questo valore. E' aggiornato automaticamente ogni anno."
 
 #. Default: "Comunicato year"
-#: ../interfaces/settings.py:140
+#: ../interfaces/settings.py:141
 msgid "comunicato_year_label"
 msgstr "Anno comunicato"
 
 #. Default: "Insert a list of CSS styles for received emails."
-#: ../interfaces/settings.py:112
+#: ../interfaces/settings.py:113
 msgid "css_styles_help"
 msgstr "Inserisci una serie di stili CSS per le mail invitate."
 
 #. Default: "Styles"
-#: ../interfaces/settings.py:108
+#: ../interfaces/settings.py:109
 msgid "css_styles_label"
 msgstr "Stili"
 
@@ -306,22 +316,22 @@ msgid "email"
 msgstr "E-mail"
 
 #. Default: "Insert the email address of the sender for emails."
-#: ../interfaces/settings.py:45
+#: ../interfaces/settings.py:46
 msgid "email_from_address_help"
 msgstr "Inserici l l'indirizzo email del mittente delle email."
 
 #. Default: "Email from address"
-#: ../interfaces/settings.py:41
+#: ../interfaces/settings.py:42
 msgid "email_from_address_label"
 msgstr "Indirizzo email mittente"
 
 #. Default: "Insert the name of the sender for emails."
-#: ../interfaces/settings.py:33
+#: ../interfaces/settings.py:34
 msgid "email_from_name_help"
 msgstr "Inserisci il nome da mostrare come mittente delle email."
 
 #. Default: "Email from name"
-#: ../interfaces/settings.py:29
+#: ../interfaces/settings.py:30
 msgid "email_from_name_label"
 msgstr "Nome mittente"
 
@@ -341,12 +351,12 @@ msgid "error_reading_csv"
 msgstr "Errore in lettura del file csv."
 
 #. Default: "If you want to send emails with an external tool (rer.newsletterdispatcher.flask), insert the url of the service here. If empty, all emails will be sent from Plone."
-#: ../interfaces/settings.py:98
+#: ../interfaces/settings.py:99
 msgid "external_sender_url_help"
 msgstr "Se vuoi inviare le email con un tool esterno (rer.newsletterdispatcher.flask), inserisci qui l'url del servizio. Se vuoto, tutte le email verranno spedite da Plone."
 
 #. Default: "External sender URL"
-#: ../interfaces/settings.py:97
+#: ../interfaces/settings.py:98
 msgid "external_sender_url_label"
 msgstr "URL servizio di invio esterno"
 
@@ -354,12 +364,12 @@ msgid "from_label"
 msgstr "Dal"
 
 #. Default: "If the frontend site is published with a different URL than the backend, insert it here. All links in emails will be converted with that URL."
-#: ../interfaces/settings.py:88
+#: ../interfaces/settings.py:89
 msgid "frontend_url_help"
 msgstr "Se il sito pubblico è accessibile da un URL diversa da quella redazionale, inserisci qui l'URL pubblico. Tutti i link all'interno delle email verranno convertiti con l'URL pubblico."
 
 #. Default: "Frontend URL"
-#: ../interfaces/settings.py:87
+#: ../interfaces/settings.py:88
 msgid "frontend_url_label"
 msgstr "URL di frontend"
 
@@ -408,7 +418,7 @@ msgid "label_portal_type"
 msgstr "Tipo"
 
 #. Default: "Sent"
-#: ../interfaces/content.py:29
+#: ../interfaces/content.py:51
 msgid "label_sent"
 msgstr "Inviato"
 
@@ -418,12 +428,12 @@ msgid "label_title"
 msgstr "Titolo"
 
 #. Default: "Insert a list of arguments related to this legislature. One per line."
-#: ../interfaces/settings.py:183
+#: ../interfaces/settings.py:203
 msgid "legislature_arguments_help"
 msgstr "Inserisci una lista di argomenti a cui si fa riferimento."
 
 #. Default: "Arguments"
-#: ../interfaces/settings.py:179
+#: ../interfaces/settings.py:199
 #: ../restapi/services/search_parameters/get.py:113
 msgid "legislature_arguments_label"
 msgstr "Argomenti"
@@ -434,32 +444,32 @@ msgid "legislature_criteria_label"
 msgstr "Legislatura"
 
 #. Default: "Insert the legislature name."
-#: ../interfaces/settings.py:172
+#: ../interfaces/settings.py:192
 msgid "legislature_help"
 msgstr "Inserisci il nome della legislatura."
 
 #. Default: "Legislature"
-#: ../interfaces/settings.py:168
+#: ../interfaces/settings.py:188
 msgid "legislature_label"
 msgstr "Legislatura"
 
 #. Default: "This is a list of all legislatures. The last one is the one used to fill fields in a new Comunicato."
-#: ../interfaces/settings.py:20
+#: ../interfaces/settings.py:21
 msgid "legislatures_help"
 msgstr "Questa è una lista di legislature. L'ultima inserita è quella utilizzata per popolare i campi dei Comunicati e Inviti."
 
 #. Default: "List of legislatures"
-#: ../interfaces/settings.py:16
+#: ../interfaces/settings.py:17
 msgid "legislatures_label"
 msgstr "Elenco Legislature"
 
 #. Default: "Insert a logo that will be used in the emails."
-#: ../interfaces/settings.py:120
+#: ../interfaces/settings.py:121
 msgid "mail_logo_help"
 msgstr "Inserisci un logo che verrà usato nelle email."
 
 #. Default: "Mail logo"
-#: ../interfaces/settings.py:119
+#: ../interfaces/settings.py:120
 msgid "mail_logo_label"
 msgstr "Logo email"
 
@@ -488,12 +498,12 @@ msgid "newspaper"
 msgstr "Testata giornalistica"
 
 #. Default: "Additional notes."
-#: ../interfaces/content.py:78
+#: ../interfaces/content.py:100
 msgid "notes_description"
 msgstr "Note aggiuntive."
 
 #. Default: "Notes"
-#: ../interfaces/content.py:77
+#: ../interfaces/content.py:99
 msgid "notes_title"
 msgstr "Note"
 
@@ -501,12 +511,12 @@ msgid "phone"
 msgstr "Telefono"
 
 #. Default: "If checked, when a Comunicato/Invito is published, all its children will be published too. This is useful to publish all the Cartelle Stampa and Allegati related to a Comunicato."
-#: ../interfaces/settings.py:155
+#: ../interfaces/settings.py:156
 msgid "recursive_publish_help"
 msgstr "Se selezionato, quando un Comunicato/Invito viene pubblicato, tutti i suoi figli verranno pubblicati. Questo è utile per pubblicare tutte le Cartelle Stampa e gli Allegati collegati a un Comunicato."
 
 #. Default: "Recursive publish"
-#: ../interfaces/settings.py:154
+#: ../interfaces/settings.py:155
 msgid "recursive_publish_label"
 msgstr "Pubblicazione ricorsiva"
 
@@ -537,22 +547,22 @@ msgid "select_placeholder_multi"
 msgstr "Seleziona uno o più valori"
 
 #. Default: "Select which attachment you want to send via email. You can only select first level Files and Images."
-#: ../interfaces/content.py:86
+#: ../interfaces/content.py:108
 msgid "send_attachments_description"
 msgstr "Seleziona quali allegati vuoi inviare via email. Puoi selezionare solamente le Immagini e i File di primo livello."
 
 #. Default: "Attachments"
-#: ../interfaces/content.py:85
+#: ../interfaces/content.py:107
 msgid "send_attachments_title"
 msgstr "Allegati"
 
 #. Default: "Select which channels should receive this Comunicato. All email address subscribed to this channel will receive it. "
-#: ../interfaces/content.py:54
+#: ../interfaces/content.py:76
 msgid "send_channels_description"
 msgstr "Seleziona quali canali devono ricevere questa comunicazione. Tutti gli indirizzi email assegnati ai canali selezionati riceveranno il messaggio."
 
 #. Default: "Channels"
-#: ../interfaces/content.py:53
+#: ../interfaces/content.py:75
 msgid "send_channels_title"
 msgstr "Canali"
 
@@ -577,12 +587,12 @@ msgid "skip_unable_to_add"
 msgstr "[${row}] - impossibile aggiungere"
 
 #. Default: "List of available subscription channels.One per line.These channels will be used for users subscriptions and for select to which channel send a Comunicato."
-#: ../interfaces/settings.py:54
+#: ../interfaces/settings.py:55
 msgid "subscription_channels_description"
 msgstr "Elenco dei vari canali a cui ci si può iscrivere. Uno per riga. Questi canali verranno usati per le iscrizioni e per selezionare a chi inviare i comunicati."
 
 #. Default: "Subscription Channels"
-#: ../interfaces/settings.py:53
+#: ../interfaces/settings.py:54
 msgid "subscription_channels_label"
 msgstr "Canali"
 
@@ -599,22 +609,22 @@ msgid "toggle_filters_label"
 msgstr "Apri/chiudi i filtri"
 
 #. Default: "Insert the salt for token generation. This, in conjunction with the secret, will generate unique tokens for subscriptions management links."
-#: ../interfaces/settings.py:77
+#: ../interfaces/settings.py:78
 msgid "token_salt_help"
 msgstr "Inserisci il salt per la generazione del token. E' una stringa che in unione con il secret, serve a generare token univoci per i link di gestione delle iscrizioni."
 
 #. Default: "Token salt"
-#: ../interfaces/settings.py:76
+#: ../interfaces/settings.py:77
 msgid "token_salt_label"
 msgstr "Token salt"
 
 #. Default: "Insert the secret key for token generation."
-#: ../interfaces/settings.py:69
+#: ../interfaces/settings.py:70
 msgid "token_secret_help"
 msgstr "Inserisci la chiave segreta per la generazione dei token."
 
 #. Default: "Token secret"
-#: ../interfaces/settings.py:68
+#: ../interfaces/settings.py:69
 msgid "token_secret_label"
 msgstr "Token secret"
 
@@ -654,7 +664,7 @@ msgid "unsubscribe_confirm_secret_token_settings_error"
 msgstr "Impossibile gestire le iscrizioni. Chiavi per il token non impostate nel pannello di controllo."
 
 #. Default: "Invalid email address: ${address}"
-#: ../interfaces/content.py:18
+#: ../interfaces/content.py:23
 msgid "validation_invalid_email"
 msgstr "Indirizzo email non valido: ${address}"
 

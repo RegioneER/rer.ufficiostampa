@@ -1,3 +1,4 @@
+from plone.autoform import directives
 from plone.restapi.controlpanels import IControlpanel
 from plone.supermodel import model
 from rer.ufficiostampa import _
@@ -171,6 +172,18 @@ class IRerUfficiostampaSettings(model.Schema):
         ),
         required=False,
         default=True,
+    )
+
+    directives.write_permission(token_secret="rer.ufficiostampa.ManageSettings")
+    directives.write_permission(token_salt="rer.ufficiostampa.ManageSettings")
+    directives.write_permission(frontend_url="rer.ufficiostampa.ManageSettings")
+    directives.write_permission(external_sender_url="rer.ufficiostampa.ManageSettings")
+    directives.write_permission(css_styles="rer.ufficiostampa.ManageSettings")
+    directives.write_permission(comunicato_number="rer.ufficiostampa.ManageSettings")
+    directives.write_permission(comunicato_year="rer.ufficiostampa.ManageSettings")
+    directives.write_permission(recursive_publish="rer.ufficiostampa.ManageSettings")
+    directives.write_permission(
+        all_attachments_selected="rer.ufficiostampa.ManageSettings"
     )
 
 
