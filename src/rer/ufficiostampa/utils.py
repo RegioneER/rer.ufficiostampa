@@ -250,15 +250,26 @@ def get_attachments_external(data):
 def get_folder_attachments(context):
     """ """
     attachments = []
-    for child in context.listFolderContents(
-        contentFilter={"portal_type": ["CartellaStampa"]}
+    for cartella_stampa in context.listFolderContents(
+        contentFilter={
+            "portal_type": ["CartellaStampa"],
+        }
     ):
-        if len(child.keys()) > 0:
+        if api.content.get_state(obj=cartella_stampa) != "published":
+            continue
+
+        should_list = False
+        for child in cartella_stampa.listFolderContents():
+            review_state = api.content.get_state(obj=child, default=None)
+            if review_state in ["published", None]:
+                should_list = True
+                break
+        if should_list:
             attachments.append(
                 {
-                    "url": child.absolute_url(),
-                    "title": child.Title(),
-                    "description": child.Description(),
+                    "url": cartella_stampa.absolute_url(),
+                    "title": cartella_stampa.Title(),
+                    "description": cartella_stampa.Description(),
                 }
             )
     return attachments

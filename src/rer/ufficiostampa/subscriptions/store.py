@@ -42,18 +42,9 @@ class BaseStore:
         return len([x for x in self.soup.data.values()])
 
     def search(self, query=None, sort_index="date", reverse=True):
-        """
-        we do manual filter for searchable text because had some indexing problems
-        when importing data.
-        """
-        text = ""
-        if query and "text" in query:
-            text = query.pop("text")
-
-        res = []
         parsed_query = self.parse_query_params(query=query)
         if parsed_query:
-            res = [
+            return [
                 x
                 for x in self.soup.query(
                     queryobject=parsed_query,
@@ -61,35 +52,19 @@ class BaseStore:
                     reverse=reverse,
                 )
             ]
-        else:
-            # return all data
-            records = self.soup.data.values()
-            if sort_index == "date":
-                res = sorted(
-                    records,
-                    key=lambda k: k.attrs[sort_index] or None,
-                    reverse=reverse,
-                )
-            else:
-                res = sorted(
-                    records,
-                    key=lambda k: k.attrs.get(sort_index, "") or "",
-                    reverse=reverse,
-                )
-        if not text:
-            return res
-
-        filter_text = partial(self.filter_by_text, text=text)
-
-        return list(filter(filter_text, res))
-
-    def filter_by_text(self, record, text):
-        for attr in ["name", "surname", "email"]:
-            words = re.split(r"[^a-zA-Z0-9]+", record.attrs.get(attr, ""))
-            match = any(w.startswith(text) for w in words)
-            if match:
-                return True
-        return False
+        # return all data
+        records = self.soup.data.values()
+        if sort_index == "date":
+            return sorted(
+                records,
+                key=lambda k: k.attrs[sort_index] or None,
+                reverse=reverse,
+            )
+        return sorted(
+            records,
+            key=lambda k: k.attrs.get(sort_index, "") or "",
+            reverse=reverse,
+        )
 
     def parse_query_params(self, query):
         if not query:
@@ -101,7 +76,7 @@ class BaseStore:
             if index not in self.indexes:
                 continue
             if index == self.text_index:
-                queries.append(Contains("text", value))
+                queries.append(Contains(index, value))
             elif index in self.keyword_indexes:
                 queries.append(Any(index, value))
             else:
@@ -180,6 +155,55 @@ class SubscriptionsStore(BaseStore):
             )
             raise ValueError(msg)
         return super().add(data=data)
+
+    def search(self, query=None, sort_index="date", reverse=True):
+        """
+        we do manual filter for searchable text because had some indexing problems
+        when importing data.
+        """
+        text = ""
+        if query and "text" in query:
+            text = query.pop("text")
+
+        res = []
+        parsed_query = self.parse_query_params(query=query)
+        if parsed_query:
+            res = [
+                x
+                for x in self.soup.query(
+                    queryobject=parsed_query,
+                    sort_index=sort_index,
+                    reverse=reverse,
+                )
+            ]
+        else:
+            # return all data
+            records = self.soup.data.values()
+            if sort_index == "date":
+                res = sorted(
+                    records,
+                    key=lambda k: k.attrs[sort_index] or None,
+                    reverse=reverse,
+                )
+            else:
+                res = sorted(
+                    records,
+                    key=lambda k: k.attrs.get(sort_index, "") or "",
+                    reverse=reverse,
+                )
+        if not text:
+            return res
+        filter_text = partial(self.filter_by_text, text=text)
+
+        return list(filter(filter_text, res))
+
+    def filter_by_text(self, record, text):
+        for attr in ["name", "surname", "email"]:
+            words = re.split(r"[^a-zA-Z0-9]+", record.attrs.get(attr, ""))
+            match = any(w.startswith(text) for w in words)
+            if match:
+                return True
+        return False
 
 
 @implementer(ISendHistoryStore)

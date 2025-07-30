@@ -161,6 +161,17 @@ class IRerUfficiostampaSettings(model.Schema):
         required=False,
         default=False,
     )
+    all_attachments_selected = schema.Bool(
+        title=_(
+            "all_attachments_selected_label", default="Show all attachments by default"
+        ),
+        description=_(
+            "all_attachments_selected_help",
+            default="If checked, in Comunicato/Invito send form, you will have all attachments selected by default.",
+        ),
+        required=False,
+        default=True,
+    )
 
 
 class ILegislaturesRowSchema(model.Schema):

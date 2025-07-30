@@ -7,6 +7,11 @@ from rer.ufficiostampa import _
 from zope import schema
 from zope.interface import Interface
 from zope.interface import Invalid
+from zope.component import getUtility
+from zope.interface import provider
+from zope.schema.interfaces import IContextAwareDefaultFactory
+from zope.schema.interfaces import IVocabularyFactory
+from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
 
 
 def check_emails(value):
@@ -22,6 +27,23 @@ def check_emails(value):
                 )
             )
     return True
+
+
+@provider(IContextAwareDefaultFactory)
+def default_attachments(context):
+    try:
+        all_attachments_selected = api.portal.get_registry_record(
+            "all_attachments_selected",
+            interface=IRerUfficiostampaSettings,
+        )
+    except KeyError:
+        all_attachments_selected = True
+    if not all_attachments_selected:
+        return []
+    factory = getUtility(
+        IVocabularyFactory, "rer.ufficiostampa.vocabularies.attachments"
+    )
+    return [x.value for x in factory(context)]
 
 
 class IComunicatoStampa(model.Schema):
@@ -93,5 +115,5 @@ class ISendForm(Interface):
         value_type=schema.Choice(source="rer.ufficiostampa.vocabularies.attachments"),
         # questa factory mette di default tutti gli allegati del comunicato,
         # la richiesta è di avere il default vuoto
-        # defaultFactory=default_attachments,
+        defaultFactory=default_attachments,
     )
