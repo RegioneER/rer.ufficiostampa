@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-07-30 09:45+0000\n"
+"POT-Creation-Date: 2025-07-30 13:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -111,7 +111,7 @@ msgstr "Righe importate"
 msgid "Installs the rer.ufficiostampa add-on."
 msgstr "Installa the rer.ufficiostampa."
 
-#: ../utils.py:213
+#: ../utils.py:222
 msgid "Invalid attachment type"
 msgstr "Tipologia file non consentito per gli allegati"
 
@@ -428,12 +428,12 @@ msgid "label_title"
 msgstr "Titolo"
 
 #. Default: "Insert a list of arguments related to this legislature. One per line."
-#: ../interfaces/settings.py:203
+#: ../interfaces/settings.py:218
 msgid "legislature_arguments_help"
 msgstr "Inserisci una lista di argomenti a cui si fa riferimento."
 
 #. Default: "Arguments"
-#: ../interfaces/settings.py:199
+#: ../interfaces/settings.py:214
 #: ../restapi/services/search_parameters/get.py:113
 msgid "legislature_arguments_label"
 msgstr "Argomenti"
@@ -444,12 +444,12 @@ msgid "legislature_criteria_label"
 msgstr "Legislatura"
 
 #. Default: "Insert the legislature name."
-#: ../interfaces/settings.py:192
+#: ../interfaces/settings.py:207
 msgid "legislature_help"
 msgstr "Inserisci il nome della legislatura."
 
 #. Default: "Legislature"
-#: ../interfaces/settings.py:188
+#: ../interfaces/settings.py:203
 msgid "legislature_label"
 msgstr "Legislatura"
 
@@ -483,6 +483,16 @@ msgstr "Stai ricevendo questa email perché sei iscritto al sito ${site_title}"
 #: ../browser/templates/cancel_subscriptions_mail_template.pt:54
 msgid "manage_subscriptions_link"
 msgstr "Gestisci le tue iscrizioni"
+
+#. Default: "Set max attachments size that will sent via email. If an attachment exceed that size, it will be discarded. Set 0 to not limit the size."
+#: ../interfaces/settings.py:178
+msgid "max_attachments_size_help"
+msgstr "Imposta una dimensione massima per gli allegati da inviare via mail. Se un allegato supera questa dimensione, verrà scartato. Imposta 0 per non limitare la dimensione."
+
+#. Default: "Max attachments size"
+#: ../interfaces/settings.py:177
+msgid "max_attachments_size_label"
+msgstr "Dimensione massima allegati"
 
 #. Default: "You need to pass a file at least."
 #: ../restapi/services/subscriptions/csv_endpoint.py:236

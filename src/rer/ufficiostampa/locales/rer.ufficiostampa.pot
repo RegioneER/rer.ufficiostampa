@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-07-30 09:45+0000\n"
+"POT-Creation-Date: 2025-07-30 13:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -111,7 +111,7 @@ msgstr ""
 msgid "Installs the rer.ufficiostampa add-on."
 msgstr ""
 
-#: ../utils.py:213
+#: ../utils.py:222
 msgid "Invalid attachment type"
 msgstr ""
 
@@ -428,12 +428,12 @@ msgid "label_title"
 msgstr ""
 
 #. Default: "Insert a list of arguments related to this legislature. One per line."
-#: ../interfaces/settings.py:203
+#: ../interfaces/settings.py:218
 msgid "legislature_arguments_help"
 msgstr ""
 
 #. Default: "Arguments"
-#: ../interfaces/settings.py:199
+#: ../interfaces/settings.py:214
 #: ../restapi/services/search_parameters/get.py:113
 msgid "legislature_arguments_label"
 msgstr ""
@@ -444,12 +444,12 @@ msgid "legislature_criteria_label"
 msgstr ""
 
 #. Default: "Insert the legislature name."
-#: ../interfaces/settings.py:192
+#: ../interfaces/settings.py:207
 msgid "legislature_help"
 msgstr ""
 
 #. Default: "Legislature"
-#: ../interfaces/settings.py:188
+#: ../interfaces/settings.py:203
 msgid "legislature_label"
 msgstr ""
 
@@ -482,6 +482,16 @@ msgstr ""
 #. Default: "Manage your subscriptions"
 #: ../browser/templates/cancel_subscriptions_mail_template.pt:54
 msgid "manage_subscriptions_link"
+msgstr ""
+
+#. Default: "Set max attachments size that will sent via email. If an attachment exceed that size, it will be discarded. Set 0 to not limit the size."
+#: ../interfaces/settings.py:178
+msgid "max_attachments_size_help"
+msgstr ""
+
+#. Default: "Max attachments size"
+#: ../interfaces/settings.py:177
+msgid "max_attachments_size_label"
 msgstr ""
 
 #. Default: "You need to pass a file at least."
