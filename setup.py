@@ -53,24 +53,13 @@ setup(
     install_requires=[
         "setuptools",
         # -*- Extra requirements: -*-
-        # 'ftfy==4.4.3;python_version<="2.7"',
-        # "collective.z3cform.jsonwidget",
-        # "collective.dexteritytextindexer",
-        "Products.CMFPlone",
-        "Products.CMFCore",
-        "Zope",
         "itsdangerous>=1.1.0",
         "plone.base",
-        "plone.api>=1.8.4",
-        "plone.app.dexterity",
-        "plone.app.contenttypes",
-        "plone.restapi",
         "premailer",
         "requests",
         "souper.plone",
-        "z3c.form",
-        "z3c.jbot",
         "defusedcsv",
+        "rer.blocks2html",
     ],
     extras_require={
         "test": [

@@ -12,6 +12,9 @@ from zope.interface import provider
 from zope.schema.interfaces import IContextAwareDefaultFactory
 from zope.schema.interfaces import IVocabularyFactory
 from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
+from collective.volto.blocksfield.field import BlocksField
+from plone.autoform import directives
+from plone.app.dexterity import textindexer
 
 
 def check_emails(value):
@@ -47,6 +50,12 @@ def default_attachments(context):
 
 
 class IComunicatoStampa(model.Schema):
+    text = BlocksField(
+        title=_("comunicato_text_label", default="Testo"),
+        required=False,
+    )
+    directives.widget("text", allowedBlocks=["slate"])
+
     message_sent = schema.Bool(
         title=_("label_sent", default="Sent"),
         description="",
@@ -58,8 +67,7 @@ class IComunicatoStampa(model.Schema):
     form.omitted("message_sent")
     form.omitted("comunicato_number")
 
-    # set text field as searchable in SearchableText
-    # searchable(IRichText, "text")
+    textindexer.searchable("text")
 
 
 class IInvitoStampa(IComunicatoStampa):

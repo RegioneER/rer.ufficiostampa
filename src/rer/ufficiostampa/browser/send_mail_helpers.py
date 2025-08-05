@@ -15,6 +15,8 @@ from zope.interface import implementer
 from zope.interface import Interface
 from zope.publisher.interfaces import IPublishTraverse
 from zope.publisher.interfaces import NotFound
+from rer.blocks2html.interfaces import IBlocksToHtml
+from zope.component import getUtility
 
 
 @implementer(IUfficioStampaLogoView)
@@ -73,6 +75,19 @@ class BaseView(BrowserView):
         )
 
         return f"{portal_state.navigation_root_url()}/ufficiostampa-logo/@@images/{filename}"
+
+    def get_text(self):
+        text = getattr(
+            self.context, "text", {"blocks": {}, "blocks_layout": {"items": []}}
+        )
+        if not text:
+            return ""
+        blocks_converter = getUtility(IBlocksToHtml)
+        return blocks_converter(
+            context=self.context,
+            blocks=text.get("blocks", {}),
+            blocks_layout=text.get("blocks_layout", {}),
+        )
 
 
 class SendMailView(BaseView):

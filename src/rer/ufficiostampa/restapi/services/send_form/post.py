@@ -204,9 +204,9 @@ class SendComunicato(Service):
     @property
     def subject(self):
         if self.context.portal_type == "ComunicatoStampa":
-            value = f"Comunicato Stampa: {self.context.title}"
+            value = f"Comunicato Regione: {self.context.title}"
         else:
-            value = self.context.title
+            value = f"Invito Regione: {self.context.title}"
         return value
 
     @property

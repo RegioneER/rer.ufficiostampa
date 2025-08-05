@@ -55,7 +55,7 @@ def createCartellaStampa(item, event):
         cartella_stampa = api.content.create(
             container=item,
             type="CartellaStampa",
-            title="Cartella Stampa",
+            title="Cartella stampa",
             id="cartella-stampa",
         )
 

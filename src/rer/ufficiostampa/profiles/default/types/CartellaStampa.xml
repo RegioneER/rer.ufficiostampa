@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <object name="CartellaStampa" meta_type="Dexterity FTI" i18n:domain="plone"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title" i18n:translate="">Cartella Stampa</property>
+ <property name="title" i18n:translate="">Cartella stampa</property>
  <property name="description" i18n:translate=""></property>
  <property name="factory">CartellaStampa</property>
  <property name="add_view_expr">string:${folder_url}/++add++CartellaStampa</property>
