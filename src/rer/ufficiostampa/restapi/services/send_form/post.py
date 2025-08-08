@@ -151,7 +151,7 @@ class SendComunicato(Service):
             "send_uid": send_uid,
         }
 
-        params = {"url": external_sender_url}
+        params = {"url": external_sender_url, "timeout": 5}
         attachments = get_attachments_external(data)
         if attachments:
             params["data"] = payload
@@ -165,12 +165,14 @@ class SendComunicato(Service):
         try:
             response = requests.post(**params)
         except (ConnectionError, Timeout) as e:
-            logger.exception(e)
-            msg = "Errore non previsto durante l'invio del comunicato"
+            if isinstance(e, Timeout):
+                msg = "La comunicazione con il gestore degli invii è andata in timeout, tuttavia la procedura potrebbe essere partita lo stesso. Controlla più tardi lo stato dell'invio."
+                status = "sending"
+            else:
+                msg = "Errore non previsto durante l'invio del comunicato."
+                status = "error"
             if send_uid:
-                self.update_history(
-                    send_id=send_uid, status="error", status_message=msg
-                )
+                self.update_history(send_id=send_uid, status=status, status_message=msg)
             res["status"] = "error"
             res["status_message"] = msg
             return res
@@ -183,6 +185,7 @@ class SendComunicato(Service):
                 )
             res["status"] = "error"
             res["status_message"] = msg
+
         return res
 
     def manage_attachments(self, data, msg):
@@ -237,14 +240,17 @@ class SendComunicato(Service):
 
     # TODO: move to utility ?
     def update_history(self, send_id, status, status_message=""):
+        logger.info(f"Aggiorno history: {send_id} {status} {status_message}")
         tool = getUtility(ISendHistoryStore)
+        data = {
+            "status": status,
+            "status_message": status_message,
+        }
+        if status != "sending":
+            data["completed_date"] = datetime.now()
         res = tool.update(
             id=send_id,
-            data={
-                "completed_date": datetime.now(),
-                "status": status,
-                "status_message": status_message,
-            },
+            data=data,
         )
         if res and "error" in res:
             logger.error(
