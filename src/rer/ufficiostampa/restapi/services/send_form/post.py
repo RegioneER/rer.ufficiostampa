@@ -49,7 +49,7 @@ class SendComunicato(Service):
 
         res = self.sendMessage(data=data)
 
-        if res.get("status", "") == "error":
+        if res and res.get("status", "") == "error":
             self.request.response.setStatus(400)
             return dict(
                 error=dict(type="BadRequest", message=res.get("status_message", ""))
@@ -166,26 +166,27 @@ class SendComunicato(Service):
             response = requests.post(**params)
         except (ConnectionError, Timeout) as e:
             if isinstance(e, Timeout):
-                msg = "La comunicazione con il gestore degli invii è andata in timeout, tuttavia la procedura potrebbe essere partita lo stesso. Controlla più tardi lo stato dell'invio."
+                msg = "In invio, controlla lo storico più tardi."
                 status = "sending"
             else:
                 msg = "Errore non previsto durante l'invio del comunicato."
                 status = "error"
             if send_uid:
                 self.update_history(send_id=send_uid, status=status, status_message=msg)
-            res["status"] = "error"
+            res["status"] = status
             res["status_message"] = msg
             return res
         if response.status_code != 200:
-            msg = f'Impossibile spedire il comunicato "{self.subject}": {response.text}'
+            msg = "Si è verificato un errore durante l'invio del comunicato."
             logger.error(msg)
+            logger.error(f"Context: {self.subject}")
+            logger.error(f"Response: {response.text}")
             if send_uid:
                 self.update_history(
                     send_id=send_uid, status="error", status_message=msg
                 )
             res["status"] = "error"
             res["status_message"] = msg
-
         return res
 
     def manage_attachments(self, data, msg):
