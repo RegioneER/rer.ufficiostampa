@@ -29,6 +29,10 @@
         title="rer.ufficiostampa: Manage Channels"
         />
     <permission
+        id="rer.ufficiostampa.AccessChannels"
+        title="rer.ufficiostampa: Access Channels"
+        />
+    <permission
         id="rer.ufficiostampa.AccessHistory"
         title="rer.ufficiostampa: Access History"
         />

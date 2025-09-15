@@ -8,7 +8,7 @@
       method="GET"
       factory=".crud.SubscriptionsGet"
       for="plone.app.layout.navigation.interfaces.INavigationRoot"
-      permission="rer.ufficiostampa.ManageChannels"
+      permission="rer.ufficiostampa.AccessChannels"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       name="@subscriptions"
       />

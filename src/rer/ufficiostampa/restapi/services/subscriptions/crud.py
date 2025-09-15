@@ -17,6 +17,11 @@ class SubscriptionsGet(DataGet):
         data["channels"] = api.portal.get_registry_record(
             "subscription_channels", interface=IRerUfficiostampaSettings
         )
+        data["permissions"] = {
+            "can_manage": api.user.has_permission(
+                "rer.ufficiostampa: Manage Channels", obj=api.portal.get()
+            ),
+        }
         return data
 
 

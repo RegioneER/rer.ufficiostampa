@@ -17,7 +17,7 @@
       <property name="link_target"></property>
       <property name="icon_expr"></property>
       <property name="permissions">
-        <element value="rer.ufficiostampa: Manage Channels"></element>
+        <element value="rer.ufficiostampa: Access Channels"></element>
       </property>
       <property name="visible">True</property>
     </object>

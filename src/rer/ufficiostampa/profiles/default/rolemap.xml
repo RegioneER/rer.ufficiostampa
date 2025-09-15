@@ -18,6 +18,14 @@
       <role name="Gestore Comunicati" />
     </permission>
     <permission acquire="True"
+                name="rer.ufficiostampa: Access Channels"
+    >
+      <role name="Manager" />
+      <role name="Site Administrator" />
+      <role name="Gestore Comunicati" />
+      <role name="Editor" />
+    </permission>
+    <permission acquire="True"
                 name="rer.ufficiostampa: Access History"
     >
       <role name="Manager" />
