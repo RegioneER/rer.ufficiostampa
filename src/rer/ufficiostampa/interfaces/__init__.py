@@ -5,6 +5,6 @@ from rer.ufficiostampa.interfaces.content import ISendForm  # noqa
 from rer.ufficiostampa.interfaces.layer import IRerUfficiostampaLayer  # noqa
 from rer.ufficiostampa.interfaces.settings import ILegislaturesRowSchema  # noqa
 from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings  # noqa
+from rer.ufficiostampa.interfaces.settings import IUfficioStampaLogoView  # noqa
 from rer.ufficiostampa.interfaces.store import ISendHistoryStore  # noqa
 from rer.ufficiostampa.interfaces.store import ISubscriptionsStore  # noqa
-from rer.ufficiostampa.interfaces.settings import IUfficioStampaLogoView  # noqa

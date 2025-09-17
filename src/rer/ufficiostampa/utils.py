@@ -14,7 +14,7 @@ from rer.ufficiostampa.interfaces.store import ISubscriptionsStore
 from zExceptions import BadRequest
 from zope.component import getUtility
 from zope.globalrequest import getRequest
-from plone.api.exc import InvalidParameterError
+
 import logging
 import premailer
 

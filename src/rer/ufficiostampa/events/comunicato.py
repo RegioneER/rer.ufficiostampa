@@ -1,7 +1,7 @@
 from plone import api
-from rer.ufficiostampa.utils import get_next_comunicato_number
-from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
 from Products.CMFPlone.interfaces import ISelectableConstrainTypes
+from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
+from rer.ufficiostampa.utils import get_next_comunicato_number
 
 
 def changeWorkflow(item, event):

@@ -1,20 +1,20 @@
 # from plone.app.contenttypes.behaviors.richtext import IRichText
 # from plone.app.dexterity.textindexer import searchable
+from collective.volto.blocksfield.field import BlocksField
 from plone import api
+from plone.app.dexterity import textindexer
+from plone.autoform import directives
 from plone.autoform import directives as form
 from plone.supermodel import model
 from rer.ufficiostampa import _
+from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
 from zope import schema
+from zope.component import getUtility
 from zope.interface import Interface
 from zope.interface import Invalid
-from zope.component import getUtility
 from zope.interface import provider
 from zope.schema.interfaces import IContextAwareDefaultFactory
 from zope.schema.interfaces import IVocabularyFactory
-from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
-from collective.volto.blocksfield.field import BlocksField
-from plone.autoform import directives
-from plone.app.dexterity import textindexer
 
 
 def check_emails(value):

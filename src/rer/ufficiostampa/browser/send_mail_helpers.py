@@ -5,18 +5,18 @@ from plone.formwidget.namedfile.converter import b64decode_file
 from plone.namedfile.browser import Download
 from plone.namedfile.file import NamedImage
 from Products.Five import BrowserView
+from rer.blocks2html.interfaces import IBlocksToHtml
 from rer.ufficiostampa.interfaces import IUfficioStampaLogoView
 from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
 from rer.ufficiostampa.utils import get_attachments
 from rer.ufficiostampa.utils import get_folder_attachments
 from rer.ufficiostampa.utils import get_site_title
 from rer.ufficiostampa.utils import prepare_email_message
+from zope.component import getUtility
 from zope.interface import implementer
 from zope.interface import Interface
 from zope.publisher.interfaces import IPublishTraverse
 from zope.publisher.interfaces import NotFound
-from rer.blocks2html.interfaces import IBlocksToHtml
-from zope.component import getUtility
 
 
 @implementer(IUfficioStampaLogoView)

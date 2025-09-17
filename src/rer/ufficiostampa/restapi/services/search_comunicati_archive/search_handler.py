@@ -51,7 +51,7 @@ class Service(object):
 
         if not self.service_name or not self.base_url:
             raise BadRequest(
-                f"Missing config: COMUNICATI_OLD_WS_URL or COMUNICATI_OLD_SERVICE_NAME"
+                "Missing config: COMUNICATI_OLD_WS_URL or COMUNICATI_OLD_SERVICE_NAME"
             )
 
         missing = set(self.required) - set(kw)

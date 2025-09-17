@@ -2,8 +2,8 @@ from plone.autoform import directives
 from plone.restapi.controlpanels import IControlpanel
 from plone.supermodel import model
 from rer.ufficiostampa import _
-from zope.interface import Interface
 from zope import schema
+from zope.interface import Interface
 
 
 class IUfficioStampaLogoView(Interface):

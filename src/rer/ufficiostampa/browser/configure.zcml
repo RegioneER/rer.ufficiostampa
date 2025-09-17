@@ -65,13 +65,13 @@
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
 
-  
+
   <!-- end send preview -->
 
   <browser:page
       name="send_mail_template"
-      class=".send_mail_helpers.SendMailView"
       for="rer.ufficiostampa.interfaces.IComunicatoStampa"
+      class=".send_mail_helpers.SendMailView"
       template="templates/send_mail_template.pt"
       permission="rer.ufficiostampa.Send"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
@@ -85,8 +85,8 @@
       />
 
 
-    <!-- Logo -->
-    <browser:page
+  <!-- Logo -->
+  <browser:page
       name="ufficiostampa-logo"
       for="plone.app.layout.navigation.interfaces.INavigationRoot"
       class=".send_mail_helpers.UfficioStampaLogoView"

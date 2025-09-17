@@ -1,15 +1,40 @@
 Changelog
 =========
 
-2.0.3 (unreleased)
+3.0.0 (unreleased)
 ------------------
 
 - Revert to RER functionalities.
   [cekk]
 - Add restapi endpoints to search old comunicati.
   [cekk]
-
-
+- Set logo in control panel.
+  [cekk]
+- Add management links in object actions to be used in Volto.
+  [cekk]
+- Create a new CartellaStampa inside every new Comunicato.
+  [cekk]
+- Editors can see list of subscribers but cannot edit them.
+  [cekk]
+- Fix legislature behavior.
+  [cekk]
+- Customize basic behaviors for Comunicato and Invito.
+  [cekk]
+- Remove not maintained old-style browser views. Now it works only with restapi.
+  [cekk]
+- Comunicato and Invito text is now managed with BlocksField and limited with only slate block.
+  [cekk]
+- Flag that allow to automatically select all attachments by default in email form.
+  [cekk]
+- Flag that allow to recursive publish/unpublish all contents inside a Comunicato/Invito.
+  [cekk]
+- Allow to set max attachments size in control panel.
+  [cekk]
+- Improved history and subscribers management.
+  [cekk]
+- Handle status messages in history.
+  [cekk]
+  
 2.0.2 (2025-05-12)
 ------------------
 

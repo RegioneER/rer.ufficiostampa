@@ -1,8 +1,8 @@
 from plone.dexterity.interfaces import IDexterityFTI
-from Products.CMFPlone.interfaces import INonInstallable
-from Products.CMFPlone.utils import get_installer
 from plone.registry.interfaces import IRegistry
+from Products.CMFPlone.interfaces import INonInstallable
 from Products.CMFPlone.interfaces import ISearchSchema
+from Products.CMFPlone.utils import get_installer
 from zope.component import getUtility
 from zope.interface import implementer
 
