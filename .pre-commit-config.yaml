@@ -49,6 +49,9 @@ repos:
     -   id: codespell
         additional_dependencies:
           - tomli
+        args:
+          - -I
+          - .codespellignore
 
 ##
 # Add extra configuration options in .meta.toml:
@@ -70,10 +73,10 @@ repos:
     hooks:
     -   id: check-python-versions
         args: ['--only', 'setup.py,pyproject.toml']
--   repo: https://github.com/collective/i18ndude
-    rev: "6.2.0"
-    hooks:
-    -   id: i18ndude
+# -   repo: https://github.com/collective/i18ndude
+#     rev: "6.2.0"
+#     hooks:
+#     -   id: i18ndude
 
 
 ##

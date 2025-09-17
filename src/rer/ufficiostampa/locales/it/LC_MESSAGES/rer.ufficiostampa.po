@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-07-30 13:02+0000\n"
+"POT-Creation-Date: 2025-09-17 12:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -226,12 +226,12 @@ msgid "Uninstalls the rer.ufficiostampa add-on."
 msgstr "Disinstalla rer.ufficiostampa."
 
 #. Default: "Insert a list of additional addressed that will receive the mail. One per line. You can use this field also for testing without sending emails to all subscribed addresses."
-#: ../interfaces/content.py:87
+#: ../interfaces/content.py:95
 msgid "additional_addresses_description"
 msgstr "Inserisci una lista di indirizzi email aggiuntivi che riceveranno questa mail. Uno per riga. Puoi utilizzare questo campo (senza selezionare dei canali) anche per fare degli invii di prova prima di inviarla a tutti i destinatari. Gli invii di prova non verranno tracciati nello storico."
 
 #. Default: "Additional addresses"
-#: ../interfaces/content.py:86
+#: ../interfaces/content.py:94
 msgid "additional_addresses_title"
 msgstr "Indirizzi aggiuntivi"
 
@@ -287,6 +287,11 @@ msgstr "Numero comunicato"
 msgid "comunicato_published_on"
 msgstr "Pubblicato il"
 
+#. Default: "Testo"
+#: ../interfaces/content.py:54
+msgid "comunicato_text_label"
+msgstr ""
+
 #. Default: "You don't have to edit this. It's automatically updated on every new year."
 #: ../interfaces/settings.py:145
 msgid "comunicato_year_help"
@@ -308,7 +313,7 @@ msgid "css_styles_label"
 msgstr "Stili"
 
 #. Default: "Unsubscribe"
-#: ../browser/templates/send_mail_template.pt:61
+#: ../browser/templates/send_mail_template.pt:95
 msgid "delete_subscriptions_link"
 msgstr "Per cancellarti"
 
@@ -418,7 +423,7 @@ msgid "label_portal_type"
 msgstr "Tipo"
 
 #. Default: "Sent"
-#: ../interfaces/content.py:51
+#: ../interfaces/content.py:60
 msgid "label_sent"
 msgstr "Inviato"
 
@@ -428,12 +433,12 @@ msgid "label_title"
 msgstr "Titolo"
 
 #. Default: "Insert a list of arguments related to this legislature. One per line."
-#: ../interfaces/settings.py:218
+#: ../interfaces/settings.py:221
 msgid "legislature_arguments_help"
 msgstr "Inserisci una lista di argomenti a cui si fa riferimento."
 
 #. Default: "Arguments"
-#: ../interfaces/settings.py:214
+#: ../interfaces/settings.py:217
 #: ../restapi/services/search_parameters/get.py:113
 msgid "legislature_arguments_label"
 msgstr "Argomenti"
@@ -444,12 +449,12 @@ msgid "legislature_criteria_label"
 msgstr "Legislatura"
 
 #. Default: "Insert the legislature name."
-#: ../interfaces/settings.py:207
+#: ../interfaces/settings.py:210
 msgid "legislature_help"
 msgstr "Inserisci il nome della legislatura."
 
 #. Default: "Legislature"
-#: ../interfaces/settings.py:203
+#: ../interfaces/settings.py:206
 msgid "legislature_label"
 msgstr "Legislatura"
 
@@ -475,7 +480,7 @@ msgstr "Logo email"
 
 #. Default: "You are receiving this email because you are subscribed to ${site_title}."
 #: ../browser/templates/cancel_subscriptions_mail_template.pt:52
-#: ../browser/templates/send_mail_template.pt:59
+#: ../browser/templates/send_mail_template.pt:93
 msgid "manage_subscriptions_intro"
 msgstr "Stai ricevendo questa email perché sei iscritto al sito ${site_title}"
 
@@ -508,12 +513,12 @@ msgid "newspaper"
 msgstr "Testata giornalistica"
 
 #. Default: "Additional notes."
-#: ../interfaces/content.py:100
+#: ../interfaces/content.py:108
 msgid "notes_description"
 msgstr "Note aggiuntive."
 
 #. Default: "Notes"
-#: ../interfaces/content.py:99
+#: ../interfaces/content.py:107
 msgid "notes_title"
 msgstr "Note"
 
@@ -557,27 +562,27 @@ msgid "select_placeholder_multi"
 msgstr "Seleziona uno o più valori"
 
 #. Default: "Select which attachment you want to send via email. You can only select first level Files and Images."
-#: ../interfaces/content.py:108
+#: ../interfaces/content.py:116
 msgid "send_attachments_description"
 msgstr "Seleziona quali allegati vuoi inviare via email. Puoi selezionare solamente le Immagini e i File di primo livello."
 
 #. Default: "Attachments"
-#: ../interfaces/content.py:107
+#: ../interfaces/content.py:115
 msgid "send_attachments_title"
 msgstr "Allegati"
 
 #. Default: "Select which channels should receive this Comunicato. All email address subscribed to this channel will receive it. "
-#: ../interfaces/content.py:76
+#: ../interfaces/content.py:84
 msgid "send_channels_description"
 msgstr "Seleziona quali canali devono ricevere questa comunicazione. Tutti gli indirizzi email assegnati ai canali selezionati riceveranno il messaggio."
 
 #. Default: "Channels"
-#: ../interfaces/content.py:75
+#: ../interfaces/content.py:83
 msgid "send_channels_title"
 msgstr "Canali"
 
 #. Default: "Date ${date}"
-#: ../browser/templates/send_mail_template.pt:24
+#: ../browser/templates/send_mail_template.pt:40
 msgid "send_date_label"
 msgstr "Data ${date}"
 
@@ -674,7 +679,7 @@ msgid "unsubscribe_confirm_secret_token_settings_error"
 msgstr "Impossibile gestire le iscrizioni. Chiavi per il token non impostate nel pannello di controllo."
 
 #. Default: "Invalid email address: ${address}"
-#: ../interfaces/content.py:23
+#: ../interfaces/content.py:26
 msgid "validation_invalid_email"
 msgstr "Indirizzo email non valido: ${address}"
 

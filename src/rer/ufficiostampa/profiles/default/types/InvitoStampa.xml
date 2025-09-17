@@ -30,7 +30,9 @@
   <property name="default_view_fallback">False</property>
   <property name="add_permission">rer.ufficiostampa.AddInvitoStampa</property>
   <property name="klass">rer.ufficiostampa.content.InvitoStampa</property>
-  <property name="behaviors" purge="False">
+  <property name="behaviors"
+            purge="False"
+  >
     <element value="rer.ufficiostampa.basic-invito" />
     <element value="plone.categorization" />
     <element value="plone.publication" />

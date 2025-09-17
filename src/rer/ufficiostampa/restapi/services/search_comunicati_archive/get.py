@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone import api
 from plone.restapi.batching import HypermediaBatch
 from plone.restapi.search.utils import unflatten_dotted_dict
@@ -53,9 +52,9 @@ class SearchComunicatiArchiveGet(Service):
         results["items"] = []
         for brain in batch:
             data = {k: json_compatible(v) for (k, v) in brain.items()}
-            data[
-                "@id"
-            ] = f"{portal_url}/@dettaglio-comunicato-archive/{brain.get('codice', '')}"
+            data["@id"] = (
+                f"{portal_url}/@dettaglio-comunicato-archive/{brain.get('codice', '')}"
+            )
 
             results["items"].append(data)
 

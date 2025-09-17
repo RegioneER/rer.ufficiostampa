@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from Acquisition import aq_base
 from plone import api
 from plone.api.exc import InvalidParameterError
@@ -14,7 +13,7 @@ import json
 
 
 @implementer(IVocabularyFactory)
-class ArgumentsVocabularyFactory(object):
+class ArgumentsVocabularyFactory:
     def __call__(self, context):
         stored = getattr(aq_base(context), "legislature", "")
         arguments = []
@@ -45,7 +44,7 @@ class ArgumentsVocabularyFactory(object):
 
 
 @implementer(IVocabularyFactory)
-class ChannelsVocabularyFactory(object):
+class ChannelsVocabularyFactory:
     def __call__(self, context):
         try:
             subscription_channels = api.portal.get_registry_record(
@@ -58,7 +57,7 @@ class ChannelsVocabularyFactory(object):
 
 
 @implementer(IVocabularyFactory)
-class AttachmentsVocabularyFactory(object):
+class AttachmentsVocabularyFactory:
     def __call__(self, context):
         terms = []
         for child in context.listFolderContents(
@@ -75,7 +74,7 @@ class AttachmentsVocabularyFactory(object):
 
 
 @implementer(IVocabularyFactory)
-class LegislaturesVocabularyFactory(object):
+class LegislaturesVocabularyFactory:
     def __call__(self, context):
         """
         return a list of legislature names.

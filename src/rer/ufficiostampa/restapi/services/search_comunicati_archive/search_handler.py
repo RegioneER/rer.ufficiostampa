@@ -26,7 +26,7 @@ class ServiceError(Exception):
     pass
 
 
-class Service(object):
+class Service:
     allowed = []
     required = []
 
@@ -135,7 +135,7 @@ class RicercaComunicatiAdvanced(XmlService):
 
     def parse_response(self, xmlbytes):
         try:
-            super(RicercaComunicatiAdvanced, self).parse_response(xmlbytes)
+            super().parse_response(xmlbytes)
         except ServiceError as e:
             logger.error("RicercaComunicatiAdvanced (service.py, line 176) - %s" % e)
             if self.empty_if_errors:
@@ -181,7 +181,7 @@ class DettaglioComunicato(XmlService):
 
     def parse_response(self, xmlbytes):
         try:
-            super(DettaglioComunicato, self).parse_response(xmlbytes)
+            super().parse_response(xmlbytes)
         except ServiceError as e:
             logger.error("DettaglioComunicato (service.py, line 206) - %s" % e)
             self.root = None

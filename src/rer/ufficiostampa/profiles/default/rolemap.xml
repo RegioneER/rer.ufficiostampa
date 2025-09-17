@@ -52,7 +52,9 @@
       <role name="Contributor" />
       <role name="Editor" />
     </permission>
-    <permission acquire="True" name="rer.ufficiostampa: Add Cartella Stampa">
+    <permission acquire="True"
+                name="rer.ufficiostampa: Add Cartella Stampa"
+    >
       <role name="Manager" />
       <role name="Site Administrator" />
       <role name="Owner" />
@@ -70,7 +72,9 @@
     </permission>
 
     <!-- this is needed to access elevate settings controlpanel -->
-    <permission name="Plone Site Setup: Overview" acquire="True">
+    <permission acquire="True"
+                name="Plone Site Setup: Overview"
+    >
       <role name="Gestore Comunicati" />
     </permission>
   </permissions>
