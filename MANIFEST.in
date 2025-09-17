@@ -6,6 +6,7 @@ exclude .babelrc
 exclude .nvmrc
 exclude .coveragerc
 exclude .isort.cfg
+exclude .codespellignore
 include *.GPL
 include *.js
 include *.json
