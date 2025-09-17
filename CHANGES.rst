@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.0 (unreleased)
+3.0.0 (2025-09-17)
 ------------------
 
 - Revert to RER functionalities.
