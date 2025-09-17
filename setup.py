@@ -60,6 +60,7 @@ setup(
         "souper.plone",
         "defusedcsv",
         "rer.blocks2html",
+        "collective.volto.blocksfield",
     ],
     extras_require={
         "test": [
