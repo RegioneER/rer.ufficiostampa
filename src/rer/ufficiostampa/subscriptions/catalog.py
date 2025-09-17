@@ -4,7 +4,6 @@ from repoze.catalog.indexes.keyword import CatalogKeywordIndex
 from repoze.catalog.indexes.text import CatalogTextIndex
 from souper.interfaces import ICatalogFactory
 from souper.soup import NodeAttributeIndexer
-from souper.soup import NodeTextIndexer
 from zope.interface import implementer
 
 import logging
@@ -17,8 +16,6 @@ logger = logging.getLogger(__name__)
 class SubscriptionsSoupCatalogFactory:
     def __call__(self, context):
         catalog = Catalog()
-        text_indexer = NodeTextIndexer(["name", "surname", "email"])
-        catalog["text"] = CatalogTextIndex(text_indexer)
         email_indexer = NodeAttributeIndexer("email")
         catalog["email"] = CatalogFieldIndex(email_indexer)
         name_indexer = NodeAttributeIndexer("name")

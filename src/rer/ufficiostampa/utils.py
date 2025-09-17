@@ -184,10 +184,16 @@ def get_next_comunicato_number():
     return f"{comunicato_number}/{comunicato_year}"
 
 
-MAX_ATTACHMENT_SIZE = 1 * 1024 * 1024
+def get_attachments(data, as_link=False):
+    try:
+        max_attachments_size = api.portal.get_registry_record(
+            "max_attachments_size", interface=IRerUfficiostampaSettings
+        )
+    except (KeyError, InvalidParameterError):
+        max_attachments_size = 0
 
-
-def get_attachments(data, as_link=False, max_attachment_size=MAX_ATTACHMENT_SIZE):
+    if max_attachments_size > 0:
+        max_attachments_size *= 1024 * 1024
     attachments = []
     for uid in data.get("attachments", []):
         item = api.content.get(UID=uid)
@@ -196,16 +202,19 @@ def get_attachments(data, as_link=False, max_attachment_size=MAX_ATTACHMENT_SIZE
             continue
         if item.portal_type == "Image":
             field = item.image
-            if field.size > max_attachment_size and not as_link:
-                continue
-            if field.size <= max_attachment_size and as_link:
-                continue
+            # discard big files
+            if max_attachments_size > 0:
+                if field.size > max_attachments_size and not as_link:
+                    continue
+                if field.size <= max_attachments_size and as_link:
+                    continue
         elif item.portal_type == "File":
             field = item.file
-            if field.size > max_attachment_size and not as_link:
-                continue
-            if field.size <= max_attachment_size and as_link:
-                continue
+            if max_attachments_size > 0:
+                if field.size > max_attachments_size and not as_link:
+                    continue
+                if field.size <= max_attachments_size and as_link:
+                    continue
         elif item.portal_type == "Link":
             if not as_link:
                 continue
@@ -245,3 +254,31 @@ def get_attachments_external(data):
         )
         for x in get_attachments(data)
     ]
+
+
+def get_folder_attachments(context):
+    """ """
+    attachments = []
+    for cartella_stampa in context.listFolderContents(
+        contentFilter={
+            "portal_type": ["CartellaStampa"],
+        }
+    ):
+        if api.content.get_state(obj=cartella_stampa) != "published":
+            continue
+
+        should_list = False
+        for child in cartella_stampa.listFolderContents():
+            review_state = api.content.get_state(obj=child, default=None)
+            if review_state in ["published", None]:
+                should_list = True
+                break
+        if should_list:
+            attachments.append(
+                {
+                    "url": cartella_stampa.absolute_url(),
+                    "title": cartella_stampa.Title(),
+                    "description": cartella_stampa.Description(),
+                }
+            )
+    return attachments

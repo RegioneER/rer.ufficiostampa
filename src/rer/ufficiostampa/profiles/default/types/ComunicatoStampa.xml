@@ -18,8 +18,9 @@
   <property name="global_allow">True</property>
   <property name="filter_content_types">True</property>
   <property name="allowed_content_types">
-    <element value="Folder" />
-    <element value="Document" />
+    <element value="Image" />
+    <element value="File" />
+    <element value="CartellaStampa" />
   </property>
   <property name="allow_discussion">False</property>
   <property name="default_view">view</property>
@@ -30,26 +31,26 @@
   <property name="default_view_fallback">False</property>
   <property name="add_permission">rer.ufficiostampa.AddComunicatoStampa</property>
   <property name="klass">rer.ufficiostampa.content.ComunicatoStampa</property>
-  <property name="behaviors">
+  <property name="behaviors"
+            purge="False"
+  >
+    <element value="rer.ufficiostampa.basic-comunicato" />
     <element value="plone.categorization" />
     <element value="plone.publication" />
     <element value="plone.ownership" />
     <element value="plone.namefromtitle" />
     <element value="plone.allowdiscussion" />
     <element value="plone.excludefromnavigation" />
-    <element value="plone.leadimage" />
-    <element value="kitconcept.seo" />
+    <element value="rer.ufficiostampa.legislature" />
     <element value="plone.shortname" />
-    <element value="plone.richtext" />
     <element value="plone.versioning" />
     <element value="plone.locking" />
     <element value="plone.textindexer" />
-    <element value="volto.preview_image" />
+    <element value="kitconcept.seo" />
+    <element value="plone.constraintypes" />
 
     <!-- TODO: su profilo rer aggiungere
       <element value="rer.solrpush.behaviors.solr_fields.ISolrFields" /> 
-      <element value="rer.ufficiostampa.basic" />
-      <element value="rer.ufficiostampa.legislature" />
     -->
 
     <!-- TODO:

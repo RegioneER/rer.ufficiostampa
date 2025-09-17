@@ -1,5 +1,7 @@
 from plone.dexterity.interfaces import IDexterityFTI
+from plone.registry.interfaces import IRegistry
 from Products.CMFPlone.interfaces import INonInstallable
+from Products.CMFPlone.interfaces import ISearchSchema
 from Products.CMFPlone.utils import get_installer
 from zope.component import getUtility
 from zope.interface import implementer
@@ -30,20 +32,36 @@ class HiddenProfiles:
 
 def post_install(context):
     """Post install script"""
-    # Do something during the installation of this package
     installer = get_installer(context)
     if installer.is_product_installed("design.plone.contenttypes"):
         set_behavior(
             "ComunicatoStampa",
-            "design.plone.contenttypes.behavior.argomenti_news",
+            "design.plone.contenttypes.behavior.exclude_from_search",
             True,
         )
         set_behavior(
-            "ComunicatoStampa", "design.plone.contenttypes.behavior.news_base", True
+            "InvitoStampa",
+            "design.plone.contenttypes.behavior.exclude_from_search",
+            True,
         )
-        set_behavior("ComunicatoStampa", "plone.basic", True)
-        set_behavior("ComunicatoStampa", "rer.ufficiostampa.basic", False)
-        set_behavior("ComunicatoStampa", "rer.ufficiostampa.legislature", False)
+        set_behavior(
+            "CartellaStampa",
+            "design.plone.contenttypes.behavior.exclude_from_search",
+            True,
+        )
+
+        disable_searchable_types()
+
+
+def disable_searchable_types(context=None):
+    # remove some types from search enabled ones
+
+    registry = getUtility(IRegistry)
+    settings = registry.forInterface(ISearchSchema, prefix="plone")
+    remove_types = ["CartellaStampa"]
+    types = set(settings.types_not_searched)
+    types.update(remove_types)
+    settings.types_not_searched = tuple(types)
 
 
 def uninstall(context):

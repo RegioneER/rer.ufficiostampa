@@ -124,6 +124,6 @@ class UfficiostampaHistoryConfigletPanel(RegistryConfigletPanel):
     schema_prefix = None
     configlet_id = "rer.ufficiostampa-managehistory"
     configlet_category_id = "Products"
-    title = _("Ufficio Stampa - Strorico invio comunicati")
+    title = _("Ufficio Stampa - Storico Invio Comunicati")
     # TODO: definire un gruppo specifico per ufficio stampa ?
     group = "Products"

@@ -17,7 +17,6 @@ import souper.plone
 
 
 class RerUfficiostampaLayer(PloneSandboxLayer):
-
     defaultBases = (PLONE_APP_CONTENTTYPES_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
@@ -50,7 +49,6 @@ RER_UFFICIOSTAMPA_FUNCTIONAL_TESTING = FunctionalTesting(
 
 
 class RerUfficiostampaLayerApi(PloneRestApiDXLayer):
-
     defaultBases = (PLONE_APP_CONTENTTYPES_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):

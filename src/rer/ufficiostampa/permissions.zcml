@@ -14,6 +14,10 @@
         id="rer.ufficiostampa.AddInvitoStampa"
         title="rer.ufficiostampa: Add Invito Stampa"
         />
+    <permission
+        id="rer.ufficiostampa.AddCartellaStampa"
+        title="rer.ufficiostampa: Add Cartella Stampa"
+        />
 
     <permission
         id="rer.ufficiostampa.ManageSettings"
@@ -23,6 +27,10 @@
     <permission
         id="rer.ufficiostampa.ManageChannels"
         title="rer.ufficiostampa: Manage Channels"
+        />
+    <permission
+        id="rer.ufficiostampa.AccessChannels"
+        title="rer.ufficiostampa: Access Channels"
         />
     <permission
         id="rer.ufficiostampa.AccessHistory"

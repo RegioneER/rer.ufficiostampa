@@ -1,3 +1,4 @@
+from Acquisition import aq_base
 from plone import api
 from plone.api.exc import InvalidParameterError
 from plone.app.vocabularies.catalog import KeywordsVocabulary
@@ -14,7 +15,7 @@ import json
 @implementer(IVocabularyFactory)
 class ArgumentsVocabularyFactory:
     def __call__(self, context):
-        stored = getattr(context.aq_base, "legislature", "")
+        stored = getattr(aq_base(context), "legislature", "")
         arguments = []
         try:
             legislatures = json.loads(
@@ -59,15 +60,14 @@ class ChannelsVocabularyFactory:
 class AttachmentsVocabularyFactory:
     def __call__(self, context):
         terms = []
-        for brain in api.portal.get_tool("portal_catalog")(
-            portal_type=["File", "Image", "Link"],
-            path={"query": "/".join(context.getPhysicalPath())},
+        for child in context.listFolderContents(
+            contentFilter={"portal_type": ["File", "Image"]}
         ):
             terms.append(
                 SimpleTerm(
-                    value=brain.UID,
-                    token=brain.UID,
-                    title=brain.Title,
+                    value=child.UID(),
+                    token=child.UID(),
+                    title=child.Title(),
                 )
             )
         return SimpleVocabulary(terms)

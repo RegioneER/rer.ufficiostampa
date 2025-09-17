@@ -5,7 +5,7 @@
 *.egg-info
 *.pyc
 *.pyo
-
+.DS_Store
 # translation related
 *.mo
 

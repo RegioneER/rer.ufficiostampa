@@ -1,53 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <object xmlns:i18n="http://xml.zope.org/namespaces/i18n"
         meta_type="Dexterity FTI"
-        name="Comunicato"
+        name="CartellaStampa"
         i18n:domain="plone"
 >
   <property name="title"
             i18n:translate=""
-  >Invito Stampa</property>
+  >Cartella stampa</property>
   <property name="description"
             i18n:translate=""
   />
-  <property name="icon_expr" />
-  <property name="factory">InvitoStampa</property>
-  <property name="add_view_expr">string:${folder_url}/++add++InvitoStampa</property>
+  <property name="factory">CartellaStampa</property>
+  <property name="add_view_expr">string:${folder_url}/++add++CartellaStampa</property>
   <property name="link_target" />
   <property name="immediate_view">view</property>
-  <property name="global_allow">True</property>
+  <property name="global_allow">False</property>
   <property name="filter_content_types">True</property>
   <property name="allowed_content_types">
     <element value="Image" />
     <element value="File" />
+    <element value="Document" />
   </property>
   <property name="allow_discussion">False</property>
-  <property name="default_view">view</property>
+  <property name="default_view">folder_listing</property>
   <property name="view_methods">
-    <!-- <element value="folder_listing" />
-  <element value="folder_contents" /> -->
+    <element value="folder_summary_view" />
+    <element value="folder_tabular_view" />
+    <element value="atct_album_view" />
+    <element value="folder_listing" />
   </property>
   <property name="default_view_fallback">False</property>
-  <property name="add_permission">rer.ufficiostampa.AddInvitoStampa</property>
-  <property name="klass">rer.ufficiostampa.content.InvitoStampa</property>
-  <property name="behaviors"
-            purge="False"
-  >
-    <element value="rer.ufficiostampa.basic-invito" />
-    <element value="plone.categorization" />
-    <element value="plone.publication" />
-    <element value="plone.ownership" />
+  <property name="add_permission">rer.ufficiostampa.AddCartellaStampa</property>
+  <property name="klass">rer.ufficiostampa.content.CartellaStampa</property>
+  <property name="behaviors">
+    <element value="plone.dublincore" />
     <element value="plone.namefromtitle" />
-    <element value="plone.allowdiscussion" />
     <element value="plone.excludefromnavigation" />
-    <element value="rer.ufficiostampa.legislature" />
     <element value="plone.shortname" />
-    <element value="plone.versioning" />
-    <element value="plone.locking" />
-    <element value="plone.textindexer" />
-    <element value="kitconcept.seo" />
+    <element value="plone.constraintypes" />
   </property>
-  <property name="schema">rer.ufficiostampa.interfaces.IInvitoStampa</property>
+  <property name="schema">rer.ufficiostampa.interfaces.ICartellaStampa</property>
   <property name="model_source" />
   <property name="model_file" />
   <property name="schema_policy">dexterity</property>

@@ -13,7 +13,6 @@ import unittest
 
 
 class TestSubscriptionsGet(unittest.TestCase):
-
     layer = RER_UFFICIOSTAMPA_API_FUNCTIONAL_TESTING
 
     def setUp(self):
@@ -82,7 +81,6 @@ class TestSubscriptionsGet(unittest.TestCase):
         self.assertEqual(self.api_session.get(self.url).json()["items_total"], 1)
 
     def test_store_only_known_fields(self):
-
         self.api_session.post(
             self.url,
             json={

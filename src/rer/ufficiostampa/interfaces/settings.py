@@ -1,7 +1,15 @@
+from plone.autoform import directives
 from plone.restapi.controlpanels import IControlpanel
 from plone.supermodel import model
 from rer.ufficiostampa import _
 from zope import schema
+from zope.interface import Interface
+
+
+class IUfficioStampaLogoView(Interface):
+    """
+    Marker interface for logo
+    """
 
 
 class IRerUfficiostampaSettings(model.Schema):
@@ -108,6 +116,14 @@ class IRerUfficiostampaSettings(model.Schema):
         ),
         required=False,
     )
+    mail_logo = schema.Bytes(
+        title=_("mail_logo_label", default="Mail logo"),
+        description=_(
+            "mail_logo_help",
+            default="Insert a logo that will be used in the emails.",
+        ),
+        required=False,
+    )
     comunicato_number = schema.Int(
         title=_(
             "comunicato_number_label",
@@ -135,36 +151,54 @@ class IRerUfficiostampaSettings(model.Schema):
         default=2021,
     )
 
-    default_acura_di = schema.TextLine(
-        title=_(
-            "default_acura_di_label",
-            default="Default a cura di",
-        ),
+    recursive_publish = schema.Bool(
+        title=_("recursive_publish_label", default="Recursive publish"),
         description=_(
-            "default_acura_di_help",
-            default="Inserire il percorso della pagina a cura di predefinita.",
+            "recursive_publish_help",
+            default="If checked, when a Comunicato/Invito is published, all its "
+            "children will be published too. This is useful to publish "
+            "all the Cartelle Stampa and Allegati related to a Comunicato.",
         ),
         required=False,
-        default="/amministrazione/aree-amministrative/ufficio-stampa",
+        default=False,
     )
-
-    default_argomenti = schema.List(
+    all_attachments_selected = schema.Bool(
         title=_(
-            "default_argomenti_label",
-            default="Default argomenti",
+            "all_attachments_selected_label", default="Show all attachments by default"
         ),
         description=_(
-            "default_argomenti_help",
-            default="Inserire i percorsi delle pagine argomenti predefinite."
-            "Una per riga.",
+            "all_attachments_selected_help",
+            default="If checked, in Comunicato/Invito send form, you will have all attachments selected by default.",
         ),
         required=False,
-        default=[
-            "/argomenti/sala-stampa",
-            "/argomenti/comunicazione-istituzionale",
-        ],
-        value_type=schema.TextLine(),
+        default=True,
     )
+    max_attachments_size = schema.Int(
+        title=_("max_attachments_size_label", default="Max attachments size"),
+        description=_(
+            "max_attachments_size_help",
+            default="Set max attachments size that will sent via email. "
+            "If an attachment exceed that size, it will be discarded. "
+            "Set 0 to not limit the size.",
+        ),
+        required=False,
+        default=0,
+    )
+    directives.write_permission(email_from_name="rer.ufficiostampa.ManageSettings")
+    directives.write_permission(email_from_address="rer.ufficiostampa.ManageSettings")
+    directives.write_permission(token_secret="rer.ufficiostampa.ManageSettings")
+    directives.write_permission(token_salt="rer.ufficiostampa.ManageSettings")
+    directives.write_permission(frontend_url="rer.ufficiostampa.ManageSettings")
+    directives.write_permission(external_sender_url="rer.ufficiostampa.ManageSettings")
+    directives.write_permission(css_styles="rer.ufficiostampa.ManageSettings")
+    directives.write_permission(mail_logo="rer.ufficiostampa.ManageSettings")
+    directives.write_permission(comunicato_number="rer.ufficiostampa.ManageSettings")
+    directives.write_permission(comunicato_year="rer.ufficiostampa.ManageSettings")
+    directives.write_permission(recursive_publish="rer.ufficiostampa.ManageSettings")
+    directives.write_permission(
+        all_attachments_selected="rer.ufficiostampa.ManageSettings"
+    )
+    directives.write_permission(max_attachments_size="rer.ufficiostampa.ManageSettings")
 
 
 class ILegislaturesRowSchema(model.Schema):

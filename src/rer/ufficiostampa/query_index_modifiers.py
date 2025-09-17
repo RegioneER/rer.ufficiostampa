@@ -39,10 +39,8 @@ class BaseModifier:
 
 
 class Arguments(BaseModifier):
-
     index_name = "arguments"
 
 
 class Legislature(BaseModifier):
-
     index_name = "legislature"

@@ -1,4 +1,5 @@
 from datetime import datetime
+from functools import partial
 from plone import api
 from repoze.catalog.query import And
 from repoze.catalog.query import Any
@@ -14,6 +15,7 @@ from zope.i18n import translate
 from zope.interface import implementer
 
 import logging
+import re
 
 
 logger = logging.getLogger(__name__)
@@ -24,7 +26,6 @@ class BaseStore:
 
     @property
     def soup(self):
-
         return get_soup(self.soup_name, api.portal.get())
 
     def add(self, data):
@@ -75,7 +76,7 @@ class BaseStore:
             if index not in self.indexes:
                 continue
             if index == self.text_index:
-                queries.append(Contains("text", value))
+                queries.append(Contains(index, value))
             elif index in self.keyword_indexes:
                 queries.append(Any(index, value))
             else:
@@ -154,6 +155,55 @@ class SubscriptionsStore(BaseStore):
             )
             raise ValueError(msg)
         return super().add(data=data)
+
+    def search(self, query=None, sort_index="date", reverse=True):
+        """
+        we do manual filter for searchable text because had some indexing problems
+        when importing data.
+        """
+        text = ""
+        if query and "text" in query:
+            text = query.pop("text")
+
+        res = []
+        parsed_query = self.parse_query_params(query=query)
+        if parsed_query:
+            res = [
+                x
+                for x in self.soup.query(
+                    queryobject=parsed_query,
+                    sort_index=sort_index,
+                    reverse=reverse,
+                )
+            ]
+        else:
+            # return all data
+            records = self.soup.data.values()
+            if sort_index == "date":
+                res = sorted(
+                    records,
+                    key=lambda k: k.attrs[sort_index] or None,
+                    reverse=reverse,
+                )
+            else:
+                res = sorted(
+                    records,
+                    key=lambda k: k.attrs.get(sort_index, "") or "",
+                    reverse=reverse,
+                )
+        if not text:
+            return res
+        filter_text = partial(self.filter_by_text, text=text)
+
+        return list(filter(filter_text, res))
+
+    def filter_by_text(self, record, text):
+        for attr in ["name", "surname", "email"]:
+            words = re.split(r"[^a-zA-Z0-9]+", record.attrs.get(attr, ""))
+            match = any(w.startswith(text) for w in words)
+            if match:
+                return True
+        return False
 
 
 @implementer(ISendHistoryStore)

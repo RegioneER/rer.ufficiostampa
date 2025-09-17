@@ -45,7 +45,6 @@ class TestSetup(unittest.TestCase):
 
 
 class TestUninstall(unittest.TestCase):
-
     layer = RER_UFFICIOSTAMPA_INTEGRATION_TESTING
 
     def setUp(self):

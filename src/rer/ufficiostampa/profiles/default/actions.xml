@@ -7,32 +7,63 @@
           purge="False"
   >
     <object meta_type="CMF Action"
-            name="channels-management"
+            name="ufficiostampa-send"
             i18n:domain="rer.ufficiostampa"
     >
       <property name="title"
                 i18n:translate=""
-      >Channels management</property>
-      <property name="url_expr">string:${globals_view/navigationRootUrl}/@@channels-management</property>
+      >Invia comunicato/invito</property>
+      <property name="url_expr">string:${object_url}/@send-comunicato</property>
       <property name="link_target" />
       <property name="icon_expr" />
+      <property name="available_expr">python: context.restrictedTraverse('@@show-send-links')()</property>
       <property name="permissions">
-        <element value="rer.ufficiostampa: Manage Channels" />
+        <element value="rer.ufficiostampa: Send" />
       </property>
       <property name="visible">True</property>
     </object>
     <object meta_type="CMF Action"
-            name="history-management"
+            name="ufficiostampa-channels-management"
             i18n:domain="rer.ufficiostampa"
     >
       <property name="title"
                 i18n:translate=""
-      >History management</property>
-      <property name="url_expr">string:${globals_view/navigationRootUrl}/@@history-management</property>
+      >Gestione degli iscritti</property>
+      <property name="url_expr">string:${globals_view/navigationRootUrl}/controlpanel/ufficiostampa-managechannels</property>
+      <property name="link_target" />
+      <property name="icon_expr" />
+      <property name="permissions">
+        <element value="rer.ufficiostampa: Access Channels" />
+      </property>
+      <property name="visible">True</property>
+    </object>
+    <object meta_type="CMF Action"
+            name="ufficiostampa-history-management"
+            i18n:domain="rer.ufficiostampa"
+    >
+      <property name="title"
+                i18n:translate=""
+      >Storico invii</property>
+      <property name="url_expr">string:${globals_view/navigationRootUrl}/controlpanel/ufficiostampa-managehistory</property>
       <property name="link_target" />
       <property name="icon_expr" />
       <property name="permissions">
         <element value="rer.ufficiostampa: Access History" />
+      </property>
+      <property name="visible">True</property>
+    </object>
+    <object meta_type="CMF Action"
+            name="ufficiostampa-settings"
+            i18n:domain="rer.ufficiostampa"
+    >
+      <property name="title"
+                i18n:translate=""
+      >Comunicati stampa: impostazioni</property>
+      <property name="url_expr">string:${globals_view/navigationRootUrl}/controlpanel/rer.ufficiostampa</property>
+      <property name="link_target" />
+      <property name="icon_expr" />
+      <property name="permissions">
+        <element value="Plone Site Setup: Overview" />
       </property>
       <property name="visible">True</property>
     </object>
