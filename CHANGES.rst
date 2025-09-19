@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.1 (unreleased)
+3.0.1 (2025-09-19)
 ------------------
 
 - Fix token encodings in vocabularies.
