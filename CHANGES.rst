@@ -4,7 +4,8 @@ Changelog
 3.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Do not return Invito in @search-comunicati results.
+  [cekk]
 
 
 3.0.1 (2025-09-19)
