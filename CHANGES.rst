@@ -4,8 +4,8 @@ Changelog
 3.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Fix token encodings in vocabularies.
+  [cekk]
 
 3.0.0 (2025-09-17)
 ------------------

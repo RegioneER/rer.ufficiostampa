@@ -2,14 +2,48 @@ from Acquisition import aq_base
 from plone import api
 from plone.api.exc import InvalidParameterError
 from plone.app.vocabularies.catalog import KeywordsVocabulary
-from plone.app.vocabularies.terms import safe_simplevocabulary_from_values
 from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
 from zope.interface import implementer
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
+from zope.schema.interfaces import ITokenizedTerm
+from zope.interface import directlyProvides
+from zope.interface import implementer
+from zope.schema.interfaces import ITitledTokenizedTerm
+from plone.app.vocabularies.terms import safe_encode
 
 import json
+
+
+@implementer(ITokenizedTerm)
+class UnsafeSimpleTerm:
+    """
+    Needed to allow unicode tokens in vocabularies.
+    Copied from plone.volto < 5.0.0 (https://github.com/plone/plone.volto/blob/5.0.0b2/src/plone/volto/vocabularies/subject.py)
+    It is removed in plone.volto 5.0.0 because volto 18 ignore tokenized tokens but we are still using 17
+    """
+
+    def __init__(self, value, token, title):
+        """Create a term for value and token. If token is omitted,
+        str(value) is used for the token.  If title is provided,
+        term implements ITitledTokenizedTerm.
+        """
+        self.value = value
+        self.token = token
+        self.title = title
+        if title is not None:
+            directlyProvides(self, ITitledTokenizedTerm)
+
+
+def unsafe_simplevocabulary_from_values(values, query=None):
+    return SimpleVocabulary(
+        [
+            UnsafeSimpleTerm(value, value, value)
+            for value in values
+            if query is None or safe_encode(query) in safe_encode(value)
+        ]
+    )
 
 
 @implementer(IVocabularyFactory)
@@ -36,11 +70,7 @@ class ArgumentsVocabularyFactory:
         for arg in getattr(context, "arguments", []) or []:
             if arg and arg not in arguments:
                 arguments.append(arg)
-        terms = [
-            SimpleTerm(value=x, token=x.encode("utf-8"), title=x)
-            for x in sorted(arguments)
-        ]
-        return SimpleVocabulary(terms)
+        return unsafe_simplevocabulary_from_values(arguments)
 
 
 @implementer(IVocabularyFactory)
@@ -53,7 +83,7 @@ class ChannelsVocabularyFactory:
             )
         except (KeyError, InvalidParameterError):
             subscription_channels = []
-        return safe_simplevocabulary_from_values(subscription_channels)
+        return unsafe_simplevocabulary_from_values(subscription_channels)
 
 
 @implementer(IVocabularyFactory)
@@ -96,7 +126,7 @@ class LegislaturesVocabularyFactory:
         catalog_legislatures = pc.uniqueValuesFor("legislature")
 
         legislatures = [x for x in registry_legislatures if x in catalog_legislatures]
-        return safe_simplevocabulary_from_values(legislatures)
+        return unsafe_simplevocabulary_from_values(legislatures)
 
 
 @implementer(IVocabularyFactory)
