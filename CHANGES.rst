@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.2 (unreleased)
+3.0.2 (2025-09-19)
 ------------------
 
 - Do not return Invito in @search-comunicati results.
