@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.3 (unreleased)
+3.0.3 (2025-09-22)
 ------------------
 
 - Cleanup data from subscriptions csv import.
