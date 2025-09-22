@@ -1,7 +1,7 @@
 <tal:root define="
             site_title python:options['site_title'];
             url python:options['url'];
-            css python:options['css'];
+            css python:options.get('css', '');
           ">
   <style tal:condition="css">${css}</style>
   <div id="logo">

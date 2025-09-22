@@ -10,5 +10,5 @@
   <include package=".search_parameters" />
   <include package=".search_comunicati" />
   <include package=".search_comunicati_archive" />
-
+  <include package=".personal_channel_management" />
 </configure>

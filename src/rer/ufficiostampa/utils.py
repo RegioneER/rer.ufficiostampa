@@ -13,7 +13,6 @@ from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
 from rer.ufficiostampa.interfaces.store import ISubscriptionsStore
 from zExceptions import BadRequest
 from zope.component import getUtility
-from zope.globalrequest import getRequest
 
 import logging
 import premailer
@@ -29,16 +28,7 @@ def get_site_title():
     return site_title
 
 
-def decode_token():
-    request = getRequest()
-    secret = request.form.get("secret", "")
-    if not secret:
-        return {
-            "error": _(
-                "unsubscribe_confirm_secret_null",
-                default="Unable to manage subscriptions. Token not present.",  # noqa
-            )
-        }
+def decode_token(secret):
     try:
         token_secret = api.portal.get_registry_record(
             "token_secret", interface=IRerUfficiostampaSettings

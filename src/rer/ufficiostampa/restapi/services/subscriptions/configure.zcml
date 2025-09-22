@@ -74,4 +74,5 @@
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       name="@subscriptions-clear"
       />
+
 </configure>

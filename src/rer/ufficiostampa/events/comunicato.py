@@ -1,4 +1,5 @@
 from plone import api
+from plone.api.exc import InvalidParameterError
 from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
 from rer.ufficiostampa.utils import get_next_comunicato_number
@@ -51,22 +52,32 @@ def createComunicato(item, event):
 
 
 def createCartellaStampa(item, event):
-    if item.portal_type == "ComunicatoStampa":
+    if item.portal_type != "ComunicatoStampa":
+        return
+
+    if "cartella-stampa" in item.keys():
+        # already exists, it's a copy probably
+        return
+
+    try:
         cartella_stampa = api.content.create(
             container=item,
             type="CartellaStampa",
             title="Cartella stampa",
             id="cartella-stampa",
         )
+    except InvalidParameterError:
+        # Cartella Stampa type is not allowed in ComunicatoStampa
+        return
 
-        # exclude from search
-        cartella_stampa.exclude_from_search = True
-        cartella_stampa.reindexObject(idxs=["exclude_from_search"])
+    # exclude from search
+    cartella_stampa.exclude_from_search = True
+    cartella_stampa.reindexObject(idxs=["exclude_from_search"])
 
-        # disable CartellaStampa from allowed types
-        constraints_context = ISelectableConstrainTypes(item)
-        constraints_context.setConstrainTypesMode(1)
-        constraints_context.setLocallyAllowedTypes(["Image", "File"])
+    # disable CartellaStampa from allowed types
+    constraints_context = ISelectableConstrainTypes(item)
+    constraints_context.setConstrainTypesMode(1)
+    constraints_context.setLocallyAllowedTypes(["Image", "File"])
 
 
 def fixText(item, event):

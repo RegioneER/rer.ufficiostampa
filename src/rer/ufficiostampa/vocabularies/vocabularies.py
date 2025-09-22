@@ -2,16 +2,15 @@ from Acquisition import aq_base
 from plone import api
 from plone.api.exc import InvalidParameterError
 from plone.app.vocabularies.catalog import KeywordsVocabulary
+from plone.app.vocabularies.terms import safe_encode
 from rer.ufficiostampa.interfaces import IRerUfficiostampaSettings
-from zope.interface import implementer
-from zope.schema.interfaces import IVocabularyFactory
-from zope.schema.vocabulary import SimpleTerm
-from zope.schema.vocabulary import SimpleVocabulary
-from zope.schema.interfaces import ITokenizedTerm
 from zope.interface import directlyProvides
 from zope.interface import implementer
 from zope.schema.interfaces import ITitledTokenizedTerm
-from plone.app.vocabularies.terms import safe_encode
+from zope.schema.interfaces import ITokenizedTerm
+from zope.schema.interfaces import IVocabularyFactory
+from zope.schema.vocabulary import SimpleTerm
+from zope.schema.vocabulary import SimpleVocabulary
 
 import json
 
@@ -70,7 +69,7 @@ class ArgumentsVocabularyFactory:
         for arg in getattr(context, "arguments", []) or []:
             if arg and arg not in arguments:
                 arguments.append(arg)
-        return unsafe_simplevocabulary_from_values(arguments)
+        return unsafe_simplevocabulary_from_values(sorted(arguments))
 
 
 @implementer(IVocabularyFactory)

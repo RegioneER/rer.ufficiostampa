@@ -100,34 +100,37 @@ class SubscriptionsCSVPost(Service):
 
         # check for data errors
         for i, row in enumerate(rows):
+            email = row.get("email", "").strip()
+            row["channels"] = self.get_channels_by_row(row=row)
+
             try:
-                Email().validate(row.get("email", ""))
+                Email().validate(email)
             except InvalidEmail:
                 msg = translate(
                     _(
                         "invalid_email",
                         default="[${row}] - row with invalid email ${email}",
-                        mapping={"row": i, "email": row.get("email", "")},
+                        mapping={"row": i, "email": email},
                     ),
                     context=self.request,
                 )
                 logger.warning(f"[ERROR] - {msg}")
                 res["errored"].append(msg)
 
-            request_channels = {
-                r.strip() for r in (row.get("channels") or "").split(",") if r.strip()
-            }
+            request_channels = row.get("channels", [])
             if not request_channels:
                 continue
 
-            channels_invalid = request_channels.difference(subscription_channels)
+            invalid_channels = [
+                c for c in request_channels if c not in subscription_channels
+            ]
 
-            if channels_invalid:
+            if invalid_channels:
                 msg = translate(
                     _(
                         "invalid_channels",
                         default="[${row}] - row with invalid channels: ${channels}",
-                        mapping={"row": i, "channels": ", ".join(channels_invalid)},
+                        mapping={"row": i, "channels": ", ".join(invalid_channels)},
                     ),
                     context=self.request,
                 )
@@ -140,7 +143,6 @@ class SubscriptionsCSVPost(Service):
 
         for i, row in enumerate(rows):
             email = row.get("email", "")
-            row["channels"] = row["channels"].split(",")
             records = tool.search(query={"email": email})
             if not records:
                 # add it
@@ -189,6 +191,14 @@ class SubscriptionsCSVPost(Service):
                     res["imported"] += 1
 
         return res
+
+    def get_channels_by_row(self, row):
+        """
+        cleanup data
+        """
+        return list(
+            {r.strip() for r in (row.get("channels") or "").split(",") if r.strip()}
+        )
 
     def get_csv_data(self, data):
         if data.get("content-type", "") not in (

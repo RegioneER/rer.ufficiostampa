@@ -91,11 +91,22 @@
       for="plone.app.layout.navigation.interfaces.INavigationRoot"
       class=".send_mail_helpers.UfficioStampaLogoView"
       permission="zope.Public"
+      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
   <browser:page
       name="images"
       for="rer.ufficiostampa.interfaces.IUfficioStampaLogoView"
       class=".send_mail_helpers.ImagesLogoView"
       permission="zope.Public"
+      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
+      />
+
+  <!-- cancel subscription -->
+  <browser:page
+      name="cancel_subscriptions_mail_template"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      template="templates/cancel_subscriptions_mail_template.pt"
+      permission="zope2.View"
+      layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
       />
 </configure>

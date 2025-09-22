@@ -4,8 +4,10 @@ Changelog
 3.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Cleanup data from subscriptions csv import.
+  [cekk]
+- Add endpoints to manage personal channel subscriptions.
+  [cekk]
 
 3.0.2 (2025-09-19)
 ------------------
