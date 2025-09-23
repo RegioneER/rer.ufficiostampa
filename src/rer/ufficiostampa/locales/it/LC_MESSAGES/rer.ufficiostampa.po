@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-09-23 18:43+0000\n"
+"POT-Creation-Date: 2025-09-23 19:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -262,7 +262,7 @@ msgid "arguments_label"
 msgstr "Argomenti"
 
 #. Default: "Manage channels subscriptions cancel for ${site}"
-#: ../restapi/services/personal_channels_management/post.py:120
+#: ../restapi/services/personal_channels_management/post.py:116
 msgid "cancel_subscription_subject_label"
 msgstr "Gestione cancellazione iscrizioni canali per ${site}"
 
@@ -307,6 +307,31 @@ msgstr "Non devi modificare questo valore. E' aggiornato automaticamente ogni an
 msgid "comunicato_year_label"
 msgstr "Anno comunicato"
 
+#. Default: "Click on"
+#: ../browser/templates/cancel_subscriptions_mail_template.pt:19
+msgid "confirm_click_on_label"
+msgstr "Clicca sul"
+
+#. Default: "This link will expire in 24 hours."
+#: ../browser/templates/cancel_subscriptions_mail_template.pt:25
+msgid "confirm_expire"
+msgstr "Questo link scadrà in 24 ore."
+
+#. Default: "You received this email because someone asked to cancel your subscriptions on ${site_title}."
+#: ../browser/templates/cancel_subscriptions_mail_template.pt:16
+msgid "confirm_help"
+msgstr "Hai ricevuto questa email perché qualcuno ha richiesto la cancellazione delle tue iscrizioni su ${site_title}."
+
+#. Default: "or ignore this email."
+#: ../browser/templates/cancel_subscriptions_mail_template.pt:23
+msgid "confirm_ignore_label"
+msgstr "o ignora questa email."
+
+#. Default: "confirmation link"
+#: ../browser/templates/cancel_subscriptions_mail_template.pt:20
+msgid "confirm_link_label"
+msgstr "link di conferma"
+
 #. Default: "Insert a list of CSS styles for received emails."
 #: ../interfaces/settings.py:113
 msgid "css_styles_help"
@@ -318,6 +343,7 @@ msgid "css_styles_label"
 msgstr "Stili"
 
 #. Default: "Unsubscribe"
+#: ../browser/templates/cancel_subscriptions_mail_template.pt:49
 #: ../browser/templates/send_mail_template.pt:95
 msgid "delete_subscriptions_link"
 msgstr "Per cancellarti"
@@ -484,28 +510,23 @@ msgid "mail_logo_label"
 msgstr "Logo email"
 
 #. Default: "You are receiving this email because you are subscribed to ${site_title}."
-#: ../browser/templates/cancel_subscriptions_mail_template.pt:52
+#: ../browser/templates/cancel_subscriptions_mail_template.pt:47
 #: ../browser/templates/send_mail_template.pt:93
 msgid "manage_subscriptions_intro"
 msgstr "Stai ricevendo questa email perché sei iscritto al sito ${site_title}"
 
-#. Default: "Manage your subscriptions"
-#: ../browser/templates/cancel_subscriptions_mail_template.pt:54
-msgid "manage_subscriptions_link"
-msgstr "Gestisci le tue iscrizioni"
-
 #. Default: "Unable to send manage subscriptions link. Please contact site administrator."
-#: ../restapi/services/personal_channels_management/post.py:130
+#: ../restapi/services/personal_channels_management/post.py:126
 msgid "manage_subscriptions_not_send"
 msgstr "Impossibile inviare il link per la gestione delle iscrizioni. Contatta l'amministratore del sito."
 
 #. Default: "Mail not found. Unable to send the link."
-#: ../restapi/services/personal_channels_management/post.py:78
+#: ../restapi/services/personal_channels_management/post.py:76
 msgid "manage_subscriptions_request_inexistent_mail"
 msgstr "Email non trovata. Impossibile inviare il link."
 
 #. Default: "Serializer secret and salt not set in control panel. Unable to send the link."
-#: ../restapi/services/personal_channels_management/post.py:93
+#: ../restapi/services/personal_channels_management/post.py:89
 msgid "manage_subscriptions_request_serializer_error"
 msgstr "Serializer secret e salt non impostati nel pannello di controllo. Impossibile inviare il link."
 
@@ -520,7 +541,7 @@ msgid "max_attachments_size_label"
 msgstr "Dimensione massima allegati"
 
 #. Default: "You need to pass an email."
-#: ../restapi/services/personal_channels_management/post.py:66
+#: ../restapi/services/personal_channels_management/post.py:64
 msgid "missing_email"
 msgstr "E' necessario inserire un indirizzo email."
 
@@ -693,7 +714,7 @@ msgid "unsubscribe_confirm_secret_invalid"
 msgstr "Impossibile gestire le iscrizioni. Token non valido."
 
 #. Default: "Unable to manage unsubscriptions. missing token."
-#: ../restapi/services/personal_channels_management/post.py:163
+#: ../restapi/services/personal_channels_management/post.py:159
 msgid "unsubscribe_confirm_secret_null"
 msgstr "Impossibile gestire le iscrizioni. Token mancante."
 
@@ -703,12 +724,12 @@ msgid "unsubscribe_confirm_secret_token_settings_error"
 msgstr "Impossibile gestire le iscrizioni. Chiavi per il token non impostate nel pannello di controllo."
 
 #. Default: "No channels to unsubscribe. Subscription not found."
-#: ../restapi/services/personal_channels_management/post.py:175
+#: ../restapi/services/personal_channels_management/post.py:171
 msgid "unsubscribe_no_channels"
 msgstr "Nessun canale da cui cancellarsi. Iscrizione non trovata."
 
 #. Default: "No channels to unsubscribe. 'channels' field missing."
-#: ../restapi/services/personal_channels_management/post.py:198
+#: ../restapi/services/personal_channels_management/post.py:194
 msgid "unsubscribe_no_channels_field"
 msgstr "Nessun canale da cui cancellarsi. Campo 'channels' mancante."
 

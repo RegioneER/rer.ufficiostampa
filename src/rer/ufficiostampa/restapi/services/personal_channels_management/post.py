@@ -108,7 +108,7 @@ class PersonalChannelsManagementSendLink(BaseService):
             context=api.portal.get(),
             template="cancel_subscriptions_mail_template",
             parameters={
-                "url": f"{self.context.absolute_url()}/personal-channels-management-link?secret={secret}",
+                "url": f"{self.context.absolute_url()}/personal-channels-management?secret={secret}",
                 "site_title": get_site_title(),
             },
         )

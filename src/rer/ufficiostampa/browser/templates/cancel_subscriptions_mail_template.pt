@@ -2,14 +2,18 @@
             site_title python:options['site_title'];
             url python:options['url'];
             css python:options.get('css', '');
-          ">
+            logo_url view/get_logo_url;
+          "
+          i18n:domain="rer.ufficiostampa"
+>
   <style tal:condition="css">${css}</style>
-  <div id="logo">
+  <div id="logo"
+       tal:condition="logo_url"
+  >
     <img alt="Regione Emilia-Romagna"
-         src="${context/portal_url}/++plone++rer.ufficiostampa/logo_rer.gif"
-         i18n:attributes="alt"
+         src="${logo_url}"
     />
-    <div i18n:translate="">Giunta Regionale - Agenzia di informazione e comunicazione</div>
+    <div>Giunta Regionale - Agenzia di informazione e comunicazione</div>
   </div>
   <p i18n:translate="confirm_help">
      You received this email because someone asked to cancel your
@@ -28,32 +32,30 @@
   </b>
   <div id="footer">
     <div class="other-news">
-      <p i18n:translate="all_news_label">
-        Tutte le notizie su
-        <a href="https://www.regione.emilia-romagna.it"
-           title="Regione Emilia-Romagna"
-           i18n:attributes="title"
-        >www.regione.emilia-romagna.it</a>,
-        i comunicati nella sezione
-        <em>Agenzia di informazione e comunicazione<em>.
-          </em></em></p>
-      <p i18n:translate="social_links_label">
-        Seguici su X (<a href="https://x.com/@RegioneER">@RegioneER</a>), Facebook (<a href="https://www.facebook.com/RegioneEmiliaRomagna">@RegioneEmiliaRomagna</a>)</p>
-      <p class="last-item-footer"
-         i18n:translate="contact_tel_label"
-      >Segreteria di redazione tel. 051 5275490</p>
+      <p>
+          Tutti i comunicati sono online su
+        <a href="https://notizie.regione.emilia-romagna.it"
+           title="Notizie Regione Emilia-Romagna"
+        >https://notizie.regione.emilia-romagna.it</a>
+      </p>
+      <p>
+        Seguici su X (<a href="https://x.com/@RegioneER">@RegioneER</a>),
+        Facebook (<a href="https://www.facebook.com/RegioneEmiliaRomagna">@RegioneEmiliaRomagna</a>),
+        Instagram (<a href="https://www.instagram.com/regione_emiliaromagna">@regione_emiliaromagna</a>),
+        Linkedin (<a href="https://www.linkedin.com/company/regione-emilia-romagna">@regione-emilia-romagna</a>)
+      </p>
+      <p class="last-item-footer">Segreteria di redazione tel.
+        <a href="tel:051-5275490">051 5275490</a>
+      </p>
     </div>
-    <div class="manage-subscriptions"
-         i18n:domain="rer.ufficiostampa"
-    >
+    <div class="manage-subscriptions">
       <p i18n:translate="manage_subscriptions_intro">
-         You are receiving this email because you are
-      subscribed to
+        You are receiving this email because you are subscribed to
         <b i18n:name="site_title">${site_title}</b>.
       </p>
       <a href="${context/portal_url}/cancel-subscriptions-request"
-         i18n:translate="manage_subscriptions_link"
-      >Manage your subscriptions</a>.
+         i18n:translate="delete_subscriptions_link"
+      >Unsubscribe</a>
     </div>
   </div>
 </tal:root>
