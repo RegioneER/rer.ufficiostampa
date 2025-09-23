@@ -53,7 +53,7 @@
         You are receiving this email because you are subscribed to
         <b i18n:name="site_title">${site_title}</b>.
       </p>
-      <a href="${context/portal_url}/cancel-subscriptions-request"
+      <a href="${context/portal_url}/personal-channels-management-link"
          i18n:translate="delete_subscriptions_link"
       >Unsubscribe</a>
     </div>
