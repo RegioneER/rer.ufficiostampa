@@ -2,6 +2,7 @@ from email.message import EmailMessage
 from itsdangerous.url_safe import URLSafeTimedSerializer
 from plone import api
 from plone.api.exc import InvalidParameterError
+from plone.protect.interfaces import IDisableCSRFProtection
 from plone.restapi.deserializer import json_body
 from plone.restapi.services import Service
 from rer.ufficiostampa import _
@@ -15,9 +16,7 @@ from smtplib import SMTPException
 from zExceptions import BadRequest
 from zope.component import getUtility
 from zope.i18n import translate
-from plone.protect.interfaces import IDisableCSRFProtection
 from zope.interface import alsoProvides
-
 
 import logging
 
