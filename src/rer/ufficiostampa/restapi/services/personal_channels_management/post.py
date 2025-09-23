@@ -2,7 +2,6 @@ from email.message import EmailMessage
 from itsdangerous.url_safe import URLSafeTimedSerializer
 from plone import api
 from plone.api.exc import InvalidParameterError
-from plone.protect.authenticator import createToken
 from plone.restapi.deserializer import json_body
 from plone.restapi.services import Service
 from rer.ufficiostampa import _
@@ -16,6 +15,9 @@ from smtplib import SMTPException
 from zExceptions import BadRequest
 from zope.component import getUtility
 from zope.i18n import translate
+from plone.protect.interfaces import IDisableCSRFProtection
+from zope.interface import alsoProvides
+
 
 import logging
 
@@ -47,7 +49,7 @@ class BaseService(Service):
         return True
 
 
-class PersonalChannelManagementSendLink(BaseService):
+class PersonalChannelsManagementSendLink(BaseService):
     def reply(self):
         tool = getUtility(ISubscriptionsStore)
         query = json_body(self.request)
@@ -55,23 +57,32 @@ class PersonalChannelManagementSendLink(BaseService):
         email = query.get("email", "").strip()
 
         if not email:
-            raise BadRequest(
-                api.portal.translate(
-                    _("missing_email", default="You need to pass an email.")
-                )
-            )
+            self.request.response.setStatus(400)
+            return {
+                "error": {
+                    "type": "Salt not set",
+                    "message": api.portal.translate(
+                        _("missing_email", default="You need to pass an email.")
+                    ),
+                }
+            }
 
         subscriptions = tool.search(query={"email": email})
         if not subscriptions:
-            msg = _(
-                "manage_subscriptions_request_inexistent_mail",
-                default="Mail not found. Unable to send the link.",
-            )
-            raise BadRequest(api.portal.translate(msg))
+            self.request.response.setStatus(400)
+            return {
+                "error": {
+                    "type": "Salt not set",
+                    "message": api.portal.translate(
+                        _(
+                            "manage_subscriptions_request_inexistent_mail",
+                            default="Mail not found. Unable to send the link.",
+                        )
+                    ),
+                }
+            }
 
         subscription = subscriptions[0]
-        # create CSRF token
-        token = createToken()
 
         # sign data
         serializer = self.get_serializer()
@@ -98,7 +109,7 @@ class PersonalChannelManagementSendLink(BaseService):
             context=api.portal.get(),
             template="cancel_subscriptions_mail_template",
             parameters={
-                "url": f"{self.context.absolute_url()}/cancel-subscriptions?secret={secret}&_authenticator={token}",
+                "url": f"{self.context.absolute_url()}/personal-channels-management-link?secret={secret}",
                 "site_title": get_site_title(),
             },
         )
@@ -139,14 +150,16 @@ class PersonalChannelManagementSendLink(BaseService):
         return URLSafeTimedSerializer(token_secret, token_salt)
 
 
-class PersonalChannelManagementTokenVerify(Service):
+class PersonalChannelsManagementTokenVerify(Service):
     def reply(self):
         query = json_body(self.request)
-        secret = query.get("secret", "").strip()
+        secret = query.get("secret", "") or ""
+        secret = secret.strip()
         if not secret:
+
             msg = _(
                 "unsubscribe_confirm_secret_null",
-                default="Unable to manage subscriptions. Token not present.",  # noqa
+                default="Unable to manage unsubscriptions. missing token.",
             )
             raise BadRequest(api.portal.translate(msg))
         data = decode_token(secret=secret)
@@ -164,8 +177,11 @@ class PersonalChannelManagementTokenVerify(Service):
         return {"channels": channels}
 
 
-class PersonalChannelManagementUpdate(BaseService):
+class PersonalChannelsManagementUpdate(BaseService):
     def reply(self):
+
+        alsoProvides(self.request, IDisableCSRFProtection)
+
         query = json_body(self.request)
         secret = query.get("secret", "").strip()
         channels = query.get("channels", [])

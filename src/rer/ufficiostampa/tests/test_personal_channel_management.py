@@ -16,7 +16,7 @@ import transaction
 import unittest
 
 
-class TestPersonalChannelManagement(unittest.TestCase):
+class TestPersonalChannelsManagement(unittest.TestCase):
     layer = RER_UFFICIOSTAMPA_API_FUNCTIONAL_TESTING
 
     def setUp(self):
@@ -101,7 +101,10 @@ class TestPersonalChannelManagement(unittest.TestCase):
 
     def get_record_from_email(self, email):
         tool = getUtility(ISubscriptionsStore)
-        return tool.search(query={"email": email})[0]
+        records = tool.search(query={"email": email})
+        if records:
+            return records[0]
+        return None
 
     def test_send_link_raise_badrequest_if_missing_email_field(self):
         """
@@ -109,7 +112,7 @@ class TestPersonalChannelManagement(unittest.TestCase):
         """
         self.assertEqual(
             self.api_session.post(
-                f"{self.portal_url}/@personal-channel-management-send-link"
+                f"{self.portal_url}/@personal-channels-management-send-link"
             ).status_code,
             400,
         )
@@ -120,7 +123,7 @@ class TestPersonalChannelManagement(unittest.TestCase):
         """
         self.assertEqual(
             self.api_session.post(
-                f"{self.portal_url}/@personal-channel-management-send-link",
+                f"{self.portal_url}/@personal-channels-management-send-link",
                 json={"email": "dfsdf@dfdf.it"},
             ).status_code,
             400,
@@ -135,7 +138,7 @@ class TestPersonalChannelManagement(unittest.TestCase):
         )
         transaction.commit()
         res = self.api_session.post(
-            f"{self.portal_url}/@personal-channel-management-send-link",
+            f"{self.portal_url}/@personal-channels-management-send-link",
             json={"email": "foo@foo.it"},
         )
         self.assertEqual(
@@ -150,7 +153,7 @@ class TestPersonalChannelManagement(unittest.TestCase):
     def test_send_link_success(self):
         """ """
         res = self.api_session.post(
-            f"{self.portal_url}/@personal-channel-management-send-link",
+            f"{self.portal_url}/@personal-channels-management-send-link",
             json={"email": "foo@foo.it"},
         )
         self.assertEqual(
@@ -161,7 +164,7 @@ class TestPersonalChannelManagement(unittest.TestCase):
     def test_token_verify_raise_badrequest_if_wrong_token(self):
         """ """
         res = self.api_session.post(
-            f"{self.portal_url}/@personal-channel-management-token-verify",
+            f"{self.portal_url}/@personal-channels-management-token-verify",
             json={"secret": "xxx"},
         )
         self.assertEqual(
@@ -171,7 +174,7 @@ class TestPersonalChannelManagement(unittest.TestCase):
 
     def test_token_verify_return_list_of_channels(self):
         res = self.api_session.post(
-            f"{self.portal_url}/@personal-channel-management-token-verify",
+            f"{self.portal_url}/@personal-channels-management-token-verify",
             json={"secret": self.generate_secret(email="foo@foo.it")},
         )
         self.assertEqual(res.json(), {"channels": ["foo", "bar"]})
@@ -179,7 +182,7 @@ class TestPersonalChannelManagement(unittest.TestCase):
     def test_update_raise_badrequest_if_missing_params(self):
         """ """
         res = self.api_session.post(
-            f"{self.portal_url}/@personal-channel-management-update",
+            f"{self.portal_url}/@personal-channels-management-update",
             json={},
         )
         self.assertEqual(
@@ -188,7 +191,7 @@ class TestPersonalChannelManagement(unittest.TestCase):
         )
 
         res = self.api_session.post(
-            f"{self.portal_url}/@personal-channel-management-update",
+            f"{self.portal_url}/@personal-channels-management-update",
             json={"secret": self.generate_secret(email="foo@foo.it")},
         )
         self.assertEqual(
@@ -197,7 +200,7 @@ class TestPersonalChannelManagement(unittest.TestCase):
         )
 
         res = self.api_session.post(
-            f"{self.portal_url}/@personal-channel-management-update",
+            f"{self.portal_url}/@personal-channels-management-update",
             json={"channels": ["foo", "bar"]},
         )
         self.assertEqual(
@@ -208,7 +211,7 @@ class TestPersonalChannelManagement(unittest.TestCase):
     def test_update_raise_badrequest_if_wrong_token(self):
         """ """
         res = self.api_session.post(
-            f"{self.portal_url}/@personal-channel-management-update",
+            f"{self.portal_url}/@personal-channels-management-update",
             json={
                 "secret": "xxx",
                 "channels": ["foo"],
@@ -219,19 +222,36 @@ class TestPersonalChannelManagement(unittest.TestCase):
             400,
         )
 
-    # def test_update_remove_channels(self):
-    #     """ """
-    #     record = self.get_record_from_email(email="foo@foo.it")
+    def test_update_remove_channels(self):
+        """ """
+        record = self.get_record_from_email(email="foo@foo.it")
 
-    #     self.assertEqual(record.attrs.get("channels", []), ["foo", "bar"])
+        self.assertEqual(record.attrs.get("channels", []), ["foo", "bar"])
 
-    #     res = self.api_session.post(
-    #         f"{self.portal_url}/@personal-channel-management-update",
-    #         json={
-    #             "secret": self.generate_secret(email="foo@foo.it"),
-    #             "channels": ["foo"],
-    #         },
-    #     )
-    #     transaction.commit()
-    #     record = self.get_record_from_email(email="foo@foo.it")
-    #     self.assertEqual(record.attrs.get("channels", []), ["foo"])
+        self.api_session.post(
+            f"{self.portal_url}/@personal-channels-management-update",
+            json={
+                "secret": self.generate_secret(email="foo@foo.it"),
+                "channels": ["foo"],
+            },
+        )
+        transaction.commit()
+        record = self.get_record_from_email(email="foo@foo.it")
+        self.assertEqual(record.attrs.get("channels", []), ["foo"])
+
+    def test_update_remove_channels_delete_email_if_no_channels_remaining(self):
+        """ """
+        record = self.get_record_from_email(email="foo@foo.it")
+
+        self.assertEqual(record.attrs.get("channels", []), ["foo", "bar"])
+
+        self.api_session.post(
+            f"{self.portal_url}/@personal-channels-management-update",
+            json={
+                "secret": self.generate_secret(email="foo@foo.it"),
+                "channels": [],
+            },
+        )
+        transaction.commit()
+        record = self.get_record_from_email(email="foo@foo.it")
+        self.assertIsNone(record)
