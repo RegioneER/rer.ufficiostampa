@@ -25,7 +25,7 @@
     <img alt="Regione Emilia-Romagna"
          src="${logo_url}"
     />
-    <div>Giunta Regionale - Agenzia di informazione e comunicazione</div>
+    <div>Giunta regionale - Agenzia di informazione e comunicazione</div>
   </div>
   <div class="infos">
     <div class="comunicato-number"
