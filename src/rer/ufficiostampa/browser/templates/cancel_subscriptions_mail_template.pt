@@ -13,7 +13,7 @@
     <img alt="Regione Emilia-Romagna"
          src="${logo_url}"
     />
-    <div>Giunta Regionale - Agenzia di informazione e comunicazione</div>
+    <div>Giunta regionale - Agenzia di informazione e comunicazione</div>
   </div>
   <p i18n:translate="confirm_help">
      You received this email because someone asked to cancel your
@@ -47,15 +47,6 @@
       <p class="last-item-footer">Segreteria di redazione tel.
         <a href="tel:051-5275490">051 5275490</a>
       </p>
-    </div>
-    <div class="manage-subscriptions">
-      <p i18n:translate="manage_subscriptions_intro">
-        You are receiving this email because you are subscribed to
-        <b i18n:name="site_title">${site_title}</b>.
-      </p>
-      <a href="${context/portal_url}/personal-channels-management-link"
-         i18n:translate="delete_subscriptions_link"
-      >Unsubscribe</a>
     </div>
   </div>
 </tal:root>
