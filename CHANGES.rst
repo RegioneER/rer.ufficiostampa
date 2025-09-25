@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.4 (unreleased)
+3.0.4 (2025-09-25)
 ------------------
 
 - Add endpoints to manage personal channel subscriptions.
