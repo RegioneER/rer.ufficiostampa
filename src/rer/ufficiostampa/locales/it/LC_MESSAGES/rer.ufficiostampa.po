@@ -310,7 +310,7 @@ msgstr "Anno comunicato"
 #. Default: "Click on"
 #: ../browser/templates/cancel_subscriptions_mail_template.pt:19
 msgid "confirm_click_on_label"
-msgstr "Clicca sul"
+msgstr "Per confermare la cancellazione clicca sul"
 
 #. Default: "This link will expire in 24 hours."
 #: ../browser/templates/cancel_subscriptions_mail_template.pt:25
@@ -320,12 +320,12 @@ msgstr "Questo link scadrà in 24 ore."
 #. Default: "You received this email because someone asked to cancel your subscriptions on ${site_title}."
 #: ../browser/templates/cancel_subscriptions_mail_template.pt:16
 msgid "confirm_help"
-msgstr "Hai ricevuto questa email perché qualcuno ha richiesto la cancellazione delle tue iscrizioni su ${site_title}."
+msgstr "Hai ricevuto questa email perché hai richiesto la cancellazione delle tue iscrizioni sul sito ${site_title}."
 
 #. Default: "or ignore this email."
 #: ../browser/templates/cancel_subscriptions_mail_template.pt:23
 msgid "confirm_ignore_label"
-msgstr "o ignora questa email."
+msgstr "oppure se non lo hai richiesto ignora questa email."
 
 #. Default: "confirmation link"
 #: ../browser/templates/cancel_subscriptions_mail_template.pt:20

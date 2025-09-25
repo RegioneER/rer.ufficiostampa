@@ -33,13 +33,13 @@ class BaseService(Service):
         host = api.portal.get_tool(name="MailHost")
         msg = EmailMessage()
 
+        msg.set_payload(message, charset="utf-8")
+        msg.replace_header("Content-Type", "text/html; charset=utf-8")
+
         msg["Subject"] = subject
         msg["To"] = mto
         msg["From"] = mail_from()
         msg["Reply-To"] = mail_from()
-
-        msg.set_payload(message, charset="utf-8")
-        msg.replace_header("Content-Type", "text/html; charset=utf-8")
 
         try:
             host.send(msg.as_string())
