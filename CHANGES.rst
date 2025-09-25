@@ -4,7 +4,8 @@ Changelog
 3.0.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add endpoints to manage personal channel subscriptions.
+  [cekk]
 
 
 3.0.3 (2025-09-22)

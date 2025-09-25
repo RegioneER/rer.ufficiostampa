@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-09-17 12:46+0000\n"
+"POT-Creation-Date: 2025-09-23 19:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -111,7 +111,7 @@ msgstr "Righe importate"
 msgid "Installs the rer.ufficiostampa add-on."
 msgstr "Installa the rer.ufficiostampa."
 
-#: ../utils.py:222
+#: ../utils.py:212
 msgid "Invalid attachment type"
 msgstr "Tipologia file non consentito per gli allegati"
 
@@ -261,6 +261,11 @@ msgstr "Seleziona uno o più valori possibili."
 msgid "arguments_label"
 msgstr "Argomenti"
 
+#. Default: "Manage channels subscriptions cancel for ${site}"
+#: ../restapi/services/personal_channels_management/post.py:116
+msgid "cancel_subscription_subject_label"
+msgstr "Gestione cancellazione iscrizioni canali per ${site}"
+
 msgid "channels"
 msgstr "Canali"
 
@@ -290,7 +295,7 @@ msgstr "Pubblicato il"
 #. Default: "Testo"
 #: ../interfaces/content.py:54
 msgid "comunicato_text_label"
-msgstr ""
+msgstr "Testo"
 
 #. Default: "You don't have to edit this. It's automatically updated on every new year."
 #: ../interfaces/settings.py:145
@@ -301,6 +306,31 @@ msgstr "Non devi modificare questo valore. E' aggiornato automaticamente ogni an
 #: ../interfaces/settings.py:141
 msgid "comunicato_year_label"
 msgstr "Anno comunicato"
+
+#. Default: "Click on"
+#: ../browser/templates/cancel_subscriptions_mail_template.pt:19
+msgid "confirm_click_on_label"
+msgstr "Per confermare la cancellazione clicca sul"
+
+#. Default: "This link will expire in 24 hours."
+#: ../browser/templates/cancel_subscriptions_mail_template.pt:25
+msgid "confirm_expire"
+msgstr "Questo link scadrà in 24 ore."
+
+#. Default: "You received this email because someone asked to cancel your subscriptions on ${site_title}."
+#: ../browser/templates/cancel_subscriptions_mail_template.pt:16
+msgid "confirm_help"
+msgstr "Hai ricevuto questa email perché hai richiesto la cancellazione delle tue iscrizioni sul sito ${site_title}."
+
+#. Default: "or ignore this email."
+#: ../browser/templates/cancel_subscriptions_mail_template.pt:23
+msgid "confirm_ignore_label"
+msgstr "oppure se non lo hai richiesto ignora questa email."
+
+#. Default: "confirmation link"
+#: ../browser/templates/cancel_subscriptions_mail_template.pt:20
+msgid "confirm_link_label"
+msgstr "link di conferma"
 
 #. Default: "Insert a list of CSS styles for received emails."
 #: ../interfaces/settings.py:113
@@ -313,6 +343,7 @@ msgid "css_styles_label"
 msgstr "Stili"
 
 #. Default: "Unsubscribe"
+#: ../browser/templates/cancel_subscriptions_mail_template.pt:49
 #: ../browser/templates/send_mail_template.pt:95
 msgid "delete_subscriptions_link"
 msgstr "Per cancellarti"
@@ -351,7 +382,7 @@ msgid "empty_subscribers"
 msgstr "Devi selezionare almeno un canale o indirizzo email."
 
 #. Default: "Error reading csv file."
-#: ../restapi/services/subscriptions/csv_endpoint.py:230
+#: ../restapi/services/subscriptions/csv_endpoint.py:240
 msgid "error_reading_csv"
 msgstr "Errore in lettura del file csv."
 
@@ -385,12 +416,12 @@ msgid "go_to_search_results"
 msgstr "Vai ai risultati"
 
 #. Default: "[${row}] - row with invalid channels: ${channels}"
-#: ../restapi/services/subscriptions/csv_endpoint.py:127
+#: ../restapi/services/subscriptions/csv_endpoint.py:130
 msgid "invalid_channels"
 msgstr "[${row}] - riga con canali non validi: ${channels}"
 
 #. Default: "[${row}] - row with invalid email ${email}"
-#: ../restapi/services/subscriptions/csv_endpoint.py:107
+#: ../restapi/services/subscriptions/csv_endpoint.py:110
 msgid "invalid_email"
 msgstr "[${row}] - riga con email non valida: ${email}"
 
@@ -479,15 +510,25 @@ msgid "mail_logo_label"
 msgstr "Logo email"
 
 #. Default: "You are receiving this email because you are subscribed to ${site_title}."
-#: ../browser/templates/cancel_subscriptions_mail_template.pt:52
+#: ../browser/templates/cancel_subscriptions_mail_template.pt:47
 #: ../browser/templates/send_mail_template.pt:93
 msgid "manage_subscriptions_intro"
 msgstr "Stai ricevendo questa email perché sei iscritto al sito ${site_title}"
 
-#. Default: "Manage your subscriptions"
-#: ../browser/templates/cancel_subscriptions_mail_template.pt:54
-msgid "manage_subscriptions_link"
-msgstr "Gestisci le tue iscrizioni"
+#. Default: "Unable to send manage subscriptions link. Please contact site administrator."
+#: ../restapi/services/personal_channels_management/post.py:126
+msgid "manage_subscriptions_not_send"
+msgstr "Impossibile inviare il link per la gestione delle iscrizioni. Contatta l'amministratore del sito."
+
+#. Default: "Mail not found. Unable to send the link."
+#: ../restapi/services/personal_channels_management/post.py:76
+msgid "manage_subscriptions_request_inexistent_mail"
+msgstr "Email non trovata. Impossibile inviare il link."
+
+#. Default: "Serializer secret and salt not set in control panel. Unable to send the link."
+#: ../restapi/services/personal_channels_management/post.py:89
+msgid "manage_subscriptions_request_serializer_error"
+msgstr "Serializer secret e salt non impostati nel pannello di controllo. Impossibile inviare il link."
 
 #. Default: "Set max attachments size that will sent via email. If an attachment exceed that size, it will be discarded. Set 0 to not limit the size."
 #: ../interfaces/settings.py:178
@@ -499,8 +540,13 @@ msgstr "Imposta una dimensione massima per gli allegati da inviare via mail. Se 
 msgid "max_attachments_size_label"
 msgstr "Dimensione massima allegati"
 
+#. Default: "You need to pass an email."
+#: ../restapi/services/personal_channels_management/post.py:64
+msgid "missing_email"
+msgstr "E' necessario inserire un indirizzo email."
+
 #. Default: "You need to pass a file at least."
-#: ../restapi/services/subscriptions/csv_endpoint.py:236
+#: ../restapi/services/subscriptions/csv_endpoint.py:246
 msgid "missing_file"
 msgstr "Devi caricare almeno un file."
 
@@ -587,17 +633,17 @@ msgid "send_date_label"
 msgstr "Data ${date}"
 
 #. Default: "[${row}] - \"${email}\" already in database"
-#: ../restapi/services/subscriptions/csv_endpoint.py:177
+#: ../restapi/services/subscriptions/csv_endpoint.py:179
 msgid "skip_duplicate"
 msgstr "[${row}] - \"${email}\" già presente"
 
 #. Default: "[${row}] - Multiple values for \"${email}\""
-#: ../restapi/services/subscriptions/csv_endpoint.py:164
+#: ../restapi/services/subscriptions/csv_endpoint.py:166
 msgid "skip_duplicate_multiple"
 msgstr "[${row}] - Valori multipli nel db per \"${email}\""
 
 #. Default: "[${row}] - unable to add"
-#: ../restapi/services/subscriptions/csv_endpoint.py:150
+#: ../restapi/services/subscriptions/csv_endpoint.py:152
 msgid "skip_unable_to_add"
 msgstr "[${row}] - impossibile aggiungere"
 
@@ -613,7 +659,6 @@ msgstr "Canali"
 
 #. Default: "His subscription has been deleted from the database because he is not subscribed to any channel at all."
 #: ../browser/templates/cancel_subscriptions_notify_template.pt:20
-#, fuzzy
 msgid "subscription_deleted_label"
 msgstr "La sua iscrizione è stata anche rimossa dal database perché non era più iscritto a nessun canale."
 
@@ -644,39 +689,49 @@ msgid "token_secret_label"
 msgstr "Token secret"
 
 #. Default: "Unable to manage subscriptions. Invalid email."
-#: ../utils.py:100
+#: ../utils.py:90
 msgid "unsubscribe_confirm_invalid_email"
 msgstr "Impossibile gestire le iscrizioni. Email non valida."
 
 #. Default: "Unable to manage subscriptions. Invalid id."
-#: ../utils.py:93
+#: ../utils.py:83
 msgid "unsubscribe_confirm_invalid_id"
 msgstr "Impossibile gestire le iscrizioni. Id non valido."
 
 #. Default: "Unable to manage subscriptions. Invalid parameters."
-#: ../utils.py:84
+#: ../utils.py:74
 msgid "unsubscribe_confirm_invalid_parameters"
 msgstr "Impossibile gestire le iscrizioni. Parametri non validi."
 
 #. Default: "Unable to manage subscriptions. Token expired."
-#: ../utils.py:68
+#: ../utils.py:58
 msgid "unsubscribe_confirm_secret_expired"
 msgstr "Impossibile gestire le iscrizioni. Token scaduto."
 
 #. Default: "Unable to manage subscriptions. Invalid token."
-#: ../utils.py:75
+#: ../utils.py:65
 msgid "unsubscribe_confirm_secret_invalid"
 msgstr "Impossibile gestire le iscrizioni. Token non valido."
 
-#. Default: "Unable to manage subscriptions. Token not present."
-#: ../utils.py:37
+#. Default: "Unable to manage unsubscriptions. missing token."
+#: ../restapi/services/personal_channels_management/post.py:159
 msgid "unsubscribe_confirm_secret_null"
-msgstr "Impossibile gestire le iscrizioni. Token non presente."
+msgstr "Impossibile gestire le iscrizioni. Token mancante."
 
 #. Default: "Unable to manage subscriptions. Token keys not set in control panel."
-#: ../utils.py:51
+#: ../utils.py:41
 msgid "unsubscribe_confirm_secret_token_settings_error"
 msgstr "Impossibile gestire le iscrizioni. Chiavi per il token non impostate nel pannello di controllo."
+
+#. Default: "No channels to unsubscribe. Subscription not found."
+#: ../restapi/services/personal_channels_management/post.py:171
+msgid "unsubscribe_no_channels"
+msgstr "Nessun canale da cui cancellarsi. Iscrizione non trovata."
+
+#. Default: "No channels to unsubscribe. 'channels' field missing."
+#: ../restapi/services/personal_channels_management/post.py:194
+msgid "unsubscribe_no_channels_field"
+msgstr "Nessun canale da cui cancellarsi. Campo 'channels' mancante."
 
 #. Default: "Invalid email address: ${address}"
 #: ../interfaces/content.py:26
@@ -684,6 +739,6 @@ msgid "validation_invalid_email"
 msgstr "Indirizzo email non valido: ${address}"
 
 #. Default: "You need to pass a csv file."
-#: ../restapi/services/subscriptions/csv_endpoint.py:199
+#: ../restapi/services/subscriptions/csv_endpoint.py:209
 msgid "wrong_content_type"
 msgstr "Devi caricare un file csv."

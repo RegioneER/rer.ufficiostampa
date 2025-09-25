@@ -79,6 +79,7 @@
   <browser:page
       name="cancel_subscriptions_notify_template"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".send_mail_helpers.SendMailView"
       template="templates/cancel_subscriptions_notify_template.pt"
       permission="zope2.View"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
@@ -105,6 +106,7 @@
   <browser:page
       name="cancel_subscriptions_mail_template"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".send_mail_helpers.SendMailView"
       template="templates/cancel_subscriptions_mail_template.pt"
       permission="zope2.View"
       layer="rer.ufficiostampa.interfaces.IRerUfficiostampaLayer"
