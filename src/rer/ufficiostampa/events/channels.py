@@ -1,8 +1,8 @@
 from plone.registry.interfaces import IRecordModifiedEvent
-from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
-from zope.component import getUtility
 from rer.ufficiostampa.interfaces import ISubscriptionsStore
+from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
 from zope.component import adapter
+from zope.component import getUtility
 
 
 @adapter(IRecordModifiedEvent)
