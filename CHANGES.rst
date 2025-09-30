@@ -8,7 +8,8 @@ Changelog
   [cekk]
 - When a channel is removed from the control panel, it is also removed from subscribers.
   [cekk]
-
+- Case insensitive subscribers search.
+  [cekk]
 
 3.0.4 (2025-09-25)
 ------------------

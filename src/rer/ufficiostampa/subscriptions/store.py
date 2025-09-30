@@ -202,8 +202,12 @@ class SubscriptionsStore(BaseStore):
         return list(filter(filter_text, res))
 
     def filter_by_text(self, record, text):
+        """
+        Force lowercase to have exact matches
+        """
+        text = text.lower()
         for attr in ["name", "surname", "email"]:
-            words = re.split(r"[^a-zA-Z0-9]+", record.attrs.get(attr, ""))
+            words = re.split(r"[^a-zA-Z0-9]+", record.attrs.get(attr, "").lower())
             match = any(w.startswith(text) for w in words)
             if match:
                 return True

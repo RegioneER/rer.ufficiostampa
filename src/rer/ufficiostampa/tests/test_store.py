@@ -82,7 +82,7 @@ class TestTool(unittest.TestCase):
         res = tool.delete(id=1222)
         self.assertEqual(res, {"error": "NotFound"})
 
-    def test_search(self):
+    def test_search_by_text(self):
         tool = getUtility(ISubscriptionsStore)
         tool.add(
             {
@@ -120,13 +120,118 @@ class TestTool(unittest.TestCase):
         self.assertEqual(len(tool.search(query={"text": "baz"})), 1)
         self.assertEqual(len(tool.search(query={"text": "xxx"})), 1)
 
-        # search by channel
-        self.assertEqual(len(tool.search(query={"channels": "foo"})), 2)
-        self.assertEqual(len(tool.search(query={"channels": "baz"})), 1)
-        self.assertEqual(len(tool.search(query={"channels": ["foo", "bar"]})), 2)
+    def test_search_by_channel(self):
+        tool = getUtility(ISubscriptionsStore)
+        tool.add(
+            {
+                "channels": ["foo"],
+                "email": "foo@foo.it",
+                "name": "John",
+                "surname": "xxx",
+                "phone": "123456",
+            },
+        )
+        tool.add(
+            {
+                "channels": ["foo", "bar"],
+                "email": "bar@bar.it",
+                "name": "Jack",
+                "surname": "yyy",
+                "phone": "123456",
+            },
+        )
+        tool.add(
+            {
+                "channels": ["baz"],
+                "email": "baz@baz.it",
+                "name": "Jim",
+                "surname": "zzz",
+                "phone": "123456",
+            },
+        )
+        transaction.commit()
+
+        self.assertEqual(len(tool.search()), 3)
+
+        #  search by text (index name, surname and email)
+        self.assertEqual(len(tool.search(query={"text": "John"})), 1)
+        self.assertEqual(len(tool.search(query={"text": "baz"})), 1)
+        self.assertEqual(len(tool.search(query={"text": "xxx"})), 1)
+
+    def test_search_combined(self):
+        tool = getUtility(ISubscriptionsStore)
+        tool.add(
+            {
+                "channels": ["foo"],
+                "email": "foo@foo.it",
+                "name": "John",
+                "surname": "xxx",
+                "phone": "123456",
+            },
+        )
+        tool.add(
+            {
+                "channels": ["foo", "bar"],
+                "email": "bar@bar.it",
+                "name": "Jack",
+                "surname": "yyy",
+                "phone": "123456",
+            },
+        )
+        tool.add(
+            {
+                "channels": ["baz"],
+                "email": "baz@baz.it",
+                "name": "Jim",
+                "surname": "zzz",
+                "phone": "123456",
+            },
+        )
+        transaction.commit()
+
+        self.assertEqual(len(tool.search()), 3)
 
         # combined search
         self.assertEqual(len(tool.search(query={"channels": "foo", "text": "Jack"})), 1)
+
+    def test_search_by_text_case_insensitive(self):
+        tool = getUtility(ISubscriptionsStore)
+        tool.add(
+            {
+                "channels": ["foo"],
+                "email": "foo@foo.it",
+                "name": "John",
+                "surname": "xxx",
+                "phone": "123456",
+            },
+        )
+        tool.add(
+            {
+                "channels": ["foo", "bar"],
+                "email": "bar@bar.it",
+                "name": "JACK",
+                "surname": "yyy",
+                "phone": "123456",
+            },
+        )
+        tool.add(
+            {
+                "channels": ["baz"],
+                "email": "baz@baz.it",
+                "name": "Jim",
+                "surname": "YYY",
+                "phone": "123456",
+            },
+        )
+        transaction.commit()
+
+        self.assertEqual(len(tool.search()), 3)
+
+        #  search by text (index name, surname and email)
+        self.assertEqual(len(tool.search(query={"text": "John"})), 1)
+        self.assertEqual(len(tool.search(query={"text": "JOHN"})), 1)
+        self.assertEqual(len(tool.search(query={"text": "yyy"})), 2)
+        self.assertEqual(len(tool.search(query={"text": "YyY"})), 2)
 
     def test_clear(self):
         tool = getUtility(ISubscriptionsStore)
