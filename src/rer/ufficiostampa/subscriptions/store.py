@@ -144,6 +144,10 @@ class SubscriptionsStore(BaseStore):
     text_index = "text"
 
     def add(self, data):
+        # force lower to have unique emails
+        email = data.get("email", "")
+        if email:
+            data["email"] = email.lower()
         old_record = self.search(query={"email": data.get("email", "")})
         if old_record:
             msg = translate(

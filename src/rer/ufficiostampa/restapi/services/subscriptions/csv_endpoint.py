@@ -46,7 +46,6 @@ class SubscriptionsCSVPost(Service):
         alsoProvides(self.request, IDisableCSRFProtection)
         tool = getUtility(ISubscriptionsStore)
         query = self.parse_query()
-
         clear = query.get("clear", False)
         overwrite = query.get("overwrite", False)
         # has_header = query.get("has_header", False)

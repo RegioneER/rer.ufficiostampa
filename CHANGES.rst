@@ -4,7 +4,10 @@ Changelog
 3.0.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- The CSV export service can now be filtered.
+  [cekk]
+- When a channel is removed from the control panel, it is also removed from subscribers.
+  [cekk]
 
 
 3.0.4 (2025-09-25)

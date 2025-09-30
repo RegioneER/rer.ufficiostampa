@@ -31,4 +31,10 @@
            zope.lifecycleevent.interfaces.IObjectModifiedEvent"
       handler=".comunicato.fixText"
       />
+
+  <!-- edit dei canali-->
+  <subscriber
+      for="plone.registry.interfaces.IRecordModifiedEvent"
+      handler=".channels.update_channels_list"
+      />
 </configure>
