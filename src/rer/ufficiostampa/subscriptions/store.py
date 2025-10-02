@@ -207,9 +207,8 @@ class SubscriptionsStore(BaseStore):
         """
         text = text.lower()
         for attr in ["name", "surname", "email"]:
-            words = re.split(r"[^a-zA-Z0-9]+", record.attrs.get(attr, "").lower())
-            match = any(w.startswith(text) for w in words)
-            if match:
+            value = record.attrs.get(attr, "").lower()
+            if text in value:  # match full-text
                 return True
         return False
 
