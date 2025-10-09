@@ -10,6 +10,9 @@ Changelog
   [cekk]
 - Case insensitive subscribers search.
   [cekk]
+- Remove unused code.
+  [cekk]
+
 
 3.0.4 (2025-09-25)
 ------------------

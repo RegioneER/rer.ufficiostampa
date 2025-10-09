@@ -66,18 +66,18 @@ def createCartellaStampa(item, event):
             title="Cartella stampa",
             id="cartella-stampa",
         )
+        # exclude from search
+        cartella_stampa.exclude_from_search = True
+        cartella_stampa.reindexObject(idxs=["exclude_from_search"])
+
+        # disable CartellaStampa from allowed types
+        constraints_context = ISelectableConstrainTypes(item)
+        constraints_context.setConstrainTypesMode(1)
+        constraints_context.setLocallyAllowedTypes(["Image", "File"])
+
     except InvalidParameterError:
         # Cartella Stampa type is not allowed in ComunicatoStampa
         return
-
-    # exclude from search
-    cartella_stampa.exclude_from_search = True
-    cartella_stampa.reindexObject(idxs=["exclude_from_search"])
-
-    # disable CartellaStampa from allowed types
-    constraints_context = ISelectableConstrainTypes(item)
-    constraints_context.setConstrainTypesMode(1)
-    constraints_context.setLocallyAllowedTypes(["Image", "File"])
 
 
 def fixText(item, event):
