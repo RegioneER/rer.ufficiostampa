@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.5 (unreleased)
+3.0.5 (2025-10-30)
 ------------------
 
 - The CSV export service can now be filtered.
