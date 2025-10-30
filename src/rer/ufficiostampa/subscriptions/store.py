@@ -15,7 +15,6 @@ from zope.i18n import translate
 from zope.interface import implementer
 
 import logging
-import re
 
 
 logger = logging.getLogger(__name__)
@@ -144,6 +143,10 @@ class SubscriptionsStore(BaseStore):
     text_index = "text"
 
     def add(self, data):
+        # force lower to have unique emails
+        email = data.get("email", "")
+        if email:
+            data["email"] = email.lower()
         old_record = self.search(query={"email": data.get("email", "")})
         if old_record:
             msg = translate(
@@ -198,10 +201,13 @@ class SubscriptionsStore(BaseStore):
         return list(filter(filter_text, res))
 
     def filter_by_text(self, record, text):
+        """
+        Force lowercase to have exact matches
+        """
+        text = text.lower()
         for attr in ["name", "surname", "email"]:
-            words = re.split(r"[^a-zA-Z0-9]+", record.attrs.get(attr, ""))
-            match = any(w.startswith(text) for w in words)
-            if match:
+            value = record.attrs.get(attr, "").lower()
+            if text in value:  # match full-text
                 return True
         return False
 

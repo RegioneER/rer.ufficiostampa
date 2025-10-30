@@ -4,6 +4,12 @@ Changelog
 3.0.5 (unreleased)
 ------------------
 
+- The CSV export service can now be filtered.
+  [cekk]
+- When a channel is removed from the control panel, it is also removed from subscribers.
+  [cekk]
+- Case insensitive subscribers search.
+  [cekk]
 - Remove unused code.
   [cekk]
 
