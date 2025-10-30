@@ -285,16 +285,8 @@ and then running ``bin/buildout``
 Contribute
 ----------
 
-- Issue Tracker: https://github.com/collective/rer.ufficiostampa/issues
-- Source Code: https://github.com/collective/rer.ufficiostampa
-- Documentation: https://docs.plone.org/foo/bar
-
-
-Support
--------
-
-If you are having issues, please let us know.
-We have a mailing list located at: project@example.com
+- Issue Tracker: https://github.com/RegioneER/rer.ufficiostampa/issues
+- Source Code: https://github.com/RegioneER/rer.ufficiostampa
 
 
 License
