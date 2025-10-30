@@ -8,7 +8,11 @@ from zope.component import getUtility
 @adapter(IRecordModifiedEvent)
 def update_channels_list(event):
     """ """
-    if event.record.interface != IRerUfficiostampaSettings:
+    try:
+        if event.record.interface != IRerUfficiostampaSettings:
+            return
+    except AttributeError:
+        # it's not a record with interface
         return
     if event.record.fieldName != "subscription_channels":
         return
