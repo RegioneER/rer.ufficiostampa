@@ -14,7 +14,7 @@ long_description = "\n\n".join(
 
 
 setup(
-    name="rer.ufficiostampa",
+    name="rer_ufficiostampa",
     version="3.0.6.dev0",
     description="Policy for Ufficio Stampa",
     long_description=long_description,

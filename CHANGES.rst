@@ -4,7 +4,8 @@ Changelog
 3.0.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Rename package on pypi to rer_ufficiostampa.
+  [cekk]
 
 
 3.0.5 (2025-10-30)
