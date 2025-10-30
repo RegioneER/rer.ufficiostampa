@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.6 (unreleased)
+3.0.6 (2025-10-30)
 ------------------
 
 - Rename package on pypi to rer_ufficiostampa.
