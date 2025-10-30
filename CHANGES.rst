@@ -4,7 +4,8 @@ Changelog
 3.0.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Go back with package name rer.ufficiostampa.
+  [cekk]
 
 
 3.0.6 (2025-10-30)
