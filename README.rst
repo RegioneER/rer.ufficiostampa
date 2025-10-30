@@ -8,6 +8,25 @@ RER: Ufficio Stampa
 
 Prodotto per la gestione delle comunicazioni alla stampa.
 
+|python| |version| |ci| |downloads| |license|
+
+.. |python| image:: https://img.shields.io/pypi/pyversions/rer.ufficiostampa.svg
+  :target: https://pypi.python.org/pypi/rer.ufficiostampa/
+
+.. |version| image:: http://img.shields.io/pypi/v/rer.ufficiostampa.svg
+  :target: https://pypi.python.org/pypi/rer.ufficiostampa
+
+.. |ci| image:: https://github.com/RegioneER/rer.ufficiostampa/actions/workflows/tests.yml/badge.svg
+  :target: https://github.com/RegioneER/rer.ufficiostampa/actions
+
+.. |downloads| image:: https://img.shields.io/pypi/dm/rer.ufficiostampa.svg
+   :target: https://pypi.org/project/rer.ufficiostampa/
+
+.. |license| image:: https://img.shields.io/pypi/l/rer.ufficiostampa.svg
+    :target: https://pypi.org/project/rer.ufficiostampa/
+    :alt: License
+
+
 Funzionalità principali
 =======================
 
@@ -266,16 +285,8 @@ and then running ``bin/buildout``
 Contribute
 ----------
 
-- Issue Tracker: https://github.com/collective/rer.ufficiostampa/issues
-- Source Code: https://github.com/collective/rer.ufficiostampa
-- Documentation: https://docs.plone.org/foo/bar
-
-
-Support
--------
-
-If you are having issues, please let us know.
-We have a mailing list located at: project@example.com
+- Issue Tracker: https://github.com/RegioneER/rer.ufficiostampa/issues
+- Source Code: https://github.com/RegioneER/rer.ufficiostampa
 
 
 License
