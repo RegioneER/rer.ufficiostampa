@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.7 (unreleased)
+3.0.7 (2025-10-30)
 ------------------
 
 - Go back with package name rer.ufficiostampa.
