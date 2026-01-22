@@ -95,7 +95,7 @@ class SubscriptionsCSVPost(Service):
                     )
                 )
         if res["errored"]:
-            raise BadRequest("; ".join(res["errored"]))
+            return res
 
         # check for data errors
         for i, row in enumerate(rows):
@@ -119,7 +119,6 @@ class SubscriptionsCSVPost(Service):
             request_channels = row.get("channels", [])
             if not request_channels:
                 continue
-
             invalid_channels = [
                 c for c in request_channels if c not in subscription_channels
             ]
@@ -128,7 +127,7 @@ class SubscriptionsCSVPost(Service):
                 msg = translate(
                     _(
                         "invalid_channels",
-                        default="[${row}] - row with invalid channels: ${channels}",
+                        default="Row ${row}: invalid channels (${channels})",
                         mapping={"row": i, "channels": ", ".join(invalid_channels)},
                     ),
                     context=self.request,
@@ -137,9 +136,8 @@ class SubscriptionsCSVPost(Service):
                 res["errored"].append(msg)
 
         # return if we have errored fields
-        if len(res["errored"]):
-            raise BadRequest("; ".join(res["errored"]))
-
+        if res["errored"]:
+            return res
         for i, row in enumerate(rows):
             email = row.get("email", "")
             records = tool.search(query={"email": email})
@@ -150,7 +148,7 @@ class SubscriptionsCSVPost(Service):
                     msg = translate(
                         _(
                             "skip_unable_to_add",
-                            default="[${row}] - unable to add",
+                            default="Row ${row}: unable to add.",
                             mapping={"row": i},
                         ),
                         context=self.request,
@@ -164,7 +162,7 @@ class SubscriptionsCSVPost(Service):
                     msg = translate(
                         _(
                             "skip_duplicate_multiple",
-                            default='[${row}] - Multiple values for "${email}"',  # noqa
+                            default='Row ${row}: multiple values for "${email}" in database',  # noqa
                             mapping={"row": i, "email": email},
                         ),
                         context=self.request,
@@ -177,8 +175,8 @@ class SubscriptionsCSVPost(Service):
                     msg = translate(
                         _(
                             "skip_duplicate",
-                            default='[${row}] - "${email}" already in database',  # noqa
-                            mapping={"row": i, "email": email},
+                            default='Row ${row}: "${email}" already in database. Not updated',  # noqa
+                            mapping={"row": i + 1, "email": email},
                         ),
                         context=self.request,
                     )
@@ -186,6 +184,9 @@ class SubscriptionsCSVPost(Service):
                     res["skipped"].append(msg)
                     continue
                 else:
+                    # remove date column, we don't need it
+                    if "date" in row:
+                        del row["date"]
                     tool.update(id=record.intid, data=row)
                     res["imported"] += 1
 

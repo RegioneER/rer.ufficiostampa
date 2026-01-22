@@ -11,6 +11,9 @@ from rer.ufficiostampa import _
 from rer.ufficiostampa.interfaces import ISendHistoryStore
 from rer.ufficiostampa.interfaces import ISubscriptionsStore
 from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
+from plone.schema.email import Email
+from plone.schema.email import InvalidEmail
+from zExceptions import BadRequest
 
 # from rer.ufficiostampa.utils import decode_token
 from rer.ufficiostampa.utils import get_attachments
@@ -38,6 +41,7 @@ class SendComunicato(Service):
         # TODO: use rer.ufficiostampa.interfaces import ISendForm
         alsoProvides(self.request, IDisableCSRFProtection)
         data = json_body(self.request)
+        self.validate_data(data=data)
         rcpts = self.get_subscribers(data=data)
         if not rcpts:
             raise BadRequest(
@@ -55,6 +59,22 @@ class SendComunicato(Service):
                 error=dict(type="BadRequest", message=res.get("status_message", ""))
             )
         return res
+
+    def validate_data(self, data):
+        # validate emails in additional_addresses
+        for email in data.get("additional_addresses", []):
+            try:
+                Email().validate(email)
+            except InvalidEmail:
+                raise BadRequest(
+                    api.portal.translate(
+                        _(
+                            "invalid_email_additional",
+                            default='Email address "${email}" is not valid in additional_addresses.',  # noqa
+                            mapping={"email": email},
+                        )
+                    )
+                )
 
     def get_value_from_settings(self, field):
         try:

@@ -4,8 +4,10 @@ Changelog
 3.0.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Improve validation and error handling in CSV import endpoint.
+  [cekk]
+- Validate additional email addresses in send form endpoint.
+  [cekk]
 
 3.0.7 (2025-10-30)
 ------------------
