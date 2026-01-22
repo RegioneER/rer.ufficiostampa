@@ -1,3 +1,4 @@
+from copy import deepcopy
 from datetime import datetime
 from email.message import EmailMessage
 from plone import api
@@ -5,15 +6,14 @@ from plone.api.exc import InvalidParameterError
 from plone.protect.interfaces import IDisableCSRFProtection
 from plone.restapi.deserializer import json_body
 from plone.restapi.services import Service
+from plone.schema.email import Email
+from plone.schema.email import InvalidEmail
 from requests.exceptions import ConnectionError
 from requests.exceptions import Timeout
 from rer.ufficiostampa import _
 from rer.ufficiostampa.interfaces import ISendHistoryStore
 from rer.ufficiostampa.interfaces import ISubscriptionsStore
 from rer.ufficiostampa.interfaces.settings import IRerUfficiostampaSettings
-from plone.schema.email import Email
-from plone.schema.email import InvalidEmail
-from zExceptions import BadRequest
 
 # from rer.ufficiostampa.utils import decode_token
 from rer.ufficiostampa.utils import get_attachments
@@ -40,7 +40,7 @@ class SendComunicato(Service):
     def reply(self):
         # TODO: use rer.ufficiostampa.interfaces import ISendForm
         alsoProvides(self.request, IDisableCSRFProtection)
-        data = json_body(self.request)
+        data = self.cleanup_data()
         self.validate_data(data=data)
         rcpts = self.get_subscribers(data=data)
         if not rcpts:
@@ -59,6 +59,19 @@ class SendComunicato(Service):
                 error=dict(type="BadRequest", message=res.get("status_message", ""))
             )
         return res
+
+    def cleanup_data(self):
+        data = deepcopy(json_body(self.request) or {})
+        if data:
+            additional_addresses = []
+            for email in data.get("additional_addresses", []):
+                email = email.strip().lower()
+                # handle multiple addresses separated by comma
+                email = [x.strip() for x in email.split(",") if x.strip()]
+                if email:
+                    additional_addresses.extend(email)
+            data["additional_addresses"] = additional_addresses
+        return data
 
     def validate_data(self, data):
         # validate emails in additional_addresses
