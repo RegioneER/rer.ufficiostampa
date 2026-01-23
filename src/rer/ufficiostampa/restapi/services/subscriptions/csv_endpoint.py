@@ -201,16 +201,6 @@ class SubscriptionsCSVPost(Service):
         )
 
     def get_csv_data(self, data):
-        if data.get("content-type", "") not in (
-            "text/comma-separated-values",
-            "text/csv",
-        ):
-            raise BadRequest(
-                _(
-                    "wrong_content_type",
-                    default="You need to pass a csv file.",
-                )
-            )
         csv_data = data["data"]
         if data.get("encoding", "") == "base64":
             csv_data = re.sub(r"^data:.*;base64,", "", csv_data)
@@ -237,12 +227,18 @@ class SubscriptionsCSVPost(Service):
             }
         except Exception as e:
             logger.exception(e)
-            return {"error": _("error_reading_csv", default="Error reading csv file.")}
+            return {
+                "error": api.portal.translate(
+                    _("error_reading_csv", default="Error reading csv file.")
+                )
+            }
 
     def parse_query(self):
         data = json_body(self.request)
         if "file" not in data:
             raise BadRequest(
-                _("missing_file", default="You need to pass a file at least.")
+                api.portal.translate(
+                    _("missing_file", default="You need to pass a file at least.")
+                )
             )
         return data

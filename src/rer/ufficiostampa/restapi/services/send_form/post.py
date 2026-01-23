@@ -31,7 +31,9 @@ from zope.schema.interfaces import IVocabularyFactory
 import json
 import logging
 import requests
+import re
 
+EMAIL_RE = re.compile(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$")
 
 logger = logging.getLogger(__name__)
 
@@ -76,14 +78,12 @@ class SendComunicato(Service):
     def validate_data(self, data):
         # validate emails in additional_addresses
         for email in data.get("additional_addresses", []):
-            try:
-                Email().validate(email)
-            except InvalidEmail:
+            if not EMAIL_RE.fullmatch(email):
                 raise BadRequest(
                     api.portal.translate(
                         _(
                             "invalid_email_additional",
-                            default='Email address "${email}" is not valid in additional_addresses.',  # noqa
+                            default='Email address "${email}" is not valid in additional_addresses. Remember to separate multiple addresses.',  # noqa
                             mapping={"email": email},
                         )
                     )

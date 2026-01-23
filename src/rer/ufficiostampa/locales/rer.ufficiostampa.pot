@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2026-01-22 13:26+0000\n"
+"POT-Creation-Date: 2026-01-23 13:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -376,12 +376,12 @@ msgid "empty_csv"
 msgstr ""
 
 #. Default: "You need to provide at least one email address or channel."
-#: ../restapi/services/send_form/post.py:48
+#: ../restapi/services/send_form/post.py:50
 msgid "empty_subscribers"
 msgstr ""
 
 #. Default: "Error reading csv file."
-#: ../restapi/services/subscriptions/csv_endpoint.py:240
+#: ../restapi/services/subscriptions/csv_endpoint.py:232
 msgid "error_reading_csv"
 msgstr ""
 
@@ -424,7 +424,7 @@ msgstr ""
 msgid "invalid_email"
 msgstr ""
 
-#. Default: "Email address \"${email}\" is not valid in additional_addresses."
+#. Default: "Email address \"${email}\" is not valid in additional_addresses. Remember to separate multiple addresses."
 #: ../restapi/services/send_form/post.py:71
 msgid "invalid_email_additional"
 msgstr ""
@@ -549,7 +549,7 @@ msgid "missing_email"
 msgstr ""
 
 #. Default: "You need to pass a file at least."
-#: ../restapi/services/subscriptions/csv_endpoint.py:246
+#: ../restapi/services/subscriptions/csv_endpoint.py:241
 msgid "missing_file"
 msgstr ""
 
@@ -739,9 +739,4 @@ msgstr ""
 #. Default: "Invalid email address: ${address}"
 #: ../interfaces/content.py:26
 msgid "validation_invalid_email"
-msgstr ""
-
-#. Default: "You need to pass a csv file."
-#: ../restapi/services/subscriptions/csv_endpoint.py:209
-msgid "wrong_content_type"
 msgstr ""

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2026-01-22 13:26+0000\n"
+"POT-Creation-Date: 2026-01-23 13:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -376,12 +376,12 @@ msgid "empty_csv"
 msgstr "File csv vuoto."
 
 #. Default: "You need to provide at least one email address or channel."
-#: ../restapi/services/send_form/post.py:48
+#: ../restapi/services/send_form/post.py:50
 msgid "empty_subscribers"
 msgstr "Devi selezionare almeno un canale o indirizzo email."
 
 #. Default: "Error reading csv file."
-#: ../restapi/services/subscriptions/csv_endpoint.py:240
+#: ../restapi/services/subscriptions/csv_endpoint.py:232
 msgid "error_reading_csv"
 msgstr "Errore in lettura del file csv."
 
@@ -424,10 +424,10 @@ msgstr "Riga ${row}: canali non validi (${channels})"
 msgid "invalid_email"
 msgstr "Riga ${row}: email non valida \"${email}\""
 
-#. Default: "Email address \"${email}\" is not valid in additional_addresses."
+#. Default: "Email address \"${email}\" is not valid in additional_addresses. Remember to separate multiple addresses."
 #: ../restapi/services/send_form/post.py:71
 msgid "invalid_email_additional"
-msgstr "Email \"${email}\" non valida negli indirizzi aggiuntivi."
+msgstr "Email \"${email}\" non valida negli indirizzi aggiuntivi. Ricorda di separare eventuali indirizzi multipli."
 
 msgid "is not valid"
 msgstr "non valido"
@@ -549,7 +549,7 @@ msgid "missing_email"
 msgstr "E' necessario inserire un indirizzo email."
 
 #. Default: "You need to pass a file at least."
-#: ../restapi/services/subscriptions/csv_endpoint.py:246
+#: ../restapi/services/subscriptions/csv_endpoint.py:241
 msgid "missing_file"
 msgstr "Devi caricare almeno un file."
 
@@ -740,8 +740,3 @@ msgstr "Nessun canale da cui cancellarsi. Campo 'channels' mancante."
 #: ../interfaces/content.py:26
 msgid "validation_invalid_email"
 msgstr "Indirizzo email non valido: ${address}"
-
-#. Default: "You need to pass a csv file."
-#: ../restapi/services/subscriptions/csv_endpoint.py:209
-msgid "wrong_content_type"
-msgstr "Devi caricare un file csv."
