@@ -427,7 +427,7 @@ msgstr "Riga ${row}: email non valida \"${email}\""
 #. Default: "Email address \"${email}\" is not valid in additional_addresses. Remember to separate multiple addresses."
 #: ../restapi/services/send_form/post.py:71
 msgid "invalid_email_additional"
-msgstr "Email \"${email}\" non valida negli indirizzi aggiuntivi. Ricorda di separare eventuali indirizzi multipli."
+msgstr "Email \"${email}\" non valida negli indirizzi aggiuntivi. Controlla che gli indirizzi abbiano specificato un dominio valido e che gli indirizzi multipli siano separati dalla virgola \",\"."
 
 msgid "is not valid"
 msgstr "non valido"
