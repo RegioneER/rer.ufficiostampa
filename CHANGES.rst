@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.8 (unreleased)
+3.0.8 (2026-01-29)
 ------------------
 
 - Improve validation and error handling in CSV import endpoint.
