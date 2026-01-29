@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-09-23 19:01+0000\n"
+"POT-Creation-Date: 2026-01-23 13:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -107,7 +107,7 @@ msgstr ""
 msgid "Imported rows"
 msgstr ""
 
-#: ../configure.zcml:31
+#: ../configure.zcml:30
 msgid "Installs the rer.ufficiostampa add-on."
 msgstr ""
 
@@ -134,11 +134,11 @@ msgstr ""
 msgid "Overwrite duplicates"
 msgstr ""
 
-#: ../configure.zcml:31
+#: ../configure.zcml:30
 msgid "RER: Ufficio Stampa"
 msgstr ""
 
-#: ../configure.zcml:40
+#: ../configure.zcml:39
 msgid "RER: Ufficio Stampa (uninstall)"
 msgstr ""
 
@@ -221,7 +221,7 @@ msgstr ""
 msgid "Ufficio Stampa settings"
 msgstr ""
 
-#: ../configure.zcml:40
+#: ../configure.zcml:39
 msgid "Uninstalls the rer.ufficiostampa add-on."
 msgstr ""
 
@@ -236,7 +236,7 @@ msgid "additional_addresses_title"
 msgstr ""
 
 #. Default: "E-mail address already registered."
-#: ../subscriptions/store.py:150
+#: ../subscriptions/store.py:153
 msgid "address_already_registered"
 msgstr ""
 
@@ -262,7 +262,7 @@ msgid "arguments_label"
 msgstr ""
 
 #. Default: "Manage channels subscriptions cancel for ${site}"
-#: ../restapi/services/personal_channels_management/post.py:116
+#: ../restapi/services/personal_channels_management/post.py:117
 msgid "cancel_subscription_subject_label"
 msgstr ""
 
@@ -308,27 +308,27 @@ msgid "comunicato_year_label"
 msgstr ""
 
 #. Default: "Click on"
-#: ../browser/templates/cancel_subscriptions_mail_template.pt:19
+#: ../browser/templates/cancel_subscriptions_mail_template.pt:24
 msgid "confirm_click_on_label"
 msgstr ""
 
 #. Default: "This link will expire in 24 hours."
-#: ../browser/templates/cancel_subscriptions_mail_template.pt:25
+#: ../browser/templates/cancel_subscriptions_mail_template.pt:30
 msgid "confirm_expire"
 msgstr ""
 
 #. Default: "You received this email because someone asked to cancel your subscriptions on ${site_title}."
-#: ../browser/templates/cancel_subscriptions_mail_template.pt:16
+#: ../browser/templates/cancel_subscriptions_mail_template.pt:21
 msgid "confirm_help"
 msgstr ""
 
 #. Default: "or ignore this email."
-#: ../browser/templates/cancel_subscriptions_mail_template.pt:23
+#: ../browser/templates/cancel_subscriptions_mail_template.pt:28
 msgid "confirm_ignore_label"
 msgstr ""
 
 #. Default: "confirmation link"
-#: ../browser/templates/cancel_subscriptions_mail_template.pt:20
+#: ../browser/templates/cancel_subscriptions_mail_template.pt:25
 msgid "confirm_link_label"
 msgstr ""
 
@@ -343,7 +343,6 @@ msgid "css_styles_label"
 msgstr ""
 
 #. Default: "Unsubscribe"
-#: ../browser/templates/cancel_subscriptions_mail_template.pt:49
 #: ../browser/templates/send_mail_template.pt:95
 msgid "delete_subscriptions_link"
 msgstr ""
@@ -372,17 +371,17 @@ msgid "email_from_name_label"
 msgstr ""
 
 #. Default: "Empty csv file."
-#: ../restapi/services/subscriptions/csv_endpoint.py:77
+#: ../restapi/services/subscriptions/csv_endpoint.py:76
 msgid "empty_csv"
 msgstr ""
 
 #. Default: "You need to provide at least one email address or channel."
-#: ../restapi/services/send_form/post.py:44
+#: ../restapi/services/send_form/post.py:50
 msgid "empty_subscribers"
 msgstr ""
 
 #. Default: "Error reading csv file."
-#: ../restapi/services/subscriptions/csv_endpoint.py:240
+#: ../restapi/services/subscriptions/csv_endpoint.py:232
 msgid "error_reading_csv"
 msgstr ""
 
@@ -415,14 +414,19 @@ msgstr ""
 msgid "go_to_search_results"
 msgstr ""
 
-#. Default: "[${row}] - row with invalid channels: ${channels}"
-#: ../restapi/services/subscriptions/csv_endpoint.py:130
+#. Default: "Row ${row}: invalid channels (${channels})"
+#: ../restapi/services/subscriptions/csv_endpoint.py:128
 msgid "invalid_channels"
 msgstr ""
 
 #. Default: "[${row}] - row with invalid email ${email}"
-#: ../restapi/services/subscriptions/csv_endpoint.py:110
+#: ../restapi/services/subscriptions/csv_endpoint.py:109
 msgid "invalid_email"
+msgstr ""
+
+#. Default: "Email address \"${email}\" is not valid in additional_addresses. Remember to separate multiple addresses."
+#: ../restapi/services/send_form/post.py:71
+msgid "invalid_email_additional"
 msgstr ""
 
 msgid "is not valid"
@@ -510,23 +514,22 @@ msgid "mail_logo_label"
 msgstr ""
 
 #. Default: "You are receiving this email because you are subscribed to ${site_title}."
-#: ../browser/templates/cancel_subscriptions_mail_template.pt:47
 #: ../browser/templates/send_mail_template.pt:93
 msgid "manage_subscriptions_intro"
 msgstr ""
 
 #. Default: "Unable to send manage subscriptions link. Please contact site administrator."
-#: ../restapi/services/personal_channels_management/post.py:126
+#: ../restapi/services/personal_channels_management/post.py:127
 msgid "manage_subscriptions_not_send"
 msgstr ""
 
 #. Default: "Mail not found. Unable to send the link."
-#: ../restapi/services/personal_channels_management/post.py:76
+#: ../restapi/services/personal_channels_management/post.py:77
 msgid "manage_subscriptions_request_inexistent_mail"
 msgstr ""
 
 #. Default: "Serializer secret and salt not set in control panel. Unable to send the link."
-#: ../restapi/services/personal_channels_management/post.py:89
+#: ../restapi/services/personal_channels_management/post.py:90
 msgid "manage_subscriptions_request_serializer_error"
 msgstr ""
 
@@ -541,17 +544,17 @@ msgid "max_attachments_size_label"
 msgstr ""
 
 #. Default: "You need to pass an email."
-#: ../restapi/services/personal_channels_management/post.py:64
+#: ../restapi/services/personal_channels_management/post.py:65
 msgid "missing_email"
 msgstr ""
 
 #. Default: "You need to pass a file at least."
-#: ../restapi/services/subscriptions/csv_endpoint.py:246
+#: ../restapi/services/subscriptions/csv_endpoint.py:241
 msgid "missing_file"
 msgstr ""
 
 #. Default: "Missing required field: ${field}"
-#: ../restapi/services/subscriptions/csv_endpoint.py:90
+#: ../restapi/services/subscriptions/csv_endpoint.py:89
 msgid "missing_required"
 msgstr ""
 
@@ -632,18 +635,18 @@ msgstr ""
 msgid "send_date_label"
 msgstr ""
 
-#. Default: "[${row}] - \"${email}\" already in database"
-#: ../restapi/services/subscriptions/csv_endpoint.py:179
+#. Default: "Row ${row}: \"${email}\" already in database. Not updated"
+#: ../restapi/services/subscriptions/csv_endpoint.py:176
 msgid "skip_duplicate"
 msgstr ""
 
-#. Default: "[${row}] - Multiple values for \"${email}\""
-#: ../restapi/services/subscriptions/csv_endpoint.py:166
+#. Default: "Row ${row}: multiple values for \"${email}\" in database"
+#: ../restapi/services/subscriptions/csv_endpoint.py:163
 msgid "skip_duplicate_multiple"
 msgstr ""
 
-#. Default: "[${row}] - unable to add"
-#: ../restapi/services/subscriptions/csv_endpoint.py:152
+#. Default: "Row ${row}: unable to add."
+#: ../restapi/services/subscriptions/csv_endpoint.py:149
 msgid "skip_unable_to_add"
 msgstr ""
 
@@ -714,7 +717,7 @@ msgid "unsubscribe_confirm_secret_invalid"
 msgstr ""
 
 #. Default: "Unable to manage unsubscriptions. missing token."
-#: ../restapi/services/personal_channels_management/post.py:159
+#: ../restapi/services/personal_channels_management/post.py:160
 msgid "unsubscribe_confirm_secret_null"
 msgstr ""
 
@@ -724,21 +727,16 @@ msgid "unsubscribe_confirm_secret_token_settings_error"
 msgstr ""
 
 #. Default: "No channels to unsubscribe. Subscription not found."
-#: ../restapi/services/personal_channels_management/post.py:171
+#: ../restapi/services/personal_channels_management/post.py:172
 msgid "unsubscribe_no_channels"
 msgstr ""
 
 #. Default: "No channels to unsubscribe. 'channels' field missing."
-#: ../restapi/services/personal_channels_management/post.py:194
+#: ../restapi/services/personal_channels_management/post.py:195
 msgid "unsubscribe_no_channels_field"
 msgstr ""
 
 #. Default: "Invalid email address: ${address}"
 #: ../interfaces/content.py:26
 msgid "validation_invalid_email"
-msgstr ""
-
-#. Default: "You need to pass a csv file."
-#: ../restapi/services/subscriptions/csv_endpoint.py:209
-msgid "wrong_content_type"
 msgstr ""

@@ -1,3 +1,4 @@
+from copy import deepcopy
 from datetime import datetime
 from email.message import EmailMessage
 from plone import api
@@ -27,8 +28,11 @@ from zope.schema.interfaces import IVocabularyFactory
 
 import json
 import logging
+import re
 import requests
 
+
+EMAIL_RE = re.compile(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$")
 
 logger = logging.getLogger(__name__)
 
@@ -37,7 +41,8 @@ class SendComunicato(Service):
     def reply(self):
         # TODO: use rer.ufficiostampa.interfaces import ISendForm
         alsoProvides(self.request, IDisableCSRFProtection)
-        data = json_body(self.request)
+        data = self.cleanup_data()
+        self.validate_data(data=data)
         rcpts = self.get_subscribers(data=data)
         if not rcpts:
             raise BadRequest(
@@ -55,6 +60,33 @@ class SendComunicato(Service):
                 error=dict(type="BadRequest", message=res.get("status_message", ""))
             )
         return res
+
+    def cleanup_data(self):
+        data = deepcopy(json_body(self.request) or {})
+        if data:
+            additional_addresses = []
+            for email in data.get("additional_addresses", []):
+                email = email.strip().lower()
+                # handle multiple addresses separated by comma
+                email = [x.strip() for x in email.split(",") if x.strip()]
+                if email:
+                    additional_addresses.extend(email)
+            data["additional_addresses"] = additional_addresses
+        return data
+
+    def validate_data(self, data):
+        # validate emails in additional_addresses
+        for email in data.get("additional_addresses", []):
+            if not EMAIL_RE.fullmatch(email):
+                raise BadRequest(
+                    api.portal.translate(
+                        _(
+                            "invalid_email_additional",
+                            default='Email address "${email}" is not valid in additional_addresses. Remember to separate multiple addresses.',  # noqa
+                            mapping={"email": email},
+                        )
+                    )
+                )
 
     def get_value_from_settings(self, field):
         try:
