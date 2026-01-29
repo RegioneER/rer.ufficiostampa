@@ -6,8 +6,6 @@ from plone.api.exc import InvalidParameterError
 from plone.protect.interfaces import IDisableCSRFProtection
 from plone.restapi.deserializer import json_body
 from plone.restapi.services import Service
-from plone.schema.email import Email
-from plone.schema.email import InvalidEmail
 from requests.exceptions import ConnectionError
 from requests.exceptions import Timeout
 from rer.ufficiostampa import _
@@ -30,8 +28,9 @@ from zope.schema.interfaces import IVocabularyFactory
 
 import json
 import logging
-import requests
 import re
+import requests
+
 
 EMAIL_RE = re.compile(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$")
 
